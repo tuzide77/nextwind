@@ -817,6 +817,7 @@ class PwUbbCode {
         if(!(strpos($path, 'http://')===0 || strpos($path, 'https://')===0)) {
             return '';
         }
+	//fixed bug ,http://www.wooyun.org/bugs/wooyun-2014-063613
         $path = str_replace(array("<",">","'","\"",";"," "), array("%3c","%3e","%27","%22","%3b","%20"),$path);
         return $path;
     }
