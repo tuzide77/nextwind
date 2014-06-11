@@ -6,7 +6,7 @@
 
 ### 初始化开发
 + 删除 data/install.lock 文件
-+ 修复可写目录权限  chmod -R 0777 ./data ./conf ./www/html ./www/attachment ./www/themes ./src/extensions
++ 修复可写目录权限  chmod -R 0777 ./data ./conf ./www/html ./www/attachment ./www/themes ./src/extensions ./www/windid/attachment/
 + 访问 /www/install.php 进行数据库安装
 
 ### 开发注意
