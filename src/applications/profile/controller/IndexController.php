@@ -11,7 +11,7 @@ Wind::import('APPS:profile.service.PwUserProfileExtends');
  * @author xiaoxia.xu <xiaoxia.xuxx@aliyun-inc.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: IndexController.php 24841 2013-02-22 08:53:35Z jinlong.panjl $
+ * @version $Id: IndexController.php 28946 2013-05-31 04:59:50Z jieyin $
  * @package src.products.u.controller.profile
  */
 class IndexController extends BaseProfileController {
@@ -78,6 +78,8 @@ class IndexController extends BaseProfileController {
 	 * 编辑用户信息
 	 */
 	public function dorunAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$userDm = new PwUserInfoDm($this->loginUser->uid);
 		$userDm->setRealname($this->getInput('realname', 'post'));
 		$userDm->setByear($this->getInput('byear', 'post'));
@@ -134,6 +136,8 @@ class IndexController extends BaseProfileController {
 	 * 编辑联系方式
 	 */
 	public function docontactAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$userDm = new PwUserInfoDm($this->loginUser->uid);
 		$userDm->setTelphone($this->getInput('telphone', 'post'));
 		$userDm->setAddress($this->getInput('address', 'post'));
@@ -177,6 +181,8 @@ class IndexController extends BaseProfileController {
 	 * 密码验证
 	 */
 	public function doeditemailAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($passwd, $email) = $this->getInput(array('passwd', 'email'), 'post');
 		if (!$passwd || !$email) $this->showError('USER:empty.error');
 		Wind::import('SRV:user.srv.PwTryPwdBp');

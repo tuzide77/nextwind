@@ -71,7 +71,7 @@ $(function(){
 					wrap: btn.parent(),
 					msg : '设置成功 即将跳转',
 					callback : function(){
-						window.location.href = data.referer;
+						window.location.href = decodeURIComponent(data.referer);
 					}
 				});
 			}else{

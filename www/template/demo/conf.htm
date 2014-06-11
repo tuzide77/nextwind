@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<template source='header' />
+<template source='header_admin' />
+</head>
+<body>
+	<div class="demo_wrap">
+		<ul class="demo_nav cc mb20">
+			<li class="current"><a href="{@url:conf}">全局配置</a></li>
+		</ul>
+
+		<div class="table_list">
+			<table width="100%">
+				<tr class="hd">
+					<td width="35%">Key(点击修改)</td>
+					<td width="8%">Type</td>
+					<td width="35%">Value</td>
+					<td>Description</td>
+				</tr>
+				<!--#foreach ($confData as $value){ #-->
+				<tr class="ct">
+					<td><a href="{@url:conf?key=$value['key']}">{$value['key']}</a></td>
+					<td>{$value['type']}</td>
+					<td>{$value['value']}</td>
+					<td>{$value['descrip']}</td>
+				</tr>
+				<!--# } #-->
+			</table>
+		</div>
+		<form class="J_ajaxForm" data-role="list"
+			action="{@url:doconf}" method="post">
+			<div class="btn_wrap">
+				<div class="btn_wrap_pd">
+					Key: <input type="text" class="input input_long" name="conf[key]" value="{$editData['key']}">
+					</td> Type: <select size="1" name="conf[vtype]">
+						<option value="string" {@Pw::isSelected($editData['vtype'] == 'string')}>String</option>
+						<option value="array" {@Pw::isSelected($editData['vtype'] == 'array')}>Array</option>
+						<option value="object" {@Pw::isSelected($editData['vtype'] == 'object')}>Object</option>
+					</select> Value: <input type="text" class="input input_success" name="conf[value]" value="{$editData['value']}">
+					Descrip: <input type="text" class="input input_hd" name="conf[descrip]" value="{$editData['descrip']}">
+					<button type="submit" class="btn btn_submit J_ajax_submit_btn">提交</button>
+				</div>
+			</div>
+		</form>
+
+	</div>
+</body>
+</html>

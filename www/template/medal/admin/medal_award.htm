@@ -60,7 +60,7 @@
 				<td><img src="{$medals[$log['medal_id']]['medalImage']}" width="30" height="30" /></td>
 				<td>{@Pw::time2str($log['created_time'])}</td>
 				<td>{$expired}</td>
-				<td><a class="J_ajax_del" data-msg="确定要收回吗？" href="{@url:medal/medal/doStop?logid=$log['log_id']}">[收回]</a></td>
+				<td><a class="J_ajax_del" data-msg="确定要收回吗？" href="{@url:medal/medal/doStop}" data-pdata="{'logid': '{$log['log_id']}'}">[收回]</a></td>
 			</tr>
 			<!--# } #-->
 		</table>

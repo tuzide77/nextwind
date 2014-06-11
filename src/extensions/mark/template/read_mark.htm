@@ -1,0 +1,186 @@
+<hook-action name="app_mark_displayMarkHtmlAfterContent" args='marks, credits, page, perpage, count, args'>
+<style>
+/*评分列表*/
+.read_mark_list{
+}
+.read_mark_list .hd{
+	padding:8px 10px 7px;
+	height:18px;
+	background:#f4f4f4;
+	border-bottom:1px solid #e4e4e4;
+}
+.a_mark_manage{
+	float:right;
+}
+.read_mark_list li{
+	overflow:hidden;
+	padding:7px 10px;
+	border-bottom:1px dotted #e4e4e4;
+}
+.read_mark_list li div.face,
+.read_mark_list li div.name,
+.read_mark_list li div.num,
+.read_mark_list li div.detail,
+.read_mark_list li div.time,
+.read_mark_list li div.checkbox{
+	float:left;
+	line-height:30px;
+	height:30px;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	-ms-text-overflow:ellipsis;
+}
+.read_mark_list li div.face{
+	width:35px;
+}
+.read_mark_list li div.name{
+	width:80px;
+}
+.read_mark_list li div.num{
+	width:90px;
+}
+.read_mark_list li div.time{
+	float:right;
+	width:100px;
+	text-align:right;
+	color:#999;
+}
+.read_mark_list li div.detail{
+	width:400px;
+}
+</style>
+	<div class="read_mark_list">
+		<form class="J_marklist_form" action="{@url:app/mark/mark/delete}" method="post" >
+		<div class="hd">共<strong class="b org">{$count}</strong>条评分，
+		<!--# foreach ($credits as $cName => $cValue) { #-->
+		{$cName}&nbsp;<strong class="b org">{$cValue}</strong>
+		<!--# } #-->
+		</div>
+		<ul>
+			<!--# 
+			$isManage = Wekit::getLoginUser()->getPermission('app_mark_manage');
+			Wind::import('SRV:credit.bo.PwCreditBo');
+			$creditBo = PwCreditBo::getInstance();
+			foreach ($marks as $value) { #-->
+			<li class="cc">
+				<!--# if ($isManage) { #-->
+				<div class="checkbox"><input type="checkbox" name="ids[]" value="{$value['id']}" class="J_markcheck"></div>
+				<!--# } #-->
+				<div class="face"><a href="{@url:space/index/run?uid=$value['created_userid']}" target="_blank" class="J_user_card_show face" data-uid="{$value['created_userid']}" ><img class="J_avatar" src="{@Pw::getAvatar($value['created_userid'], 'small')}" data-type="small" alt="{$value['created_username']}" width="30" height="30" /></a></div>
+				<div class="name"><a href="{@url:space/index/run?uid=$value['created_userid']}" target="_blank" class="J_user_card_show face" data-uid="{$value['created_userid']}" >{$value['created_username']}</a></div>
+				<div class="num">{$creditBo->cType[$value['ctype']]}&nbsp;<strong class="org b">{$value['cnum']}</strong></div>
+				<div class="detail">{$value['reason']}</div>
+				<div class="time">{@Pw::time2str($value['created_time'], 'auto')}</div>
+			</li>
+			<!--# } #-->
+		</ul>
+		<!--# if ($isManage) { #-->
+		<div class="p10"><label class="mr10"><input type="checkbox" class="J_markcheck_all">全选</label> <button class="btn mr10 J_marklist_del" type="submit">删除</button></div>
+		<!--# } #-->
+		<div class="J_plugin_mark_page"><page tpl="TPL:common.page" page="$page" per="$perpage" count="$count" url="app/mark/mark/list" args='$args'/></div>
+		</form>
+	</div>
+</hook-action>
+
+<hook-action name="app_mark_displayMarkHtmlContentBottom" args='read, count'>
+<style>
+/*评分按钮*/
+.read_appbtn_wrap{
+	height:30px;
+	padding:20px 0;
+	position:relative;
+}
+.icon_read_like{
+	margin:0;
+	position:absolute;
+	left:50%;
+	margin-left:-120px;
+}
+.icon_read_mark{
+	left:50%;
+	margin-left:5px;
+	position:absolute;
+	width:115px;
+	height:25px;
+	background:url({@G:url.extres}/mark/images/icon_read_mark.png) no-repeat;
+	display:block;
+	line-height:25px;
+	cursor:pointer;
+	overflow:hidden;
+}
+.icon_read_mark span{
+	float:left;
+	display:block;
+	width:0;
+	height:0;
+	overflow:hidden;
+	font:0/0 Arial;
+	padding:0;
+	margin:0;
+}
+.icon_read_mark em{
+	float:right;
+	width:47px;
+	height:25px;
+	color:#3982c2;
+	text-align:center;
+	font-weight:700;
+	text-indent:0;
+	overflow:hidden;
+	display:block;
+}
+.icon_read_mark:hover{
+	filter:alpha(opacity=90);
+	-moz-opacity:0.9;
+	opacity:0.9;
+	text-decoration:none;
+}
+</style>
+<a role="button" rel="nofollow" href="#" data-pid="0" data-uri="{@url:app/mark/mark/mark?tid=$read['tid']&pid=0}" class="icon_read_mark J_plugin_read_mark" id=""><span>评分</span><em>{$count}</em></a>
+<script>
+Wind.ready('global.js', function(){
+	Wind.js('{@G:url.extres}/mark/js/mark.min.js?v=' + GV.JS_VERSION);
+});
+</script>
+</hook-action>
+<hook-action name="app_mark_displayMarkHtmlForThreadButton" args='read, count'>			
+&nbsp;&nbsp;&nbsp;&nbsp;<a role="button" rel="nofollow" href="#" data-pid="{$read['pid']}" data-uri="{@url:app/mark/mark/mark?tid=$read['tid']&pid=$read['pid']}" class="J_plugin_read_mark" id=""><span>评分</span><!--# if ($count) { #--><em>({$count})</em><!--# } #--></a>
+<script>
+Wind.ready('global.js', function(){
+	Wind.js('{@G:url.extres}/mark/js/mark.min.js?v=' + GV.JS_VERSION);
+});
+</script>
+</hook-action>
+<hook-action name="app_mark_credits" args='pKey,pData'>
+	<!--# 
+		Wind::import('SRV:credit.bo.PwCreditBo');
+		$creditBo = PwCreditBo::getInstance();
+	#-->
+	<div >
+		<table width="100%">
+			<thead>
+			<tr>
+				<td width="80"></td>
+				<td width="200">每次评分限制</td>
+				<td width="100">每日评分上限</td>
+				<td  width="100">扣除自身相应积分</td>
+			</tr>
+			</thead>
+			<!--# foreach ($creditBo->cType as $k => $v) { 
+			#-->
+			<tr>
+				<td><input data-yid="J_check_{$tk}" class="J_check" type="checkbox" name="gpermission[{$pKey}][{$k}][isopen]" value="1" {@Pw::ifcheck($pData['default'][$k]['isopen'])}>{$v}</td>
+				<td>最小<input class="input length_1" type="number" name="gpermission[{$pKey}][{$k}][min]" value="{$pData['default'][$k]['min']}"> 最大<input class="input length_1" type="number" name="gpermission[{$pKey}][{$k}][max]" value="{$pData['default'][$k]['max']}"></td>
+				<td><input class="input length_1"  type="number" name="gpermission[{$pKey}][{$k}][dayMax]" value="{$pData['default'][$k]['dayMax']}"></td>
+				<td><input type="radio" name="gpermission[{$pKey}][{$k}][markdt]" value="1" {@Pw::ifcheck($pData['default'][$k]['markdt'] == 1)}>开启  <input type="radio" name="gpermission[{$pKey}][{$k}][markdt]" value="0" {@Pw::ifcheck($pData['default'][$k]['markdt'] == 0)}>关闭  </td>
+			</tr>
+			<!--# } #-->	
+			
+		</table>
+	</div>
+</hook-action>
+
+<hook-action name="app_mark_displayThreadListHtml" args='markCount'>
+	<span class="org">[{$markCount}]</span>
+</hook-action>

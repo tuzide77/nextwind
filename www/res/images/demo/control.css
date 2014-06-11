@@ -1,0 +1,42 @@
+/*nav*/
+.navA{height:35px;background:#2871a6;border-bottom:1px solid #00355c;overflow:hidden;}
+.navA ul{margin-left:-1px;}
+.navA li{float:left;}
+.navA li.line{border-left:1px solid #3883bc;width:1px;background:#145b8d;overflow:hidden;height:35px;}
+.navA li a{ font:bold 14px/35px Arial;padding:0 15px;color:#fff;overflow:hidden;position:relative;float:left;height:35px;}
+.navA li a:hover{color:#ffd800; text-decoration:none;background:#3883bc;}
+.navA li.current a{background:#3883bc;}
+
+/*navB*/
+.navB{padding:0;margin:0 0 10px;}
+.navB ul{background:#f7f7f7;border-bottom:1px solid #e4e4e4;padding:5px;overflow:hidden;}
+.navB li{float:left; list-style:none;padding:0 5px;}
+.navB li a{float:left;padding:0 5px;}
+.navB li a:hover{background:#2871a6;color:#fff; text-decoration:none;}
+
+/*login*/
+.login{/*float:right;padding-top:15px;*/}
+.into dt{width:133px;float:left;}
+.into dd{width:63px;float:left;}
+.into dd p{float:left;width:63px;}
+.into p{height:26px;overflow:hidden;}
+.into label input{margin:0 2px 0 3px;_margin-top:-2px;padding:0;}
+.into dt .input{width:124px;float:left;margin-bottom:5px;_margin-top:1px;background:#fff;border:0;padding:2px;border:1px solid #ccc;}
+.into .btn2 button,.into .bt2 button{width:60px;}
+
+/*layout user home*/
+.userHome{overflow:hidden;min-height:400px;}
+.userHome .cm{float:left;width:100%;min-height:1px;overflow:hidden;}
+.userHome .cw{margin:0 250px 0 85px;min-height:400px;_height:400px;background:#fff;/*position:relative;*/}
+.userHome .sd{float:left;width:250px;margin-left:-250px;margin-bottom:-900000em;padding-bottom:900000em;background:#cccccc;}
+.userHome .md{float:left;width:85px;margin-left:-100%;min-height:250px;_height:250px;background:#ccc;margin-top:20px;}
+
+/*layout user home*/
+.userApp .cw{margin:0 0 0 85px;}
+
+/*pages*/
+.pages{ font-family:Tahoma,SimSun,Arial;}
+.pages span{display:inline-block;height:22px;line-height:22px;}
+.pages a,.pages_cur,.pages_old{display:inline-block;padding:0 8px;border:1px solid #ccc;background:#fff;color:#555;line-height:22px;}
+.pages_cur,.pages a:hover{border:1px solid #aac2e0;background:#f0f7ff;color:#004499;}
+.pages_old{border:1px solid #ccc;color:#aaa;background:#fff;}

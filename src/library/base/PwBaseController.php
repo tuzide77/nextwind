@@ -6,7 +6,7 @@ defined('WEKIT_VERSION') || exit('Forbidden');
  *
  * @author Jianmin Chen <sky_hold@163.com>
  * @license http://www.phpwind.com
- * @version $Id: PwBaseController.php 25328 2013-03-12 10:11:25Z jieyin $
+ * @version $Id: PwBaseController.php 29863 2013-07-02 03:28:46Z gao.wanggao $
  * @package lib.base.controller
  */
 class PwBaseController extends WindController {
@@ -50,6 +50,7 @@ class PwBaseController extends WindController {
 	protected function showMessage($message = '', $referer = '', $refresh = false) {
 		$this->addMessage('success', 'state');
 		$this->addMessage($this->forward->getVars('data'), 'data');
+		$this->addMessage($this->forward->getVars('html'), 'html');
 		$this->showError($message, $referer, $refresh);
 	}
 
@@ -61,7 +62,7 @@ class PwBaseController extends WindController {
 	 * @param boolean $referer 是否刷新页面
 	 */
 	protected function showError($error = '', $referer = '', $refresh = false) {
-		if ($referer) {
+		if ($referer && !WindValidator::isUrl($referer)) {
 			$_referer = explode('#', $referer, 2);
 			$referer = WindUrlHelper::createUrl($_referer[0], array(), 
 				isset($_referer[1]) ? $_referer[1] : '');
@@ -113,6 +114,8 @@ class PwBaseController extends WindController {
 		$this->resolveActionFilter($_filters);
 	}
 	
+
+
 	/**
 	 * 风格设置
 	 *

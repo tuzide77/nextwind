@@ -11,7 +11,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @author Qiong Wu <papa0924@gmail.com> 2011-10-13
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: IndexController.php 24585 2013-02-01 04:02:37Z jieyin $
+ * @version $Id: IndexController.php 28926 2013-05-31 02:21:50Z yetianshi $
  * @package admin
  * @subpackage controller
  */
@@ -176,7 +176,7 @@ class IndexController extends AdminBaseController {
 		} else {
 			$html = $srv->getVerify($config['type']);
 		}
-		$this->setOutput($html, 'data');
+		$this->setOutput($html, 'html');
 		$this->showMessage("operate.success");
 	}
 }

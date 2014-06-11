@@ -26,7 +26,7 @@ class DraftController extends PwBaseController {
 	 * @return void
 	 */
 	public function doAddAction() {
-		list($title,$content) = $this->getInput(array('atc_title','atc_content'));
+		list($title,$content) = $this->getInput(array('atc_title','atc_content'), 'post');
 		if (!$title || !$content) {
 			$this->showError('BBS:draft.content.empty');
 		}
@@ -48,7 +48,11 @@ class DraftController extends PwBaseController {
 	 * @return void
 	 */
 	public function doDeleteAction() {
-		$id = (int)$this->getInput('id');
+		$id = (int)$this->getInput('id', 'post');
+		if (!$id) {
+			$this->showError('operate.fail');
+		}
+
 		$draft = $this->_getDraftDs()->getDraft($id);
 		if ($draft['created_userid'] != $this->loginUser->uid) {
 			$this->showError('BBS:draft.operater.error');
@@ -72,7 +76,7 @@ class DraftController extends PwBaseController {
 			$_tmp['created_time'] = Pw::time2str($v['created_time'],'auto');
 			$data[] = $_tmp;
 		}
-		echo Pw::jsonEncode(array('state' => 'success', 'data' => $data));exit;
+		Pw::echoJson(array('state' => 'success', 'data' => $data));exit;
 	}
 	
 	/**

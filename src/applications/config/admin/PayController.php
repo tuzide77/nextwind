@@ -26,6 +26,7 @@ class PayController extends AdminBaseController {
 	}
 	
 	public function dorunAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
 
 		list($ifopen, $reason, $alipay, $alipaypartnerID, $alipaykey, $alipayinterface, $tenpay, $tenpaykey, $paypal, $paypalkey, $_99bill, $_99billkey) = $this->getInput(array('ifopen', 'reason', 'alipay', 'alipaypartnerID', 'alipaykey', 'alipayinterface', 'tenpay', 'tenpaykey', 'paypal', 'paypalkey', '99bill', '99billkey'));
 

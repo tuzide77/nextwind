@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+<template source='header' />
+<template source='header_admin' />
+</head>
+<body>
+<div class="demo_wrap">
+	<div class="section" id="textclor_name">
+		<h2>component 业务服务型组件代码示例</h2>
+		<div class="cc">
+			<div class="demo_code">
+			<!--代码区域开始-->
+			<div><component name='link' tpl='TPL:link.link' args='首页'/></div>
+			<div><component name='test' tpl='DEMO:template.hook_sigment2' args='asdfasdfasdf'/></div>
+			<div><component class='DEMO:service.DemoTestHookService' tpl='DEMO:template.hook_sigment2' args='$service' /></div>
+			<!--代码区域结束-->
+			</div>
+			<div class="demo_html">
+				<h3>代码</h3>
+				<div class="demo_html_cont">
+					标签调用:<br>
+					&lt;component name='test' tpl='DEMO:template.hook_sigment2' args='asdfasdfasdf' /&gt;<br>
+					配置举例:<br>
+					'test' => array(<br>
+					&nbsp;&nbsp;'service' => 'DEMO:service.DemoTestComponentService',<br>
+					&nbsp;&nbsp;'method' => 'test',<br>
+					),<br>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="section" id="textclor_name">
+		<h2>hook</h2>
+		<div class="cc">
+			<div class="demo_code">
+			<ul>
+			<li>alias: 分组的缓存文件名字，所有alias相同的模板片段会被编译到该以__segment_打头，后跟alias缓存文件中</li>
+			</ul>
+			<b>右侧代码使用如下：</b>
+			<!--代码区域开始-->
+			<div><hook class='$service' method='display' alias='hook_test'/></div>
+			<!--代码区域结束-->
+			<br/>
+			<p>并可以查看文件__segment_hook_test.tpl中看到所有该处的钩子模板文件都编译到此，同时在display中调用PwHook::template的时候，可以通过指定第三个参数为false来独立编译。</p>
+			</div>
+			<div class="demo_html">
+				<h3>代码</h3>
+				<div class="demo_html_cont">
+					&lt;hook class='$service' method='display' alias='hook_test' /&gt;<br>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="section" id="textclor_name">
+		<h2>segment 模板片段标签使用示例</h2>
+		<div class="cc">
+			<div class="demo_code">
+			<ul>
+			<li>alias: 分组的缓存文件名字，所有alias相同的模板片段会被编译到该以__segment_打头，后跟alias缓存文件中</li>
+			<li>tpl: 模板片段路径</li>
+			<li>args: 传递给模板片段的变量,在该模板标签中，将定义为$data变量来作为传入参数用以调用</li>
+			<li>name: 模板片段中（tpl）的定义的hook-action的名字</li>
+			</ul>
+			<br/>
+			模板文件中允许存在如下三种形式：
+			<ul>
+				 <li><b>1、第一种：</b><br/>
+					 &lt;hook-action name="hook1" args='a,b,c'&gt;
+					 &lt;div&gt;i am from hook1 {$a} |{$b}|{$c}&lt;/div&gt;
+				 	 &lt;/hook-action&gt;
+				 <br/><i>如上将会被编译成：</i><br/>
+				 <span>function templateName_hook1($a, $b, $c) { &lt;div&gt;....&lt;/div&gt;}</span>
+				 </li>
+				 <li><b>2、第二种：</b><br/>
+				 &lt;hook-action name="hook2"&gt;
+				 &lt;div&gt; i am from hook2 {$data} &lt;/div&gt;
+				 &lt;/hook-action&gt;
+				<br/><i>如上将会被编译成：</i><br/>
+				 <span>function templateName_hook2($data) {&lt;div&gt;....&lt;/div&gt;}</span>
+				 </li>
+				 <li><b>3、第三种：</b><br/>
+				 &lt;div&gt; i am from segment {$data}&lt;/div&gt;
+				 <br/><i>如上将会被编译成：</i><br/>
+				 <span>function templateName($data) {&lt;div&gt;....&lt;/div&gt;}</span>
+				 </li>
+			 </ul>
+			 <br/>
+			 <b>模板标签使用：</b><br/>
+			 &lt;segment alias='' name='' args='' tpl='' /&gt;<br/>
+			 tpl文件中的模板内容按照如上三种规则被编译之后，将会保存到__segment_alias文件中
+			 调用方法根据：
+			 tpl_name来调用,如果func没有写，则调用方法为tpl，否则为tpl_func,传入参数为args
+	 		<br/><br/>
+			<!--代码区域结束-->
+			</div>
+			<div class="demo_html">
+				<h3>代码</h3>
+				<div class="demo_html_cont">
+					标签调用:<br>
+					&lt;segment alias='segment_test' tpl='DEMO:template.segment_test1' args='array("a" => "111")' /&gt;<br>
+					&lt;segment alias='segment_test' tpl='DEMO:template.segment_test2' args='array("b" => "2222")' /&gt;<br>
+				</div>
+				<b>以上代码使用如下：</b>
+				<!--代码区域开始-->
+				<div><segment alias='segment_test' tpl='DEMO:template.segment_test1' args='"测试测试", "fsdf", "发送地方"' name='test_segment2'/></div>
+				<div><segment alias='segment_test' tpl='DEMO:template.segment_test2' args='array("haha")' name='' /></div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

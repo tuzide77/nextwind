@@ -1,6 +1,4 @@
 ﻿<?xml version="1.0"?>
-<!DOCTYPE cross-domain-policy SYSTEM "http://www.macromedia.com/xml/dtds/cross-domain-policy.dtd">
 <cross-domain-policy>
-   <site-control permitted-cross-domain-policies="all" />
-   <allow-access-from domain="*" to-ports="*" />
+	<allow-access-from domain="*" /><!-- flash跨域策略，domain建议设置为 *.你的站点域名 -->
 </cross-domain-policy>

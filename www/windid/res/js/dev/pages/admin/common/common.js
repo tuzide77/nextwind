@@ -4,7 +4,7 @@
  * @Descript: 后台全局功能js（在footer.htm模板引用）
  * @Author	: chaoren1641@gmail.com linhao87@gmail.com
  * @Depend	: core.js、jquery.js(1.7 or later)
- * $Id: common.js 23951 2013-01-17 08:04:38Z hao.lin $		:
+ * $Id: common.js 28795 2013-05-24 05:28:06Z hao.lin $		:
  */
 ;(function() {
 	//全局ajax处理
@@ -195,9 +195,9 @@
 									//返回带跳转地址
 									if(window.parent.Wind.dialog) {
 										//iframe弹出页
-										window.parent.location.href = data.referer;
+										window.parent.location.href = decodeURIComponent(data.referer);
 									}else {
-										window.location.href = data.referer;
+										window.location.href = decodeURIComponent(data.referer);
 									}
 								}else {
 									if(window.parent.Wind.dialog) {
@@ -232,22 +232,33 @@
 
 			$('.J_ajax_del').on('click',function(e) {
 				e.preventDefault();
-				var $this = $(this), href = $this.prop('href'), msg = $this.data('msg');
+				var $this = $(this), href = $this.prop('href'), msg = $this.data('msg'), pdata = $this.data('pdata');
 				var params = {
 					message	: msg ? msg : '确定要删除吗？',
 					type	: 'confirm',
 					isMask	: false,
 					follow	: $(this),//跟随触发事件的元素显示
 					onOk	: function() {
-						$.getJSON(href).done(function(data) {
-							if(data.state === 'success') {
-								if(data.referer) {
-									location.href = data.referer;
-								}else {
-									reloadPage(window);
+						$.ajax({
+							url: href,
+							type : 'post',
+							dataType: 'json',
+							data: function(){
+								if(pdata) {
+									pdata = $.parseJSON(pdata.replace(/'/g, '"'));
+									return pdata
 								}
-							}else if( data.state === 'fail' ) {
-								Wind.dialog.alert(data.message);
+							}(),
+							success: function(data){
+								if(data.state === 'success') {
+									if(data.referer) {
+										location.href = decodeURIComponent(data.referer);
+									}else {
+										reloadPage(window);
+									}
+								}else if( data.state === 'fail' ) {
+									Wind.dialog.alert(data.message);
+								}
 							}
 						});
 					}
@@ -268,20 +279,33 @@
 				return false;
 			}
 			refresh_lock = true;
+			var pdata = $(this).data('pdata');
 
-			$.post(this.href, function(data) {
-				refresh_lock = false;
-
-				if(data.state === 'success') {
-					if(data.referer) {
-						location.href = data.referer;
-					}else {
-						reloadPage(window);
+			$.ajax({
+				url: this.href,
+				type : 'post',
+				dataType: 'json',
+				data: function(){
+					if(pdata) {
+						pdata = $.parseJSON(pdata.replace(/'/g, '"'));
+						return pdata
 					}
-				}else if( data.state === 'fail' ) {
-					Wind.dialog.alert(data.message);
+				}(),
+				success: function(data){
+					refresh_lock = false;
+
+					if(data.state === 'success') {
+						if(data.referer) {
+							location.href = decodeURIComponent(data.referer);
+						}else {
+							reloadPage(window);
+						}
+					}else if( data.state === 'fail' ) {
+						Wind.dialog.alert(data.message);
+					}
 				}
-			}, 'json');
+			});
+
 		});
 	}
 

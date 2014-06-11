@@ -60,7 +60,7 @@
 				<td><span class="{$statusColor}">{$status}</span></td>
 				<td>{$value['username']}</td>
 				<td>{$start_date}至{$end_date}</td>
-				<td><a href="{@url:announce/announce/update?aid=$value['aid']}" title="编辑公告管理" class="mr10">[编辑]</a><a href="{@url:announce/announce/doDelete?aid=$value['aid']}" class="mr10 J_ajax_del">[删除]</a></td>
+				<td><a href="{@url:announce/announce/update?aid=$value['aid']}" title="编辑公告管理" class="mr10">[编辑]</a><a href="{@url:announce/announce/doDelete}" class="mr10 J_ajax_del" data-pdata="{'aid': '{$value['aid']}'}">[删除]</a></td>
 			</tr>
 			<!--# } #-->
 			<!--# } else { #-->

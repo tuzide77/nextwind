@@ -7,7 +7,7 @@ Wind::import('SRV:hook.dm.PwHookDm');
  * @author Shi Long <long.shi@alibaba-inc.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: ManageController.php 24585 2013-02-01 04:02:37Z jieyin $
+ * @version $Id: ManageController.php 28812 2013-05-24 09:08:16Z jieyin $
  * @package hook
  */
 class ManageController extends AdminBaseController {
@@ -46,6 +46,8 @@ class ManageController extends AdminBaseController {
 	 * 添加hook
 	 */
 	public function doAddAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($name, $app, $dec, $param, $interface) = $this->getInput(array('name', 'app', 'dec', 'param', 'interface'), 'post');
 		list($appId, $appName) = explode('|', $app);
 		$r = $this->_hookDs()->fetchByName($name);
@@ -83,6 +85,8 @@ class ManageController extends AdminBaseController {
 	 * hook编辑
 	 */
 	public function doEditAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($name, $app, $dec, $param, $interface) = $this->getInput(array('name', 'app', 'dec', 'param', 'interface'), 'post');
 		list($appId, $appName) = explode('|', $app);
 		$dm = new PwHookDm();
@@ -102,6 +106,8 @@ class ManageController extends AdminBaseController {
 	 * 删除hook
 	 */
 	public function delAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$name = $this->getInput('name');
 		$r = $this->_hookDs()->delByName($name);
 		$r && $r = $this->_injectDs()->delByHookName($name);

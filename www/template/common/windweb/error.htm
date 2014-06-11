@@ -89,13 +89,13 @@ body {
 <div class="wind_main">
 <h2><?php echo "Uncaught error with message '".WindSecurity::escapeHTML($message)."'"; ?></h2>
 <?php if(isset($debug)) {?>
-<h3><?php echo $debug['file'],': ',$debug['line']; ?></h3>
+<h3><?php echo WindSecurity::escapeHTML($debug['file'].': '.$debug['line']); ?></h3>
 <ul>
 	<?php foreach($debug['fileLines'] as $key => $value){
 		if($key == ($debug['line']-1)){?>
-	<li class="err"><?php echo $value; ?></li>
+	<li class="err"><?php echo WindSecurity::escapeHTML($value); ?></li>
 	<?php }else{ ?>
-	<li><?php echo $value; ?></li>
+	<li><?php echo WindSecurity::escapeHTML($value); ?></li>
 	<?php }} ?>
 </ul>
 

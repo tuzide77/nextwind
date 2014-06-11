@@ -111,7 +111,7 @@
 
 							}, 'html');
 						}else{
-							window.location.href = data.referer;
+							window.location.href = decodeURIComponent(data.referer);
 						}
 					}else{
 						Wind.Util.ajaxBtnEnable(qlogin_btn);

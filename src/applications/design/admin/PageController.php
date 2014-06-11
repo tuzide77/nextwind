@@ -1,11 +1,11 @@
 <?php
 Wind::import('ADMIN:library.AdminBaseController');
 /**
- * the last known user to change this file in the repository  <$LastChangedBy: jieyin $>
- * @author $Author: jieyin $ Foxsee@aliyun.com
+ * the last known user to change this file in the repository  <$LastChangedBy: gao.wanggao $>
+ * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PageController.php 22678 2012-12-26 09:22:23Z jieyin $ 
+ * @version $Id: PageController.php 28936 2013-05-31 02:50:17Z gao.wanggao $ 
  * @package 
  */
 
@@ -52,7 +52,7 @@ class PageController extends AdminBaseController {
 		foreach ($modules AS $v) {
 			$option .= '<option value="'.$v['module_id'].'">'.$v['module_name'].'</option>';
 		}
-		$this->setOutput($option, 'data');
+		$this->setOutput($option, 'html');
 		$this->showMessage("operate.success");
 	}
 	
@@ -62,7 +62,7 @@ class PageController extends AdminBaseController {
 	 * @see ImportController->dorunAction
 	 */
 	public function doclearAction() {
-		$pageid = (int)$this->getInput('id', 'get');
+		$pageid = (int)$this->getInput('id', 'post');
 		Wind::import('SRV:design.bo.PwDesignPageBo');
     	$pageBo = new PwDesignPageBo($pageid);
 		$pageInfo = $pageBo->getPage();

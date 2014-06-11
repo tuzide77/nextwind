@@ -222,7 +222,7 @@
 								location.reload();
 							}else{
 								//主楼跳转
-								location.href = data.referer;
+								location.href = decodeURIComponent(data.referer);
 							}
 						}else if(data.state == 'fail'){
 							Wind.Util.resultTip({

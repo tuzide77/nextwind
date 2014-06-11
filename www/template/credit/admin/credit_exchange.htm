@@ -29,7 +29,7 @@
 					<td>兑换</td>
 					<td>{$value['value2']}个{$creditBo->cType[$value['credit2']]}</td>
 					<td><input type="hidden" name="exchange_old[{$key}]" value="1"><input type="checkbox" name="ifopen_old[{$key}]" value="1"{@Pw::ifcheck($value['ifopen'])}></td>
-					<td><a href="{@url:credit/credit/delexchange?id=$key}" class="J_ajax_del">[删除]</a></td>
+					<td><a href="{@url:credit/credit/delexchange}" class="J_ajax_del" data-pdata="{'id': '{$key}'}">[删除]</a></td>
 				</tr>
 				<!--# } #-->
 			</tbody>

@@ -6,7 +6,7 @@ define('WINDID_BOOT', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 require WINDID_BOOT . 'bootstrap.php';
 
 class WindidApi {
-	
+
 	public static function api($api) {
 		static $cls = array();
 		$array = array('user', 'config', 'message', 'avatar', 'area', 'school', 'app', 'notify');
@@ -25,7 +25,7 @@ class WindidApi {
 		}
 		return $cls[$class];
 	}
-	
+
 	public static function open($script, $getData = array(), $postData = array(), $method='post', $protocol='http') {
 		$time = Pw::getTime();
 		list($c, $a) = explode('/', $script);
@@ -33,16 +33,20 @@ class WindidApi {
 			'm' => 'api',
 			'c' => $c,
 			'a' => $a,
-			'windidkey' => WindidUtility::appKey(WINDID_CLIENT_ID, $time, WINDID_CLIENT_KEY),
+			'windidkey' => WindidUtility::appKey(WINDID_CLIENT_ID, $time, WINDID_CLIENT_KEY, $getData, $postData),
 			'clientid' => WINDID_CLIENT_ID,
 			'time' => $time,
 		);
 		$url = WINDID_SERVER_URL  . '/index.php?' . http_build_query($query) .'&' . http_build_query($getData);
-		$result = WindidUtility::buildRequest($url, $postData);
+		//$result = WindidUtility::buildRequest($url, $postData); //系统自带的函数不知道是什么问题，先用这个函数，并且加上过滤防范了安全。taishici
+        if(!(strpos($url, 'http://')===0 || strpos($url, 'https://')===0)) {
+            return false;
+        }
+        $result = file_get_contents($url);
 		if ($result === false) return WindidError::SERVER_ERROR;
 		return Pw::jsonDecode($result);
 	}
-	
+
 	public static function getDm($api) {
 		$array = array('user', 'message', 'credit', 'app');
 		if (!in_array($api, $array)) return WindidError::FAIL;

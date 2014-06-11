@@ -39,7 +39,7 @@
 									<div class="title">
 										 发给 <a href="{@url:space/index/run?uid=$value['from_uid']}" class="name J_user_card_show" data-uid="{$value['from_uid']}"  target="_blank">{$lastMessage['to_username']}</a>：{$lastMessage['content']|html}<!--# if ($value['unread_count']) { #--><a class="J_unread unread" data-count="{$value['unread_count']}" href="{@url:message/message/dialog?dialogid=$value['dialog_id']}">(<span class="J_read_count_{$value['from_uid']}">{$value['unread_count']}</span>条未读)</a><!--# } #--><a class="J_tragger" href="{@url:message/message/dialog?dialogid=$value['dialog_id']}"></a>
 									</div>
-									<div class="info"><span class="num">共{$value['message_count']}条</span><span class="operating"><a href="{@url:message/message/deleteDialog?ids=$value['dialog_id']}" data-msg="确定删除与{$lastMessage['to_username']}的所有对话记录吗？" class="J_msg_del" data-type="msg">删除</a>|</span><span class="time"><!--#echo Pw::time2str($value['modified_time'],'auto');#--></span></div>
+									<div class="info"><span class="num">共{$value['message_count']}条</span><span class="operating"><a href="#" data-uri="{@url:message/message/deleteDialog}" data-msg="确定删除与{$lastMessage['to_username']}的所有对话记录吗？" class="J_msg_del" data-pdata="{'ids':'{$value['dialog_id']}'}" data-type="msg">删除</a>|</span><span class="time"><!--#echo Pw::time2str($value['modified_time'],'auto');#--></span></div>
 								<!--# } else { #-->
 									<a href="{@url:space/index/run?uid=$lastMessage['from_uid']}" class="face J_user_card_show" data-uid="{$lastMessage['from_uid']}"  target="_blank">
 										<img src="{@Pw::getAvatar($lastMessage['from_uid'], 'small')}" data-type="small" width="50" height="50" alt="" class="J_avatar" />
@@ -47,7 +47,7 @@
 									<div class="title">
 										 <a href="{@url:space/index/run?uid=$lastMessage['from_uid']}" class="name J_user_card_show" data-uid="{$lastMessage['from_uid']}"  target="_blank">{$lastMessage['from_username']}</a>：{$lastMessage['content']|html}<!--# if ($value['unread_count']) { #--><a class="J_unread unread" data-count="{$value['unread_count']}" href="{@url:message/message/dialog?dialogid=$value['dialog_id']}">(<span class="J_read_count_{$lastMessage['from_uid']}">{$value['unread_count']}</span>条未读)</a><!--# } #--><a class="J_tragger" href="{@url:message/message/dialog?dialogid=$value['dialog_id']}"></a>
 									</div>
-									<div class="info"><span class="num">共{$value['message_count']}条</span><span class="operating"><a href="{@url:message/message/dialog?dialogid=$value['dialog_id']}">回复</a>|<a href="{@url:message/message/deleteDialog?ids=$value['dialog_id']}" data-msg="确定删除与{$lastMessage['from_username']}的所有对话记录吗？" class="J_msg_del" data-type="msg">删除</a>|</span><span class="time"><!--#echo Pw::time2str($value['modified_time'],'auto');#--></span></div>
+									<div class="info"><span class="num">共{$value['message_count']}条</span><span class="operating"><a href="{@url:message/message/dialog?dialogid=$value['dialog_id']}">回复</a>|<a href="#" data-uri="{@url:message/message/deleteDialog}" data-msg="确定删除与{$lastMessage['from_username']}的所有对话记录吗？" class="J_msg_del" data-pdata="{'ids':'{$value['dialog_id']}'}" data-type="msg">删除</a>|</span><span class="time"><!--#echo Pw::time2str($value['modified_time'],'auto');#--></span></div>
 								<!--# } #-->
 								</div>
 							</div>

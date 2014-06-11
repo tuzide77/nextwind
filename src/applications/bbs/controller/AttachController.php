@@ -5,7 +5,7 @@
  *
  * @author Jianmin Chen <sky_hold@163.com>
  * @license http://www.phpwind.com
- * @version $Id: AttachController.php 26520 2013-04-10 07:41:08Z jieyin $
+ * @version $Id: AttachController.php 28798 2013-05-24 06:20:13Z jieyin $
  * @package forum
  */
 
@@ -178,7 +178,10 @@ class AttachController extends PwBaseController {
 
 	public function deleteAction() {
 
-		$aid = $this->getInput('aid');
+		$aid = $this->getInput('aid', 'post');
+		if (!$aid) {
+			$this->showError('operate.fail');
+		}
 		if (!$attach = Wekit::load('attach.PwThreadAttach')->getAttach($aid)) {
 			$this->showError('data.error');
 		}

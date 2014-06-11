@@ -1,0 +1,1215 @@
+<!doctype html>
+<html>
+<head>
+	<template source='header' />
+	<template source='header_admin' />
+	<!--<link href="http://chaoren1641.github.com/demo/assets/google-code-prettify/prettify.css" rel="stylesheet" />-->
+	<style>
+		/*.demo_html_cont{
+		 display:none;
+		 }*/
+		
+	</style>
+</head>
+<body>
+<div id="J_header" class="header">
+	<div class="wrap">
+		<h1>phpwind9.0 前端交互API</h1>
+		<p class="desc">Depends on: wind.js, jQuery1.8.0</p>
+	</div>
+</div>
+<div id="J_side_head" class="side_head" style="display:none;">
+	<p>phpwind9.0 前端交互API</p>
+</div>
+<div class="side" style="" id="J_side">
+	
+	<dl>
+		<dt>Wind组件方法</dt>
+		<dd>
+			<ul>
+				<li><a href="#tabs">.tabs()<p>选项卡</p></a></li>
+				<li><a href="#dialog">.dialog()<p>对话框</p></a></li>
+				<li><a href="#colorPicker">.colorPicker()<p>颜色选择</p></a></li>
+				<li><a href="#datePicker">.datePicker()<p>日期选择</p></a></li>
+				<li><a href="#uploadPreview">.uploadPreview()<p>图片上传预览</p></a></li>
+				<li><a href="#region">.region()<p>地区选择组件</p></a></li>
+				<li><a href="#school">school<p>学校选择组件</p></a></li>
+			</ul>
+		</dd>
+		<dt>Wind.Util下的全局方法(global.js)</dt>
+		<dd>
+			<ul>
+				<li><a href="#ajaxBtnDisable">Wind.Util.ajaxBtnDisable()<p>提交按钮不可用(ajax显示“**中...”)</p></a></li>
+				<li><a href="#ajaxBtnDisable">Wind.Util.ajaxBtnEnable()<p>把显示“**中...”的按钮恢复为点击前状态</p></a></li>
+				<li><a href="#ajaxConfirm">Wind.Util.ajaxConfirm()<p>所有需二次确认ajax提交操作（如删除）</p></a></li>
+				<li><a href="#ajaxMaskShow">Wind.Util.ajaxMaskShow()<p>显示ajax操作遮罩提示</p></a></li>
+				<li><a href="#ajaxTempError">Wind.Util.ajaxTempError()<p>ajax请求html模板，判断是否出错</p></a></li>
+				<li><a href="#buttonStatus">Wind.Util.buttonStatus()<p>按钮可用&不可用状态切换</p></a></li>
+				<li><a href="#clickToggle">Wind.Util.clickToggle()<p>click显示/隐藏内容</p></a></li>
+				<li><a href="#cookieGet">Wind.Util.cookieGet()<p>获取cookie</p></a></li>
+				<li><a href="#cookieGet">Wind.Util.cookieSet()<p>设置cookie</p></a></li>
+				<li><a href="#ctrlEnterSub">Wind.Util.ctrlEnterSub()<p>ctrl+enter提交</p></a></li>
+				<li><a href="#formBtnTips">Wind.Util.formBtnTips()<p>表单提交反馈提示（提交按钮旁显示）</p></a></li>
+				<li><a href="#getVerifyTemp">Wind.Util.getVerifyTemp()<p>获取验证码模板</p></a></li>
+				<li><a href="#hoverToggle">Wind.Util.hoverToggle()<p>hover显示/隐藏内容</p></a></li>
+				<li><a href="#reloadPage">Wind.Util.reloadPage()<p>强制刷新</p></a></li>
+				<li><a href="#resultTip">Wind.Util.resultTip()<p>操作通用提示</p></a></li>
+				<li><a href="#showVerifyPop">Wind.Util.showVerifyPop()<p>获取验证码弹窗</p></a></li>
+				<li><a href="#popPos">Wind.Util.popPos()<p>弹窗定位</p></a></li>
+				<li><a href="#postTip">Wind.Util.postTip()<p>发送信息的提示</p></a></li>
+				<li><a href="#quickLogin">Wind.Util.quickLogin()<p>快捷登录</p></a></li>
+			</ul>
+		</dd>
+	</dl>
+</div>
+<div class="demo_wrap js_demo">
+	<!-- <ul class="demo_nav cc mb20">
+		<li class="current">
+			<a href="">Wind JavaScript交互DEMO</a> 
+		</li>
+		<li>
+			<a href="?a=windeditor">WindEditor DEMO</a>
+		</li>
+	</ul> -->
+
+	<div class="section" id="tabs">
+		<h2>.tabs()</h2>
+		<p>tab选项卡</p>
+		<div class="cc">
+			<div class="demo_code">
+				<!--代码区域开始-->
+				<h3>示例</h3>
+				<div class="demo_code_cont">
+					<div id="J_tabs">
+						<div class="nav">
+							<ul class="cc tabs_nav">
+								<li>
+									<a href="#">选项卡1</a>
+								</li>
+								<li>
+									<a href="#">选项卡2</a>
+								</li>
+								<li>
+									<a href="#">选项卡3</a>
+								</li>
+							</ul>
+						</div>
+						<div class="tabs_contents">
+							<div class="p10">
+								选项卡1的内容
+							</div>
+							<div class="p10">
+								选项卡2的内容
+							</div>
+							<div class="p10">
+								选项卡3的内容
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--代码区域结束-->
+			</div>
+			<div class="demo_html">
+				<h3>代码</h3>
+				<div class="demo_html_cont">
+					<pre class="prettyprint linenums">
+&#60;div id="J_tabs"&#62;
+	&#60;div class="nav"&#62;
+		&#60;ul class="cc tabs_nav"&#62;
+			&#60;li&#62;&#60;a href="#"&#62;选项卡1&#60;/a&#62;&#60;/li&#62;
+			&#60;li&#62;&#60;a href="#"&#62;选项卡2&#60;/a&#62;&#60;/li&#62;
+			&#60;li&#62;&#60;a href="#"&#62;选项卡3&#60;/a&#62;&#60;/li&#62;
+		&#60;/ul&#62;
+	&#60;/div&#62;
+	&#60;div class="tabs_contents"&#62;
+		&#60;div class="p10"&#62;选项卡1的内容&#60;/div&#62;
+		&#60;div class="p10"&#62;选项卡2的内容&#60;/div&#62;
+		&#60;div class="p10"&#62;选项卡3的内容&#60;/div&#62;
+	&#60;/div&#62;
+&#60;/div&#62;
+
+Wind.use('tabs',function() {
+	$('.tabs_nav').tabs('.tabs_contents > div');
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="section" id="dialog">
+				<h2>.dialog()</h2>
+				<p>对话框</p>
+				<div class="cc">
+					<div class="demo_code">
+						<!--代码区域开始-->
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<div id="J_dialog">
+								<input type="button" class="btn" value="alert弹窗" id="J_alert"/>
+								<input type="button" class="btn" value="confirm弹窗" id="J_confirm"/>
+								<input type="button" class="btn" value="弹url" id="J_openUrl"/>
+								<input type="button" class="btn" value="弹某个已知元素，或者弹出ajax请求的HTML" id="J_showHTML"/>
+								<div class="demo_code" id="J_dialog_html" style="display:none">
+									<!--代码区域开始-->
+									<h3>按钮(基础样式btn)</h3>
+									<div class="demo_code_cont">
+										<div class="mb10">
+											<a href="#" class="btn mr10">默认</a><a href="#" class="btn btn_success mr10">确认/添加(btn_success)</a><a href="#" class="btn btn_error mr10">错误/醒目(btn_error)</a>
+										</div>
+										<div>
+											<a href="#" class="btn btn_submit mr10">提交(btn_submit)</a><a href="#" class="btn btn_success"><span class="add"></span>添加</a>
+										</div>
+									</div>
+									<h3>大按钮(多加个btn_big)</h3>
+									<div class="demo_code_cont">
+										<div class="mb10">
+											<a href="#" class="btn btn_big mr10">默认</a><a href="#" class="btn btn_success btn_big mr10">确认/添加</a><a href="#" class="btn btn_error btn_big mr10">错误/醒目</a>
+										</div>
+										<div>
+											<a href="#" class="btn btn_submit btn_big mr10">提交</a><a href="#" class="btn btn_success btn_big"><span class="add"></span>添加</a>
+										</div>
+									</div>
+									<!--代码区域结束-->
+								</div>
+							</div>
+						</div>
+						<!--代码区域结束-->
+					</div>
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+Wind.use('dialog',function() {
+	$('#J_alert').on('click',function(e){
+		var elem = e.currentTarget;
+		Wind.dialog.alert('我是alert',function(){
+			alert('你点了确定，我是原生alert');
+			elem.focus();//关闭窗口后使原始按钮获取焦点
+		});
+	});
+	
+	//confirm
+	$('#J_confirm').on('click',function(e){
+		var elem = e.currentTarget;
+		Wind.dialog.confirm('我是alert',function(e){
+			alert('你点了确定');
+			elem.focus();
+		},function(){
+			alert('你点了取消');
+			elem.focus();
+		});
+	});
+	
+	//open url
+	$('#J_openUrl').on('click',function(){
+		Wind.dialog.open('http://www.baidu.com');
+	});
+	
+	//showHTML
+	$('#J_showHTML').on('click',function(){
+		Wind.dialog.html('#J_dialog_html');
+	});
+	
+	//注意，每一次调用都会返回一个dialog对象，可以调用它的close方法关闭当前窗口，如：
+	var dialog = Wind.dialog.html('#J_dialog_html');
+	dialog.close();
+});
+</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="section" id="colorPicker">
+				<h2>.colorPicker()</h2>
+				<p>颜色选择器</p>
+				<div class="cc">
+					<div style="position:static;" class="demo_code">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<div class="mb10">
+								<input type="text" class="input length_2 mr5 J_color_input">
+								<span class="J_color_picker color_pick"><em style="background:#ff5500;"></em></span>
+							</div>
+							<div class="mb10">
+								<span class="color_pick color_big J_color_picker"><em style="background:#ff5500;"></em>大个的</span>
+							</div>
+						</div>
+					</div>
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+&#60;div class="mb10"&#62;
+	&#60;input type="text" class="input length_2 mr5 J_color_input"&#62;
+	&#60;span class="J_color_picker color_pick"&#62;&#60;em style="background:#ff5500;"&#62;&#60;/em&#62;&#60;/span&#62;
+&#60;/div&#62;
+&#60;div class="mb10"&#62;
+	&#60;span class="color_pick color_big J_color_picker"&#62;&#60;em style="background:#ff5500;"&#62;&#60;/em&#62;大个的&#60;/span&#62;
+&#60;/div&#62;
+
+Wind.use('colorPicker', function() {
+	$('.J_color_picker').colorPicker({
+		callback : function(color) {
+			$(this).find('em').css('background', color);
+			$(this).prev('.J_color_input').val(color);
+		}
+	});
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			
+			<div class="section" id="datePicker">
+				<h2>.datePicker()</h2>
+				<p>日期选择器</p>
+				<div class="cc">
+					<div style="position:static;" class="demo_code">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<input type="date"/>
+						</div>
+					</div>
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+&#60;input type="date"/&#62;
+
+Wind.use('datePicker', function() {
+	$(":date").datePicker();
+});</pre>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+			
+			<div class="section" id="uploadPreview">
+				<h2>.uploadPreview()</h2>
+				<p>input:file 图片上传预览（不支持ie）</p>
+				<div class="cc">
+					<div style="position:static;" class="demo_code">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<div class="single_image_up">
+								<a href="javascript:void(0)">上传图片</a>
+								<input name="sitelogo" type="file">
+							</div>
+						</div>
+					</div>
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+&#60;div class="single_image_up"&#62;
+	&#60;a href="javascript:void(0)"&#62;上传图片&#60;/a&#62;
+	&#60;input name="sitelogo" type="file"&#62;
+&#60;/div&#62;
+
+Wind.use('uploadPreview', function() {
+	$(':file').uploadPreview();
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="region">
+				<h2>.region(options)</h2>
+				<p>地区选择<br>options.type：类型（'school'用于<a href="#school">学校选择</a>，默认为地区选择）</p>
+				<div class="cc">
+					<div style="position:static;" class="demo_code">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<div class="J_region_set">
+								<span class="J_region_list">
+									<span class="J_province"></span> <span class="J_city"></span> <span class="J_district"></span>
+								</span>
+								<a class="J_region_change" href="" data-did="" data-cid="" data-pid="">选择地区</a>
+								<input type="hidden" value="" name="location" class="J_areaid">
+							</div>
+						</div>
+					</div>
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+&#60;div class="J_region_set"&#62;
+	&#60;span class="J_region_list"&#62;
+		&#60;span class="J_province"&#62;&#60;/span&#62; &#60;span class="J_city"&#62;&#60;/span&#62; &#60;span class="J_district"&#62;&#60;/span&#62;
+	&#60;/span&#62;
+	&#60;a class="J_region_change" href="" data-did="" data-cid="" data-pid=""&#62;更改&#60;/a&#62;
+	&#60;input type="hidden" value="" name="location" class="J_areaid"&#62;
+&#60;/div&#62;
+
+//global.js
+var region_set = $('.J_region_set');
+if(region_set.length) {
+	Wind.use('region', function(){
+		$('a.J_region_change').region();
+	});
+}</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="school">
+				<h2>school</h2>
+				<p>学校选择，基于.region()</p>
+				<div class="cc">
+					<div style="position:static;" class="demo_code">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<input type="text" placeholder="大学" class="J_plugin_school" data-rank="province" data-typeid="3">
+							<input type="hidden" value="" name="">
+
+							<input type="text" placeholder="中学&小学" class="J_plugin_school" data-rank="" data-typeid="">
+							<input type="hidden" value="" name="">
+						</div>
+					</div>
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+&#60;input type="text" placeholder="大学" class="J_plugin_school" data-rank="province" data-typeid="3"&#62;
+&#60;input type="hidden" value="" name=""&#62;
+
+&#60;input type="text" placeholder="中学&小学" class="J_plugin_school" data-rank="" data-typeid=""&#62;
+&#60;input type="hidden" value="" name=""&#62;
+
+
+Wind.use('region', 'school', function(){
+	$('input.J_plugin_school').region({
+		type : 'school'
+	});
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="ajaxBtnDisable">
+				<h2>.ajaxBtnDisable(btn), ajaxBtnEnable(btn, disabled)</h2>
+				<p>ajaxBtnDisable：显示提交按钮为“**中...”并disabled；<br>ajaxBtnEnable：恢复为提交状态（带'disabled'参数则按钮默认不可用）；</p>
+				<div class="cc">
+					<div class="demo_code" style="position:static;">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<button class="btn" id="J_ajaxBtnDisable" type="submit">提交</button>
+						</div>
+					</div>
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+$('#J_ajaxBtnDisable').on('click', function(e){
+	e.preventDefault();
+	var $this = $(this);
+	Wind.Util.ajaxBtnDisable($this);
+
+	setTimeout(function(){
+		Wind.Util.ajaxBtnEnable($this);
+	}, 3000);
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="ajaxConfirm">
+				<h2>.ajaxConfirm(options)</h2>
+				<p>所有需要二次确认ajax提交操作（如删除）</p>
+				<div class="cc">
+					<div class="demo_code" style="position:static;">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<p>我是一条记录 (<a href="" id="J_ajaxConfirm">删除</a>)</p>
+						</div>
+					</div>
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+$('#J_ajaxConfirm').on('click', function(e){
+	e.preventDefault();
+	var $this = $(this);
+	
+	Wind.Util.ajaxConfirm({
+		elem : $this,
+		href : this.href,
+		msg : '真的删了噢？',
+		callback : function(){
+			//删除后回调
+		}
+	});
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="ajaxMaskShow">
+				<h2>.ajaxMaskShow(zindex)</h2>
+				<p>显示ajax操作遮罩提示<br>zindex：遮罩z值，默认12</p>
+				<div class="cc">
+					<div class="demo_code" style="position:static;">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<a href="" id="J_ajaxMaskShow">关注我</a>
+						</div>
+					</div>
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+var timer;
+$('#J_ajaxMaskShow').on('click', function(e){
+	e.preventDefault();
+	var $this = $(this);
+	Wind.Util.ajaxMaskShow();
+	clearTimeout(timer);
+
+	timer = setTimeout(function(){
+		$('#J_ajaxmask').remove();
+		$this.replaceWith('已关注');
+	}, 3000);
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="ajaxTempError">
+				<h2>.ajaxTempError(data, follow, zindex)</h2>
+				<p>ajax请求html模板，判断是否出错<br>data：html返回的模板数据，请求失败则返回通用错误模板error.htm<br>follow：气泡提示的跟随显示元素<br>zindex：提示气泡z值，默认根据css设置</p>
+				<div class="cc">
+					<div class="demo_code" style="position:static;">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<button class="btn" id="J_ajaxTempError">提交</button>
+						</div>
+					</div>
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+$('#J_ajaxTempError').on('click', function(e){
+	e.preventDefault();
+	var $this = $(this),
+		data = '&#60;div class="reg_cont_wrap"&#62;&#60;div class="reg_message reg_ignore"&#62;&#60;ul class="mb10 f14"&#62;\
+		&#60;li id="J_html_error"&#62;操作失败&#60;/li&#62;\
+	&#60;/ul&#62;&#60;div class="error_return"&#62;&#60;a href="javascript:window.history.go(-1);"&#62;返回上一页&#60;/a&#62; 或者 &#60;a href="http://dev.wekit.net"&#62;回到首页&#60;/a&#62;&#60;/div&#62;&#60;/div&#62;&#60;/div&#62;';
+
+	if(Wind.Util.ajaxTempError(data, $this)) {
+		return;
+	}
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="buttonStatus">
+				<h2>.buttonStatus(input, btn)</h2>
+				<p>按钮可用&不可用状态切换<br>input：输入框(支持textarea)<br>btn：按钮</p>
+				<div class="cc">
+					<div class="demo_code" style="position:static;">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<input id="J_buttonStatus_input">
+							<button class="btn" id="J_buttonStatus_btn">提交</button>
+						</div>
+					</div>
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+Wind.Util.buttonStatus($('#J_buttonStatus_input'), $('#J_buttonStatus_btn'));</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="clickToggle">
+				<h2>.clickToggle(options)</h2>
+				<p>点击显示/隐藏列表<br>options.elem：点击元素<br>options.list：隐藏元素<br>options.callback：显示后回调<br>options.callbackHide：隐藏后回调</p>
+
+				<div class="cc">
+					<div class="demo_code" style="position:static;">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<a id="J_clicktoggle_me" href="#" style="width:50px;">点我</a>
+							<div id="J_clicktoggle_list" style="display:none;position:absolute;">出现啦</div>
+						</div>
+					</div>
+
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+Wind.Util.clickToggle({
+	elem : $('#J_clicktoggle_me'),
+	list : $('#J_clicktoggle_list'),
+	callback : function(elem, list){
+		list.css({
+			left : elem.offset().left,
+			top : elem.offset().top + elem.height()
+		});
+	}
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="cookieGet">
+				<h2>.cookieGet(name), cookieSet(name,value,days,domain)</h2>
+				<p>获取/设置cookie值<br>name：cookie名称<br>value：cookie值<br>days：有效期<br>domain：域</p>
+
+				<div class="cc">
+					<div class="demo_code" style="position:static;">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<p><a id="J_cookieSet" href="#">设置cookie</a></p>
+							<p><a id="J_cookieGet" href="#">获取cookie值</a></p>
+						</div>
+					</div>
+
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+$('#J_cookieSet').on('click', function(e){
+	e.preventDefault();
+	Wind.Util.cookieSet('test', 'hello', null, document.domain);
+	Wind.dialog.alert('设置成功');
+});
+
+$('#J_cookieGet').on('click', function(e){
+	e.preventDefault();
+	Wind.dialog.alert('cookie名test&#60;br&#62;cookie值'+ Wind.Util.cookieGet('test'));
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="ctrlEnterSub">
+				<h2>.ctrlEnterSub(elem, btn)</h2>
+				<p>ctrl+enter 提交表单<br>elem：输入元素<br>btn：提交按钮</p>
+
+				<div class="cc">
+					<div class="demo_code" style="position:static;">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<p><textarea id="J_ctrlEnterSub_ta">按下ctrl+enter试试</textarea></p>
+							<p><button id="J_ctrlEnterSub_btn" class="btn">提交</button></p>
+						</div>
+					</div>
+
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+$('#J_cookieSet').on('click', function(e){
+	e.preventDefault();
+	Wind.Util.cookieSet('test', 'hello', null, document.domain);
+	Wind.dialog.alert('设置成功');
+});
+
+$('#J_cookieGet').on('click', function(e){
+	e.preventDefault();
+	Wind.dialog.alert('cookie名test&#60;br&#62;cookie值'+ Wind.Util.cookieGet('test'));
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="formBtnTips">
+				<h2>.formBtnTips(options)</h2>
+				<p>表单提交反馈提示（提交按钮旁显示），<br>options.error：是否失败（默认否 false）<br>options.wrap：提示容器（按钮父标签）<br>options.msg：提示信息<br>options.callback：提交成功后回调<br></p>
+
+				<div class="cc">
+					<div class="demo_code" style="position:static;">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<form id="J_formBtnTips_form">
+								<textarea>试试点击下面提交</textarea>
+								<div><button id="J_formBtnTips_btn" type="submit" class="btn">提交</button></div>
+							</form>
+						</div>
+					</div>
+
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+$('#J_formBtnTips_form').on('submit', function(e){
+	e.preventDefault();
+	Wind.Util.formBtnTips({
+		error : true,
+		wrap : $('#J_formBtnTips_btn').parent(),
+		msg : '这里显示出错信息'
+	});
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="getVerifyTemp">
+				<h2>.getVerifyTemp(options)</h2>
+				<p>获取验证码模板（非弹窗），在引用了global.js的页面中输出&#60;div id="J_verify_code"&#62;&#60;/div&#62;就会自动调用getVerifyTemp()方法<br>options.wrap：验证码容器<br>options.afterClick：点击“换一个”后回调</p>
+
+				<div class="cc">
+					<div class="demo_code" style="position:static;">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<form id="J_getVerifyTemp_form">
+								<textarea>页面载入后加载验证码</textarea>
+								<div><input placeholder="请输入验证码" class="input" type="text"><div id="J_getVerifyTemp_code"></div><button class="btn" type="submit">提交</button></div>
+							</form>
+						</div>
+					</div>
+
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+&#60;form id="J_getVerifyTemp_form"&#62;
+	&#60;textarea&#62;页面载入后加载验证码&#60;/textarea&#62;
+	&#60;div&#62;
+		&#60;input placeholder="请输入验证码" class="input" type="text"&#62;
+		&#60;div id="J_verify_code"&#62;&#60;/div&#62;
+		&#60;button class="btn" type="submit"&#62;提交&#60;/button&#62;
+	&#60;/div&#62;
+&#60;/form&#62;
+
+Wind.Util.getVerifyTemp({wrap : $('#J_getVerifyTemp_code')});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="hoverToggle">
+				<h2>.hoverToggle(options)</h2>
+				<p>鼠标hover元素时显示/隐藏另一个元素<br>options.elem：hover元素<br>options.list：隐藏元素<br>options.delay：显示延时（毫秒），默认200</p>
+				<div class="cc">
+					<div class="demo_code" style="position:static;">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<div id="J_hovertoggle_me" style="width:50px;">hover我</div>
+							<div id="J_hovertoggle_list" style="display:none;position:absolute;">出现啦</div>
+						</div>
+					</div>
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+Wind.Util.hoverToggle({
+	elem : $('#J_hovertoggle_me'),
+	list : $('#J_hovertoggle_list'),
+	delay : 300
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="reloadPage">
+				<h2>.reloadPage(win)</h2>
+				<p>强制刷新页面<br>win：窗口对象</p>
+				<div class="cc">
+					<div class="demo_code" style="position:static;">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<a href="" id="J_reloadPage">点我强制刷新页面</a>
+						</div>
+					</div>
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+&#60;a href="" id="J_reloadPage"&#62;点我强制刷新页面&#60;/a&#62;
+
+$('#J_reloadPage').on('click', function(e){
+	e.preventDefault();
+	Wind.Util.reloadPage(window);
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="resultTip">
+				<h2>.resultTip(options)</h2>
+				<p>操作通用小气泡提示<br>options.error：是否错误，默认否 false<br>options.msg：提示内容<br>options.follow：跟随显示的元素<br>options.zindex：z值，默认10<br>options.callback：回调</p>
+				<div class="cc">
+					<div class="demo_code" style="position:static;">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<p><a href="" id="J_resultTip_right">正确提示</a></p>
+							<p><a href="" id="J_resultTip_error">错误提示</a></p>
+						</div>
+					</div>
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+&#60;p&#62;&#60;a href="" id="J_resultTip_right"&#62;正确提示&#60;/a&#62;&#60;/p&#62;
+$('#J_resultTip_right').on('click', function(e){
+	e.preventDefault();
+	var $this = $(this);
+	
+	Wind.Util.resultTip({
+		msg : '这是正确提示',
+		follow : $(this)
+	});
+});
+
+
+&#60;p&#62;&#60;a href="" id="J_resultTip_error"&#62;错误提示&#60;/a&#62;&#60;/p&#62;
+$('#J_resultTip_error').on('click', function(e){
+	e.preventDefault();
+	var $this = $(this);
+
+	Wind.Util.resultTip({
+		error : true,
+		msg : '这是错误提示',
+		follow : $(this)
+	});
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="showVerifyPop">
+				<h2>.showVerifyPop(subButton)</h2>
+				<p>获取验证码弹窗模板（如发帖页），<br>subButton：提交按钮</p>
+
+				<div class="cc">
+					<div class="demo_code" style="position:static;">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<form id="J_showVerifyPop_form">
+								<textarea>点击提交弹出验证码</textarea>
+								<div><button class="btn" type="submit" id="J_showVerifyPop_btn">提交</button></div>
+							</form>
+						</div>
+					</div>
+
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+&#60;form id="J_showVerifyPop_form"&#62;
+	&#60;textarea&#62;点击提交弹出验证码&#60;/textarea&#62;
+	&#60;div&#62;&#60;button class="btn" type="submit" id="J_showVerifyPop_btn"&#62;提交&#60;/button&#62;&#60;/div&#62;
+&#60;/form&#62;
+
+$('#J_showVerifyPop_form').on('submit', function(e){
+	e.preventDefault();
+	if(Wind.Util.showVerifyPop($('#J_showVerifyPop_btn'))) {
+		//提交前验证码判断 未通过
+		return;
+	}
+
+	$(this).find('textarea').val('已验证通过');
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="popPos">
+				<h2>.popPos(wrap)</h2>
+				<p>弹窗居中定位显示（插入dom或请求获取的html建议使用Wind.dialog组件）<br>wrap：弹窗容器</p>
+
+				<div class="cc">
+					<div class="demo_code" style="position:static;">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<a href="" id="J_popPos_show" class="btn">显示弹窗</a>
+							<div style="display:none;position:absolute;width:200px;" class="wind_dialog core_pop_wrap" id="J_popPos_pop">
+								<div class="pop_top J_pop_handle"><strong>弹窗</strong></div>
+								<div class="pop_cont">我是一个弹窗</div>
+								<div class="pop_bottom"><button class="btn btn_submit" type="button" id="J_popPos_close">关闭</button></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+&#60;a href="" id="J_popPos_show" class="btn"&#62;显示弹窗&#60;/a&#62;
+&#60;div style="display:none;position:absolute;width:200px;" class="wind_dialog core_pop_wrap" id="J_popPos_pop"&#62;
+	&#60;div class="pop_top J_pop_handle"&#62;&#60;strong&#62;弹窗&#60;/strong&#62;&#60;/div&#62;
+	&#60;div class="pop_cont"&#62;我是一个弹窗&#60;/div&#62;
+	&#60;div class="pop_bottom"&#62;&#60;button class="btn btn_submit" type="button" id="J_popPos_close"&#62;关闭&#60;/button&#62;&#60;/div&#62;
+&#60;/div&#62;
+
+$('#J_popPos_show').on('click', function(e){
+	e.preventDefault();
+	Wind.Util.popPos($('#J_popPos_pop'));
+});
+
+$('#J_popPos_close').on('click', function(e){
+	e.preventDefault();
+	$('#J_popPos_pop').hide();
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="postTip">
+				<h2>.postTip(options)</h2>
+				<p>发送信息的提示（如快速发帖、消息窗私信）<br>options.elem：定位元素<br>options.msg：提示信息<br>options.zindex：z值<br>options.callback：回调</p>
+
+				<div class="cc">
+					<div class="demo_code" style="position:static;">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							<form id="J_postTip_form">
+								<textarea style="width:500px;height:50px;border:1px solid #ccc;">试试点击下面的提交</textarea>
+								<div><button class="btn" type="submit">提交</button></div>
+							</form>
+						</div>
+					</div>
+
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+&#60;form id="J_postTip_form"&#62;
+	&#60;textarea style="width:500px;height:50px;border:1px solid #ccc;"&#62;试试点击下面的提交&#60;/textarea&#62;
+	&#60;div&#62;&#60;button class="btn" type="submit"&#62;提交&#60;/button&#62;&#60;/div&#62;
+&#60;/form&#62;
+
+$('#J_postTip_form').on('submit', function(e){
+	e.preventDefault();
+	var ta = $(this).find('textarea');
+	Wind.Util.postTip({
+		elem : ta,
+		msg : '提示信息',
+		callback : function(){
+			ta.val('你已经提交过了');
+		}
+	});
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="section" id="quickLogin">
+				<h2>.quickLogin(referer)</h2>
+				<p>快捷登录弹窗<br>referer：登录后的跳转地址，默认空（刷新页面）</p>
+
+				<div class="cc">
+					<div class="demo_code" style="position:static;">
+						<h3>示例</h3>
+						<div class="demo_code_cont">
+							在未登录状态下点击>><a href="" id="J_quickLogin">我的关注</a>
+						</div>
+					</div>
+
+					<div class="demo_html">
+						<h3>代码</h3>
+						<div class="demo_html_cont">
+							<pre class="prettyprint linenums">
+&#60;a href="" id="J_quickLogin"&#62;我的关注&#60;/a&#62;
+
+$('#J_quickLogin').on('click', function(e){
+	e.preventDefault();
+
+	if(!GV.U_ID) {
+		Wind.Util.quickLogin();
+	}else{
+		Wind.dialog.alert('你已经登录了');
+	}
+	
+});</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+		</div>
+		<template source='footer' />
+		<!--<script src="http://chaoren1641.github.com/demo/assets/google-code-prettify/prettify.js"></script>-->
+<script>
+Wind.use('global', function(){
+	
+
+	//Wind组件
+			//tabs
+			Wind.use('tabs', function() {
+				$('.tabs_nav').tabs('.tabs_contents > div');
+			});
+			//dialog
+			Wind.use('dialog', function() {
+				$('#J_alert').on('click', function(e) {
+					var elem = e.currentTarget;
+					Wind.dialog.alert('我是alert', function() {
+						alert('你点了确定，我是原生alert');
+						elem.focus();
+						//关闭窗口后使原始按钮获取焦点
+					});
+				});
+				//confirm
+				$('#J_confirm').on('click', function(e) {
+					var elem = e.currentTarget;
+					Wind.dialog.confirm('我是alert', function() {
+						alert('你点了确定');
+						elem.focus();
+					}, function() {
+						alert('你点了取消');
+						elem.focus();
+					});
+				});
+				//open url
+				$('#J_openUrl').on('click', function() {
+					Wind.dialog.open('http://www.phpwind.net/');
+				});
+				//showHTML
+				$('#J_showHTML').on('click', function() {
+					Wind.dialog.html('#J_dialog_html', {
+						title : '弹出html片段',
+						width : 200,
+						isDrag : true
+					});
+				});
+			});
+			//colorPicker
+			Wind.use('colorPicker', function() {
+				$('.J_color_picker').colorPicker({
+					callback : function(color) {
+						$(this).find('em').css('background', color);
+						$(this).prev('.J_color_input').val(color);
+					}
+				});
+			});
+			//datePicker
+			Wind.use('datePicker', function() {
+				$(":date").datePicker();
+			})
+			//uploadPreview
+			Wind.use('uploadPreview', function() {
+				$(':file').uploadPreview();
+			});
+
+			Wind.use('region', 'school', function(){
+				$('input.J_plugin_school').region({
+					type : 'school'
+				});
+			});
+			
+			//lazyload
+			Wind.use('lazyload', function() {
+				$('img').lazyload({container:'#idLazyContainer'})
+			});
+
+/*
+ * global.js函数
+*/
+	$('#J_ajaxConfirm').on('click', function(e){
+		e.preventDefault();
+		var $this = $(this);
+
+		Wind.Util.ajaxConfirm({
+			elem : $this,
+			href : this.href,
+			msg : '真的删了噢？',
+			callback : function(){
+				//删除后回调
+			}
+		});
+	});
+	
+
+	$('#J_ajaxBtnDisable').on('click', function(e){
+		e.preventDefault();
+		var $this = $(this);
+		Wind.Util.ajaxBtnDisable($this);
+
+		setTimeout(function(){
+			Wind.Util.ajaxBtnEnable($this);
+		}, 3000);
+	});
+
+	var timer;
+	$('#J_ajaxMaskShow').on('click', function(e){
+		e.preventDefault();
+		var $this = $(this);
+		Wind.Util.ajaxMaskShow();
+		clearTimeout(timer);
+
+		timer = setTimeout(function(){
+			$('#J_ajaxmask').remove();
+			$this.replaceWith('已关注');
+		}, 3000);
+	});
+
+	$('#J_ajaxTempError').on('click', function(e){
+		e.preventDefault();
+		var $this = $(this),
+			data = '<div class="reg_cont_wrap"><div class="reg_message reg_ignore"><ul class="mb10 f14">\
+			<li id="J_html_error">操作失败</li>\
+		</ul><div class="error_return"><a href="javascript:window.history.go(-1);">返回上一页</a> 或者 <a href="http://dev.wekit.net">回到首页</a></div></div></div>';
+
+		if(Wind.Util.ajaxTempError(data, $this)) {
+			return;
+		}
+	});
+
+	Wind.Util.buttonStatus($('#J_buttonStatus_input'), $('#J_buttonStatus_btn'));
+
+	Wind.Util.clickToggle({
+		elem : $('#J_clicktoggle_me'),
+		list : $('#J_clicktoggle_list'),
+		callback : function(elem, list){
+			list.css({
+				left : elem.offset().left,
+				top : elem.offset().top + elem.height()
+			});
+		}
+	});
+
+	$('#J_cookieSet').on('click', function(e){
+		e.preventDefault();
+		Wind.Util.cookieSet('test', 'hello', null, document.domain);
+		Wind.dialog.alert('设置成功');
+	});
+
+	$('#J_cookieGet').on('click', function(e){
+		e.preventDefault();
+		Wind.dialog.alert('cookie名test<br>cookie值'+ Wind.Util.cookieGet('test'));
+	});
+
+	Wind.Util.ctrlEnterSub($('#J_ctrlEnterSub_ta'), $('#J_ctrlEnterSub_btn'));
+	$('#J_ctrlEnterSub_btn').on('click', function(e){
+		e.preventDefault();
+		Wind.dialog.alert('触发了提交');
+	});
+
+	$('#J_formBtnTips_form').on('submit', function(e){
+		e.preventDefault();
+		Wind.Util.formBtnTips({
+			error : true,
+			wrap : $('#J_formBtnTips_btn').parent(),
+			msg : '这里显示出错信息'
+		});
+	});
+
+	Wind.Util.getVerifyTemp({wrap : $('#J_getVerifyTemp_code')});
+
+	Wind.Util.hoverToggle({
+		elem : $('#J_hovertoggle_me'),
+		list : $('#J_hovertoggle_list'),
+		delay : 300
+	});
+
+	$('#J_reloadPage').on('click', function(e){
+		e.preventDefault();
+		Wind.Util.reloadPage(window);
+	});
+
+	$('#J_resultTip_right').on('click', function(e){
+		e.preventDefault();
+		var $this = $(this);
+
+		Wind.Util.resultTip({
+			msg : '这是正确提示',
+			follow : $(this)
+		});
+	});
+
+	$('#J_resultTip_error').on('click', function(e){
+		e.preventDefault();
+		var $this = $(this);
+
+		Wind.Util.resultTip({
+			error : true,
+			msg : '这是错误提示',
+			follow : $(this)
+		});
+	});
+
+	$('#J_showVerifyPop_form').on('submit', function(e){
+		e.preventDefault();
+		if(Wind.Util.showVerifyPop($('#J_showVerifyPop_btn'))) {
+			//提交前验证码判断 未通过
+			return;
+		}
+
+		$(this).find('textarea').val('已验证通过');
+	});
+
+
+	$('#J_popPos_show').on('click', function(e){
+		e.preventDefault();
+
+		Wind.Util.popPos($('#J_popPos_pop'));
+	});
+	$('#J_popPos_close').on('click', function(e){
+		e.preventDefault();
+
+		$('#J_popPos_pop').hide();
+	});
+
+	$('#J_postTip_form').on('submit', function(e){
+		e.preventDefault();
+		var ta = $(this).find('textarea');
+		Wind.Util.postTip({
+			elem : ta,
+			msg : '提示信息',
+			callback : function(){
+				ta.val('你已经提交过了');
+			}
+		});
+	});
+
+	$('#J_quickLogin').on('click', function(e){
+		e.preventDefault();
+
+		if(!GV.U_ID) {
+			Wind.Util.quickLogin();
+		}else{
+			Wind.dialog.alert('你已经登录了');
+		}
+		
+	});
+
+});
+</script>
+</body>
+</html>

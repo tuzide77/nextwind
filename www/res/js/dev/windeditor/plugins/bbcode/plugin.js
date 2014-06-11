@@ -396,18 +396,13 @@
 	    rep(/\[quote\]([\s\S]*?)\[\/quote\]/ig, '<blockquote class="blockquote">$1</blockquote>');
 	    rep(/\[(\/?)(blockquote)\]/ig, '<$1$2>');
 	    //rep(/\[blockquote\]([\s\S]*?)\[\/blockquote\]/ig, '<blockquote>$1</blockquote>');
-	    rep(/\[flash\s*(?:=\s*(\d+)\s*,\s*(\d+)\s*)?\]\s*(((?!")[\s\S])+?)(?:"[\s\S]*?)?\s*\[\/flash\]/ig, function (all, w, h, url) {
-	        if (!w) {w = 480;}
-	        if (!h) {h = 400;}
-	        return '<embed type="application/x-shockwave-flash" src="' + url + '" wmode="opaque" quality="high" bgcolor="#ffffff" menu="false" play="true" loop="true" width="' + w + '" height="' + h + '"/>';
-	    });
 	    rep(/\[media\s*(?:=\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*(\d+)\s*)?)?\]\s*(((?!")[\s\S])+?)(?:"[\s\S]*?)?\s*\[\/media\]/ig, function (all, w, h, play, url) {
 	        if (!w) { w = 480;}
 	        if (!h) {h = 400;}
 	        return '<embed type="application/x-mplayer2" src="' + url + '" enablecontextmenu="false" autostart="' + (play == '1' ? 'true' : 'false') + '" width="' + w + '" height="' + h + '"/>';
 	    });
 	    rep(/\[table\s*(?:=\s*(\d{1,4}%?)\s*(?:,\s*([^\]"]+){1,3}(?:"[^\]]*?)?)?)?\s*\]/ig, function (all, w, o) {
-	        var str = '<table',b, c, s, p;
+	        var str = '<table',b, c, s, g, p;
 	        if (o) {
 	            o = o.split(',');
 	            b = o[0], c = o[1], s = o[2], p = o[3], g = o[4];

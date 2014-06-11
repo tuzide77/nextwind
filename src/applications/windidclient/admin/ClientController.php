@@ -7,7 +7,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ?2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: ClientController.php 25094 2013-03-01 09:07:16Z gao.wanggao $ 
+ * @version $Id: ClientController.php 29745 2013-06-28 09:07:39Z gao.wanggao $ 
  * @package 
  */
 class ClientController extends AdminBaseController { 
@@ -25,7 +25,7 @@ class ClientController extends AdminBaseController {
 		if (!$client) $this->showError('WINDID:fail');
 		$time = Pw::getTime();
 		$array = array(
-			'windidkey'=>WindidUtility::appKey($client['id'], $time, $client['secretkey']),
+			'windidkey'=>WindidUtility::appKey($client['id'], $time, $client['secretkey'], array('operation'=>999), array('testdata'=>1)),
 			'operation'=>999,
 			'clientid'=>$client['id'],
 			'time'=>$time
@@ -84,7 +84,11 @@ class ClientController extends AdminBaseController {
 	}
 	
 	public function deleteAction() {
-		$result = $this->_getAppDs()->delApp(intval($this->getInput('id', 'get')));
+		$id = intval($this->getInput('id', 'post'));
+		if (!$id) {
+			$this->showError('operate.fail');
+		}
+		$result = $this->_getAppDs()->delApp($id);
 		if ($result instanceof WindidError) $this->showError('WINDID:fail');
 		$this->showMessage('WINDID:success');
 	}

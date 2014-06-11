@@ -5,11 +5,11 @@ Wind::import('LIB:upload.PwUploadAction');
 Wind::import('COM:utility.WindUtility');
 
 /**
- * the last known user to change this file in the repository  <$LastChangedBy: jieyin $>
- * @author $Author: jieyin $ Foxsee@aliyun.com
+ * the last known user to change this file in the repository  <$LastChangedBy: gao.wanggao $>
+ * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwDesignDataUpload.php 23975 2013-01-17 10:20:11Z jieyin $ 
+ * @version $Id: PwDesignDataUpload.php 28882 2013-05-28 10:51:23Z gao.wanggao $ 
  * @package 
  */
 
@@ -17,9 +17,11 @@ class PwDesignDataUpload extends PwUploadAction {
 	
 	public $moduleid = 0;
 	public $key = 0;
+	public $mime = array();
 	
 	public function __construct($key, $moduleid) {
 		$this->ftype = array('jpg' => 2000, 'jpeg' => 2000, 'png' => 2000, 'gif' => 2000);
+		$this->mime = array('image/jpg', 'image/jpeg', 'image/png', 'image/gif');
 		$this->ifftp = 0;
 		$this->moduleid = (int)$moduleid;
 		$this->key = $key;
@@ -29,10 +31,6 @@ class PwDesignDataUpload extends PwUploadAction {
 	 * @see PwUploadAction.check
 	 */
 	public function check() {
-		foreach ($_FILES as $key => $value) {
-			if (!$_FILES[$key]['size']) return new PwError('upload.fail');
-		}
-		
 		return true;
 	}
 	

@@ -7,7 +7,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @author Qiong Wu <papa0924@gmail.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: VerifyController.php 24341 2013-01-29 03:08:55Z jieyin $
+ * @version $Id: VerifyController.php 28863 2013-05-28 03:22:39Z jieyin $
  * @package 
  */
 class VerifyController extends AdminBaseController {
@@ -31,6 +31,7 @@ class VerifyController extends AdminBaseController {
 	 * @return void
 	 */
 	public function dorunAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
 		$questions = $this->getInput('contentQuestions', 'post');
 		$_questions = array();
 		!$questions && $questions = array();
@@ -79,6 +80,7 @@ class VerifyController extends AdminBaseController {
 	 * @return void
 	 */
 	public function dosetAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
 		$ext = $this->getInput('ext', 'post');
 		$extConfig = array();
 		foreach ($ext as $key => $value) {

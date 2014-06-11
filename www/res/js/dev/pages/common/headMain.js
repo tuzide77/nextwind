@@ -378,7 +378,7 @@
 				'withMyforum' : 1
 			}, function(data){
 			if(data.state == 'success') {
-				forum_data.data = $.parseJSON(data.data);
+				forum_data.data = data.data;
 
 				//循环写入分类数据
 				var cate_data = forum_data.data['cate'],		//分类数据

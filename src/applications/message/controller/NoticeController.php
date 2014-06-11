@@ -1,7 +1,7 @@
 <?php
 
 class NoticeController extends PwBaseController {
-	
+
 	public function beforeAction($handlerAdapter){
 		parent::beforeAction($handlerAdapter);
 		if (!$this->loginUser->isExists()) {
@@ -12,7 +12,7 @@ class NoticeController extends PwBaseController {
 		$this->setOutput($action,'_action');
 		$this->setOutput($controller,'_controller');
 	}
-	
+
 	public function run() {
 		list($type,$page) = $this->getInput(array('type','page'));
 		$page = intval($page);
@@ -26,9 +26,9 @@ class NoticeController extends PwBaseController {
 		$typeid = intval($type);
 		//获取未读通知数
 		$unreadCount = $this->_getNoticeDs()->getUnreadNoticeCount($this->loginUser->uid);
-		
+
 		$this->_readNoticeList($unreadCount,$noticeList);
-		
+
 		//count
 		$count = intval($typeCounts[$typeid]['count']);
 		$this->setOutput($page, 'page');
@@ -39,7 +39,7 @@ class NoticeController extends PwBaseController {
 		$this->setOutput($typeid, 'typeid');
 		$this->setOutput($typeCounts, 'typeCounts');
 		$this->setOutput($noticeList, 'noticeList');
-		
+
 		// seo设置
 		Wind::import('SRV:seo.bo.PwSeoBo');
 		$seoBo = PwSeoBo::getInstance();
@@ -47,9 +47,9 @@ class NoticeController extends PwBaseController {
 		$seoBo->setCustomSeo($lang->getMessage('SEO:mess.notice.run.title'), '', '');
 		Wekit::setV('seo', $seoBo);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * 忽略消息
 	 */
 	public function ignoreAction(){
@@ -60,23 +60,24 @@ class NoticeController extends PwBaseController {
 			$this->showError('操作失败');
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * 删除消息
 	 */
 	public function deleteAction(){
-		list($id,$ids) = $this->getInput(array('id','ids'));
+		list($id,$ids) = $this->getInput(array('id','ids'), 'post');
 		if (!$ids && $id) $ids = array(intval($id));
-		if ($this->_getNoticeDs()->deleteNoticeByIds($ids)) {
+        if(!is_array($ids))$this->showError('操作失败');
+		if ($this->_getNoticeDs()->deleteNoticeByIdsAndUid($this->loginUser->uid, $ids)) {
 			$this->showMessage('操作成功');
 		} else {
 			$this->showError('操作失败');
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * 顶部快捷列表
 	 */
 	public function minilistAction(){
@@ -92,9 +93,9 @@ class NoticeController extends PwBaseController {
 		}
 		$this->setOutput($noticeList, 'noticeList');
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * 具体通知详细页
 	 */
 	public function detaillistAction(){
@@ -112,9 +113,9 @@ class NoticeController extends PwBaseController {
 		//$tpl = $typeName ? sprintf('notice_detail_%s',$typeName) : 'notice_detail';
 		//$this->setTemplate($tpl);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * 具体通知详细页
 	 */
 	public function detailAction(){
@@ -135,36 +136,36 @@ class NoticeController extends PwBaseController {
 		//$tpl = $typeName ? sprintf('notice_detail_%s',$typeName) : 'notice_detail';
 		//$this->setTemplate($tpl);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * Enter description here ...
 	 * @return PwMessageNotices
 	 */
 	protected function _getNoticeDs(){
 		return Wekit::load('message.PwMessageNotices');
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * Enter description here ...
 	 * @return PwNoticeService
 	 */
 	protected function _getNoticeService(){
 		return Wekit::load('message.srv.PwNoticeService');
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * Enter description here ...
 	 * @return PwUser
 	 */
 	protected function _getUserDs(){
 		return Wekit::load('user.PwUser');
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * 设置已读
 	 * @param int $unreadCount
 	 * @param array $noticeList

@@ -125,7 +125,7 @@ Wind.use('jquery', 'global', 'validate', 'ajaxForm', function(){
 				success : function(data, statusText, xhr, $form) {
 					if(data.state === 'success') {
 						if(data.referer) {
-							location.href = data.referer;
+							location.href = decodeURIComponent(data.referer);
 						}
 					}else if(data.state === 'fail'){
 						Wind.Util.ajaxBtnEnable(btn);

@@ -123,7 +123,7 @@
                             _this.isLoading = false;
                             var state = data.state;
                             if(state == 'success'){
-                                var result = data.data;
+                                var result = data.html;
                                 callback && callback(result);
                                 if (!result || result.length < 1) {
                                 	$("#J_loading").hide();

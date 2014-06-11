@@ -61,7 +61,7 @@
 				<td>{@Pw::time2str($v['time'], 'Y-m-d H:i:s')}</td>
 				<td>{$v['send_num']}</td>
 				<td><!--# if($v['complete']){#-->成功<!--# }else{ #--><span style="color:#ff0000">失败</span><!--#}#--></td>
-				<td><!--# if(!$v['complete']){#--><a href="{@url:windidclient/notify/resend?logid=$v['logid']}" class="mr10" title="重新发送">[重新发送]</a><!--#}#--><a href="{@url:windidclient/notify/delete?logid=$v['logid']}" class="mr10" class="mr10 J_ajax_del" data-msg="确定要删除选中内容?">[删除]</a></td>
+				<td><!--# if(!$v['complete']){#--><a href="{@url:windidclient/notify/resend?logid=$v['logid']}" class="mr10" title="重新发送">[重新发送]</a><!--#}#--><a href="{@url:windidclient/notify/delete}" class="mr10 J_ajax_del" class="mr10 J_ajax_del" data-msg="确定要删除选中内容?" data-pdata="{'logid': '{$v['logid']}'}">[删除]</a></td>
 			</tr>
 		<!--#}#-->
 		</table>

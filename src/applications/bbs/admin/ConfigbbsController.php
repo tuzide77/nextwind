@@ -8,7 +8,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @author Qiong Wu <papa0924@gmail.com> 2011-10-21
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: ConfigbbsController.php 24341 2013-01-29 03:08:55Z jieyin $
+ * @version $Id: ConfigbbsController.php 28788 2013-05-23 10:08:37Z jieyin $
  * @package admin
  * @subpackage controller
  */
@@ -35,6 +35,8 @@ class ConfigbbsController extends AdminBaseController {
 	 * 设置论坛设置
 	 */
 	public function dorunAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($bbsname, $title_length_max, $content_length_min, $content_length_max/*, $ifopen*/, $check) = $this->getInput(array('bbsname', 'title_length_max', 'content_length_min', 'content_length_max'/*, 'ifopen'*/, 'check'));
 		$config = new PwConfigSet('bbs');
 		$config->set('bbsname', $bbsname)

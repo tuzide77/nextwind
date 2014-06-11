@@ -1,0 +1,552 @@
+
+-- 帖子索引表删除标志
+ALTER TABLE `pw_bbs_threads_index` CHANGE `ischeck` `disabled` TINYINT( 3 ) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `pw_bbs_threads_cate_index` CHANGE `ischeck` `disabled` TINYINT( 3 ) UNSIGNED NOT NULL DEFAULT '0';
+
+-- 敏感词版本号
+ALTER TABLE  `pw_bbs_threads_content` ADD  `word_version` SMALLINT( 6 ) UNSIGNED NOT NULL DEFAULT  '0';
+ALTER TABLE  `pw_bbs_posts` ADD  `word_version` SMALLINT( 6 ) UNSIGNED NOT NULL DEFAULT  '0';
+
+
+-- @提醒用户
+ALTER TABLE  `pw_bbs_threads_content` ADD  `reminds` varchar( 255 ) NOT NULL DEFAULT  '';
+ALTER TABLE  `pw_bbs_posts` ADD  `reminds` varchar( 255 ) NOT NULL DEFAULT  '';
+
+--- 推送增加开始时间
+ALTER TABLE `pw_design_push` ADD `start_time` INT UNSIGNED NOT NULL DEFAULT '0' AFTER `created_time`;
+--- 推送增加预约状态
+ALTER TABLE `pw_design_data` ADD `is_reservation` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT '0' AFTER `data_type`;
+
+--用户表中记录该用户被加精的帖子数
+ALTER TABLE `pw_user_data` ADD `digest` mediumint(8) unsigned NOT NULL DEFAULT '0' AFTER `postnum`;
+
+---修改推送表数据状态
+ALTER TABLE `pw_design_push` CHANGE `needcheck` `status` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT '0'
+
+---删除导航分类表
+DROP TABLE `pw_common_navtype`;
+
+--- 帖子管理 屏蔽
+ALTER TABLE  `pw_bbs_threads` ADD  `ifshield` tinyint(1) UNSIGNED NOT NULL DEFAULT  '0';
+ALTER TABLE  `pw_bbs_posts` ADD  `ifshield` tinyint(1) UNSIGNED NOT NULL DEFAULT  '0';
+
+--- 帖子管理 提醒
+ALTER TABLE  `pw_bbs_threads_content` ADD  `manage_remind` varchar( 150 ) NOT NULL DEFAULT  '';
+ALTER TABLE  `pw_bbs_posts` ADD  `manage_remind` varchar( 150 ) NOT NULL DEFAULT  '';
+
+--- 帖子管理 帖内置顶
+CREATE TABLE IF NOT EXISTS `pw_bbs_posts_topped` (
+  `pid` int(10) unsigned NOT NULL DEFAULT '0',
+  `tid` int(10) unsigned NOT NULL,
+  `floor` int(10) unsigned NOT NULL DEFAULT '0',
+  `created_userid` int(10) unsigned NOT NULL DEFAULT '0',
+  `created_time` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`pid`),
+  KEY `idx_tid_createdtime` (`tid`,`created_time`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='帖内置顶';
+
+ALTER TABLE  `pw_bbs_threads` ADD  `reply_topped` MEDIUMINT( 8 ) UNSIGNED NOT NULL DEFAULT  '0';
+ALTER TABLE  `pw_bbs_posts` ADD  `topped` tinyint(3) UNSIGNED NOT NULL DEFAULT  '0';
+ALTER TABLE `pw_bbs_forum` ADD `style` varchar(20) NOT NULL DEFAULT '';
+
+ALTER TABLE `pw_design_push` CHANGE `push_orderid` `push_orderid` TINYINT UNSIGNED NOT NULL DEFAULT '0';
+
+--帖子-精华帖子索引表
+CREATE TABLE IF NOT EXISTS `pw_bbs_threads_digest_index` (
+	`tid` INT(10) UNSIGNED NOT NULL DEFAULT 0,
+	`fid` SMALLINT(6) UNSIGNED NOT NULL DEFAULT 0,
+	`cid` SMALLINT(6) UNSIGNED NOT NULL DEFAULT 0,
+	`topic_type` INT(10) UNSIGNED NOT NULL DEFAULT 0,
+	`created_time` INT(10) UNSIGNED NOT NULL DEFAULT 0,
+	`lastpost_time` INT(10) UNSIGNED NOT NULL DEFAULT 0,
+	`operator` VARCHAR(15) NOT NULL DEFAULT '',
+	`operator_userid` INT(10) NOT NULL DEFAULT 0,
+	`operator_time` INT(10) NOT NULL DEFAULT 0,
+	PRIMARY KEY (`tid`),
+	INDEX `idx_cid_lastposttime` (`cid`, `lastpost_time`),
+	INDEX `idx_fid_lastposttime_topictype` (`fid`, `lastpost_time`, `topic_type`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='精华帖子索引表';
+
+--增加门户模块调用管理表
+CREATE TABLE IF NOT EXISTS `pw_design_script` (
+  `module_id` int(10) unsigned NOT NULL,
+  `token` char(10) NOT NULL,
+  `view_times` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`module_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='模块调用管理表';
+
+DROP TABLE `pw_admin_founder`;
+CREATE TABLE IF NOT EXISTS `pw_admin_custom` (
+  `username` varchar(15) NOT NULL,
+  `custom` text NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='后台常用菜单表';
+
+-- 增加我加入的版块
+ALTER TABLE  `pw_user_data` ADD  `join_forum` VARCHAR( 255 ) NOT NULL DEFAULT  '' AFTER `punch`;
+
+-- 增加推荐关注用户缓存
+ALTER TABLE  `pw_user_data` ADD  `recommend_friend` TEXT AFTER `join_forum`;
+ALTER TABLE pw_domain ADD `id` int(10) unsigned not null default 0;
+
+-- 新鲜事与帖子关联表
+CREATE TABLE `pw_attention_fresh_index` (
+  `fresh_id` int(10) unsigned NOT NULL default '0',
+  `tid` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`fresh_id`),
+  KEY `idx_tid` (`tid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='新鲜事与帖子关联表';
+
+
+-- 增加用户的积分变动记录   2012-8-24 by xiaoxia.xu
+ALTER TABLE  `pw_user_data` ADD  `last_credit_affect_log` VARCHAR(255) AFTER `recommend_friend`;
+
+--门户页面唯一性定义
+ALTER TABLE `pw_design_page` CHANGE `is_unique` `is_unique` INT UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `pw_domain` ADD INDEX `idx_domaintype` ( `domain_type` );
+--模块与结构绑定
+ALTER TABLE `pw_design_module` ADD `module_struct` VARCHAR( 20 ) NOT NULL AFTER `module_id` ;
+
+--推送数据加入结束时间
+ALTER TABLE `pw_design_push` ADD `end_time` INT UNSIGNED NOT NULL DEFAULT '0' AFTER `start_time`; 
+
+--个人空间访问脚印更新字段
+ALTER TABLE `pw_space` CHANGE `visitors` `visitors` VARCHAR( 512 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '';
+ALTER TABLE `pw_space` CHANGE `tovisitors` `tovisitors` VARCHAR( 512 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '';
+
+--推送表索引
+
+ALTER TABLE `pw_design_push` ADD INDEX `idx_end_time` ( `end_time` );
+ALTER TABLE `pw_design_push` ADD INDEX `idx_status` ( `status` );
+
+--游客在线，联合索引
+ALTER TABLE `nextwind`.`pw_online_guest` DROP PRIMARY KEY ,
+ADD PRIMARY KEY ( `ip` , `created_time` ) ;
+
+--特殊排序表附加信息字段
+ALTER TABLE `pw_bbs_threads_sort` ADD `extra` INT NOT NULL DEFAULT '0' AFTER `tid`; 
+
+--用户黑名单
+DROP TABLE `pw_windid_user_black`;
+CREATE TABLE `pw_windid_user_black` (
+  `uid` int(10) unsigned NOT NULL DEFAULT '0',
+  `blacklist` text,
+  PRIMARY KEY (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='用户黑名单';
+
+--回复通知
+ALTER TABLE `pw_bbs_posts` ADD `reply_notice` tinyint( 3 ) unsigned  NOT NULL DEFAULT '1' ; 
+ALTER TABLE `pw_bbs_threads` ADD `reply_notice` tinyint( 3 )  unsigned NOT NULL DEFAULT '1' ; 
+
+--可能认识的人
+DROP TABLE `pw_attention_recommend_cron`;
+CREATE TABLE `pw_attention_recommend_cron` (
+  `uid` int(10) unsigned NOT NULL DEFAULT '0',
+  `created_time` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='可能认识的人更新任务表';
+
+DROP TABLE `pw_attention_recommend_friends`;
+CREATE TABLE `pw_attention_recommend_friends` (
+  `uid` int(10) unsigned NOT NULL DEFAULT '0',
+  `recommend_uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '潜在好友',
+  `same_uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '共同好友',
+  UNIQUE KEY `idx_uid_puid_suid` (`uid`,`recommend_uid`,`same_uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+---模块与页面梆定
+ALTER TABLE `pw_design_module` ADD `page_id` INT UNSIGNED NOT NULL DEFAULT '0' AFTER `module_id`;
+---修改门户备份
+ALTER TABLE `pw_design_bak` CHANGE `bak_pk` `page_id` INT UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `pw_design_bak` DROP PRIMARY KEY ,
+ADD PRIMARY KEY ( `page_id` , `bak_type` );
+
+ALTER TABLE  `pw_link` ADD  `iflogo` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '0' ;
+----门户备份:门户快照
+ALTER TABLE `pw_design_bak` ADD `is_snapshot` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否快照' AFTER `page_id` ;
+ALTER TABLE `pw_design_bak` DROP PRIMARY KEY ,
+ADD PRIMARY KEY ( `page_id` , `bak_type` , `is_snapshot` );
+
+ALTER TABLE `pw_design_module` ADD `module_compid` INT UNSIGNED NOT NULL DEFAULT '0' AFTER `module_style` 
+
+--- 表COMMENT 2012.9.11 panjinlong
+ALTER TABLE  `pw_word` COMMENT =  '敏感词表';
+ALTER TABLE  `pw_windid_message_dialog` COMMENT =  '消息对话表';
+ALTER TABLE  `pw_windid_message_relation` COMMENT =  '消息关系表';
+ALTER TABLE  `pw_windid_message` COMMENT =  '消息内容表';
+ALTER TABLE  `pw_weibo_comment` COMMENT =  '微薄评论表';
+ALTER TABLE  `pw_weibo` COMMENT =  '微薄表';
+ALTER TABLE  `pw_user_work` COMMENT =  '用户工作经历表';
+ALTER TABLE  `pw_windid_app` COMMENT =  '应用数据表';
+ALTER TABLE  `pw_windid_notify` COMMENT =  '通知队列表';
+ALTER TABLE  `pw_style` COMMENT =  '主题风格表';
+ALTER TABLE  `pw_report` COMMENT =  '举报表';
+ALTER TABLE  `pw_remind` COMMENT =  '@提醒表';
+ALTER TABLE  `pw_recycle_topic` COMMENT =  '主题回收站';
+ALTER TABLE  `pw_recycle_reply` COMMENT =  '回复回收站';
+ALTER TABLE  `pw_cache` COMMENT =  '缓存表';
+ALTER TABLE  `pw_bbs_topped` COMMENT =  '置顶帖表';
+ALTER TABLE  `pw_bbs_topic_type` COMMENT =  '主题分类表';
+ALTER TABLE  `pw_bbs_threads_buy` COMMENT =  '帖子购买记录贴表';
+ALTER TABLE  `pw_bbs_threads_content` COMMENT =  '帖子内容表';
+ALTER TABLE  `pw_bbs_threads` COMMENT =  '帖子基本信息表';
+ALTER TABLE  `pw_bbs_specialsort` COMMENT =  '帖子特殊排序表';
+ALTER TABLE  `pw_bbs_posts` COMMENT =  '帖子回复表';
+ALTER TABLE  `pw_attachs_thread` COMMENT =  '帖子附件表';
+ALTER TABLE  `pw_bbs_forum_statistics` COMMENT =  '版块统计表';
+ALTER TABLE  `pw_bbs_forum_extra` COMMENT =  '帖子扩展信息表';
+ALTER TABLE  `pw_bbs_forum` COMMENT =  '版块基本信息表';
+ALTER TABLE  `pw_attention_type_relations` COMMENT =  '关注分类关系表';
+
+ALTER TABLE  `pw_attention_type` COMMENT =  '关注分类表';
+ALTER TABLE  `pw_attention_recommend_friends` COMMENT =  '可能认识的人表';
+ALTER TABLE  `pw_attention_fresh_relations` COMMENT =  '新鲜事关系表';
+ALTER TABLE  `pw_attention_fresh` COMMENT =  '新鲜事主表';
+ALTER TABLE  `pw_attention` COMMENT =  '关注主表';
+ALTER TABLE  `pw_attachs` COMMENT =  '附件表';
+ALTER TABLE  `pw_application_log` COMMENT =  '应用安装日志表';
+ALTER TABLE  `pw_user_verify` COMMENT =  '实名认证表';
+ALTER TABLE  `pw_hook` COMMENT =  '钩子基本信息表';
+ALTER TABLE  `pw_hook_inject` COMMENT =  '钩子挂载方法表';
+
+
+9.11号
+ALTER TABLE `pw_design_module` CHANGE `module_struct` `module_struct` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '';
+
+------2012.09.18 by long.shi-----
+ALTER TABLE `pw_album_photo_comment` DROP COLUMN `created_username`;
+ALTER TABLE `pw_design_portal` CHANGE `style` `style` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '自定义样式';
+
+-----2012.09.26------
+ALTER TABLE `pw_hook_inject` ADD `app_id` CHAR(20) NOT NULL DEFAULT '' AFTER `id`, ADD `app_name` VARCHAR(100) NOT NULL DEFAULT '' AFTER `app_id`;
+-----2012.09.27------
+ALTER TABLE `pw_design_data` ADD `is_edited` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否修改过' AFTER `data_type`;
+
+---2012.09.27
+ALTER TABLE `pw_user_info` ADD `location_text` VARCHAR(100) NOT NULL DEFAULT '' AFTER `location`, ADD `hometown_text` VARCHAR(100) NOT NULL DEFAULT '' AFTER `hometown`;
+
+-- 2012-9-27 chenjm--
+CREATE TABLE `pw_bbs_threads_hits` (
+  `tid` int(10) unsigned NOT NULL default '0',
+  `hits` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`tid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+alter table pw_bbs_forum add fupname varchar(255) not null default '' after fup;
+
+--- 2012-10-09 ----
+ALTER TABLE `pw_application` ADD `status` TINYINT(1) NOT NULL DEFAULT 0 AFTER `modified_time`;
+ALTER TABLE `pw_application` CHANGE `pw_version` `pwversion` varchar(50) NOT NULL DEFAULT '';
+ALTER TABLE `pw_style` CHANGE `pw_version` `pwversion` varchar(50) NOT NULL DEFAULT '';
+--- 2012-10-10 ----
+ALTER TABLE `pw_design_shield` ADD `shield_title` VARCHAR( 255 ) NOT NULL DEFAULT '' AFTER `module_id` ;
+ALTER TABLE `pw_design_shield` ADD `shield_url` VARCHAR( 255 ) NOT NULL DEFAULT '' AFTER `shield_title` ;
+
+--- 2012-10-14 ----
+INSERT INTO `pw_common_nav` (`navid`, `parentid`, `rootid`, `type`, `sign`, `name`, `style`, `link`, `alt`, `target`, `isshow`, `orderid`) VALUES
+(1, 0, 1, 'main', 'default|index|run|', '首页', '', 'index.php', '', 0, 0, 1),
+(2, 0, 2, 'main', 'bbs|forum|run|', '论坛', '|||', 'index.php?m=bbs&c=forum', '', 0, 1, 2),
+(3, 0, 3, 'main', 'like|like|run|', '喜欢', '|||', 'index.php?m=like&c=like', '', 0, 1, 2),
+(4, 0, 4, 'main', '', '云平台', '|||', 'http://open.phpwind.com', '', 1, 1, 5),
+(5, 0, 5, 'main', 'tag|index|run|', '话题', '|||', 'index.php?m=tag', '', 0, 1, 3),
+(6, 0, 6, 'main', 'appcenter|index|run|', '应用', '', 'index.php?m=appcenter', '', 0, 1, 4),
+(7, 0, 7, 'my', 'space', '我的空间', '', 'index.php?m=space', '', 0, 1, 1),
+(8, 0, 8, 'my', 'fresh', '我的关注', '', 'index.php?m=my&c=fresh', '', 0, 1, 2),
+(9, 0, 9, 'my', 'forum', '我的版块', '', 'index.php?m=bbs&c=forum&a=my', '', 0, 1, 3),
+(10, 0, 10, 'my', 'article', '我的帖子', '', 'index.php?m=my&c=article', '', 0, 1, 4),
+(11, 0, 11, 'my', 'vote', '我的投票', '', 'index.php?m=vote&c=my', '', 0, 1, 5),
+(12, 0, 12, 'my', 'task', '我的任务', '', 'index.php?m=task', '', 0, 1, 6),
+(13, 0, 13, 'my', 'medal', '我的勋章', '', 'index.php?m=medal', '', 0, 1, 7);
+--- 2012-10-15 ----
+ALTER TABLE `pw_design_data` DROP INDEX `idx_datatype` ;
+--- 2012-10-17 ----
+ALTER TABLE `pw_user_data` ADD `medal_ids` VARCHAR( 255 ) NOT NULL DEFAULT '' AFTER `last_credit_affect_log` 
+
+---2012-10-19---
+ALTER TABLE `pw_user` DROP `vippoint`, DROP `memberpoint`, DROP `vipid` ;
+---2012-10-22---
+ALTER TABLE `pw_design_bak` COMMENT = '门户备份表';
+
+
+--- 2012-10-30 ---
+alter table pw_bbs_threads_content add ipfrom varchar(255) not null default '' after tags;
+alter table pw_bbs_posts add ipfrom varchar(255) not null default '' after word_version;
+----2012-11-07----
+CREATE TABLE `pw_space_domain` (
+`domain` varchar(15) NOT NULL DEFAULT '' COMMENT '空间域名',
+`uid` INT(10) NOT NULL DEFAULT 0 COMMENT '用户id',
+PRIMARY KEY  (`domain`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT = '空间域名表';
+
+--- 2012-11-9 ---
+alter table pw_user change column `status` `status` smallint(6) unsigned NOT NULL DEFAULT '0' COMMENT '状态';
+
+----2012-11-29---
+DROP TABLE IF EXISTS `pw_admin_log`;
+DROP TABLE IF EXISTS `pw_log`;
+CREATE TABLE `pw_log` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `typeid` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT '操作类型ID',
+  `created_userid` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '操作者UID',
+  `created_time` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '操作时间',
+  `created_username` varchar(15) NOT NULL DEFAULT '' COMMENT '操作者名字',
+  `operated_uid` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '被操作者UID',
+  `operated_username` varchar(15) NOT NULL DEFAULT '' COMMENT '被操作者名字',
+  `ip` varchar(40) NOT NULL DEFAULT '' COMMENT '操作IP',
+  `fid` smallint(6) unsigned NOT NULL DEFAULT 0 COMMENT '版块ID',
+  `tid` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '帖子ID',
+  `pid` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '帖子回复ID',
+  `extends` varchar(100) NOT NULL DEFAULT '' COMMENT '扩展信息',
+  `content` text COMMENT '操作日志内容',
+  PRIMARY KEY (`id`),
+  INDEX `idx_tid_pid` (`tid`, `pid`),
+  INDEX `idx_fid` (`fid`),
+  INDEX `idx_created_time` (`created_time`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='前台管理日志表';
+
+----2012-12-3----
+DROP TABLE IF EXISTS `pw_log_login`;
+CREATE TABLE `pw_log_login` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `uid` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '用户ID',
+  `username` varchar(15) NOT NULL DEFAULT '' COMMENT '用户名字',
+  `typeid` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT '错误类型',
+  `created_time` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '尝试时间',
+  `ip` varchar(40) NOT NULL DEFAULT '' COMMENT '尝试IP',
+  PRIMARY KEY (`id`),
+  INDEX `idx_username` (`username`),
+  INDEX `idx_ip` (`ip`),
+  INDEX `idx_created_time` (`created_time`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='前台用户登录错误日志表';
+
+
+-- 2012-12-4 论坛信息表----
+CREATE TABLE `pw_bbsinfo` (
+  `id` smallint(3) unsigned NOT NULL auto_increment COMMENT '主键ID',
+  `newmember` varchar(15) NOT NULL default '' COMMENT '最新会员',
+  `totalmember` mediumint(8) unsigned NOT NULL default '0' COMMENT '会员总数',
+  `higholnum` mediumint(8) unsigned NOT NULL default '0' COMMENT '最高在线人数',
+  `higholtime` int(10) unsigned NOT NULL default '0' COMMENT '最高在线发生日期',
+  `yposts` mediumint(8) unsigned NOT NULL default '0' COMMENT '昨日发帖数',
+  `hposts` mediumint(8) unsigned NOT NULL default '0' COMMENT '最高日发帖数',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='论坛信息表';
+
+INSERT INTO `pw_bbsinfo` VALUES (1, '', 0, 0, 0, 0, 0);
+
+
+CREATE TABLE IF NOT EXISTS `pw_windid_notify_log` (
+  `logid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nid` int(10) unsigned NOT NULL DEFAULT '0',
+  `appid` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `complete` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `send_num` int(10) unsigned NOT NULL DEFAULT '0',
+  `reason` varchar(16) NOT NULL DEFAULT '',
+  PRIMARY KEY (`logid`),
+  KEY `idx_complete` (`complete`),
+  KEY `idx_appid` (`appid`)
+) ENGINE=MyISAM;
+
+
+ALTER TABLE `pw_windid_notify` CHANGE `param` `param` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '';
+ALTER TABLE `pw_windid_app` CHANGE `synlogin` `issyn` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `pw_windid_app` ADD `isnotify` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT '0' AFTER `issyn` ;
+ALTER TABLE `pw_windid_app` ADD `siteip` VARCHAR( 20 ) NOT NULL DEFAULT '' AFTER `siteurl` ;
+
+ALTER TABLE `pw_windid_app` ADD `charset` TINYINT UNSIGNED NOT NULL DEFAULT '1' AFTER `apifile`;
+ALTER TABLE `pw_windid_message_relation` DROP INDEX `idx_messageid` ;
+ALTER TABLE `pw_windid_message_relation` ADD INDEX `idx_dialogid` ( `dialog_id` );
+
+ALTER TABLE `pw_windid_message_dialog` ADD INDEX `idx_touid` ( `to_uid` );
+
+ALTER TABLE `pw_windid_message_dialog` DROP INDEX `idx_touid` ,
+ADD UNIQUE `idx_touid_fromuid` ( `to_uid` , `from_uid` ) ;
+
+ALTER TABLE `pw_windid_message` ADD `to_uid` INT UNSIGNED NOT NULL DEFAULT '0' AFTER `from_uid`;
+
+
+ALTER TABLE `pw_windid_notify` DROP `complete` ;
+
+ALTER TABLE `pw_windid_user_info` ADD `realname` VARCHAR( 20 ) NOT NULL DEFAULT '' AFTER `uid` ;
+ALTER TABLE `pw_windid_user_info` ADD `profile` VARCHAR( 250 ) NOT NULL DEFAULT '' AFTER `msn` ;
+
+ALTER TABLE `pw_windid_user_info` ADD `lastvisit` INT UNSIGNED NOT NULL DEFAULT '0' AFTER `profile` ;
+ALTER TABLE `pw_windid_notify_log` ADD INDEX `idx_appid` ( `appid` ) ;
+---20121207---
+CREATE TABLE IF NOT EXISTS `pw_upgrade_log` (
+  `id` varchar(25) NOT NULL DEFAULT '',
+  `type` tinyint(1) NOT NULL DEFAULT '0',
+  `data` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='更新日志表';
+
+ALTER TABLE `pw_windid_app` CHANGE `charset` `charset` VARCHAR( 16 ) NOT NULL DEFAULT '' COMMENT '客户端编码';
+ALTER TABLE `pw_windid_app` CHANGE `apifile` `apifile` VARCHAR( 128 ) NOT NULL DEFAULT '' COMMENT '通知接收文件';
+/*12-13*/
+ALTER TABLE `pw_windid_notify` CHANGE `param` `param` INT UNSIGNED NOT NULL DEFAULT '0';
+/*12-17*/
+ALTER TABLE `pw_design_component` ADD `sys_id` INT UNSIGNED NOT NULL DEFAULT '0' AFTER `comp_tpl`;
+
+---Dec 19, 2012 私信升级过慢, 原索引加字段
+ALTER TABLE `pw_windid_message` DROP INDEX `idx_fromuid` , ADD INDEX `idx_fromuid_touid` ( `from_uid` , `to_uid` ); 
+
+-- 2012-12-19 chenjm 帖子html--
+alter table pw_bbs_threads_content add usehtml tinyint(1) unsigned not null default '0' after useubb;
+alter table pw_bbs_posts add usehtml tinyint(1) unsigned not null default '0' after useubb;
+
+/*12-20图片异步缩略*/
+CREATE TABLE IF NOT EXISTS `pw_design_image` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '附件ID',
+  `path` varchar(80) NOT NULL DEFAULT '' COMMENT '原图片路径',
+  `thumb` varchar(80) NOT NULL DEFAULT '' COMMENT '缩略图路径',
+  `width` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '缩略图宽',
+  `height` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '缩略图高',
+  `moduleid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属模块',
+  `data_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '门户数据ID',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '原图片状态1正常0不正常',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM ;
+
+/*12-21   帖子精华列表添加帖子的disabled状态字段*/
+ALTER TABLE pw_bbs_threads_digest_index ADD disabled tinyint(1) unsigned NOT NULL DEFAULT '0' AFTER fid;
+
+
+ALTER TABLE `pw_design_module` ADD `segment` VARCHAR( 50 ) NOT NULL DEFAULT '' AFTER `page_id` ;
+ALTER TABLE `pw_design_structure` ADD `segment` VARCHAR( 50 ) NOT NULL DEFAULT '' AFTER `struct_style`;
+ALTER TABLE `pw_design_structure` CHANGE `struct_name` `struct_name` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '结构名称';
+ALTER TABLE `pw_design_segment` CHANGE `segment` `segment` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '片段名称';
+
+-- 帖子索引 chenjm 2012-12-21--
+ALTER TABLE `pw_bbs_threads` ADD INDEX `idx_createduserid_createdtime` ( `created_userid` , `created_time` );
+ALTER TABLE `pw_bbs_posts` ADD INDEX `idx_createduserid_createdtime` ( `created_userid` , `created_time` );
+
+-- 帖子类型 chenjm 2012-12024 --
+alter table pw_bbs_threads change special  special varchar(20) not null default '';
+update pw_bbs_threads set special='poll' where special=1;
+
+--- 会话表加索引 紫韶 2012-1228 ---
+ALTER TABLE pw_windid_message_dialog ADD KEY `idx_fromuid_touid` (`from_uid`,`to_uid`);
+
+
+-----正式版之后20130104--------------
+ALTER TABLE `pw_windid_message_relation` ADD `is_send` TINYINT UNSIGNED NOT NULL DEFAULT '0' AFTER `is_read` ;
+ALTER TABLE `pw_windid_message_relation` ADD INDEX `idx_messageid` ( `message_id` );
+ALTER TABLE `pw_windid_message_relation` ADD INDEX `idx_isread` ( `is_read` );
+ALTER TABLE `pw_windid_message_relation` ADD INDEX `idx_issend` ( `is_send` );
+
+ALTER TABLE `pw_space` CHANGE `visitors` `visitors` TEXT NULL DEFAULT NULL COMMENT '来访者';
+ALTER TABLE `pw_space` CHANGE `tovisitors` `tovisitors` TEXT NULL DEFAULT NULL COMMENT '我的访问记录';
+ALTER TABLE `pw_design_bak` CHANGE `bak_info` `bak_info` MEDIUMTEXT  NULL DEFAULT NULL COMMENT '备份信息';
+ALTER TABLE `pw_design_page` CHANGE `module_ids` `module_ids` TEXT NULL DEFAULT NULL COMMENT '页面模块';
+ALTER TABLE `pw_design_page` CHANGE `struct_names` `struct_names` TEXT NULL DEFAULT NULL COMMENT '页面结构';
+ALTER TABLE `pw_design_page` CHANGE `segments` `segments` TEXT NULL DEFAULT NULL COMMENT '页面模块片段';
+ALTER TABLE `pw_design_segment` CHANGE `segment_tpl` `segment_tpl` MEDIUMTEXT NULL DEFAULT NULL  COMMENT '片段代码';
+ALTER TABLE `pw_design_segment` CHANGE `segment_struct` `segment_struct` MEDIUMTEXT NULL DEFAULT NULL COMMENT '片段结构代码';
+
+ALTER TABLE  `pw_windid_message_dialog` DROP INDEX  `idx_touid_fromuid_modifiedtime`;
+ALTER TABLE  `pw_windid_message_dialog` ADD UNIQUE  `idx_touid_fromuid` (  `to_uid` ,  `from_uid` );
+ALTER TABLE  `pw_windid_message_dialog` DROP INDEX  `idx_fromuid_touid`;
+ALTER TABLE  `pw_windid_message_dialog` ADD INDEX  `idx_touid_modifiedtime` (  `to_uid` ,  `modified_time` );
+
+ALTER TABLE  `pw_attention_fresh_index` DEFAULT CHARACTER SET utf8;
+ALTER TABLE  `pw_design_cron` DEFAULT CHARACTER SET utf8;
+
+--- chenjm 2013-01-16 windid 独立表 ---
+CREATE TABLE `pw_windid_hook` (
+  `name` varchar(50) NOT NULL DEFAULT '',
+  `app_id` char(20) NOT NULL DEFAULT '' COMMENT '应用id',
+  `app_name` varchar(100) NOT NULL DEFAULT '' COMMENT '应用名称',
+  `created_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `modified_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
+  `document` text COMMENT '钩子详细信息',
+  PRIMARY KEY (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='钩子基本信息表';
+
+CREATE TABLE `pw_windid_hook_inject` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `app_id` char(20) NOT NULL DEFAULT '',
+  `app_name` varchar(100) NOT NULL DEFAULT '',
+  `hook_name` varchar(100) NOT NULL DEFAULT '' COMMENT '钩子名',
+  `alias` varchar(100) NOT NULL DEFAULT '' COMMENT '挂载别名',
+  `class` varchar(100) NOT NULL DEFAULT '' COMMENT '挂载类',
+  `method` varchar(100) NOT NULL DEFAULT '' COMMENT '调用方法',
+  `loadway` varchar(20) NOT NULL DEFAULT '' COMMENT '导入方式',
+  `expression` varchar(100) NOT NULL DEFAULT '' COMMENT '条件表达式',
+  `created_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `modified_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
+  `description` varchar(255) NOT NULL DEFAULT '' COMMENT '描述',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_hook_name` (`hook_name`,`alias`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='钩子挂载方法表';
+
+CREATE TABLE `pw_windid_admin_auth` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `uid` int(10) NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `username` varchar(15) NOT NULL DEFAULT '' COMMENT '用户名',
+  `roles` varchar(255) NOT NULL DEFAULT '' COMMENT '角色',
+  `created_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `modified_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最后修改时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_uid` (`uid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户权限角色表';
+
+CREATE TABLE `pw_windid_admin_config` (
+  `name` varchar(30) NOT NULL DEFAULT '' COMMENT '配置名称',
+  `namespace` varchar(15) NOT NULL DEFAULT 'global' COMMENT '配置命名空间',
+  `value` text COMMENT '缓存值',
+  `vtype` enum('string','array','object') NOT NULL DEFAULT 'string' COMMENT '配置值类型',
+  `description` text COMMENT '配置介绍',
+  PRIMARY KEY (`namespace`,`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='网站配置表';
+
+CREATE TABLE `pw_windid_admin_custom` (
+  `username` varchar(15) NOT NULL,
+  `custom` text COMMENT '常用菜单项',
+  PRIMARY KEY (`username`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='后台常用菜单表';
+
+CREATE TABLE `pw_windid_admin_role` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `name` varchar(15) NOT NULL DEFAULT '' COMMENT '角色名',
+  `auths` text COMMENT '权限点',
+  `created_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `modified_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最后修改时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_name` (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台用户角色表';
+
+ALTER TABLE `pw_common_nav` ADD `image` VARCHAR( 100 ) NOT NULL DEFAULT '' AFTER `alt` ;
+
+ALTER TABLE `pw_windid_notify` CHANGE `param` `param` TEXT;
+
+-- 2013-2-1----
+
+CREATE TABLE `pw_windid_application` (
+  `app_id` char(20) NOT NULL DEFAULT '' COMMENT '应用id',
+  `name` varchar(100) NOT NULL DEFAULT '' COMMENT '名称',
+  `alias` varchar(100) NOT NULL DEFAULT '' COMMENT '别名',
+  `logo` varchar(100) NOT NULL DEFAULT '' COMMENT '应用logo',
+  `author_name` varchar(30) NOT NULL DEFAULT '' COMMENT '作者名',
+  `author_icon` varchar(100) NOT NULL DEFAULT '' COMMENT '作者头像',
+  `author_email` varchar(200) NOT NULL DEFAULT '' COMMENT '作者email',
+  `website` varchar(200) NOT NULL DEFAULT '' COMMENT '开发者网站',
+  `version` varchar(50) NOT NULL DEFAULT '' COMMENT '应用版本',
+  `pwversion` varchar(50) NOT NULL DEFAULT '',
+  `created_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `modified_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `description` varchar(255) NOT NULL DEFAULT '' COMMENT '描述',
+  PRIMARY KEY (`app_id`),
+  UNIQUE KEY `alias` (`alias`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='本地应用信息表';
+
+CREATE TABLE `pw_windid_application_log` (
+  `app_id` char(20) NOT NULL DEFAULT '' COMMENT '应用id',
+  `log_type` char(10) NOT NULL DEFAULT '' COMMENT '日志类型',
+  `data` text COMMENT '日志内容',
+  `created_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `modified_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
+  UNIQUE KEY `app_id` (`app_id`,`log_type`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='应用安装日志表';
+
+-- 2013-2-21 by chenjm--
+ALTER TABLE `pw_windid_notify_log` ADD INDEX `idx_nid` ( `nid` );

@@ -9,13 +9,13 @@ Wind::import('WIND:dao.WindDao');
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwBaseDao.php 24810 2013-02-21 10:32:03Z jieyin $
+ * @version $Id: PwBaseDao.php 29721 2013-06-27 10:57:28Z hao.lin $
  * @package lib
  * @subpackage base.dao
  */
 
 class PwBaseDao extends WindDao {
-	
+
 	protected $_table;
 	protected $_pk = 'id';
 	protected $_className = '';
@@ -38,7 +38,7 @@ class PwBaseDao extends WindDao {
 
 	/**
 	 * 获取当前dao类的基础DAO类
-	 * 
+	 *
 	 * 获取当前dao类的基础DAO类,当baseInstance没有设置时,调用defaultBaseInstance
 	 * @throws Exception
 	 * @return PwBaseDao
@@ -62,7 +62,7 @@ class PwBaseDao extends WindDao {
 		!$table && $table = $this->_table;
 		return $this->getConnection()->getTablePrefix() . $table;
 	}
-	
+
 	/**
 	 * 获取当前dao表字段结构
 	 *
@@ -97,7 +97,7 @@ class PwBaseDao extends WindDao {
 		}
 		return $str ? implode(',', $str) : '';
 	}
-	
+
 	/**
 	 * sql组装,将数组组装成类似`key`=`key`|value等位运算形式返回
 	 *
@@ -201,7 +201,7 @@ class PwBaseDao extends WindDao {
 	 *
 	 * @param array $array
 	 * @param array $allow
-	 * @return multitype:|unknown|multitype:unknown 
+	 * @return multitype:|unknown|multitype:unknown
 	 */
 	protected function _filterStruct($array, $allow = array()) {
 		if (empty($array) || !is_array($array)) return array();
@@ -219,7 +219,7 @@ class PwBaseDao extends WindDao {
 	 *
 	 * @param array $array1
 	 * @param array $array2
-	 * @return multitype:Ambigous <multitype:, unknown> 
+	 * @return multitype:Ambigous <multitype:, unknown>
 	 */
 	protected function _margeArray($array1, $array2) {
 		$result = array();

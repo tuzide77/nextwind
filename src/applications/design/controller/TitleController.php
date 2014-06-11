@@ -5,7 +5,7 @@ Wind::import('APPS:design.controller.DesignBaseController');
  * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: TitleController.php 19273 2012-10-12 07:17:57Z gao.wanggao $ 
+ * @version $Id: TitleController.php 28899 2013-05-29 07:23:48Z gao.wanggao $ 
  * @package 
  */
 class TitleController extends DesignBaseController{
@@ -97,7 +97,7 @@ class TitleController extends DesignBaseController{
  		$dm->setTitle($array);
 		$resource = $this->_getModuleDs()->updateModule($dm);
 		if ($resource instanceof PwError) $this->showError($resource->getError());
-		$this->setOutput($html, 'data');
+		$this->setOutput($html, 'html');
 		$this->showMessage("operate.success");
 	}
 	

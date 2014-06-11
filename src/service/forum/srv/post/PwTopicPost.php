@@ -10,7 +10,7 @@ Wind::import('SRV:forum.dm.PwTopicDm');
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwTopicPost.php 22440 2012-12-24 09:17:41Z jieyin $
+ * @version $Id: PwTopicPost.php 28950 2013-05-31 05:58:25Z jieyin $
  * @package forum
  */
 
@@ -48,6 +48,9 @@ class PwTopicPost extends PwPostAction {
 			return new PwError('permission.post.allow', array('{grouptitle}' => $this->user->getGroupInfo('name')));
 		}
 		if (($result = $this->checkPostNum()) !== true) {
+			return $result;
+		}
+		if (($result = $this->checkPostPertime()) !== true) {
 			return $result;
 		}
 		return true;

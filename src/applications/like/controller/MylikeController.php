@@ -121,7 +121,7 @@ class MylikeController extends PwBaseController {
 			$_data[$k]['like_url'] = WindUrlHelper::createUrl(
 				'like/mylike/doLike/?typeid=' . $_data[$k]['fromtype'] . '&fromid=' . $_data[$k]['fromid']);
 		}
-		$this->setOutput($_data, 'data');
+		$this->setOutput($_data, 'html');
 		$this->showMessage('operate.success');
 	}
 
@@ -157,8 +157,8 @@ class MylikeController extends PwBaseController {
 	 * 如果喜欢内容总喜欢数小于1，同时删除喜欢内容
 	 */
 	public function doDelLikeAction() {
-		$logid = (int) $this->getInput('logid', 'get');
-		if ($logid < 0) $this->showError('BBS:like.fail');
+		$logid = (int) $this->getInput('logid', 'post');
+		if (!$logid) $this->showError('BBS:like.fail');
 		$resource = $this->_getLikeService()->delLike($this->loginUser->uid, $logid);
 		if ($resource) $this->showMessage('BBS:like.success');
 		$this->showError('BBS:like.fail');
@@ -210,7 +210,10 @@ class MylikeController extends PwBaseController {
 	 *
 	 */
 	public function doDelTagAction() {
-		$tagid = (int) $this->getInput('tag', 'get');
+		$tagid = (int) $this->getInput('tag', 'post');
+		if (!$tagid) {
+			$this->showError('operate.fail');
+		}
 		$info = $this->_getLikeService()->allowEditTag($this->loginUser->uid, $tagid);
 		if ($info instanceof PwError) $this->showError($info->getError());
 		if (!$this->_getLikeTagService()->deleteInfo($tagid)) $this->showError('BBS:like.fail');

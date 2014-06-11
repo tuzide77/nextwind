@@ -1,10 +1,10 @@
 <?php
 /**
- * the last known user to change this file in the repository  <$LastChangedBy: jieyin $>
- * @author $Author: jieyin $ Foxsee@aliyun.com
+ * the last known user to change this file in the repository  <$LastChangedBy: gao.wanggao $>
+ * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ?2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: WindidUserService.php 24838 2013-02-22 07:31:19Z jieyin $ 
+ * @version $Id: WindidUserService.php 28968 2013-05-31 12:05:48Z gao.wanggao $ 
  * @package 
  */
 class WindidUserService {
@@ -161,7 +161,9 @@ class WindidUserService {
 
 	public function showFlash($uid, $appId, $appKey, $getHtml = 1) {
 		$time = Pw::getTime();
-		$key = WindidUtility::appKey($appId, $time, $appKey);
+		$key = WindidUtility::appKey($appId, $time, $appKey, array('uid'=>$uid, 'type'=>'flash'), array('uid'=>'undefined'));
+		$key2 = WindidUtility::appKey($appId, $time, $appKey, array('uid'=>$uid, 'type'=>'normal'), array());
+		
 		$postUrl = "postAction=ra_postAction&redirectURL=/&requestURL=" . urlencode(Wekit::app('windid')->url->base . "/index.php?m=api&c=avatar&a=doAvatar&uid=" . $uid . '&windidkey=' . $key . '&time=' . $time . '&clientid=' . $appId . '&type=flash') . '&avatar=' . urlencode($this->getAvatar($uid, 'big') . '?r=' . rand(1,99999));
 		return $getHtml ? '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="700" height="430" id="rainbow" align="middle">
 							<param name="movie" value="' . Wekit::app('windid')->url->res . 'swf/avatar/avatar.swf?' . rand(0,9999) . '" />
@@ -174,9 +176,9 @@ class WindidUserService {
 							<param name="menu" value="true" />
 							<param name="devicefont" value="false" />
 							<param name="salign" value="" />
-							<param name="allowScriptAccess" value="always" />
+							<param name="allowScriptAccess" value="never" />
 							<param name="FlashVars" value="' . $postUrl . '"/>
-							<embed src="' . Wekit::app('windid')->url->res . 'swf/avatar/avatar.swf?' . rand(0,9999) . '" quality="high" bgcolor="#ffffff" width="700" height="430" name="mycamera" align="middle" allowScriptAccess="always" allowFullScreen="false" scale="exactfit"  wmode="transparent" FlashVars="' . $postUrl . '" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+							<embed src="' . Wekit::app('windid')->url->res . 'swf/avatar/avatar.swf?' . rand(0,9999) . '" quality="high" bgcolor="#ffffff" width="700" height="430" name="mycamera" align="middle" allowScriptAccess="never" allowFullScreen="false" scale="exactfit"  wmode="transparent" FlashVars="' . $postUrl . '" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
 						</object>'
 		               : array(
 		                    'width' => '500',
@@ -185,8 +187,8 @@ class WindidUserService {
 		                    'name' => 'uploadAvatar',
 		                    'src' => Wekit::app('windid')->url->res . 'swf/avatar/avatar.swf',
 		                    'wmode' => 'transparent',
-		                    'postUrl' => Wekit::app('windid')->url->base . "/index.php?m=api&c=avatar&a=doAvatar&uid=" . $uid . '&windidkey=' . $key . '&time=' . $time . '&clientid=' . $appId . '&type=normal&jcallback=avatarNormal',
-		               		'token' => $key,
+		                    'postUrl' => Wekit::app('windid')->url->base . "/index.php?m=api&c=avatar&a=doAvatar&uid=" . $uid . '&windidkey=' . $key2 . '&time=' . $time . '&clientid=' . $appId . '&type=normal&jcallback=avatarNormal',
+		               		'token' => $key2,
 		                );
 
 	}

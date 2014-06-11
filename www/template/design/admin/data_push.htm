@@ -13,7 +13,7 @@
 		<div class="return"><a href="{@url:design/module/run?type=$isapi}">返回上一级</a></div>
 		<ul class="cc">
 			<li><a href="{@url:design/data/run?moduleid=$moduleid}">显示数据</a></li>
-			<li  class="current"><a href="{@url:design/data/push?moduleid=$moduleid}">推送审核</a></li>
+			<li  class="current"><a href="{@url:design/data/push?moduleid=$moduleid}">推送12审核</a></li>
 			<li><a href="{@url:design/property/edit?moduleid=$moduleid}">属性</a></li>
 			<li><a href="{@url:design/template/edit?moduleid=$moduleid}">模板</a></li>
 		</ul>
@@ -39,19 +39,30 @@
 Wind.use('dialog', function(){
 	//通过 拒绝
 	$('a.J_data_push').on('click', function(e){
-			e.preventDefault();
-			$.getJSON(this.href, function(data) {
+		e.preventDefault();
+		var pdata = $(this).data('pdata');
+		$.ajax({
+			url: this.href,
+			type : 'post',
+			dataType: 'json',
+			data: function(){
+				if(pdata) {
+					return $.parseJSON(pdata.replace(/'/g, '"'));
+				}
+			}(),
+			success: function(data){
 				if(data.state === 'success') {
 					if(data.referer) {
-						location.href = data.referer;
+						location.href = decodeURIComponent(data.referer);
 					}else {
 						reloadPage(window);
 					}
 				}else if( data.state === 'fail' ) {
 					Wind.dialog.alert(data.message);
 				}
-			});
+			}
 		});
+	});
 });
 </script>
 </body>

@@ -1,11 +1,11 @@
 <?php
 Wind::import('LIB:base.PwBaseController');
 /**
- * the last known user to change this file in the repository  <$LastChangedBy: gao.wanggao $>
- * @author $Author: gao.wanggao $ Foxsee@aliyun.com
+ * the last known user to change this file in the repository  <$LastChangedBy: yetianshi $>
+ * @author $Author: yetianshi $ Foxsee@aliyun.com
  * @copyright ?2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: ApiController.php 20063 2012-10-23 03:52:55Z gao.wanggao $ 
+ * @version $Id: ApiController.php 28830 2013-05-27 03:37:39Z yetianshi $ 
  * @package 
  */
 class ApiController extends PwBaseController {
@@ -61,6 +61,7 @@ class ApiController extends PwBaseController {
     	foreach ($data AS $v) {
     		$child = $dom->createElement('data');
     		foreach ((array)$v AS $_k=>$_v) {
+    			$_v = WindSecurity::escapeHTML($_v);
     			$_k = $dom->createElement($_k);
              	$_k->appendChild($dom->createTextNode($_v));
 				$child->appendChild($_k);

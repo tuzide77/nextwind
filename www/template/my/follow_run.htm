@@ -112,7 +112,7 @@
 							<!--# foreach ($typeArr as $key => $value) { #-->
 							<li id="J_side_group_{$key}">
 								<!--# if ($key > 0) { #-->
-								<a href="{@url:my/follow/deleteType?id=$key}" class="icon_del J_group_del" data-id="{$key}">删除</a>
+								<a href="{@url:my/follow/deleteType}" class="icon_del J_group_del" data-pdata="{'id':'{$key}'}" data-id="{$key}">删除</a>
 								<a href="{@url:my/follow/editType?id=$key}" class="icon_edit J_group_edit" data-id="{$key}" data-name="{$value}">编辑</a>
 								<!--# } #-->
 								<a href="{@url:my/follow/run?type=$key}" class="title"><span class="J_name">{$value}</span><em>(<!--# echo isset($typeCounts[$key]) ? $typeCounts[$key]['count'] : 0; #-->)</em></a>
@@ -224,7 +224,7 @@ Wind.use('jquery', 'global', 'ajaxForm', 'dialog', function(){
 					setGroupNames(newest);
 
 					//右侧栏写入新分组
-					$('#J_side_group_list').append('<li id="J_side_group_'+ _data.id +'"><a class="icon_del J_group_del" href="{@url:my/follow/deleteType/}&id='+ _data.id +'" data-id="'+ _data.id +'">删除</a><a data-name="'+ _data.name +'" data-id="'+ _data.id +'" class="icon_edit J_group_edit" href="{@url:my/follow/editType/)}&id='+ _data.id +'">编辑</a><a class="title" href="{@url:my/follow/run/}&type='+ _data.id +'"><span class="J_name">'+ _data.name +'</span><em>(0)</em></a></li>');
+					$('#J_side_group_list').append('<li id="J_side_group_'+ _data.id +'"><a class="icon_del J_group_del" data-pdata="{\'id\':\''+ _data.id +'\'}" href="{@url:my/follow/deleteType/}" data-id="'+ _data.id +'">删除</a><a data-name="'+ _data.name +'" data-id="'+ _data.id +'" class="icon_edit J_group_edit" href="{@url:my/follow/editType/)}&id='+ _data.id +'">编辑</a><a class="title" href="{@url:my/follow/run/}&type='+ _data.id +'"><span class="J_name">'+ _data.name +'</span><em>(0)</em></a></li>');
 
 				}else if(data.state === 'fail'){
 					Wind.Util.resultTip({
@@ -258,7 +258,7 @@ Wind.use('jquery', 'global', 'ajaxForm', 'dialog', function(){
 						list.append('<li><label><input type="checkbox" data-id="'+ _data.id +'" data-value="'+ _data.name +'" class="J_group_name">'+ _data.name +'</label></li>');
 
 						//右侧栏写入新分组
-						$('#J_side_group_list').append('<li id="J_side_group_'+ _data.id +'"><a class="icon_del J_group_del" href="{@url:my/follow/deleteType/}&id='+ _data.id +'" data-id="'+ _data.id +'">删除</a><a data-name="'+ _data.name +'" data-id="'+ _data.id +'" class="icon_edit J_group_edit" href="{@url:my/follow/editType/)}&id='+ _data.id +'">编辑</a><a class="title" href="{@url:my/follow/run/}&type='+ _data.id +'"><span class="J_name">'+ _data.name +'</span><em>(0)</em></a></li>');
+						$('#J_side_group_list').append('<li id="J_side_group_'+ _data.id +'"><a class="icon_del J_group_del" data-pdata="{\'id\':\''+ _data.id +'\'}" href="{@url:my/follow/deleteType/}" data-id="'+ _data.id +'">删除</a><a data-name="'+ _data.name +'" data-id="'+ _data.id +'" class="icon_edit J_group_edit" href="{@url:my/follow/editType/)}&id='+ _data.id +'">编辑</a><a class="title" href="{@url:my/follow/run/}&type='+ _data.id +'"><span class="J_name">'+ _data.name +'</span><em>(0)</em></a></li>');
 					}
 
 					var group_edit_wrap = $('#J_group_edit_wrap');

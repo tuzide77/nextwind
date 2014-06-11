@@ -1,11 +1,11 @@
 <?php
 Wind::import('ADMIN:library.AdminBaseController');
 /**
- * the last known user to change this file in the repository  <$LastChangedBy: gao.wanggao $>
- * @author $Author: gao.wanggao $ Foxsee@aliyun.com
+ * the last known user to change this file in the repository  <$LastChangedBy: jieyin $>
+ * @author $Author: jieyin $ Foxsee@aliyun.com
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: ComponentController.php 22041 2012-12-18 10:31:33Z gao.wanggao $
+ * @version $Id: ComponentController.php 28810 2013-05-24 08:50:05Z jieyin $
  * @package
  */
 
@@ -98,7 +98,7 @@ class ComponentController extends AdminBaseController {
 	}
 	
 	public function delAction() {
-		$id = (int)$this->getInput('id','get');
+		$id = (int)$this->getInput('id','post');
 		if (!$id) $this->showMessage("operate.fail");
 		$resource = $this->_getDesignComponentDs()->deleteComponent($id);
 		if (!$resource) $this->showMessage("operate.fail");

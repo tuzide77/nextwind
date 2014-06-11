@@ -8,7 +8,7 @@ Wind::import('SRV:education.dm.PwEducationDm');
  * @author xiaoxia.xu <x_824@sina.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: EducationController.php 21352 2012-12-05 06:48:57Z xiaoxia.xuxx $
+ * @version $Id: EducationController.php 28848 2013-05-28 02:21:12Z jieyin $
  * @package src.productions.u.controller.profile
  */
 class EducationController extends BaseProfileController {
@@ -46,7 +46,11 @@ class EducationController extends BaseProfileController {
 	 * 删除教育经历
 	 */
 	public function deleteAction() {
-		$id = $this->getInput('id');
+		$id = $this->getInput('id', 'post');
+		if (!$id) {
+			$this->showError('operate.fail');
+		}
+
 		$educationDs = $this->_getDs();
 		if (($result = $educationDs->deleteEducation($id, $this->loginUser->uid)) instanceof PwError) {
 			$this->showError($result->getError());

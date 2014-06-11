@@ -26,6 +26,8 @@ class WatermarkController extends AdminBaseController {
 	 * 后台设置-水印管理
 	 */
 	public function dorunAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$config = new PwConfigSet('attachment');
 		$config->set('mark.limitwidth', abs(intval($this->getInput('markLimitwidth', 'post'))))
 			->set('mark.limitheight', abs(intval($this->getInput('markLimitheight', 'post'))))
@@ -105,6 +107,8 @@ class WatermarkController extends AdminBaseController {
 	 * 后台设置-水印策略设置
 	 */
 	public function dosetAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$ext = $this->getInput('ext', 'post');
 		$extConfig = array();
 		foreach ($ext as $key => $value) {

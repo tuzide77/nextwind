@@ -8,7 +8,7 @@ Wind::import('SRV:work.dm.PwWorkDm');
  * @author xiaoxia.xu <xiaoxia.xuxx@aliyun-inc.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: WorkController.php 21352 2012-12-05 06:48:57Z xiaoxia.xuxx $
+ * @version $Id: WorkController.php 28852 2013-05-28 02:46:06Z jieyin $
  * @package src.productions.u.controller.profile
  */
 class WorkController extends BaseProfileController {
@@ -58,7 +58,11 @@ class WorkController extends BaseProfileController {
 	 * 删除工作经历
 	 */
 	public function deleteAction() {
-		$id = $this->getInput('id');
+		$id = $this->getInput('id', 'post');
+		if (!$id) {
+			$this->showError('operate.fail');
+		}
+
 		$workDs = $this->_getDs();
 		if (($result = $workDs->deleteWorkExperience($id, $this->loginUser->uid)) instanceof PwError) {
 			$this->showError($result->getError());

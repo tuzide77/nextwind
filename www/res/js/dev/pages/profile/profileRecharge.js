@@ -50,7 +50,7 @@
 		success : function(data){
 			if(data.state == 'success') {
 				//支付跳转
-				window.location.href = data.data.url;//todo
+				window.location.href = decodeURIComponent(data.data.url);//todo
 				//window.location.href = data.referer;
 			}else if(data.state == 'fail'){
 				//global.js

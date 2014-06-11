@@ -28,6 +28,8 @@ class EmailController extends AdminBaseController {
 	 * 后台设置-email设置
 	 */
 	public function dorunAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$password = $this->getInput('mailPassword', 'post');
 		$config = $this->_getConfig();
 		$t = Pw::strlen($config['mail.password']);

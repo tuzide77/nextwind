@@ -3,7 +3,7 @@
 @explain: 全局样式表（头尾效果、全局背景、右侧个人信息等）
 @copyright: Copyright 2012,phpwind.com
 @author: longwenid@gmail.com
-$Id: style.css 25260 2013-03-08 07:49:16Z yanchixia $
+$Id: style.css 28793 2013-05-24 03:55:18Z jieyin $
 ===================
 #*/
 
@@ -112,7 +112,7 @@ a:hover{
 .icon_face/*表情*/,
 .feed_lists_del/*删除关注信息*/,
 .header_search button span/*搜索放大镜*/,
-.sidebar_login dt i/*右侧登陆图标*/,
+.sidebar_login dt i/*右侧登录图标*/,
 .my_message_content .goin li i/*消息详情箭头*/{
 	background:url(../../images/common/style_icon.png) no-repeat;
 }

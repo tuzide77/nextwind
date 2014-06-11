@@ -8,7 +8,7 @@ Wind::import('APPCENTER:service.srv.helper.PwManifest');
  * @author Zhu Dong <zhudong0808@gmail.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: AppController.php 24585 2013-02-01 04:02:37Z jieyin $
+ * @version $Id: AppController.php 32059 2013-09-24 02:10:15Z long.shi $
  * @package appcenter.admin
  */
 class AppController extends AdminBaseController {
@@ -121,10 +121,12 @@ class AppController extends AdminBaseController {
 	 * 本地安装, 分步模式执行应用安装
 	 */
 	public function doInstallAction() {
-		list($file, $step, $hash) = $this->getInput(array('file', 'step', 'hash'));
+		list($file, $step, $hash) = $this->getInput(array('file', 'step', 'hash'), 'post');
+		if (!$file) $this->showError('APPCENTER:install.checkpackage.fail');
 		$install = $this->_installService();
 		if ($file) {
 			$file = Wind::getRealDir($install->getConfig('tmp_dir'), true) . '/' . $file;
+			$file = WindSecurity::escapePath($file, true);
 			$install->setTmpPath(dirname($file));
 			if (!WindFile::isFile($file)) $this->showError('APPCENTER:install.checkpackage.fail');
 			$_r = $install->extractPackage($file);
@@ -180,9 +182,10 @@ class AppController extends AdminBaseController {
 	 * 删除已上传压缩包
 	 */
 	public function delFileAction() {
-		$file = $this->getInput('file');
-		$file = ATTACH_PATH . $file;
-		WindFile::del($file);
+		$file = $this->getInput('file', 'post');
+		if ($file && file_exists(ATTACH_PATH . $file)) {
+			WindFile::del(ATTACH_PATH . $file);
+		}
 		$this->showMessage('success');
 	}
 	
@@ -191,9 +194,11 @@ class AppController extends AdminBaseController {
 	 *
 	 */
 	public function delFolderAction() {
-		$folder = $this->getInput('folder', 'get');
-		WindFolder::clearRecur(EXT_PATH . $folder, true);
-		WindFolder::clearRecur(THEMES_PATH . 'extres/' . $folder, true);
+		$folder = $this->getInput('folder', 'post');
+		if ($folder) {
+			is_dir(EXT_PATH . $folder) && WindFolder::clearRecur(EXT_PATH . $folder, true);
+			is_dir(THEMES_PATH . 'extres/' . $folder) && WindFolder::clearRecur(THEMES_PATH . 'extres/' . $folder, true);
+		}
 		$this->showMessage('success');
 	}
 

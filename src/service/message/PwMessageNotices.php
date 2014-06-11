@@ -152,6 +152,9 @@ class PwMessageNotices {
 	public function deleteNoticeByIds($ids){
 		return $this->_getDao()->deleteNoticeByIds($ids);
 	}
+	public function deleteNoticeByIdsAndUid($uid, $ids){
+		return $this->_getDao()->deleteNoticeByIdsAndUid($uid, $ids);
+	}
 	
 	/**
 	 * 根据类型删除通知

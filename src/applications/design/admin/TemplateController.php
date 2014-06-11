@@ -5,7 +5,7 @@ Wind::import('APPS:design.admin.DesignBaseController');
  * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ?2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: TemplateController.php 23961 2013-01-17 08:40:02Z gao.wanggao $ 
+ * @version $Id: TemplateController.php 28936 2013-05-31 02:50:17Z gao.wanggao $ 
  * @package 
  */
 class TemplateController extends DesignBaseController{
@@ -40,7 +40,7 @@ class TemplateController extends DesignBaseController{
 		} else {
 			$tpl = $this->bo->getTemplate();
 		}
-		$this->setOutput($tpl, 'data');
+		$this->setOutput($tpl, 'html');
 		$this->showMessage("operate.success");
 	}
 	

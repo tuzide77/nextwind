@@ -67,7 +67,7 @@
 			<div class="title J_notice_all" style="display:none;"></div>
 			<div class="c"></div>
 			<div class="info">
-				<span class="time"><!--# echo Pw::time2str($v['modified_time'],'auto');#--></span><span class="operating"><span class="line">|</span><a class="J_msg_del" href="{@url:message/notice/delete?id=$v['id']}">删除</a></span>
+				<span class="time"><!--# echo Pw::time2str($v['modified_time'],'auto');#--></span><span class="operating"><span class="line">|</span><a class="J_msg_del" href="#" data-uri="{@url:message/notice/delete}" data-pdata="{'id':'{$v['id']}'}">删除</a></span>
 			</div>
 		</div>
 	</div>

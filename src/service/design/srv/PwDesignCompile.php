@@ -4,7 +4,7 @@
  * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ?2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwDesignCompile.php 23886 2013-01-17 03:06:19Z gao.wanggao $ 
+ * @version $Id: PwDesignCompile.php 28769 2013-05-23 03:48:46Z gao.wanggao $ 
  * @package 
  */
 class PwDesignCompile {
@@ -453,8 +453,10 @@ class PwDesignCompile {
 				'<?php if(!empty(\\$__v[\'\\1\'])){?>',
 				'<?php echo WindSecurity::escapeHTML(\\$__v[\'\\1\']);?>',
 				'<?php echo WindSecurity::escapeHTML(Pw::substrs(\\$__v[\'\\1\'],\\2));?>',
-				'<?php echo \\$__v[\'\\1\'];?>', //TODO
-				'<?php echo \\$__v[\'\\1\'];?>',
+				/*'<?php echo \\$__v[\'\\1\'];?>', //TODO
+				'<?php echo \\$__v[\'\\1\'];?>',*/
+				'<?php echo WindSecurity::escapeHTML(\\$__v[\'\\1\']);?>',
+				'<?php echo WindSecurity::escapeHTML(\\$__v[\'\\1\']);?>',
 				'<?php echo WindSecurity::escapeHTML(\\$__v[\'\\1\']);?>',
 				/*'<?php \\$__data=(is_array(\\$__design_data[\''.$moduleName.'\']))?\\$__design_data[\''.$moduleName.'\']:array();foreach(\\$__data AS \\$__k=>\\$__v){?>',*/
 				'<?php if(is_array(\\$__design_data[\''.$moduleName.'\'])){

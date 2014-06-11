@@ -64,7 +64,7 @@
 				<span class="time">{@Pw::time2str($v['modified_time'],'auto')}</span>
 				<span class="operating">
 					<span class="line">|</span>
-					<a class="J_msg_del" href="{@url:message/notice/delete?id=$v['id']}">删除</a>
+					<a class="J_msg_del" href="#" data-uri="{@url:message/notice/delete}" data-pdata="{'id':'{$v['id']}'}">删除</a>
 					<!-- span class="line">|</span>
 					<a class="J_addblack" data-type="notice" data-user="{$v['extend_params']['remindUsername']}" href="{@url:message/message/addBlack?uid=$v['extend_params']['remindUid']}" data-referer="{@url:profile/secret/black?_left=secret}">加入黑名单</a -->
 				</span>

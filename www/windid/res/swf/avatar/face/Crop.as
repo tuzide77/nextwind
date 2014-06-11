@@ -329,7 +329,8 @@
 		 * 选择图片
 		 */
 		private function upload(e:MouseEvent):void
-		{
+		{	
+			hideTip();
 			var filetype:Array = [new FileFilter('All Image Files(*.jpg;*.jpeg;*.gif;*.png)','*.jpg;*.jpeg;*.gif;*.png')];
 			file.browse(filetype);
 		}
@@ -346,6 +347,7 @@
 				isGIF = false;
 				loader.loadBytes(file.data);
 			}
+			
 		}
 		/***
 		 * 选择文件
@@ -403,19 +405,42 @@
 		
 		protected function onIOError(event_:IOErrorEvent):void
         {
-            dispatchEvent(new ErrorEvent(ErrorEvent.ERROR, false, false, "图片保存失败12，网络连接错误！"));
-			ExternalInterface.call("Wind.Util.resultTip({error : true,msg : '图片保存失败,网络连接错误!'})");
+            //dispatchEvent(new ErrorEvent(ErrorEvent.ERROR, false, false, "图片保存失败12，网络连接错误！"));
+			//ExternalInterface.call("Wind.Util.resultTip({error : true,msg : '图片保存失败,网络连接错误!'})");
+			showTip('图片保存失败,网络连接错误!');
         }
         
         protected function onUploadComplete(event_:Event):void
         {
-            dispatchEvent(new Event(Event.COMPLETE));
+        	showTip('上传成功');
+        	/*
+        	dispatchEvent(new Event(Event.COMPLETE));
 			var url:String = "javascript:uploadSuccess();void(0);";
 			var urlRequest_:URLRequest = new URLRequest(url);
 			//var header:URLRequestHeader=new URLRequestHeader("charset","utf-8");
 			//urlRequest_.requestHeaders.push(header);
 			navigateToURL(urlRequest_,'_self');
+        	*/
         }
+
+
+        private function errorHandlers(e:IOErrorEvent):void
+		{
+			showTip(Crop.IO_ERROR);
+		}
+		
+		//显示错误信息
+		private function showTip(txt:String):void
+		{
+			warning.text = txt; 
+			warning.visible = true;
+		}
+		
+		// 隐藏错误信息
+		private function hideTip():void
+		{
+			warning.visible = false;
+		}
 		/*private function errorHandlers(e:IOErrorEvent):void
 		{
 			showTip(Crop.IO_ERROR);

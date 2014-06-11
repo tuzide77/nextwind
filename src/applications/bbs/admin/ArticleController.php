@@ -105,7 +105,8 @@ class ArticleController extends AdminBaseController {
 	}
 	
 	public function deletethreadAction() {
-		list($tids,$isDeductCredit) = $this->getInput(array('tids','isDeductCredit'));
+		$isDeductCredit = $this->getInput('isDeductCredit');
+		$tids = $this->getInput('tids', 'post');
 		if (!is_array($tids) || !count($tids)) {
 			$this->showError('operate.select');
 		}
@@ -193,7 +194,8 @@ class ArticleController extends AdminBaseController {
 	 *
 	 */
 	public function deletereplyAction() {
-		list($pids,$isDeductCredit) = $this->getInput(array('pids','isDeductCredit'));
+		$isDeductCredit = $this->getInput('isDeductCredit');
+		$pids = $this->getInput('pids', 'post');
 		if (!is_array($pids) || !count($pids)) {
 			$this->showError('operate.select');
 		}

@@ -51,6 +51,7 @@ class ManageController extends AdminBaseController {
 	}
 	
 	public function dogroupAction(){
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
 		$view = $this->getInput('view', 'post');
 		
 		$groups = $this->_getUserGroupsDs()->getAllGroups();
@@ -90,6 +91,7 @@ class ManageController extends AdminBaseController {
 	}
 	
 	public function doeditforumAction(){
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
 		$forumid = $this->getInput('fid', 'post');	
 		$forumid = $forumid ? explode(',', $forumid) : array();
 		

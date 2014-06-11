@@ -44,7 +44,7 @@
 
 				<td>
 					<a href="{@url:emotion/emotion/emotion?catid=$cat['category_id']}" class="mr5">[管理]</a>
-					<a href="{@url:emotion/emotion/deletecate?cateid=$cat['category_id']}" class="mr5 J_ajax_del">[删除]</a>
+					<a href="{@url:emotion/emotion/deletecate}" class="mr5 J_ajax_del" data-pdata="{'cateid': '{$cat['category_id']}'}">[删除]</a>
 				</td>
 			</tr>
 		<!--# } #-->

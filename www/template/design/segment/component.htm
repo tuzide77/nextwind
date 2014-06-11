@@ -48,7 +48,7 @@ $(function() {
 			}, function(data){
 				Wind.Util.ajaxMaskRemove();
 				if(data.state == 'success') {
-					$('#J_design_temp_tpl').val(data.data);
+					$('#J_design_temp_tpl').val(data.html);
 				}else if(data.state == 'fail'){
 					if(Wind.Util.resultTip) {
 						Wind.Util.resultTip({
@@ -108,8 +108,8 @@ $(function() {
 				}, function(data){
 					Wind.Util.ajaxMaskRemove();
 					if(data.state == 'success') {
-						$('textarea[name=tpl]').val(data.data);
-						codeEditor.setValue(data.data);
+						$('textarea[name=tpl]').val(data.html);
+						codeEditor.setValue(data.html);
 					}else if(data.state == 'fail'){
 						if(Wind.Util.resultTip) {
 							Wind.Util.resultTip({

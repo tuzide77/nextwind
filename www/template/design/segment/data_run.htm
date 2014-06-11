@@ -44,9 +44,9 @@
 			<td>
 				<a href="{@url:design/data/edit?dataid=$v['data_id']&moduleid=$v['module_id']}" class="mr5 J_data_edit" data-id="{$v['data_id']}">[编辑]</a>
 				<!--# if($v['from_type'] == 1){ #-->
-				<a class="J_design_data_ajax" href="{@url:design/data/doshield?dataid=$v['data_id']&moduleid=$v['module_id']}">[删除]</a>
+				<a class="J_design_data_ajax" href="{@url:design/data/doshield?dataid=$v['data_id']&moduleid=$v['module_id']}" data-pdata="{'dataid': '{$v['data_id']}', 'moduleid':'$v['module_id']'}">[删除]</a>
 				<!--# }else{ #-->
-				<a class="J_design_data_ajax" href="{@url:design/data/doshield?dataid=$v['data_id']&moduleid=$v['module_id']}">[屏蔽]</a>
+				<a class="J_design_data_ajax" href="{@url:design/data/doshield?dataid=$v['data_id']&moduleid=$v['module_id']}" data-pdata="{'dataid': '{$v['data_id']}', 'moduleid':'$v['module_id']'}">[屏蔽]</a>
 				<!--# } #-->
 				<input type="hidden" name="dataid[]" value="{$v['data_id']}">
 			</td>

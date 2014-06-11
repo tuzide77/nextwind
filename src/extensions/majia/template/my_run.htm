@@ -1,0 +1,73 @@
+<hook-action name="displayMajiaClose" args="user,list,totalN">
+<div class="not_content">马甲功能已经关闭</div>
+</hook-action>
+
+<hook-action name="displayMajiaForbidden" args="user,list,totalN">
+<div class="not_content_mini">您所在的用户组不能使用马甲功能</div>
+<div class="credit_page">
+	<div class="credit_has">
+		<h2>已绑定马甲</h2>
+		<dl>
+			<dt>
+				<span class="name">用户名</span>
+				<span class="name">用户组</span>
+				<span class="num">操作</span>
+			</dt>
+			<!--#foreach ($list as $_one) {#-->
+			<dd>
+				<span class="name"><a href="{@url:space/index/run?uid=$_one['uid']}" target="_blank">{$_one['username']}</a></span>
+				<span class="name">{$_one['group']}</span>
+				<span class="num">
+					<a href="{@url:app/majia/my/change?uid=$_one['uid']}" data-uid="{$_one['uid']}" class="mr10 J_majia_handle">[切换]</a>
+					<a href="{@url:app/majia/my/unband?uid=$_one['uid']}" data-uid="{$_one['uid']}" class="J_majia_handle">[解绑]</a>
+				</span>
+			</dd>
+			<!--#}#-->
+		</dl>
+	</div>
+</div>
+</hook-action>
+
+<hook-action name="displayList" args="user,list,totalN">
+<div class="credit_page">
+	<div class="credit_has">
+		<h2>已绑定马甲</h2>
+		<dl>
+			<dt>
+				<span class="name">用户名</span>
+				<span class="name">用户组</span>
+				<span class="num">操作</span>
+			</dt>
+			<!--#foreach ($list as $_one) {#-->
+			<dd>
+				<span class="name"><a href="{@url:space/index/run?uid=$_one['uid']}" target="_blank">{$_one['username']}</a></span>
+				<span class="name">{$_one['group']}</span>
+				<span class="num">
+					<a href="{@url:app/majia/my/change?uid=$_one['uid']}" data-uid="{$_one['uid']}" class="mr10 J_majia_handle">[切换]</a>
+					<a href="{@url:app/majia/my/unband?uid=$_one['uid']}" data-uid="{$_one['uid']}" class="J_majia_handle">[解绑]</a>
+				</span>
+			</dd>
+			<!--#}#-->
+		</dl>
+	</div>
+</div>
+
+<div class="profile_ct password_list">
+<form id="J_majiaband_form" action="{@url:app/majia/my/band}" method="post" class="">
+	<input type="hidden" name="step" value="2" />
+	<h3 class="mb20">马甲绑定(您还可以绑定<!--#echo $totalN-count($list);#-->个帐号)</h3>
+	<dl class="cc">
+		<dt>用户名：</dt>
+		<dd><input type="text" class="input length_4" name="username" value=""/></dd>
+	</dl>
+	<dl class="cc">
+		<dt>密码：</dt>
+		<dd><input type="password" class="input length_4" name="password" value=""/></dd>
+	</dl>
+	<dl class="cc">
+		<dt>&nbsp;</dt>
+		<dd><button type="submit" class="btn btn_submit btn_big mr10">绑定</button></dd>
+	</dl>
+</form>
+</div>
+</hook-action>

@@ -54,13 +54,16 @@ class MasingleController extends PwBaseController {
 	}
 
 	protected function _getManage($action) {
-		$pids = $this->getInput('pids');
-		$tid = $this->getInput('tid');
-		$pid = $this->getInput('pid');
+		$pids = $this->getInput('pids', 'post');
+		$tid = $this->getInput('tid', 'post');
+		$pid = $this->getInput('pid', 'post');
 		if ($pids && !is_array($pids)) {
 			$pids = explode(',', $pids);
 		} elseif (!$pids && $pid) {
 			$pids = array($pid);
+		}
+		if (!$pids) {
+			$this->showError('operate.select');
 		}
 		in_array('0', $pids) && $this->_hasThread = true;
 		$manage = new PwThreadManage(new PwFetchReplyByTidAndPids($tid, $pids), $this->loginUser);

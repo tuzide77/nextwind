@@ -251,7 +251,7 @@ class IndexController extends PwBaseController {
 		list($myTagsCount,$myTags['tags']) = $this->_getTagService()->getAttentionTags($this->loginUser->uid,$start,$limit);
 		$countStep = ceil($myTagsCount/$this->attentionTagList);
 		$step < $countStep && $myTags['step'] = $step+1;
-		echo Pw::jsonEncode($myTags);exit;
+		Pw::echoJson($myTags);exit;
 	}
 	
 	/**
@@ -321,7 +321,7 @@ class IndexController extends PwBaseController {
 	 */
 	public function getHotTagsAction(){
 		$hotTags = $this->_getTagService()->getHotTags('',$this->hotTagList);
-		echo Pw::jsonEncode($hotTags);exit;
+		Pw::echoJson($hotTags);exit;
 	}
 	
 	/**

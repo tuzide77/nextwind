@@ -9,7 +9,7 @@ Wind::import('COM:utility.WindUtility');
  * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwSpaceUpload.php 24104 2013-01-21 10:21:10Z gao.wanggao $ 
+ * @version $Id: PwSpaceUpload.php 28882 2013-05-28 10:51:23Z gao.wanggao $ 
  * @package 
  */
 
@@ -17,9 +17,11 @@ class PwSpaceUpload extends PwUploadAction {
 	public $dir;
 	public $filename;
 	protected $uid = 0;
+	private $mime = array();
 	
 	public function __construct($uid) {
 		$this->ftype = array('jpeg'=>2000, 'jpg' => 2000, 'png' => '2000', 'gif' => 2000);
+		$this->mime = array('image/jpeg', 'image/png', 'image/jpg', 'image/gif');
 		$this->uid = $uid;
 	}
 	
@@ -27,7 +29,6 @@ class PwSpaceUpload extends PwUploadAction {
 	 * @see PwUploadAction.check
 	 */
 	public function check() {
-		
 		return true;
 	}
 	

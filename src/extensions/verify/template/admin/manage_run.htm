@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+<template source='TPL:admin.common.head' />
+</head>
+<body>
+<div class="wrap J_check_wrap">
+	<div class="nav">
+		<ul>
+			<li class="current"><a href="{@url:app/verify/manage/run}">认证设置</a></li>
+			<li><a href="{@url:app/verify/manage/rights}">认证权限</a></li>
+			<li><a href="{@url:app/verify/manage/users}">认证会员</a></li>
+			<li><a href="{@url:app/verify/manage/check}">认证审核</a></li>
+		</ul>
+	</div>
+	<div class="h_a">功能说明</div>
+	<div class="prompt_text">
+		<ol>
+			<li>开启实名认证，用户可以在设置-认证中提交认证信息，保障用户信息的真实性；</li>
+			<li>可以在<a href="{@url:app/verify/manage/rights}">[认证权限]</a>中设置用户操作权限控制；</li>
+			<li>如果需要启用“手机号码”认证，必须在<a href="{@url:config/regist/run}">[[全局-注册登录-注册设置]]</a>中开启服务并有足够短信剩余条数，否则会导致认证短信下发失败。</li>
+		</ol>
+	</div>
+	<div class="h_a">认证设置</div>
+	<form class="J_ajaxForm" action="{@url:app/verify/manage/doRun}" method="post">
+	<div class="table_full">
+		<table width="100%">
+			<col class="th" />
+			<col />
+			<tr>
+				<th>实名认证</th>
+				<td>
+					<ul class="switch_list cc">
+						<li><label><input type="radio" name="verifyOpen" value="1" {@Pw::ifcheck($conf['verify.isopen'] == 1)}><span>开启</span></label></li>
+						<li><label><input type="radio" name="verifyOpen" value="0" {@Pw::ifcheck($conf['verify.isopen'] == 0)}><span>关闭</span></label></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="table_full J_check_wrap">
+		<table width="100%">
+			<thead>
+				<tr class="h_a">
+					<th width="140">认证类型</th>
+					<td width="80"><label><input type="checkbox" class="J_check_all" data-checklist="J_check_y" data-direction="y">启用</label></td>
+					<td width="120">操作</td>
+					<td>审核</td>
+				</tr>
+			</thead>
+			<tr>
+				<th>真实姓名</th>
+				<td><input data-yid="J_check_y" class="J_check" type="checkbox" name="verifyType[{@App_Verify::VERIFY_REALNAME}]" value="1" {@Pw::ifcheck(Pw::getstatus($conf['verify.type'], App_Verify::VERIFY_REALNAME))}></td>
+				<td></td>
+				<td><a href="{@url:app/verify/manage/check}">[认证审核]</a></td>
+			</tr>
+			<tr>
+				<th>头像</th>
+				<td><input data-yid="J_check_y" class="J_check" type="checkbox" name="verifyType[{@App_Verify::VERIFY_AVATAR}]" value="1" {@Pw::ifcheck(Pw::getstatus($conf['verify.type'], App_Verify::VERIFY_AVATAR))}></td>
+				<td></td>
+				<td>自动认证，无需人工审核</td>
+			</tr>
+			<tr>
+				<th>电子邮箱</th>
+				<td><input data-yid="J_check_y" class="J_check" type="checkbox"  name="verifyType[{@App_Verify::VERIFY_EMAIL}]" value="1" {@Pw::ifcheck(Pw::getstatus($conf['verify.type'], App_Verify::VERIFY_EMAIL))}></td>
+				<td><a href="{@url:app/verify/manage/email}">设置</a></td>
+				<td>自动认证，无需人工审核</td>
+			</tr>
+			<tr>
+				<th>支付宝</th>
+				<td><input data-yid="J_check_y" class="J_check" type="checkbox"  name="verifyType[{@App_Verify::VERIFY_ALIPAY}]" value="1" {@Pw::ifcheck(Pw::getstatus($conf['verify.type'], App_Verify::VERIFY_ALIPAY))}></td>
+				<td></td>
+				<td>自动认证，无需人工审核</td>
+			</tr>
+			<tr>
+				<th>手机号码</th>
+				<td><input data-yid="J_check_y" class="J_check" type="checkbox" name="verifyType[{@App_Verify::VERIFY_MOBILE}]" value="1" {@Pw::ifcheck(Pw::getstatus($conf['verify.type'], App_Verify::VERIFY_MOBILE))}></td>
+				<td></td>
+				<td>自动认证，无需人工审核。请确认已开启手机服务，当前短信剩余：<span class="org mr10">{$restMessage}条</span><a href="{$appMobileUrl}" target="_blank">查看详细</a></td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="btn_wrap">
+		<div class="btn_wrap_pd">
+			<button class="btn btn_submit J_ajax_submit_btn" type="submit">提交</button>
+		</div>
+	</div>
+	</form>
+	
+</div>
+<template source='TPL:admin.common.footer' />
+</body>
+</html>

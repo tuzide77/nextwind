@@ -37,7 +37,7 @@
 									<dd class="text_content">
 										<div class="content">原文不存在</div>
 										<div class="info">
-											<span class="time">喜欢于{@Pw::time2str($logList['created_time'])}</span><a href="{@url:like/mylike/doDelLike?logid=$logList['logid']}" class="a_unlike J_unlike">取消喜欢</a>
+											<span class="time">喜欢于{@Pw::time2str($logList['created_time'])}</span><a href="#" data-uri="{@url:like/mylike/doDelLike}" data-pdata="{'logid':'{$logList['logid']}'}" class="a_unlike J_unlike">取消喜欢</a>
 										</div>
 									</dd>
 								</dl>
@@ -67,7 +67,7 @@
 													<em class="core_arrow"></em>
 												</a>
 											</div>
-											<span class="time">喜欢于{@Pw::time2str($logList['created_time'])}</span><a href="{@url:like/mylike/doDelLike?logid=$logList['logid']}" class="a_unlike J_unlike">取消喜欢</a>
+											<span class="time">喜欢于{@Pw::time2str($logList['created_time'])}</span><a href="#" data-uri="{@url:like/mylike/doDelLike?logid=$logList['logid']}" data-pdata="{'logid':'{$logList['logid']}'}" class="a_unlike J_unlike">取消喜欢</a>
 										</div>
 									<!--# }else{ #-->
 										<div class="content"><a href="{@url:space/index/run?uid=$uid}" class="name J_user_card_show" data-uid="{$likeInfos[$logList['likeid']]['uid']}">{$likeInfos[$logList['likeid']]['username']}</a>：<em><a href="{$likeInfos[$logList['likeid']]['url']}" class="title">{$likeInfos[$logList['likeid']]['subject']}</a></em></div>
@@ -94,7 +94,7 @@
 													<em class="core_arrow"></em>
 												</a>
 											</div>
-											<span class="time">喜欢于 {@Pw::time2str($logList['created_time'])}</span>&nbsp;&nbsp;<a href="{@url:like/mylike/doDelLike?logid=$logList['logid']}" class="a_unlike J_unlike">取消喜欢</a>
+											<span class="time">喜欢于 {@Pw::time2str($logList['created_time'])}</span>&nbsp;&nbsp;<a href="#" data-uri="{@url:like/mylike/doDelLike}" data-pdata="{'logid':'{$logList['logid']}'}" class="a_unlike J_unlike">取消喜欢</a>
 										</div>
 									<!--# } #-->
 										<div class="fr">
@@ -117,19 +117,21 @@
 			</div>
 			<div class="main_sidebar">
 				<template source='TPL:common.sidebar_1' load='true' />
-			<!--# if ($tagLists){ #-->
+			
 				<div class="box_wrap">
 					<h2 class="box_title">我的喜欢分类</h2>
 					<div class="side_cate_list">
 						<ul id="J_side_group_list" class="cc">
-						<!--# foreach ($tagLists as $tag){ #-->
-							<li id="J_side_group_{$tag['tagid']}"><a href="{@url:like/mylike/doDelTag?tag=$tag['tagid']}" class="icon_del J_group_del" data-id="{$tag['tagid']}">删除</a><a href="{@url:like/mylike/doEditTag?tag=$tag['tagid']}" data-name="{$tag['tagname']}" data-id="{$tag['tagid']}" class="icon_edit J_group_edit">编辑</a><a href="{@url:like/mylike/run?tag=$tag['tagid']}" class="title"><span class="J_name">{$tag['tagname']}</span><em>({$tag['number']})</em></a></li>
+							<!--# if ($tagLists){ #-->
+							<!--# foreach ($tagLists as $tag){ #-->
+							<li id="J_side_group_{$tag['tagid']}"><a href="{@url:like/mylike/doDelTag}" class="icon_del J_group_del" data-pdata="{'tag': '{$tag['tagid']}'}" data-id="{$tag['tagid']}">删除</a><a href="{@url:like/mylike/doEditTag?tag=$tag['tagid']}" data-name="{$tag['tagname']}" data-id="{$tag['tagid']}" class="icon_edit J_group_edit">编辑</a><a href="{@url:like/mylike/run?tag=$tag['tagid']}" class="title"><span class="J_name">{$tag['tagname']}</span><em>({$tag['number']})</em></a></li>
+							<!--# } #-->
 						<!--# } #-->
 						</ul>
 						<a href="" class="add" id="J_creat_group_side">创建新分类</a>
 					</div>
 				</div>
-			<!--# } #-->
+			
 				<div class="box_wrap">
 					<h2 class="box_title">热门喜欢</h2>
 					<div class="like_hot_list">
@@ -187,7 +189,7 @@
 var  GRROUP_DATA = '{@$likeJson|json}';
 Wind.use('jquery', 'global', function(){
 	
-	var my_like = $('#J_my_like_list');
+	var my_like = $('#J_side_group_list');
 	$('#J_group_check_ul').data({
 		'saveList' : function(elem, type, id){
 			//保存分组
@@ -232,7 +234,7 @@ Wind.use('jquery', 'global', function(){
 					setGroupNames(newest);
 
 					//右侧栏写入新分组
-					my_like.append('<li id="J_side_group_'+ _data.id +'"><a class="icon_del J_group_del" href="{@url:like/mylike/doDelTag/}&tag='+ _data.id +'" data-id="'+ _data.id +'">删除</a><a class="icon_edit J_group_edit" data-id="'+ _data.id +'" data-name="'+ _data.name +'" href="{@url:like/mylike/doEditTag/}&tag='+ _data.id +'">编辑</a><a class="title" href="{@url:like/mylike/run/}&tag='+ _data.id +'"><span class="J_name">'+ _data.name +'</span><em>(1)</em></a></li>');
+					my_like.append('<li id="J_side_group_'+ _data.id +'"><a class="icon_del J_group_del" data-pdata="{\'tag\': \''+ _data.id +'\'}" href="{@url:like/mylike/doDelTag/}" data-id="'+ _data.id +'">删除</a><a class="icon_edit J_group_edit" data-id="'+ _data.id +'" data-name="'+ _data.name +'" href="{@url:like/mylike/doEditTag/}&tag='+ _data.id +'">编辑</a><a class="title" href="{@url:like/mylike/run/}&tag='+ _data.id +'"><span class="J_name">'+ _data.name +'</span><em>(1)</em></a></li>');
 
 				}else if(data.state === 'fail'){
 					Wind.Util.resultTip({
@@ -245,7 +247,7 @@ Wind.use('jquery', 'global', function(){
 		}
 	});
 
-	$('#J_side_group_list').data({
+	my_like.data({
 		save : function(elem, url){
 			var group_edit_input = $('#J_group_edit_input'),
 				id = elem.data('id');
@@ -266,7 +268,7 @@ Wind.use('jquery', 'global', function(){
 						$('div.J_group_check_list > ul').append('<li><label><input type="checkbox" data-id="'+ _data.id +'" data-value="'+ _data.name +'" class="J_group_name">'+ _data.name +'</label></li>');
 
 						//右侧栏写入新分组
-						$('#J_side_group_list').append('<li id="J_side_group_'+ _data.id +'"><a class="icon_del J_group_del" href="{@url:like/mylike/doDelTag/}&tag='+ _data.id +'" data-id="'+ _data.id +'">删除</a><a class="icon_edit J_group_edit" data-id="'+ _data.id +'" data-name="'+ _data.name +'" href="{@url:like/mylike/doEditTag/}&tag='+ _data.id +'">编辑</a><a class="title" href="{@url:like/mylike/run/}&tag='+ _data.id +'"><span class="J_name">'+ _data.name +'</span><em>(0)</em></a></li>');
+						my_like.append('<li id="J_side_group_'+ _data.id +'"><a class="icon_del J_group_del" data-pdata="{\'tag\': \''+ _data.id +'\'}" href="{@url:like/mylike/doDelTag/}" data-id="'+ _data.id +'">删除</a><a class="icon_edit J_group_edit" data-id="'+ _data.id +'" data-name="'+ _data.name +'" href="{@url:like/mylike/doEditTag/}&tag='+ _data.id +'">编辑</a><a class="title" href="{@url:like/mylike/run/}&tag='+ _data.id +'"><span class="J_name">'+ _data.name +'</span><em>(0)</em></a></li>');
 					}
 					var group_edit_wrap = $('#J_group_edit_wrap');
 					group_edit_wrap.siblings('li:hidden').show();
@@ -294,8 +296,11 @@ Wind.use('jquery', 'global', function(){
 	$('a.J_unlike').on('click', function(e){
 		e.preventDefault();
 		var $this = $(this);
-		
-		$.getJSON($this.attr('href'), function(data){
+		$('body').trigger('setCustomPost', [$this]);
+
+		Wind.Util.ajaxMaskShow();
+		$.post($this.data('uri'), function(data){
+			Wind.Util.ajaxMaskRemove();
 			if(data.state === 'success') {
 				$this.parents('dl').slideUp('slow', function(){
 					$(this).remove();
@@ -313,7 +318,7 @@ Wind.use('jquery', 'global', function(){
 					follow : $this
 				});
 			}
-		});
+		}, 'json');
 		
 	});
 	

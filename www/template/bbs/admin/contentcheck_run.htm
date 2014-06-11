@@ -48,8 +48,8 @@
 					</td>
 					<td>
 						<ul class="single_list cc">
-							<li><a class="J_ajax_refresh mr5" href="{@url:bbs/contentcheck/doPassThread?tid=$value['tid']}">[通过]</a></li>
-							<li><a class="J_ajax_del" href="{@url:bbs/contentcheck/doDeleteThread?tid=$value['tid']}">[删除]</a></li>
+							<li><a class="J_ajax_refresh mr5" href="{@url:bbs/contentcheck/doPassThread}" data-pdata="{'tid': '{$value['tid']}'}">[通过]</a></li>
+							<li><a class="J_ajax_del" href="{@url:bbs/contentcheck/doDeleteThread}" data-pdata="{'tid': '{$value['tid']}'}">[删除]</a></li>
 						</ul>
 					</td>
 				</tr>

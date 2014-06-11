@@ -231,7 +231,7 @@ $(function(){
 		$.post(install_form.attr('action'), _data, function(data){
 			if(data.state == 'success') {
 				response_tips.html('<div class="loading"><span>提交中...</span></div>').show();
-				window.location.href = data.referer;
+				window.location.href = decodeURIComponent(data.referer);
 			}else if(data.state == 'fail'){
 				if(data.refresh == true) {
 					if(confirm(data.message)) {

@@ -5,7 +5,7 @@
  *
  * @author Jianmin Chen <sky_hold@163.com>
  * @license http://www.phpwind.com
- * @version $Id: AlipayController.php 24284 2013-01-25 03:28:25Z xiaoxia.xuxx $
+ * @version $Id: AlipayController.php 26622 2013-04-13 02:16:20Z jieyin $
  * @package forum
  */
 
@@ -32,9 +32,9 @@ class AlipayController extends PwBaseController {
 			'partner' => $this->_conf['alipaypartnerID']
 		)), "\r\n");
 		
-		/* $veryfy_result2 = PostHost("http://notify.alipay.com/trade/notify_query.do","notify_id=" . $this->_var['notify_id'] . "&partner=" . $this->_conf['alipaypartnerID'], 'POST');
-		 echo $veryfy_result2;echo '<br>';exit; */
-		
+		//兼容支付宝urlencode之后伪静态+号无法rawurldecode的处理方案
+		isset($this->_var['notify_time']) && $this->_var['notify_time'] = urldecode($this->_var['notify_time']);
+
 		ksort($this->_var);
 		reset($this->_var);
 		$arg = '';

@@ -55,7 +55,7 @@
 					<td><input type="text" class="input length_3" name="data[{$value['category_id']}][category_name]" value="{$value['category_name']}"></td>
 					<td><input type="text" class="input length_3" name="data[{$value['category_id']}][alias]" value="{$value['alias']}"></td>
 					<td>{$value['tag_count']}</td>
-					<td><!-- a href="{@url:tag/index/run?categoryid=$value['category_id']|pw}" class="mr5" target="_blank">[访问]</a--><a href="{@url:tag/manage/editCategory?id=$value['category_id']}" title="分类编辑" class="mr5 J_dialog">[编辑]</a><a href="{@url:tag/manage/run?categoryId=$value['category_id']}" class="mr5">[话题管理]</a><a href="{@url:tag/manage/deleteCategory?id=$value['category_id']}" class="J_ajax_del">[删除]</a></td>
+					<td><!-- a href="{@url:tag/index/run?categoryid=$value['category_id']|pw}" class="mr5" target="_blank">[访问]</a--><a href="{@url:tag/manage/editCategory?id=$value['category_id']}" title="分类编辑" class="mr5 J_dialog">[编辑]</a><a href="{@url:tag/manage/run?categoryId=$value['category_id']}" class="mr5">[话题管理]</a><a href="{@url:tag/manage/deleteCategory}" class="J_ajax_del" data-pdata="{'id': '{$value['category_id']}'}">[删除]</a></td>
 				</tr>
 			<!--# } #-->
 			</tbody>

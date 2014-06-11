@@ -11,7 +11,7 @@ Wind::import('WIND:db.AbstractWindPdoAdapter');
  * @author Qiong Wu <papa0924@gmail.com> 2011-9-22
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: WindMysqlPdoAdapter.php 3113 2011-11-11 07:28:09Z yishuo $
+ * @version $Id: WindMysqlPdoAdapter.php 3941 2013-05-31 05:41:07Z long.shi $
  * @package db
  * @subpackage mysql
  */
@@ -21,7 +21,10 @@ class WindMysqlPdoAdapter extends AbstractWindPdoAdapter {
 	 * @see AbstractWindPdoAdapter::setCharset()
 	 */
 	public function setCharset($charset) {
-		$charset && $this->query("set names " . $this->quote($charset) . ";");
+		if ($charset) {
+			$charset = $this->quote($charset);
+			$this->query(sprintf("set character_set_connection= %s, character_set_results= %s, character_set_client=binary, sql_mode='';", $charset, $charset));
+		}
 	}
 
 	/**

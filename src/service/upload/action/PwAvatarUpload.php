@@ -12,7 +12,7 @@ Wind::import('COM:utility.WindUtility');
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwAvatarUpload.php 23975 2013-01-17 10:20:11Z jieyin $
+ * @version $Id: PwAvatarUpload.php 28882 2013-05-28 10:51:23Z gao.wanggao $
  * @package upload
  */
 
@@ -22,11 +22,13 @@ class PwAvatarUpload extends PwUploadAction {
 
 	public $user;
 	public $udir;
+	private $mime = array();
 
 	public function __construct(PwUserBo $user) {
 		$this->ftype = array('jpg' => 2000, 'png' => 2000, 'jpeg' => 2000);
 		$this->user = $user;
 		$this->udir = Pw::getUserDir($this->user->uid);
+		$this->mime = array('image/jpg', 'image/jpeg', 'image/png', 'image/gif');
 	}
 	
 	/**

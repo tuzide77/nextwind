@@ -8,7 +8,7 @@ Wind::import('SRV:report.dm.PwReportDm');
  * @author jinlong.panjl <jinlong.panjl@aliyun-inc.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: ReportController.php 23994 2013-01-18 03:51:46Z long.shi $
+ * @version $Id: ReportController.php 28816 2013-05-24 09:45:25Z jieyin $
  * @package wind
  */
 class ReportController extends BaseManageController {
@@ -62,7 +62,10 @@ class ReportController extends BaseManageController {
 	 * @return void
 	 */
 	public function deleteAction() {
-		$id = $this->getInput('id');
+		$id = $this->getInput('id', 'post');
+		if (!$id) {
+			$this->showError('operate.fail');
+		}
 		!is_array($id) && $id = array($id);
 		$this->_sendDealNotice($id,'忽略');
 		$this->_getReportDs()->batchDeleteReport($id);
@@ -79,8 +82,12 @@ class ReportController extends BaseManageController {
 	 * @return void
 	 */
 	public function dealCheckAction() {
-		$id = $this->getInput('id');
+		$id = $this->getInput('id', 'post');
+		if (!$id) {
+			$this->showError('operate.fail');
+		}
 		!is_array($id) && $id = array($id);
+
 		$dm = new PwReportDm();
 		$dm->setOperateUserid($this->loginUser->uid)
 			->setOperateTime(Pw::getTime())

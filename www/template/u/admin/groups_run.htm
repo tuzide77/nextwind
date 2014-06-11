@@ -57,7 +57,7 @@
 				<a href="{@url:admin/u/groups/edit?gid=$group['gid']}" class="mr10">[编辑]</a>
 				<!--# } #-->
 				<!--# if ($group['gid'] > 7) { #-->
-				<a href="{@url:admin/u/groups/delete?gid=$group['gid']}" class="mr10 J_ajax_del">[删除]</a>
+				<a href="{@url:admin/u/groups/delete}" class="mr10 J_ajax_del" data-pdata="{'gid': '{$group['gid']}'}">[删除]</a>
 				<!--# } #-->
 			</td>
 		</tr>

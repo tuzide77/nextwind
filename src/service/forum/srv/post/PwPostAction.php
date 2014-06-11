@@ -10,7 +10,7 @@ Wind::import('SRV:user.dm.PwUserInfoDm');
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwPostAction.php 23093 2013-01-06 04:04:36Z jieyin $
+ * @version $Id: PwPostAction.php 28950 2013-05-31 05:58:25Z jieyin $
  * @package forum
  */
 
@@ -126,6 +126,17 @@ abstract class PwPostAction extends PwBaseHookService {
 
 	abstract function isForumContentCheck();
 	
+	/**
+	 * 检查发帖时间间隔
+	 */
+	public function checkPostPertime() {
+		$pertime = $this->user->getPermission('post_pertime'); //防灌水
+		if ($pertime && Pw::getTime() - $this->user->info['lastpost'] < $pertime) {
+			return new PwError('BBS:post.pertime', array('{pertime}' => $pertime));
+		}
+		return true;
+	}
+
 	public function checkPostNum() {
 		$allow = $this->user->getPermission('threads_perday');
 		if ($allow > 0 && $this->user->info['todaypost'] >= $allow && $this->user->info['lastpost'] > Pw::getTdtime()) {

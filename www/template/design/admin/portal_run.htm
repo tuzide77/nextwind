@@ -49,10 +49,10 @@
 				<td>
 					<a href="{@url:special/index/run?id=$v['id']|pw}" class="mr5" target="_blank">[查看]</a>
 					<a href="{@url:design/portal/edit?id=$v['id']|pw}" class="mr5" target="_blank">[编辑]</a>
-					<a href="{@url:design/portal/delete?id=$v[id]}" data-msg="确定要删除此页面？" class="mr5 J_ajax_del">[删除]</a>
+					<a href="{@url:design/portal/delete}" data-msg="确定要删除此页面？" class="mr5 J_ajax_del" data-pdata="{'id': '{$v[id]}'}">[删除]</a>
 					<a href="{@url:design/permissions/page?id=$v['page_id']}" class="mr5">[权限管理]</a>
 					<a href="{@url:design/module/run?pageid=$v['page_id']}" class="mr5" >[模块管理]</a>
-					<a href="{@url:design/page/doclear?id=$v['page_id']}" class="mr5 J_ajax_del" data-msg="您确定要清空页面上的所有模块？<br>清空后将不可恢复！">[清空模块]</a>
+					<a href="{@url:design/page/doclear}" class="mr5 J_ajax_del" data-msg="您确定要清空页面上的所有模块？<br>清空后将不可恢复！" data-pdata="{'id': '{$v['page_id']}'}">[清空模块]</a>
 				</td>
 			</tr>
 			<!--# } #-->

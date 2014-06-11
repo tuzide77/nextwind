@@ -3,11 +3,11 @@ Wind::import('LIB:base.PwBaseController');
 Wind::import('SRV:space.bo.PwSpaceBo');
 /**
  * 我的空间
- * the last known user to change this file in the repository  <$LastChangedBy: jieyin $>
- * @author $Author: jieyin $ Foxsee@aliyun.com
+ * the last known user to change this file in the repository  <$LastChangedBy: gao.wanggao $>
+ * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ?2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: MyspaceController.php 24585 2013-02-01 04:02:37Z jieyin $ 
+ * @version $Id: MyspaceController.php 28765 2013-05-23 03:05:46Z gao.wanggao $ 
  * @package 
  */
 class MyspaceController extends PwBaseController {
@@ -134,6 +134,9 @@ class MyspaceController extends PwBaseController {
 				$image = $background;
 			}
 		}
+		if (!in_array($repeat, array('no-repeat', 'repeat'))) $repeat = 'no-repeat';
+		if (!in_array($fixed, array('fixed', 'scroll'))) $fixed = 'scroll';
+		if (!in_array($align, array('left', 'right', 'center'))) $align = 'left';
 		
 		Wind::import('SRV:space.dm.PwSpaceDm');
  		$dm = new PwSpaceDm($this->loginUser->uid);

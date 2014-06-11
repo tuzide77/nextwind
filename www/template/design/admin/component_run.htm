@@ -51,7 +51,7 @@
 				<td>{$v['comp_id']}</td>
 				<td>{$v['comp_name']}</td>
 				<td>{$models[$v['model_flag']]['name']}</td>
-				<td><a href="{@url:design/component/edit?id=$v['comp_id']&page=$page}" class="mr10">[编辑]</a><a href="{@url:design/component/del?id=$v['comp_id']}" class="J_ajax_del">[删除]</a></td>
+				<td><a href="{@url:design/component/edit?id=$v['comp_id']&page=$page}" class="mr10">[编辑]</a><a href="{@url:design/component/del}" class="J_ajax_del" data-pdata="{'id': '{$v['comp_id']}'}">[删除]</a></td>
 			</tr>
 			<!--# } #-->
 		</table>

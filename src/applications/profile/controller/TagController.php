@@ -59,7 +59,10 @@ class TagController extends BaseProfileController {
 	 * 删除用户的标签
 	 */
 	public function doDeleteAction() {
-		$tagid = $this->getInput('tagid');
+		$tagid = $this->getInput('tagid', 'post');
+		if (!$tagid) {
+			$this->showError('operate.fail');
+		}
 		$result = $this->_getRelationDs()->deleteRelation($this->loginUser->uid, $tagid);
 		if ($result instanceof PwError) {
 			$this->showError($result->getError());

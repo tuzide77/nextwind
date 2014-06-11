@@ -6,7 +6,7 @@ Wind::import('APPS:api.controller.OpenBaseController');
  * 
  * @author Jianmin Chen <sky_hold@163.com>
  * @license http://www.phpwind.com
- * @version $Id: AvatarController.php 24829 2013-02-22 03:46:48Z jieyin $
+ * @version $Id: AvatarController.php 28965 2013-05-31 11:36:01Z jieyin $
  * @package windid.service.avatar
  */
 class AvatarController  extends OpenBaseController{
@@ -101,6 +101,8 @@ class AvatarController  extends OpenBaseController{
 		$upload = new PwUpload($bhv);
 		if (($result = $upload->check()) === true) {
 			$result = $upload->execute();
+		} else {
+			$this->output($this->errorCode('upload.content.error'));
 		}
 		if ($result instanceof PwError) {
 			$this->output($this->errorCode($result->getError()));

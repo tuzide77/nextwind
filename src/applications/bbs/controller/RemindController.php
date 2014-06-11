@@ -44,7 +44,7 @@ class RemindController extends PwBaseController {
 			}
 		}
 		$uids = array_unique(array_merge((array)$reminds,(array)$follows));
-		echo Pw::jsonEncode(array('state' => 'success', 'data' => $this->_buildRemindUsers($uids)));exit;
+		Pw::echoJson(array('state' => 'success', 'data' => $this->_buildRemindUsers($uids)));exit;
 	}
 	
 	/**
@@ -84,7 +84,7 @@ class RemindController extends PwBaseController {
 			$count = $this->loginUser->info['follows'];
 		}
 		$uids = array_keys($follows);
-		echo Pw::jsonEncode(array('state' => 'success', 'data' => $this->_buildRemindUsers($uids), 'page' => $page));exit;
+		Pw::echoJson(array('state' => 'success', 'data' => $this->_buildRemindUsers($uids), 'page' => $page));exit;
 	}
 	
 	/** 

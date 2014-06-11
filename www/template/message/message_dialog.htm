@@ -166,7 +166,7 @@ Wind.use('jquery', 'global', 'dialog', 'ajaxForm', 'validate', function(){
 				$this.parents('dl').slideUp('slow', function(){
 					$this.remove();
 					if(data.referer) {
-						location.href = data.referer;
+						location.href = decodeURIComponent(data.referer);
 					}
 				});
 			}else if(data.state == 'fail') {

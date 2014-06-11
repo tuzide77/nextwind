@@ -6,7 +6,7 @@ Wind::import('SRV:design.bo.PwDesignStructureBo');
  * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: StructureController.php 22471 2012-12-24 12:06:23Z gao.wanggao $ 
+ * @version $Id: StructureController.php 28899 2013-05-29 07:23:48Z gao.wanggao $ 
  * @package 
  */
 class StructureController extends PwBaseController{
@@ -142,7 +142,7 @@ class StructureController extends PwBaseController{
  			->setStructStyle($style['font'], $style['link'], $style['border'], $style['margin'], $style['padding'], $style['background'], $style['styleclass']);
 		$resource = $this->_getStructureDs()->replaceStruct($dm);
 		if ($resource instanceof PwError) $this->showError($resource->getError());
-		$this->setOutput($data, 'data');
+		$this->setOutput($data, 'html');
 		$this->showMessage("operate.success");
 	}
 	
@@ -180,7 +180,7 @@ class StructureController extends PwBaseController{
 			$compile->replaceTitle($this->bo->name, $title, $struct['segment']);
 		}
 		
-		$this->setOutput($title, 'data');
+		$this->setOutput($title, 'html');
 		$this->showMessage("operate.success");
 	}
 	
@@ -249,7 +249,7 @@ class StructureController extends PwBaseController{
 		$_style['styleDomId'] = $styleSrv->getCss($style);
 		$_style['styleDomIdLink'] = $styleSrv->getLink($style);
 		$_style['styleDomClass'] = $styleclass;
-		$this->setOutput($_style, 'data');
+		$this->setOutput($_style, 'html');
 		$this->showMessage("operate.success");
 	}
 	

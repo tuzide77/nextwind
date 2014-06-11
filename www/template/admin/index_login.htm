@@ -73,7 +73,7 @@ var GV = {
 			csrf_token : GV.TOKEN
 		}, function(data){
 			if(data.state == 'success') {
-				wrap.html(data.data);
+				wrap.html(data.html);
 			}else if(data.state == 'fail') {
 				if(clone) {
 					//恢复原代码

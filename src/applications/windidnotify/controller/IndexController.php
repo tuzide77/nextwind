@@ -10,7 +10,7 @@ Wind::import('WINDID:service.base.WindidUtility');
  * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ?2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: IndexController.php 24513 2013-01-31 06:53:26Z gao.wanggao $ 
+ * @version $Id: IndexController.php 29741 2013-06-28 07:54:24Z gao.wanggao $ 
  * @package 
  */
 class IndexController extends PwBaseController {
@@ -27,7 +27,7 @@ class IndexController extends PwBaseController {
 		define('WINDID_CLIENT_ID', $windidConfig['clientId']);
 		define('WINDID_CLIENT_KEY', $windidConfig['clientKey']);
 
-		if (WindidUtility::appKey(WINDID_CLIENT_ID, $_time, WINDID_CLIENT_KEY) != $_windidkey) $this->showError('fail');
+		if (WindidUtility::appKey(WINDID_CLIENT_ID, $_time, WINDID_CLIENT_KEY, $this->getRequest()->getGet(null), $this->getRequest()->getPost()) != $_windidkey) $this->showError('fail');
 		$time = Pw::getTime();
 		if ($time - $_time > 120) $this->showError('timeout');
 	}
@@ -52,12 +52,12 @@ class IndexController extends PwBaseController {
 	}
 	
 	protected function showError($message = '', $referer = '', $refresh = false) {
-		echo $message;
+		Pw::echoStr($message);
 		exit();
 	}
 
 	protected function showMessage($message = '', $referer = '', $refresh = false) {
-		echo $message;
+		Pw::echoStr($message);
 		exit();
 	}
 }

@@ -54,7 +54,7 @@
 				<td>{$medals[$log['medal_id']]['name']}</td>
 				<td><img src="{$medals[$log['medal_id']]['medalImage']}" width="30" height="30" /></td>
 				<td>{$medals[$log['medal_id']]['descrip']}</td>
-				<td><a href="{@url:medal/medal/doEditApply?id=$log['log_id']&check=yes}" class="mr5 J_medal_pass">[通过]</a><a href="{@url:medal/medal/doEditApply?id=$log['log_id']&check=no}" class="J_ajax_del" data-msg="确定要拒绝此申请？">[拒绝]</a></td>
+				<td><a href="{@url:medal/medal/doEditApply}" class="mr5 J_ajax_refresh" data-pdata="{'id': '{$log['log_id']}', 'check':'yes'}">[通过]</a><a href="{@url:medal/medal/doEditApply}" class="J_ajax_del" data-msg="确定要拒绝此申请？" data-pdata="{'id': '{$log['log_id']}', 'check': 'no'}">[拒绝]</a></td>
 			</tr>
 			<!--# } #-->
 		</table>
@@ -75,21 +75,5 @@
 	</form>
 </div>
 <template source='TPL:admin.common.footer' />
-<script>
-Wind.use('dialog', function(){
-	//单个审核通过
-	$('a.J_medal_pass').on('click', function(e){
-		e.preventDefault();
-		var $this = $(this);
-		$.getJSON($this.attr('href'), function(data){
-			if(data.state === 'success') {
-				reloadPage(window);
-			}else if(data.state === 'fail'){
-				Wind.dialog.alert(data.message);
-			}
-		});
-	});
-});
-</script>
 </body>
 </html>

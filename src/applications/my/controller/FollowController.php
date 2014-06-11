@@ -7,7 +7,7 @@ Wind::import('SRV:attention.PwAttentionType');
  *
  * @author Jianmin Chen <sky_hold@163.com>
  * @license http://www.phpwind.com
- * @version $Id: FollowController.php 26493 2013-04-10 03:54:14Z jieyin $
+ * @version $Id: FollowController.php 28843 2013-05-28 01:57:37Z jieyin $
  * @package forum
  */
 
@@ -150,8 +150,11 @@ class FollowController extends PwBaseController {
 	 * 添加关注分类
 	 */
 	public function addtypeAction() {
-		$name = $this->getInput('name');
+		$name = $this->getInput('name', 'post');
 		$uid = (int)$this->getInput('uid');
+		if (!$name) {
+			$this->showError('operate.select');
+		}
 		$result = $this->_getService()->addType($this->loginUser->uid, $name);
 
 		if ($result instanceof PwError) {
@@ -168,7 +171,10 @@ class FollowController extends PwBaseController {
 	 * 保存用户分类
 	 */
 	public function savetypeAction() {
-		list($uid, $id, $type) = $this->getInput(array('uid', 'id', 'type'));
+		list($uid, $id, $type) = $this->getInput(array('uid', 'id', 'type'), 'post');
+		if (!$uid) {
+			$this->showError('operate.select');
+		}
 		if ($type == 1) {
 			$this->_getTypeDs()->addUserType($this->loginUser->uid, $uid, $id);
 		} else {
@@ -181,7 +187,10 @@ class FollowController extends PwBaseController {
 	 * 修改关注分类
 	 */
 	public function editTypeAction() {
-		list($id, $name) = $this->getInput(array('id', 'name'));
+		list($id, $name) = $this->getInput(array('id', 'name'), 'post');
+		if (!$id) {
+			$this->showError('operate.select');
+		}
 		$type = $this->_getTypeDs()->getType($id);
 		if (empty($type) || $type['uid'] != $this->loginUser->uid) {
 			$this->showError('USER:attention.type.edit.self');
@@ -208,7 +217,10 @@ class FollowController extends PwBaseController {
 	 * 删除关注分类
 	 */
 	public function deleteTypeAction() {
-		$id = $this->getInput('id');
+		$id = $this->getInput('id', 'post');
+		if (!$id) {
+			$this->showError('operate.select');
+		}
 		$type = $this->_getTypeDs()->getType($id);
 		if (empty($type) || $type['uid'] != $this->loginUser->uid) {
 			$this->showError('USER:attention.type.delete.self');

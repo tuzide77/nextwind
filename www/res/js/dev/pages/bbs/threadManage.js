@@ -183,7 +183,7 @@ Wind.use('dialog', function(){
 		if(checkall.prop('checked')) {
 			$('#J_post_manage_checkall').click();
 		}else{
-			posts_checkbox.filter(':checked').click();
+			posts_checkbox.filter(':checked').prop('checked', false).parents('tr.tr_check').removeClass('tr_check');
 		}
 	}
 
@@ -350,7 +350,7 @@ function manageHandles(){
 						msg : data.message,
 						callback : function(){
 							if(data.referer) {
-								location.href = data.referer;
+								location.href = decodeURIComponent(data.referer);
 							}else{
 								if(role == "read") {
 									//阅读页 楼层
@@ -456,7 +456,7 @@ function manageHandles(){
 				fromtype : document.getElementById('J_fromtype').value
 			}, function(data){
 			if(data.state == 'success') {
-				$('#J_push_select_passive').html(data.data);
+				$('#J_push_select_passive').html(data.html);
 			}else if(data.state == 'fail') {
 				//global.js
 				Wind.Util.resultTip({

@@ -44,7 +44,7 @@ class ManageController extends AdminBaseSeoController {
 	 * @see WindController::run()
 	 */
 	public function run() {
-		$url = $this->setTab();
+		$url = $this->setTab('');
 		$this->forwardAction($url);
 	}
 
@@ -97,7 +97,9 @@ class ManageController extends AdminBaseSeoController {
 	 *
 	 */
 	public function doRunAction() {
-		$seo = $this->getInput('seo');
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
+		$seo = $this->getInput('seo', 'post');
 		$mod = $this->getInput('mod');
 		$data = array();
 		foreach ($seo as $page => $list) {

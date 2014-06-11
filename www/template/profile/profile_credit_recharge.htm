@@ -61,7 +61,7 @@
 </div>
 
 <script>
-var RECHARGE = {@Pw::jsonEncode($recharge)|json};
+var RECHARGE = '{$recharge|json}';
 Wind.ready(document, function(){
 	Wind.use('jquery', 'global', 'ajaxForm', GV.JS_ROOT +'pages/profile/profileRecharge.js?v=' +GV.JS_VERSION);
 });

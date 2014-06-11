@@ -67,7 +67,7 @@
 				<td><input type="text" class="input mr5" name="vieworder[{$cate['fid']}]" value="{$cate['vieworder']}" style="width:20px;"><span class="mr10 J_forum_names" data-id="{$cate['fid']}">{@$cate['name']|html}</span><a style="display:none" data-id="{$cate['fid']}" data-type="forum_child" data-forumlevel="2" data-html="tbody" href="#" class="link_add J_addChild">添加新版块</a></td>
 				<td class="tar">{$cate['fid']}</td>
 				<td><input type="text" class="input length_3" name="manager[{$cate['fid']}]" value="{@trim($cate['manager'], ',')}"></td>
-				<td><a href="{@url:bbs/cate/run?fid=$cate['fid']|pw}" target="_blank" class="mr5">[访问]</a><a href="{@url:bbs/setforum/edit?fid=$cate['fid']}" class="mr5">[编辑]</a><a href="{@url:bbs/setforum/deleteforum?fid=$cate['fid']}" class="mr5 J_ajax_del">[删除]</a></td>
+				<td><a href="{@url:bbs/cate/run?fid=$cate['fid']|pw}" target="_blank" class="mr5">[访问]</a><a href="{@url:bbs/setforum/edit?fid=$cate['fid']}" class="mr5">[编辑]</a><a href="{@url:bbs/setforum/deleteforum}" class="mr5 J_ajax_del" data-pdata="{'fid': '{$cate['fid']}'}">[删除]</a></td>
 			</tr>
 			</tbody>
 				<!--# if ($forumList[$cate['fid']]) { #-->
@@ -78,7 +78,7 @@
 				<td>{@$lang[$forum['type']]|html}<span class="plus_icon<!--# if ($forum['isEnd']) echo ' plus_end_icon'; #-->"></span><input type="text" class="input mr5" name="vieworder[{$forum['fid']}]" value="{$forum['vieworder']}" style="width:20px;"><span class="mr10 J_forum_names" data-id="{$forum['fid']}">{@$forum['name']|html}</span><!--# if ($forum['type'] == 'forum') { #--><a style="display:none" data-id="{$forum['fid']}" data-type="forum_child" data-forumlevel="3" data-html="tr" href="#" class="link_add J_addChild">添加二级版块</a><!--# } elseif ($forum['type'] == 'sub') { #--><a style="display:none" data-id="{$forum['fid']}" data-type="forum_child" data-forumlevel="4" data-html="tr" href="#" class="link_add J_addChild">添加三级版块</a><!--# } #--></td>
 				<td class="tar">{$forum['fid']}</td>
 				<td><input type="text" class="input length_3" name="manager[{$forum['fid']}]" value="{@trim($forum['manager'], ',')}"></td>
-				<td><a href="{@url:bbs/thread/run?fid=$forum['fid']|pw}" target="_blank" class="mr5">[访问]</a><a href="{@url:bbs/setforum/edit?fid=$forum['fid']}" class="mr5">[编辑]</a><a href="{@url:bbs/setforum/deleteforum?fid=$forum['fid']}" class="mr5 J_ajax_del">[删除]</a></td>
+				<td><a href="{@url:bbs/thread/run?fid=$forum['fid']|pw}" target="_blank" class="mr5">[访问]</a><a href="{@url:bbs/setforum/edit?fid=$forum['fid']}" class="mr5">[编辑]</a><a href="{@url:bbs/setforum/deleteforum}" class="mr5 J_ajax_del" data-pdata="{'fid': '{$forum['fid']}'}">[删除]</a></td>
 			</tr>
 					<!--# } #-->
 			</tbody>

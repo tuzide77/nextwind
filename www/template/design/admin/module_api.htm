@@ -70,7 +70,7 @@
 				<!--# } #-->
 					<!--a href="{@url:design/data/run?moduleid=$v['module_id']}" class="mr10">[数据]</a-->
 					<a href="{@url:design/module/script?moduleid=$v['module_id']}"  class="mr10">[调用代码]</a>
-					<a href="{@url:design/module/delete?moduleid=$v['module_id']}" class="mr10 J_ajax_del">[删除]</a>
+					<a href="{@url:design/module/delete}" class="mr10 J_ajax_del" data-pdata="{'moduleid': '{$v['module_id']}'}">[删除]</a>
 				</td>
 			</tr>
 		<!--# } #-->

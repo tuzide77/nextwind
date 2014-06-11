@@ -84,7 +84,7 @@
 				<td>{$created_username|html}</td>
 				<td>{$v['reason']}</td>
 				<!--# if (!$args['ifcheck']) { #-->
-				<td><a href="{@url:report/manage/dealCheck?id=$v['id']}" class="mr5 J_ajax_refresh">[标记已处理]</a><a href="{@url:report/manage/delete?id=$v['id']}" class="J_ajax_refresh">[忽略]</a></td>
+				<td><a href="{@url:report/manage/dealCheck}" class="mr5 J_ajax_refresh" data-pdata="{'id': '{$v['id']}'}">[标记已处理]</a><a href="{@url:report/manage/delete}" class="J_ajax_refresh" data-pdata="{'id': '{$v['id']}'}">[忽略]</a></td>
 				<!--# } else { #-->
 				<td><a href="{@url:space/index/run?uid=$v['operate_userid']|pw}" target="_blank">{$v['operate_username']}</a> 已处理</td>
 				<!--# } #-->

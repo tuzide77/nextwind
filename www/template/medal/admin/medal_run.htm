@@ -50,7 +50,7 @@
 				</td>
 				<td><a title="编辑勋章" href="{@url:medal/medal/edit?id=$medal['medal_id']}" class="mr5 J_dialog">[编辑]</a>
 					<!--# if($medal['medal_type'] != 1){ #-->
-					<a class="J_ajax_del" data-msg="确定要删除此勋章？" href="{@url:medal/medal/doDel?id=$medal['medal_id']}">[删除]</a>
+					<a class="J_ajax_del" data-msg="确定要删除此勋章？" href="{@url:medal/medal/doDel}" data-pdata="{'id': '{$medal['medal_id']}'}">[删除]</a>
 					<!--# } #-->
 				</td>
 			</tr>

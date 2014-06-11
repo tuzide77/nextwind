@@ -84,9 +84,11 @@
 			if(textarea.val() === '') {
 				alert('请输入要隐藏的帖子内容');return;
 			}
+			//script xss
+			var snap = $('<div />').text(textarea.val());
 			var html;
 			if(type == '1') {
-				html = '<div class="content_hidden"><h5>回复才可见的内容</h5>'+ textarea.val() +'</div>';
+				html = '<div class="content_hidden"><h5>回复才可见的内容</h5>'+ snap.html() +'</div>';
 			}else {
 				var price = dialog.find('input.J_price').val() || 0;
 				var numPatt = new RegExp('^[1-9][0-9]*$');
@@ -94,7 +96,7 @@
 					price = 0;
 				}
 				var unit = dialog.find('.J_unit option:selected').val();
-				html = '<div class="content_hidden" data-price="'+ (price || 0) +'" data-unit="'+ unit +'"><h5>'+ credit[unit] +'大于等于'+ price +'时才显示的内容</h5>'+ textarea.val() +'</div>';
+				html = '<div class="content_hidden" data-price="'+ (price || 0) +'" data-unit="'+ unit +'"><h5>'+ credit[unit] +'大于等于'+ price +'时才显示的内容</h5>'+ snap.html() +'</div>';
 			}
 			_self.insertHTML(html).hideDialog();
 		});

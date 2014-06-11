@@ -1,0 +1,39 @@
+<style>
+.pop_majia_ct {
+	padding-bottom:15px;
+}
+.pop_majia_ct li{
+	float:left;
+	width:150px;
+	line-height:25px;
+	text-indent:25px;
+}
+.pop_majia_ct li a{
+	display:block;
+}
+.pop_majia_ct li a:hover,
+.pop_majia_ct li.current a{
+	background:#f7f7f7 url({@G:url.extres}/majia/images/cutover.png) 5px center no-repeat;
+}
+</style>
+<div style="width:350px;">
+			<form id="J_reband_form" action="{@url:app/majia/my/reBand}" method='post'>
+			<input type="hidden" name="step" value="2" />
+			<input type="hidden" name="username" value="{$info['username']}" />
+			<input type="hidden" name="uid" value="{$info['uid']}" />
+			<div class="pop_cont">
+				<dl class="cc" style="padding-bottom:0;">
+					<dt style="width:50px;">帐号：</dt>
+					<dd><div style="line-height:24px;" class="b">{$info['username']}</div></dd>
+				</dl>
+				<dl class="cc">
+					<dt style="width:50px;">密码：</dt>
+					<dd><input data-id="password" name="password" required="true" placeholder="密码" type="password" class="input length_4" value=""></dd>
+				</dl>
+				<dl class="cc">
+					<dt style="width:50px;">&nbsp;</dt>
+					<dd><button type="submit" class="btn btn_submit mr10">绑定</button></dd>
+				</dl>
+			</div>
+			</form>
+		</div>

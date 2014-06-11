@@ -66,7 +66,7 @@
 				<td>{$modules[$v['module_id']]['module_name']}</td>
 				<td>{$pushs[$v['from_id']]['created_user']}</td>
 				<td>{@Pw::time2str($v['start_time'])}</td>
-				<td><a href="{@url:design/push/doshield?dataid=$v['data_id']}" class="mr10 J_ajax_del" data-msg="确定要删除选中内容?">[删除]</a></td>
+				<td><a href="{@url:design/push/doshield}" class="mr10 J_ajax_del" data-msg="确定要删除选中内容?" data-pdata="{'dataid': '{$v['data_id']}'}">[删除]</a></td>
 			</tr>
 			<!--# } #-->
 		</table>
@@ -106,7 +106,7 @@ $(function(){
 		if(pageid) {
 			$.post('{@url:design/page/getModuleOption}', {pageid : pageid}, function(data){
 				if(data.state == 'success') {
-					flag_passive.html('<option>不限制</option>'+data.data);
+					flag_passive.html('<option>不限制</option>'+data.html);
 
 					if(id) {
 						flag_passive.children('[value='+ id +']').prop('selected', true);

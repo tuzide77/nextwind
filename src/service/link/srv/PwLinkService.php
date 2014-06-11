@@ -6,7 +6,7 @@
  * @author xiaoxia.xu <xiaoxia.xuxx@aliyun-inc.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: PwLinkService.php 24310 2013-01-28 07:41:43Z jinlong.panjl $
+ * @version $Id: PwLinkService.php 28814 2013-05-24 09:31:14Z jieyin $
  * @package src.service.link.srv
  */
 class PwLinkService {
@@ -119,6 +119,7 @@ class PwLinkService {
 	 */
 	public function getAllLinkTypes() {
 		$linkCount = $this->_getDs()->countLinkTypes();
+		$linkTypes = array();
 		foreach ($this->_getDs()->getAllTypes() as $k => $v) {
 			$v['linknum'] = isset($linkCount[$k]['linknum']) ? $linkCount[$k]['linknum'] : 0;
 			$linkTypes[$v['typeid']] = $v;

@@ -50,7 +50,7 @@
 					<span>{$typesList[$typeid]['typename']}</span>
 					<!--# } #--></div>
 				</td>
-				<td><a class="J_check_pass mr10" data-lid="{$value['lid']}" href="">[通过]</a><a href="{@url:link/link/doDelete?lid=$value['lid']}" class="mr10 J_ajax_del" data-msg="确定要拒绝此友情链接申请吗？">[拒绝]</a></td>
+				<td><a class="J_check_pass mr10" data-lid="{$value['lid']}" href="">[通过]</a><a href="{@url:link/link/doDelete}" class="mr10 J_ajax_del" data-msg="确定要拒绝此友情链接申请吗？" data-pdata="{'lid': '{$value['lid']}'}">[拒绝]</a></td>
 			</tr>
 			<!--# } #-->
 			<!--# } else { #-->

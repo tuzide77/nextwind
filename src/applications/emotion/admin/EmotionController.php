@@ -34,6 +34,8 @@ class EmotionController extends AdminBaseController {
 	}
 	
 	public function dorunAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$isopens = $this->getInput('isopen','post');
 		$catids = $this->getInput('catid','post');
 		is_int($catids) && $catids = array($catids);
@@ -55,6 +57,8 @@ class EmotionController extends AdminBaseController {
 	}
 	
 	public function doaddAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		Wind::import('SRV:emotion.dm.PwEmotionCategoryDm');
  		$dm = new PwEmotionCategoryDm();
  		$dm->setCategoryMame($this->getInput('catname','post'))
@@ -68,7 +72,11 @@ class EmotionController extends AdminBaseController {
 	}
 
 	public function deletecateAction() {
-		$cateId = (int)$this->getInput('cateid','get');
+		$cateId = (int)$this->getInput('cateid', 'post');
+		if (!$cateId) {
+			$this->showError('operate.fail');
+		}
+
 		$this->_getEmotionCategoryDs()->deleteCategory($cateId);
 		$this->_getEmotionDs()->deleteEmotionByCatid($cateId);
 
@@ -137,8 +145,8 @@ class EmotionController extends AdminBaseController {
 	}
 	
 	public function dousedAction() {
-		$emotionId = (int)$this->getInput('emotionid','get');
-		$used = (int)$this->getInput('used','get');
+		$emotionId = (int)$this->getInput('emotionid', 'post');
+		$used = (int)$this->getInput('used','post');
 		if ($emotionId < 1) $this->showError('ADMIN:fail');
 		$used = $used > 0 ? 1 : 0;
 		Wind::import('SRV:emotion.dm.PwEmotionDm');
@@ -150,15 +158,15 @@ class EmotionController extends AdminBaseController {
 	}
 	
 	private function _getEmotionService() {
-		return  Wekit::load('emotion.srv.PwEmotionService');
+		return Wekit::load('emotion.srv.PwEmotionService');
 	}
 
 	private function _getEmotionDs() {
-		return  Wekit::load('emotion.PwEmotion');
+		return Wekit::load('emotion.PwEmotion');
 	}
 	
 	private function _getEmotionCategoryDs() {
-		return  Wekit::load('emotion.PwEmotionCategory');
+		return Wekit::load('emotion.PwEmotionCategory');
 	}
 }
 ?>

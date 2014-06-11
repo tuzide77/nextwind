@@ -6,7 +6,7 @@ Wind::import('WSRV:notify.dm.WindidNotifyLogDm');
  * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ?2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: WindidNotifyServer.php 25306 2013-03-12 02:48:37Z gao.wanggao $ 
+ * @version $Id: WindidNotifyServer.php 29745 2013-06-28 09:07:39Z gao.wanggao $ 
  * @package 
  */
 class WindidNotifyServer {
@@ -72,16 +72,18 @@ class WindidNotifyServer {
 		$notifys = $this->_getNotifyDs()->fetchNotify(array_unique($nids));
 
 		$post = $urls = array();
+		
 		foreach ($queue as $k => $v) {
 			$appid = $v['appid'];
 			$nid = $v['nid'];
+			$post[$k] = unserialize($notifys[$nid]['param']);
 			$array = array(
-				'windidkey' => WindidUtility::appKey($v['appid'], $time, $apps[$appid]['secretkey']),
+				'windidkey' => WindidUtility::appKey($v['appid'], $time, $apps[$appid]['secretkey'],array('operation' => $notifys[$nid]['operation']), $post[$k]),
 				'operation' => $notifys[$nid]['operation'],
 				'clientid' => $v['appid'],
 				'time' => $time
 			);
-			$post[$k] = unserialize($notifys[$nid]['param']);
+			
 			$urls[$k] = WindidUtility::buildClientUrl($apps[$appid]['siteurl'] , $apps[$appid]['apifile']) . http_build_query($array);
 		}
 		return WindidUtility::buildMultiRequest($urls, $post);

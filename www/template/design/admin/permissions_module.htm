@@ -63,7 +63,7 @@
 				<td><input class="J_radio_type_modle" type="radio" name="permissions[{$v['id']}]" value="3" {@Pw::ifcheck($v['permissions'] == 3)}></td>
 				<td><input class="J_radio_type_content" type="radio" name="permissions[{$v['id']}]" value="2" {@Pw::ifcheck($v['permissions'] == 2)}></td>
 				<td><input class="J_radio_type_verify" type="radio" name="permissions[{$v['id']}]" value="1" {@Pw::ifcheck($v['permissions'] == 1)}></td>
-				<td><a href="{@url:design/permissions/delete?id=$v['id']}" class="J_ajax_del">[删除]</a></td>
+				<td><a href="{@url:design/permissions/delete}" class="J_ajax_del" data-pdata="{'id': '{$v['id']}'}">[删除]</a></td>
 			</tr>
 			<!--# } #-->
 			<tr>

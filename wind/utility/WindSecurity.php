@@ -1,14 +1,28 @@
 <?php
+Wind::import('WIND:utility.WindJson');
+
 /**
  * 字符、路径过滤等安全处理
  *
  * @author Qiong Wu <papa0924@gmail.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: WindSecurity.php 3904 2013-01-08 07:01:26Z yishuo $
+ * @version $Id: WindSecurity.php 3939 2013-05-29 06:22:57Z xiaoxia.xuxx $
  * @package utility
  */
 class WindSecurity {
+
+	/**
+	 * 输出json到页面
+	 * 添加转义
+	 *
+	 * @param mixed $source
+	 * @param string $charset
+	 * @return string
+	 */
+	public static function escapeEncodeJson($source, $charset = 'utf-8') {
+		return WindJson::encode(is_string($source) ? self::escapeHTML($source) : self::escapeArrayHTML($source), $charset);
+	}
 
 	/**
 	 * 转义输出字符串
@@ -28,11 +42,11 @@ class WindSecurity {
 	 * @return array
 	 */
 	public static function escapeArrayHTML($array) {
-		if (!is_array($array) || count($array) > 100) return $array;
+		if (!is_array($array)) return self::escapeHTML($array);
 		$_tmp = array();
 		foreach ($array as $key => $value) {
 			is_string($key) && $key = self::escapeHTML($key);
-			$_tmp[$key] = self::escapeHTML($value);
+			$_tmp[$key] = is_array($value) ? self::escapeArrayHTML($value) : self::escapeHTML($value);
 		}
 		return $_tmp;
 	}

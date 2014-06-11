@@ -52,7 +52,7 @@
 					<td data-id="{$v['id']}" class="J_status"><img src="{@G:url.images}/admin/content/loading.gif"></td>
 					<td>
 						<a href="{@url:windid/client/edit?id=$v['id']}" class="mr10 J_dialog" title="编辑客户端">[编辑]</a>
-						<a href="{@url:windid/client/delete?id=$v['id']}" class="mr10 J_ajax_del" data-msg="确定要删除选中内容?">[删除]</a>
+						<a href="{@url:windid/client/delete}" class="mr10 J_ajax_del" data-msg="确定要删除选中内容?" data-pdata="{'id': '{$v['id']}'}">[删除]</a>
 					</td>
 				</tr>
 				<!--# endforeach; #-->

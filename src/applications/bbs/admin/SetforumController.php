@@ -6,7 +6,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @author Qiong Wu <papa0924@gmail.com> 2011-10-21
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: SetforumController.php 24585 2013-02-01 04:02:37Z jieyin $
+ * @version $Id: SetforumController.php 28796 2013-05-24 05:38:40Z jieyin $
  * @package admin
  * @subpackage controller
  */
@@ -40,7 +40,8 @@ class SetforumController extends AdminBaseController {
 	 * @return void
 	 */
 	public function dorunAction() {
-		
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		/**
 		 * 修改版块资料
 		 */
@@ -77,6 +78,7 @@ class SetforumController extends AdminBaseController {
 		 */
 		list($new_vieworder, $new_forumname, $new_manager, $tempid) = $this->getInput(array('new_vieworder', 'new_forumname', 'new_manager', 'tempid'), 'post');
 		$newArray = array();
+		is_array($new_vieworder) || $new_vieworder = array();
 		foreach ($new_vieworder as $parentid => $value) {
 			foreach ($value as $key => $v) {
 				if ($tempid[$parentid][$key] && $new_forumname[$parentid][$key]) {
@@ -98,6 +100,7 @@ class SetforumController extends AdminBaseController {
 		 * 在虚拟版块下，添加子版
 		 */
 		list($temp_vieworder, $temp_forumname, $temp_manager) = $this->getInput(array('temp_vieworder', 'temp_forumname', 'temp_manager'), 'post');
+		is_array($temp_vieworder) || $temp_vieworder = array();
 		ksort($temp_vieworder);
 		foreach ($temp_vieworder as $key => $value) {
 			if (!isset($newArray[$key])) continue;
@@ -195,7 +198,11 @@ class SetforumController extends AdminBaseController {
 
 	public function doeditAction() {
 
-		$fid = $this->getInput('fid');
+		$fid = $this->getInput('fid', 'post');
+		if (!$fid) {
+			$this->showError('operate.fail');
+		}
+
 		list($copyFids,$copyItems) = $this->getInput(array('copy_fids','copyitems'));
 		!$copyItems && $copyItems = array();
 		Wind::import('SRV:forum.bo.PwForumBo');
@@ -213,6 +220,7 @@ class SetforumController extends AdminBaseController {
 	}
 
 	public function douniteAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
 		$fid = $this->getInput('fid', 'post');
 		$tofid = $this->getInput('tofid', 'post');
 

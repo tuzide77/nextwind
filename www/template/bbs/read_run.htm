@@ -174,7 +174,8 @@ Wind.use('jquery', 'global', 'dialog', function(){
 	$('a.J_read_mark').on('click', function(e) {
 		e.preventDefault();
 		var $this = $(this);
-		$.post(this.href, function(data) {
+		$('body').trigger('setCustomPost', [$this]);
+		$.post($this.data('uri'), function(data) {
 			Wind.Util.resultTip({
 				error : (data.state == 'success' ? false : true),
 				elem : $this,
@@ -224,7 +225,8 @@ Wind.use('jquery', 'global', 'dialog', function(){
 				return false;
 			}
 			top_lock = true;
-			$.post(this.href, function(data){
+			$('body').trigger('setCustomPost', [$this]);
+			$.post($this.data('uri'), function(data){
 				if(data.state == 'success') {
 					Wind.Util.resultTip({
 						follow : $this,

@@ -88,7 +88,7 @@
 			<td class="tac"><input name="data[{$value['navid']}][isshow]" type="checkbox" value="1" {@Pw::ifcheck($value['isshow'])}></td>
 			<td>
 				<a href="{@url:nav/nav/edit?navid=$value['navid']&type=$value['type']}" class="mr10 J_dialog" title="导航编辑">[编辑]</a>
-				<a href="{@url:nav/nav/del?navid=$value['navid']}" class="mr10 J_ajax_del">[删除]</a>
+				<a href="{@url:nav/nav/del}" class="mr10 J_ajax_del" data-pdata="{'navid': '{$value['navid']}'}">[删除]</a>
 			</td>
 		</tr>
 		</tbody>
@@ -111,7 +111,7 @@
 				<td></td>
 				<td class="tac"><input name="data[{$childValue['navid']}][isshow]" type="checkbox" value="1" {$checked}></td>
 				<td>
-					<a href="{@url:nav/nav/edit?navid=$childValue['navid']&type=$childValue['type']}" class="mr10 J_dialog" title="导航编辑">[编辑]</a><a href="{@url:nav/nav/del?navid=$childValue['navid']}" class="mr10 J_ajax_del">[删除]</a>
+					<a href="{@url:nav/nav/edit?navid=$childValue['navid']&type=$childValue['type']}" class="mr10 J_dialog" title="导航编辑">[编辑]</a><a href="{@url:nav/nav/del}" class="mr10 J_ajax_del" data-pdata="{'navid': '{$childValue['navid']}'}">[删除]</a>
 				</td>
 			</tr>
 		<!--#

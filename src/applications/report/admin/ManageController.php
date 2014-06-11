@@ -45,7 +45,7 @@ class ManageController extends AdminBaseController {
 	 * @return void
 	 */
 	public function deleteAction() {
-		$id = $this->getInput('id');
+		$id = $this->getInput('id', 'post');
 		if (!$id) $this->showError('operate.select');
 		!is_array($id) && $id = array($id);
 		$this->_sendDealNotice($id,'忽略');
@@ -63,7 +63,7 @@ class ManageController extends AdminBaseController {
 	 * @return void
 	 */
 	public function dealCheckAction() {
-		$id = $this->getInput('id');
+		$id = $this->getInput('id', 'post');
 		if (!$id) $this->showError('operate.select');
 		!is_array($id) && $id = array($id);
 		$dm = new PwReportDm();
@@ -109,7 +109,7 @@ class ManageController extends AdminBaseController {
 	 * @return void
 	 */
 	public function addReceiverAction() {
-		$username = $this->getInput('username');
+		$username = $this->getInput('username', 'post');
 		!$username && $this->showError('Report:user.empty');
 		$user = $this->_getPwUserDs()->getUserByName($username);
 		if (!$user) {
@@ -132,7 +132,11 @@ class ManageController extends AdminBaseController {
 	 * @return void
 	 */
 	public function deleteReceiverAction() {
-		$uid = (int)$this->getInput('uid');
+		$uid = (int)$this->getInput('uid', 'post');
+		if (!$uid) {
+			$this->showError('operate.fail');
+		}
+
 		$uids = $this->_getReportDs()->getNoticeReceiver();
 		$uids = array_flip($uids);
 		unset($uids[$uid]);

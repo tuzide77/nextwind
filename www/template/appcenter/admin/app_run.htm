@@ -109,7 +109,7 @@ if(app_ids) {
         	$.each(data.data, function(k,v){
         		if(v.admin_url) {
         			$('#app_set_'+k).show();
-        			$('#app_set_'+k).attr('href', v.admin_url);
+        			$('#app_set_'+k).attr('href', v.admin_url.replace(/&amp;/g, '&')); //0531版本后台云搜索、广告管家无法使用的解决办法 http://www.phpwind.net/read/3027660 by taishici
         		}
         		v.update_url && $('#app_update_'+k).show();
         		v.open_new && $('#app_set_'+k).attr('target', '_blank');
@@ -141,7 +141,7 @@ Wind.use('dialog',function() {
 				        	$this.removeClass('disabled tips_loading').text(act).removeProp('disabled');
 				        	if(data.state === 'success') {
 								if(data.referer) {
-									location.href = data.referer;
+									location.href = decodeURIComponent(data.referer);
 								}else {
 									reloadPage(window);
 								}

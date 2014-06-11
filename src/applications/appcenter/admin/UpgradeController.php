@@ -9,7 +9,7 @@ Wind::import('APPCENTER:service.srv.helper.PwSftpSave');
  * @author Shi Long <long.shi@alibaba-inc.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: UpgradeController.php 24682 2013-02-04 11:09:43Z long.shi $
+ * @version $Id: UpgradeController.php 28799 2013-05-24 06:47:37Z yetianshi $
  * @package appcenter
  */
 class UpgradeController extends AdminBaseController {
@@ -224,7 +224,8 @@ class UpgradeController extends AdminBaseController {
 		$useFtp = Wekit::cache()->get('system_upgrade_ftp');
 		$r = $this->installService->doUpgrade($this->localFileList, $useFtp);
 		if ($r instanceof PwError) {
-			echo '<span>上传失败！' . var_export($r->getError(), true) . '</span>';
+			$errorMsg = '上传失败！' . var_export($r->getError(), true);
+			Pw::echoStr($errorMsg);
 			exit();
 		}
 		Wekit::cache()->set('system_upgrade_step', 5);

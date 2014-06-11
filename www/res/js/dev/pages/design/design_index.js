@@ -340,9 +340,9 @@
 						if(role == 'layouttitle') {
 							//写入标题
 							var layout_hd = layout.children('.design_layout_hd, J_layout_hd'),
-								tit = data['data']['tab'];
+								tit = data['html']['tab'];
 
-							layout_hd.attr('style', data['data']['background']);
+							layout_hd.attr('style', data['html']['background']);
 
 							if(structure == 'tab') {
 								layout_hd.find('ul').html(tit);
@@ -364,7 +364,7 @@
 						}else if(role == 'layoutstyle') {
 							//写入样式
 							var prev_style = layout.prev('style'),
-									layout_style = '<style type="text/css" class="_tmp">#'+ data.data.styleDomId[0] +'{'+ data.data.styleDomId[1] +'}#'+ data.data.styleDomId[0] +' a{'+ data.data.styleDomIdLink[1] +'}</style>';
+									layout_style = '<style type="text/css" class="_tmp">#'+ data.html.styleDomId[0] +'{'+ data.html.styleDomId[1] +'}#'+ data.html.styleDomId[0] +' a{'+ data.html.styleDomIdLink[1] +'}</style>';
 							if(prev_style.length) {
 								//已有style标签
 								prev_style.replaceWith(layout_style);
@@ -372,9 +372,9 @@
 								layout.before(layout_style);
 							}
 
-							if(data.data.styleDomClass) {
+							if(data.html.styleDomClass) {
 								//写入class
-								layout.attr('class', layout_class_mapping[layout.data('lcm')]+' '+data.data.styleDomClass);
+								layout.attr('class', layout_class_mapping[layout.data('lcm')]+' '+data.html.styleDomClass);
 							}
 
 						}
@@ -1343,7 +1343,7 @@
 							Wind.Util.ajaxMaskRemove();
 							if(data.state == 'success') {
 								layout_edit_pop.hide();
-								$('#' + id).html(data.data);
+								$('#' + id).html(data.html);
 							}else{
 								Wind.Util.resultTip({
 									error : true,
@@ -1803,9 +1803,9 @@
 
 						var modtit = mudule_box.children('h2');
 						if(modtit.length) {
-							modtit.replaceWith(data.data);
+							modtit.replaceWith(data.html);
 						}else{
-							mudule_box.prepend(data.data);
+							mudule_box.prepend(data.html);
 						}
 
 						if(!apply) {
@@ -1823,11 +1823,11 @@
 						mudule_box.find('style').remove();
 
 						//写入style 样式
-						mudule_box.prepend('<style type="text/css" class="_tmp">#'+ data.data.styleDomId[0] +'{'+ data.data.styleDomId[1] +'}#'+ data.data.styleDomId[0] +' a{'+ data.data.styleDomIdLink[1] +'}</style>');
+						mudule_box.prepend('<style type="text/css" class="_tmp">#'+ data.html.styleDomId[0] +'{'+ data.html.styleDomId[1] +'}#'+ data.html.styleDomId[0] +' a{'+ data.html.styleDomIdLink[1] +'}</style>');
 
 						//更新class
-						if(data.data.styleDomClass) {
-							mudule_box.removeClass(module_class_mapping).addClass(data.data.styleDomClass)
+						if(data.html.styleDomClass) {
+							mudule_box.removeClass(module_class_mapping).addClass(data.html.styleDomClass)
 							//mudule_box.attr('class', 'box J_mod_box '+ data.data.styleDomClass);
 						}
 
@@ -1999,9 +1999,9 @@
 					Wind.Util.ajaxMaskRemove();
 
 					if(data.state == 'success') {
-						if(data.data) {
+						if(data.referer) {
 							window.onbeforeunload = null;
-							location.href = data.data;
+							location.href = decodeURIComponent(data.referer);
 						}
 					}else{
 						//global.js
@@ -2031,7 +2031,7 @@
 					return;
 				}
 				window.onbeforeunload = null;
-				location.href = data.data;
+				location.href = decodeURIComponent(data.referer);
 			}, 'json');
 		}
  	});
@@ -2041,7 +2041,7 @@
 		e.preventDefault();
 		$.post(this.href, {pageid: pageid, uri : uri}, function(data){
 			window.onbeforeunload = null;
-			location.href = data.data;
+			location.href = data.referer;
 		}, 'json');
 	});
 

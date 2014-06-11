@@ -6,7 +6,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @author Qiong Wu <papa0924@gmail.com> 2011-11-12
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: RoleController.php 22163 2012-12-19 11:01:58Z yishuo $
+ * @version $Id: RoleController.php 28783 2013-05-23 09:42:22Z jieyin $
  * @package admin
  * @subpackage controller
  */
@@ -93,7 +93,9 @@ class RoleController extends AdminBaseController {
 	 * 删除角色
 	 */
 	public function delAction() {
-		$rid = $this->getInput('rid', 'get');
+		$rid = $this->getInput('rid', 'post');
+		!$rid && $this->showError('operate.fail');
+
 		$result = $this->_loadRoleService()->delById($rid);
 		if ($result instanceof PwError) $this->showError($result->getError());
 		$this->showMessage('ADMIN:role.del.success');

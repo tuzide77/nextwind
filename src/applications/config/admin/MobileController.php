@@ -38,6 +38,8 @@ class MobileController extends AdminBaseController {
 	 * 后台设置-手机设置
 	 */
 	public function dosetAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$config = new PwConfigSet('register');
 		$config->set('active.phone', $this->getInput('activePhone', 'post'))
 				->set('mobile.message.content', $this->getInput('mobileMessageContent', 'post'))

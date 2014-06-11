@@ -133,7 +133,7 @@
 						</div>
 						<!--# if ($foruminfo['icon']) { #-->
 						<img id="j_forum_preview_icon" src="{@Pw::getPath($foruminfo['icon'])}" align="top" class="mr5"/>
-						<a href="{@url:bbs/setforum/deleteicon?fid=$fid}" class="J_ajax_del">删除</a>
+						<a href="{@url:bbs/setforum/deleteicon}" class="J_ajax_del" data-pdata="{'fid': '{$fid}'}">删除</a>
 						<!--# } else { #-->
 						<img id="j_forum_preview_icon" style="display:none"/>
 						<!--# } #-->
@@ -155,7 +155,7 @@
 						</div>
 						<!--# if ($foruminfo['logo']) { #-->
 						<img id="j_forum_preview_logo" src="{@Pw::getPath($foruminfo['logo'])}" align="top" class="mr5" />
-						<a href="{@url:bbs/setforum/deletelogo?fid=$fid}" class="J_ajax_del">删除</a>
+						<a href="{@url:bbs/setforum/deletelogo}" class="J_ajax_del" data-pdata="{'fid': '{$fid}'}">删除</a>
 						<!--# } else { #-->
 						<img id="j_forum_preview_logo" style="display:none" />
 						<!--# } #-->
@@ -446,7 +446,7 @@
 					<td><input name="t_logo[{$v['id']}]" type="file" class="length_3 J_upload_preview" data-preview="#J_icon_{$v['id']}">&nbsp;<img id="J_icon_{$v['id']}" src="{@Wekit::getGlobal('url', 'attach') . '/' . $v['logo']}" style="max-width:100px;"></td>
 					-->
 					<td class="tac"><input class="J_issys_par" name="t_issys[{$v['id']}]" type="checkbox" value="1" {@Pw::ifcheck($v['issys'])}></td>
-					<td><a href="{@url:admin/bbs/setforum/deletetopictype?id=$v['id']}" class="J_ajax_del" data-msg="确定删除此主题分类？删除此主题分类将同时删除其二级分类">[删除]</a></td>
+					<td><a href="{@url:admin/bbs/setforum/deletetopictype}" class="J_ajax_del" data-msg="确定删除此主题分类？删除此主题分类将同时删除其二级分类" data-pdata="{'id': '{$v['id']}'}">[删除]</a></td>
 				</tr>
 					<!--# $subTopicTypes = $topicTypes['sub_topic_types'][$v['id']]; #-->
 					<!--# if (is_array($subTopicTypes)) { #-->
@@ -466,7 +466,7 @@
 					<td><input name="t_logo[{$v2['id']}]" type="file" class="length_3 J_upload_preview" data-preview="#J_icon_{$v2['id']}">&nbsp;<img id="J_icon_{$v2['id']}" src="" style="max-width:100px;"></td>
 					-->
 					<td class="tac"><input class="J_issys_child" name="t_issys[{$v2['id']}]" type="checkbox" value="1" {@Pw::ifcheck($v2['issys'])}></td>
-					<td><a href="{@url:admin/bbs/setforum/deletetopictype?id=$v2['id']}" class="J_ajax_del" data-msg="确定删除此主题分类？">[删除]</a></td>
+					<td><a href="{@url:admin/bbs/setforum/deletetopictype}" class="J_ajax_del" data-msg="确定删除此主题分类？" data-pdata="{'id': '{$v2['id']}'}">[删除]</a></td>
 				</tr>
 						<!--# } #-->
 					<!--# } #-->

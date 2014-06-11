@@ -3,7 +3,7 @@
  * @author Qiong Wu <papa0924@gmail.com> 2011-10-25
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: AdminBaseController.php 23742 2013-01-15 09:22:58Z jieyin $
+ * @version $Id: AdminBaseController.php 28892 2013-05-29 06:41:54Z jieyin $
  * @package admin
  * @subpackage library
  */
@@ -44,6 +44,7 @@ class AdminBaseController extends WindController {
 	protected function showMessage($message = '', $referer = '', $refresh = false) {
 		$this->addMessage('success', 'state');
 		$this->addMessage($this->forward->getVars('data'), 'data');
+		$this->addMessage($this->forward->getVars('html'), 'html');
 		$this->showError($message, $referer, $refresh);
 	}
 

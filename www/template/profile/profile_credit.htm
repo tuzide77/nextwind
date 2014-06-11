@@ -110,10 +110,10 @@
 </div>
 <!--==============转换弹窗结束===============-->
 <script>
-var EXCHANGE = {@Pw::jsonEncode($exchange)|json},						//积分转换数据
-		TRANSFER = {@Pw::jsonEncode($transfer)|json},						//积分转账数据
-		CREDITNAME = {@Pw::jsonEncode($creditBo->cType)|json},	//积分名
-		CREDITUNIT = {@Pw::jsonEncode($creditBo->cUnit)|json};	//积分单位
+var EXCHANGE = {$exchange|json},						//积分转换数据
+		TRANSFER = {$transfer|json},						//积分转账数据
+		CREDITNAME = {$creditBo->cType|json},	//积分名
+		CREDITUNIT = {$creditBo->cUnit|json};	//积分单位
 Wind.ready(document, function(){
 	Wind.use('jquery', 'global', 'ajaxForm', 'draggable', GV.JS_ROOT +'pages/profile/profileCredit.js?v=' +GV.JS_VERSION);
 });

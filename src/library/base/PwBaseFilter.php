@@ -7,7 +7,7 @@ Wind::import('WIND:filter.WindActionFilter');
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: PwBaseFilter.php 23656 2013-01-14 06:40:25Z jieyin $
+ * @version $Id: PwBaseFilter.php 28262 2013-05-07 17:52:20Z jieyin $
  * @package src
  * @subpackage library.filter
  */
@@ -35,7 +35,7 @@ abstract class PwBaseFilter extends WindActionFilter {
 	 * @param boolean $referer 是否刷新页面
 	 */
 	protected function showError($error = '', $referer = '', $refresh = false) {
-		if ($referer) {
+		if ($referer && !WindValidator::isUrl($referer)) {
 			$_referer = explode('#', $referer, 2);
 			$referer = WindUrlHelper::createUrl($_referer[0], array(), 
 				isset($_referer[1]) ? $_referer[1] : '');

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+	<application>
+		<name>账号通</name>                  
+		<alias>account</alias>
+		<version>1.0</version>	 
+		<pw-version>9.0RC</pw-version>       
+		<description></description>   
+		<logo>images/logo.png</logo>		
+		<type>app</type>					
+		<charset>UTF-8</charset>		 
+		<website></website>	 
+		<author-name>fengxiao</author-name>		     
+		<author-email></author-email>		  	
+		<author-icon>your icon</author-icon>	         
+	</application>
+
+	<res>res</res>
+
+	<installation-service></installation-service>
+<inject-services>
+<!-- add by 1 --> 
+<hook-name name="s_profile_menus">                                     <!-- 钩子名称 -->  
+    <alias name="app_account">                                 <!-- 扩展别名 -->   
+        <class>EXT:account.service.srv.App_Account_CommonService</class>           
+        <method>getMenus</method>                  
+        <loadway>load</loadway>                 
+        <expression></expression>
+        <description>账号通 - 菜单设置</description>             
+    </alias>        
+</hook-name>
+
+<!-- add by 2 --> 
+<hook-name name="s_PwUserService_logout">                                     <!-- 钩子名称 -->  
+    <alias name="app_account">                                 <!-- 扩展别名 -->   
+        <class>EXT:account.service.srv.App_Account_CommonService</class>           
+        <method>logout</method>                  
+        <loadway>load</loadway>                 
+        <expression></expression>
+        <description>账号通 - 账号退出</description>             
+    </alias>        
+</hook-name>
+
+
+<!-- add by 3 --> 
+<hook-name name="c_profile_extends_run">                                     <!-- 钩子名称 -->  
+    <alias name="app_account">                                 <!-- 扩展别名 -->   
+        <class>EXT:account.service.srv.injector.App_Account_Injector</class>           
+        <method>createHtml</method>                  
+        <loadway>load</loadway>                 
+        <expression></expression>
+        <description>账号通 - 菜单展示</description>             
+    </alias>        
+</hook-name>
+
+
+<!-- add by 4 --> 
+<hook-name name="s_header_info_3">                                     <!-- 钩子名称 -->  
+    <alias name="app_account">                                 <!-- 扩展别名 -->   
+        <class>EXT:account.service.srv.App_Account_CommonService</class>           
+        <method>head_login</method>                  
+        <loadway>load</loadway>                 
+        <expression></expression>
+        <description>账号通 - 头部登陆</description>             
+    </alias>        
+</hook-name>
+
+<!-- add by 5 --> 
+<hook-name name="s_login_sidebar">                                     <!-- 钩子名称 -->  
+    <alias name="app_account">                                 <!-- 扩展别名 -->   
+        <class>EXT:account.service.srv.App_Account_CommonService</class>           
+        <method>login_sidebar</method>                  
+        <loadway>load</loadway>                 
+        <expression></expression>
+        <description>账号通 - 登陆页右侧</description>             
+    </alias>        
+</hook-name>
+
+</inject-services>
+</manifest>

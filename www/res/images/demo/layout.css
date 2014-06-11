@@ -1,0 +1,23 @@
+html{ overflow-y:scroll;}
+.bA{border:1px solid #cccccc;background:#ffffff;height:70px;padding:15px;}
+h2{ font-size:12px;}
+
+/*one*/
+.cm{float:left;width:100%;min-height:1px;}
+.cw{/*position:relative;*/}
+.sd{width:250px;float:left;}
+.md{width:250px;float:left;}
+
+.grid_2 .cw{margin-right:260px;}
+.grid_2 .sd{margin-left:-250px;}
+
+.grid_2r .cw{margin-left:260px;}
+.grid_2r .sd{margin-left:-100%;}
+
+.grid_3 .cw{margin:0 260px;}
+.grid_3 .md{width:250px;margin-left:-100%;}
+.grid_3 .sd{margin-left:-250px;}
+
+.grid_3r .cw{margin-right:520px;}
+.grid_3r .sd{margin-left:-510px;}
+.grid_3r .md{margin-left:-250px;}

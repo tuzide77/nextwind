@@ -87,7 +87,7 @@
 							if(data.state == 'fail' && data.referer) {
 								//尝试过多
 								setTimeout(function(){
-									location.href = data.referer;
+									location.href = decodeURIComponent(data.referer);
 								}, 1000);
 							}
 						}
@@ -220,7 +220,7 @@
 							msg : data.message,
 							wrap: btn.parent(),
 							callback : function(){
-								window.location.href = data.referer;
+								window.location.href = decodeURIComponent(data.referer);
 							}
 						});
 					}else if(data.state === 'fail'){

@@ -10,7 +10,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @author Mingqu Luo <luo.mingqu@gmail.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: ManageController.php 23975 2013-01-17 10:20:11Z jieyin $
+ * @version $Id: ManageController.php 28865 2013-05-28 03:34:43Z jieyin $
  * @package wind
  */
 class ManageController extends AdminBaseController {
@@ -79,7 +79,7 @@ class ManageController extends AdminBaseController {
 	}
 	
 	public function doeditAction () {
-		list($id, $word) = $this->getInput(array('id', 'word'));
+		list($id, $word) = $this->getInput(array('id', 'word'), 'post');
 		
 		if (!$id) $this->showError('WORD:id_not_exist');
 		
@@ -113,8 +113,7 @@ class ManageController extends AdminBaseController {
 	}
 	
 	public function deleteAction() {
-		$id = intval($this->getInput('id'));
-		
+		$id = intval($this->getInput('id'), 'post');
 		if (!$id) $this->showError('WORD:id_not_exist');
 		
 		$this->_getWordDS()->delete($id);
@@ -123,7 +122,7 @@ class ManageController extends AdminBaseController {
 	}
 	
 	public function batchdeleteAction() {
-		list($ids, $checkAll) = $this->getInput(array('ids', 'checkall'));
+		list($ids, $checkAll) = $this->getInput(array('ids', 'checkall'), 'post');
 		
 		if ($checkAll) {
 			list($type, $keyword) = $this->getInput(array('type', 'keyword'));
@@ -141,7 +140,6 @@ class ManageController extends AdminBaseController {
 	
 	public function batcheditAction() {
 		list($ids, $checkAll) = $this->getInput(array('ids', 'checkall'));
-		
 		if (empty($ids) || !is_array($ids)) $this->showError('WORD:no_operate_object');
 		
 		$wordList = $this->_getWordDS()->fetch($ids);
@@ -161,7 +159,7 @@ class ManageController extends AdminBaseController {
 	}
 	
 	public function dobatcheditAction() {
-		list($word, $checkAll) = $this->getInput(array('word', 'checkall'));
+		list($word, $checkAll) = $this->getInput(array('word', 'checkall'), 'post');
 		
 		if ($checkAll) {
 			$wordService = $this->_getWordService();

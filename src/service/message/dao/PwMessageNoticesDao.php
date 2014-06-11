@@ -139,6 +139,11 @@ class PwMessageNoticesDao extends PwBaseDao {
 		return $smt->update();
 	}
 	
+	public function deleteNoticeByIdsAndUid($uid, $ids){
+		$sql = $this->_bindTable('DELETE FROM %s WHERE `id` IN ' . $this->sqlImplode($ids) . ' AND uid=?');
+		$smt = $this->getConnection()->createStatement($sql);
+		return $smt->update(array($uid), true);
+	}
 	/**
 	 * 根据类型删除通知
 	 * 

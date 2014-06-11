@@ -7,7 +7,7 @@ Wind::import('APPS:manage.controller.BaseManageController');
  * @author Qiong Wu <papa0924@gmail.com> 2011-10-21
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: RecycleController.php 23994 2013-01-18 03:51:46Z long.shi $
+ * @version $Id: RecycleController.php 28816 2013-05-24 09:45:25Z jieyin $
  * @package src.applications.manage.controller
  */
 class RecycleController extends BaseManageController {
@@ -100,7 +100,10 @@ class RecycleController extends BaseManageController {
 	 */
 	public function doDeleteTopicAction() {
 		
-		$tids = $this->getInput('tids');
+		$tids = $this->getInput('tids', 'post');
+		if (!$tids) {
+			$this->showError('operate.fail');
+		}
 		
 		Wind::import('SRV:forum.srv.operation.PwDeleteTopic');
 		Wind::import('SRV:forum.srv.dataSource.PwFetchTopicByTid');
@@ -115,7 +118,10 @@ class RecycleController extends BaseManageController {
 	 */
 	public function doRevertTopicAction() {
 		
-		$tids = $this->getInput('tids');
+		$tids = $this->getInput('tids', 'post');
+		if (!$tids) {
+			$this->showError('operate.fail');
+		}
 
 		Wind::import('SRV:forum.srv.operation.PwRevertTopic');
 		$srv = new PwRevertTopic($tids, $this->loginUser);
@@ -199,7 +205,10 @@ class RecycleController extends BaseManageController {
 	 */
 	public function doDeleteReplyAction() {
 	
-		$pids = $this->getInput('pids');
+		$pids = $this->getInput('pids', 'post');
+		if (!$pids) {
+			$this->showError('operate.fail');
+		}
 	
 		Wind::import('SRV:forum.srv.operation.PwDeleteReply');
 		Wind::import('SRV:forum.srv.dataSource.PwFetchReplyByPid');
@@ -214,14 +223,18 @@ class RecycleController extends BaseManageController {
 	 */
 	public function doRevertReplyAction() {
 	
-		$pids = $this->getInput('pids');
-	
+		$pids = $this->getInput('pids', 'post');
+		if (!$pids) {
+			$this->showError('operate.fail');
+		}
+
 		Wind::import('SRV:forum.srv.operation.PwRevertReply');
 		$srv = new PwRevertReply($pids, $this->loginUser);
 		$srv->execute();
 	
 		$this->showMessage('还原成功了');
 	}
+
 	protected function _getFroumService() {
 		return Wekit::load('forum.srv.PwForumService');
 	}

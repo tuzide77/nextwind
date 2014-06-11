@@ -43,7 +43,7 @@
 				<td>{$next}</td>
 				<td><a href="{@url:cron/cron/edit?id=$cron['cron_id']}" class="mr5">[编辑]</a>
 				<!--# if ($cron['isopen'] !=2){ #-->
-				<a class="J_ajax_del" href="{@url:cron/cron/dodelete?id=$cron['cron_id']}">[删除]</a></td>
+				<a class="J_ajax_del" href="{@url:cron/cron/dodelete}" data-pdata="{'id': '{$cron['cron_id']}'}">[删除]</a></td>
 				<!--# } #-->
 			</tr>
 		<!--# 

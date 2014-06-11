@@ -17,6 +17,8 @@ class IndexController extends PwBaseController {
 	}
 	
 	public function doaddAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($name,$url,$descrip,$logo,$ifcheck,$contact) = $this->getInput(array('name','url','descrip','logo','ifcheck','contact'), 'post');
 
 		Wind::import('SRC:service.link.dm.PwLinkDm');

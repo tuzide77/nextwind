@@ -60,11 +60,11 @@
 					<!--# if($v['iscurrent'] == 1){ #-->
 					<span class="org">默认模板</span>
 					<!--# }else{ #-->
-					<a href="{@url:appcenter/style/default?styleid=$id}" class="J_ajax_refresh">设为默认</a><a data-msg="确定要卸载吗？" href="{@url:appcenter/style/uninstall?styleid=$id}" class="J_ajax_del">卸载</a>
+					<a href="{@url:appcenter/style/default}" class="J_ajax_refresh" data-pdata="{'styleid': '{$id}'}">设为默认</a><a data-msg="确定要卸载吗？" href="{@url:appcenter/style/uninstall}" class="J_ajax_del" data-pdata="{'styleid': '{$id}'}">卸载</a>
 					<!--# }if($type == 'site'){ #-->
 					<!-- <a target="_blank" href="{@url:appcenter/style/preview?styleid=$id}">预览</a> -->
 					<!--# }} else { #-->
-					<a href="{@url:appcenter/style/uninstall?styleid=$id}" class="J_ajax_del">卸载</a>
+					<a href="{@url:appcenter/style/uninstall}" class="J_ajax_del" data-pdata="{'styleid': '{$id}'}">卸载</a>
 					<!--# } if(Wekit::C('site', 'debug') && $type != 'portal'){ #-->
 					<a href="{@url:appcenter/style/export?type=$type&alias=$v['alias']}">导出</a>
 					<!--# } #-->
@@ -118,7 +118,7 @@ Wind.use('dialog',function() {
 				        	$this.removeClass('disabled tips_loading').text('升级').removeProp('disabled');
 				        	if(data.state === 'success') {
 								if(data.referer) {
-									location.href = data.referer;
+									location.href = decodeURIComponent(data.referer);
 								}else {
 									reloadPage(window);
 								}

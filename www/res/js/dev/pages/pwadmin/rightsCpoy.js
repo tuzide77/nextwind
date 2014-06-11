@@ -115,7 +115,7 @@
 				if( data.state === 'success' ) {
 					$( '<span class="tips_success">' + data.message + '</span>' ).appendTo(rights_form_btn.parent()).fadeIn('slow').delay( 1000 ).fadeOut(function() {
 						//加入当前tab参数
-						window.location.href = data.referer+'&tab='+tabs_nav.children('.current').data('tab');
+						window.location.href = decodeURIComponent(data.referer)+'&tab='+tabs_nav.children('.current').data('tab');
 					});
 				}else if( data.state === 'fail' ) {
 					$( '<span class="tips_error">' + data.message + '</span>' ).appendTo(rights_form_btn.parent()).fadeIn( 'fast' );

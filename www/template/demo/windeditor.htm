@@ -1,0 +1,414 @@
+<!doctype html>
+<html>
+	<head>
+		<template source='header' />
+		<template source='header_admin' />
+		<link href="http://chaoren1641.github.com/demo/assets/google-code-prettify/prettify.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="demo_wrap js_demo">
+			<ul class="demo_nav cc">
+				<li>
+					<a href="?a=js">Wind JavaScript交互DEMO</a>
+				</li>
+				<li class="current">
+					<a href="">WindEditor DEMO</a>
+				</li>
+			</ul>
+		</div>
+		<div class="p20">
+<!--=====================字体======================-->
+			<div class="edit_menu" style="display:none;">
+				<ul class="edit_menu_select">
+					<li><a href="">字体</a></li>
+					<li><a href="">字体</a></li>
+					<li><a href="">字体</a></li>
+					<li><a href="">字体</a></li>
+					<li><a href="">字体</a></li>
+					<li><a href="">字体</a></li>
+				</ul>
+			</div>
+<!--=====================字体大小======================-->
+			<div class="edit_menu" style="display:none;">
+				<ul class="edit_menu_select">
+					<li><a href="" style="font-size:10px;">10px</a></li>
+					<li><a href="" style="font-size:12px;">12px</a></li>
+					<li><a href="" style="font-size:14px;">14px</a></li>
+					<li><a href="" style="font-size:16px;">16px</a></li>
+					<li><a href="" style="font-size:18px;">18px</a></li>
+					<li><a href="" style="font-size:20px;">20px</a></li>
+					<li><a href="" style="font-size:24px;">24px</a></li>
+					<li><a href="" style="font-size:36px;">36px</a></li>
+				</ul>
+			</div>
+<!--=====================隐藏回复可见======================-->
+			<div class="edit_menu" style="display:none;">
+				<div class="edit_menu_hide">
+					<div class="edit_menu_top"><a href="" class="edit_menu_close">关闭</a><strong>插入隐藏内容</strong></div>
+					<div class="edit_menu_cont">
+						<ul>
+							<li><label><input name="" type="radio" value="">回复才可见</label></li>
+							<li><label><input name="" type="radio" value="">铜币用户高于<input class="input" type="text" style="width:40px;">时才显示</label></li>
+						</ul>
+						<textarea></textarea>
+					</div>
+					<div class="edit_menu_bot">
+						<button type="button" class="edit_menu_btn">提交</button><button type="button">取消</button>
+					</div>
+				</div>
+			</div>
+<!--=====================附件上传======================-->
+			<div class="edit_menu" style="display:none;">
+				<div class="edit_menu_file">
+					<div class="edit_menu_top"><a href="" class="edit_menu_close">关闭</a><strong>附件上传</strong><span class="edit_tips" title="可上传格式和大小 rar:2000kb zip:200kb"></span></div>
+					<div class="edit_menu_cont">
+						<div class="edit_uping"><span class="num">还可上传<em>8</em>个</span><button type="button" class="edit_menu_btn">批量上传</button><a href="">单个上传</a></div>
+						<div class="edit_menu_upfile">
+							<dl>
+								<dt>
+									<span class="span_1">附件名</span>
+									<span class="span_2">附件信息</span>
+									<span class="span_3">操作</span>
+								</dt>
+<!--========上传中========-->
+								<dd style="background-position:-300px 0;">
+									<span class="span_1 file_icon">
+										<span class="file_icon_png"></span>
+										<em class="file_title">adasjoasdasdaqweqweasdaasd.rar</em>
+									</span>
+									<span class="span_2">30%</span>
+									<span class="span_3"><span>——</span><a href="#">删除</a><span>——</span></span>
+								</dd>
+<!--========上传成功========-->
+								<dd style="background-position:0 0;">
+									<span class="span_1 file_icon">
+										<span class="file_icon_rar"></span><!--  file_icon_rar 后面的rar根据文件格式来显示 -->
+										<input type="text" class="input" value="adasjoasdasdaqweqweasdaasd.rar" />
+									</span>
+									<span class="span_2">上传成功</span>
+									<span class="span_3"><a href="#">插入</a><a href="#">删除</a><a href="#">出售</a></span>
+								</dd>
+<!--========出售附件========-->
+								<dd>
+									<span class="span_1 file_icon">
+										<span class="file_icon_torrent"></span>
+										<em class="file_title">艳照门.torrent</em>
+									</span>
+									<span class="span_4"><input class="input input_sell" type="text" placeholder="请输入价格"><em>铜币</em><button>确认</button><button>取消</button></span>
+								</dd>
+<!--========出售提交后========-->
+								<dd>
+									<span class="span_1 file_icon">
+										<span class="file_icon_torrent"></span>
+										<em class="file_title">艳照门.torrent</em>
+									</span>
+									<span class="span_2">售价：5个铜币</span>
+									<span class="span_3"><a href="#">插入</a><a href="#">删除</a><a href="#">出售</a></span>
+								</dd>
+<!--========结束========-->
+							</dl>
+						</div>
+					</div>
+					<div class="edit_menu_bot">
+						<button type="button" class="edit_menu_btn">提交</button>
+					</div>
+				</div>
+			</div>
+<!--=====================图片上传======================-->
+			<div class="edit_menu" style="display:none;">
+				<div class="edit_menu_photo">
+					<div class="edit_menu_top">
+						<a href="" class="edit_menu_close">关闭</a>
+						<ul>
+							<li class="current"><a href="">本地上传</a></li>
+							<li><a href="">相册上传</a></li>
+							<li><a href="">网络图片</a></li>
+						</ul>
+						<span class="edit_tips" title="rar:2000kb zip:200kb"></span>
+					</div>
+<!--==========上传==========-->
+<div style="display:none;">
+					<div class="edit_menu_cont">
+						<div class="edit_uping"><span class="num">还可上传<em>8</em>个</span><button type="button" class="edit_menu_btn">批量上传</button><a href="">单个上传</a></div>
+						<div class="eidt_uphoto">
+							<ul class="cc">
+<!--========上传完成========-->
+								<li>
+									<div class="get">
+										<a href="" class="del">删除</a>
+										<a href="" class="edit">编辑</a>
+										<img src="{@G:theme.url.img}/thumb/330.jpg" width="78" height="98" />
+									</div>
+								</li>
+<!--========上传成功========-->
+								<li>
+									<div class="schedule"><em>上传成功!</em><span style="width:100%;"></span></div>
+								</li>
+<!--========上传中========-->	
+								<li>
+									<div class="schedule"><em>30%</em><span style="width:30%;"></span></div>
+								</li>
+<!--========无内容========-->
+								<li>
+									<div class="no">暂无</div>
+								</li>
+								<li>
+									<div class="no">暂无</div>
+								</li>
+								<li>
+									<div class="no">暂无</div>
+								</li>
+								<li>
+									<div class="no">暂无</div>
+								</li>
+								<li>
+									<div class="no">暂无</div>
+								</li>
+								<li>
+									<div class="no">暂无</div>
+								</li>
+								<li>
+									<div class="no">暂无</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="edit_menu_bot">
+						<button type="button" class="edit_menu_btn">提交</button>点击图片可插入到帖子，点击编辑可编辑图片效果
+					</div>
+</div>
+<!--=========相册选择===========-->
+<div style="display:none;">
+					<div class="edit_menu_cont">
+						<div class="edit_uping">
+							<select><option>默认相册</option></select>
+						</div>
+						<div class="eidt_uphoto">
+							<ul class="cc">
+								<li>
+									<div class="get">
+										<img src="{@G:theme.url.img}/thumb/330.jpg" width="78" height="98" />
+									</div>
+								</li>
+								<li>
+									<div class="get">
+										<img src="{@G:theme.url.img}/thumb/330.jpg" width="78" height="98" />
+									</div>
+								</li>
+								<li>
+									<div class="get">
+										<img src="{@G:theme.url.img}/thumb/330.jpg" width="78" height="98" />
+									</div>
+								</li>
+								<li>
+									<div class="get">
+										<img src="{@G:theme.url.img}/thumb/330.jpg" width="78" height="98" />
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="edit_menu_bot">
+						点击图片可插入到帖子
+					</div>
+</div>
+<!--=========网络相册===========-->
+					<div class="edit_menu_cont">
+						<div class="edit_online_photo">
+							<em>图片地址：</em><input name="" type="text" class="input" value="" placeholder="http://">
+						</div>
+						<div class="tac mb20"><button type="button" class="edit_menu_btn">插入图片</button></div>
+					</div>
+<!--=========结束===========-->
+				</div>
+			</div>
+			
+			
+<!--=====================图片编辑======================-->
+			<div class="edit_menu" style="display:none;">
+				<div class="edit_menu_photoedit">
+					<div class="edit_menu_top">
+						<a href="" class="edit_menu_close">关闭</a>
+						<strong>图片编辑</strong>
+					</div>
+					<div class="edit_menu_cont cc">
+						<div class="sidebar">
+							<dl>
+								<dt>旋转</dt>
+								<dd>
+									<p><a href=""><em class="whirl_left"></em>左转</a></p>
+									<p><a href=""><em class="whirl_right"></em>右转</a></p>
+								</dd>
+							</dl>
+							<dl>
+								<dt>剪切</dt>
+								<dd>
+									<p><a href=""><em class="cut"></em>剪切</a></p>
+								</dd>
+							</dl>
+							<dl>
+								<dd>
+									<p><a href=""><em class="reset"></em>重置</a></p>
+								</dd>
+							</dl>
+						</div>
+						<div class="content">
+							<div class="eidt_preview_wrap">
+								<div class="eidt_preview">
+									<span><img src="{@G:theme.url.img}/thumb/330.jpg" /></span>
+								</div>
+							</div>
+							<div class="eidt_photo_title"><input type="text" value="330.jpg" class="input length_6"></div>
+						</div>
+					</div>	
+					<div class="edit_menu_bot">
+						<button type="button" class="edit_menu_btn">保存</button><button type="button">取消</button>
+					</div>
+				</div>
+			</div>
+			
+			
+<!--=====================插入链接======================-->
+			<div class="edit_menu" style="display:none;">
+				<div class="edit_menu_insertLink">
+					<div class="edit_menu_top"><a href="" class="edit_menu_close">关闭</a><strong>插入链接</strong></div>
+					<div class="edit_menu_cont">
+						<dl class="cc http_dl">
+							<dt>地址：</dt>
+							<dd><select><option>http://</option><option>https://</option></select><input name="" type="text" class="input"></dd>
+						</dl>
+						<dl class="cc">
+							<dt>标题：</dt>
+							<dd><input name="" type="text" class="input length_6"></dd>
+						</dl>
+						<dl class="cc">
+							<dt>设置：</dt>
+							<dd><label><input type="checkbox" value="">新窗口打开</label><br><label><input type="checkbox" value="">作为下载链接</label></dd>
+						</dl>
+					</div>
+					<div class="edit_menu_bot">
+						<button type="button" class="edit_menu_btn">提交</button><button type="button">取消</button>
+					</div>
+				</div>
+			</div>
+			
+			
+<!--=====================插入表格======================-->
+			<div class="edit_menu" style="display:none;">
+				<div class="edit_menu_insertTable">
+					<div class="edit_menu_top"><a href="" class="edit_menu_close">关闭</a><strong>插入表格</strong></div>
+					<div class="edit_menu_cont">
+						<ul class="cc">
+							<li><em>行数</em><input name="" type="number" class="input"></li>
+							<li><em>表格宽度</em><input name="" type="number" class="input">px</li>
+							<li><em>列数</em><input name="" type="number" class="input"></li>
+							<li><em>表格边框</em><input name="" type="number" class="input">px</li>
+							<li><em>内间距</em><input name="" type="number" class="input">px</li>
+							<li><em>边框颜色</em><input name="" type="text" class="input"></li>
+							<li><em>背景颜色</em><input name="" type="text" class="input"></li>
+							<li><em>表格对齐</em><select><option>默认</option><option>居左</option><option>居中</option><option>居右</option></select></li>
+							<li><em>内容对齐</em><select><option>左对齐</option><option>居中</option><option>右对齐</option></select></li>
+						</ul>
+					</div>
+					<div class="edit_menu_bot">
+						<button type="button" class="edit_menu_btn">提交</button><button type="button">取消</button>
+					</div>
+				</div>
+			</div>
+			
+			
+<!--=====================插入代码======================-->
+			<div class="edit_menu" style="display:none;">
+				<div class="edit_menu_code">
+					<div class="edit_menu_top"><a href="" class="edit_menu_close">关闭</a><strong>插入代码</strong></div>
+					<div class="edit_menu_cont">
+						<textarea></textarea>
+					</div>
+					<div class="edit_menu_bot">
+						<button type="button" class="edit_menu_btn">提交</button><button type="button">取消</button>
+					</div>
+				</div>
+			</div>
+
+
+<!--=====================插入视频======================-->
+			<div class="edit_menu" style="display:none;">
+				<div class="edit_menu_video">
+					<div class="edit_menu_top"><a href="" class="edit_menu_close">关闭</a><strong>插入视频</strong></div>
+					<div class="edit_menu_cont">
+						<dl class="cc">
+							<dt>地址：</dt>
+							<dd><input type="text" class="input length_5"></dd>
+						</dl>
+						<dl class="cc">
+							<dt>尺寸：</dt>
+							<dd><input type="text" class="input length_1 mr5"><span class="mr20">宽</span><input type="text" class="input length_1 mr5"><span>高</span></dd>
+						</dl>
+						<dl class="cc">
+							<dt>设置：</dt>
+							<dd><label><input type="checkbox">自动展开</label></dd>
+						</dl>
+					</div>
+					<div class="edit_menu_bot">
+						<button type="button" class="edit_menu_btn">提交</button><button type="button">取消</button>
+					</div>
+				</div>
+			</div>
+
+<!--=====================插入音乐======================-->
+			<div class="edit_menu">
+				<div class="edit_menu_music">
+					<div class="edit_menu_top"><a href="" class="edit_menu_close">关闭</a><strong>插入音乐</strong></div>
+					<div class="edit_menu_cont">
+						<dl class="cc">
+							<dt>地址：</dt>
+							<dd><input type="text" class="input length_5"></dd>
+						</dl>
+						<dl class="cc">
+							<dt>设置：</dt>
+							<dd><label><input type="checkbox">自动播放</label></dd>
+						</dl>
+					</div>
+					<div class="edit_menu_bot">
+						<button type="button" class="edit_menu_btn">提交</button><button type="button">取消</button>
+					</div>
+				</div>
+			</div>
+			
+			
+<!--=====================结束======================-->
+			<div id="J_tabs_name">
+				<textarea id="J_wind_editor" class="windeditor" style="width:800px;height:600px"></textarea>
+			</div>
+		</div>
+		<template source='footer' />
+		<script>
+			Wind.use('jquery','windeditor',function() {
+				var plugins = ['insertCode','insertPhoto','insertHide','insertSell','insertEmoticons','insertVideo','insertMusic','insertFile','codemirror'];
+				if(1/*如果没有html权限,则使用bbcode，此时需加载bbcode插件*/) {
+					plugins.push('bbcode');
+				}
+				$('#J_wind_editor').windeditor({
+					editor_path	: window.js_root + 'windeditor/',//windoweditor的路径
+					plugins		: plugins,
+					iframeCss	: ['http://localhost:8888/NextWind/www/themes/nextwind/css/build/core.css?v=','http://localhost:8888/NextWind/www/themes/nextwind/css/build/common.css?v=','http://localhost:8888/NextWind/www/themes/nextwind/css/build/read.css?v=']//为了更好的可见即所得，加载阅读页的css文件
+				}); 
+			});
+
+		</script>
+		<script src="http://chaoren1641.github.com/demo/assets/google-code-prettify/prettify.js"></script>
+		<div>纯拉长页面</div>
+		<div>纯拉长页面</div>
+		<div>纯拉长页面</div>
+		<div>纯拉长页面</div>
+		<div>纯拉长页面</div>
+		<div>纯拉长页面</div>
+		<div>纯拉长页面</div>
+		<div>纯拉长页面</div>
+		<div>纯拉长页面</div>
+		<div>纯拉长页面</div>
+		<div>纯拉长页面</div>
+		<div>纯拉长页面</div>
+		<div>纯拉长页面</div><div>纯拉长页面</div><div>纯拉长页面</div><div>纯拉长页面</div><div>纯拉长页面</div><div>纯拉长页面</div><div>纯拉长页面</div><div>纯拉长页面</div><div>纯拉长页面</div><div>纯拉长页面</div>
+	</body>
+</html>

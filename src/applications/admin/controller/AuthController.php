@@ -9,7 +9,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @author Qiong Wu <papa0924@gmail.com> 2011-10-21
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: AuthController.php 24805 2013-02-21 09:14:12Z jieyin $
+ * @version $Id: AuthController.php 28781 2013-05-23 09:33:37Z jieyin $
  * @package admin
  * @subpackage controller
  */
@@ -41,8 +41,11 @@ class AuthController extends AdminBaseController {
 	 */
 	public function delAction() {
 		/* @var $service AdminAuthService */
+		$id = $this->getInput('id', 'post');
+		!$id && $this->showError('operate.fail');
+
 		$service = Wekit::load('ADMIN:service.srv.AdminAuthService');
-		$result = $service->del($this->getInput('id', 'get'));
+		$result = $service->del($id);
 		if ($result instanceof PwError) $this->showError($result->getError());
 		$this->showMessage('ADMIN:success');
 	}

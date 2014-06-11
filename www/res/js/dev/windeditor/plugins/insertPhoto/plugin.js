@@ -338,7 +338,6 @@
 				this.cancelUpload(file.id);
 				tip = '上传数量超出限制';
 				invalid = true;
-				file_list_box.append('<li class="invalid"><div class="error" title="'+ tip +'">'+ tip +'<a href="javascript:;" class="del">删除</a></div></li>');
 			}
 
 		}

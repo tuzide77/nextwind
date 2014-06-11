@@ -52,7 +52,7 @@
 					<span class="J_link_{$typesList[$lid]['typeid']}">{$typesList[$lid]['typename']}</span>
 					<!--# } #-->
 				</div></td>
-				<td><a href="{@url:link/link/edit?lid=$v['lid']}" title="编辑友情链接" class="mr10 J_dialog">[编辑]</a><a href="{@url:link/link/doDelete?lid=$v['lid']}" class="mr10 J_ajax_del">[删除]</a></td>
+				<td><a href="{@url:link/link/edit?lid=$v['lid']}" title="编辑友情链接" class="mr10 J_dialog">[编辑]</a><a href="{@url:link/link/doDelete}" class="mr10 J_ajax_del" data-pdata="{'lid': '{$v['lid']}'}">[删除]</a></td>
 			</tr>
 			<!--# } #-->
 			<!--# } else { #-->

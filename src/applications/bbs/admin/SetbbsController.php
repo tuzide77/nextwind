@@ -6,7 +6,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @author Qiong Wu <papa0924@gmail.com> 2011-10-21
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: SetbbsController.php 24341 2013-01-29 03:08:55Z jieyin $
+ * @version $Id: SetbbsController.php 28790 2013-05-23 10:15:16Z jieyin $
  * @package admin
  * @subpackage controller
  */
@@ -19,6 +19,8 @@ class SetbbsController extends AdminBaseController {
 	}
 
 	public function dorunAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($showBirthdayMembers, $showLinks, $showOnlineUsers, $listOnlineUsers) = $this->getInput(
 			array('show_birthday_members', 'show_links', 'show_online_users', 'list_online_users'));
 		$config = new PwConfigSet('bbs');
@@ -36,6 +38,8 @@ class SetbbsController extends AdminBaseController {
 	}
 
 	public function dothreadAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($newThreadMinutes, $perpage, $maxPages, $leftsideWidth, $hotthreadReplies) = $this->getInput(
 			array('new_thread_minutes', 'perpage', 'max_pages', 'leftside_width', 'hotthread_replies'));
 		$config = new PwConfigSet('bbs');
@@ -83,6 +87,8 @@ class SetbbsController extends AdminBaseController {
 	}
 
 	public function doreadAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$arrInput = $this->getInput(
 			array(
 				'perpage', 

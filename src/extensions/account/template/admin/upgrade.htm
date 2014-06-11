@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<template source='TPL:admin.common.head' />
+</head>
+<body>
+<div class="wrap">
+
+<template source='head_tab' />
+<div class="h_a">数据升级</div>
+
+<div class="prompt_text">
+	<ul>
+		<li>升级老版本账号通数据；</li>
+		<li>修改配置文件,文件所在位置：src/extensions/account/conf/App_Account_UpgradeConfig.php；</li>
+		<li>如果重复执行，会覆盖数据；</li>
+	</ul>
+</div>
+<div class="table_full">
+	<table width="100%">
+		<col width="th" />
+		<col width="400"/>
+		<col />
+		
+		<tr>
+		<th>淘宝网</th>
+		<td>
+			<a class="btn" data-msg="确定要升级吗？" href="{@url:app/account/manage/doUpgrade?type=taobao}">升级</a>
+		</td>
+		<td><div class="fun_tips">请不要重复执行</div></td>
+		</tr>
+		
+		<tr>
+		<th>新浪微博</th>
+		<td>
+			<a class="btn" data-msg="确定要升级吗？" href="{@url:app/account/manage/doUpgrade?type=sinaweibo}">升级</a>
+		</td>
+		<td><div class="fun_tips">请不要重复执行</div></td>
+		</tr>
+		
+		<tr>
+		<th>QQ</th>
+		<td>
+			<a class="btn" data-msg="确定要升级吗？" href="{@url:app/account/manage/doUpgrade?type=qzone}">升级</a>
+		</td>
+		<td><div class="fun_tips">请不要重复执行</div></td>
+		</tr>
+		
+		<tr>
+		<th>支付宝</th>
+		<td>
+			<a class="btn" data-msg="确定要升级吗？" href="{@url:app/account/manage/doUpgrade?type=alipay}">升级</a>
+		</td>
+		<td><div class="fun_tips">请不要重复执行</div></td>
+		</tr>
+		
+	</table>
+</div>
+</div>
+<template source='TPL:admin.common.footer' />
+<script>
+
+</script>
+
+</body>
+</html>

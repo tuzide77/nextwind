@@ -6,7 +6,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @author $Author: jieyin $ Foxsee@aliyun.com
  * @copyright ?2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: NotifyController.php 24768 2013-02-20 11:03:35Z jieyin $ 
+ * @version $Id: NotifyController.php 28921 2013-05-30 07:50:23Z jieyin $ 
  * @package 
  */
 class NotifyController extends AdminBaseController {
@@ -81,7 +81,10 @@ class NotifyController extends AdminBaseController {
 	}
 	
 	public function deleteAction() {
-		$logid = (int)$this->getInput('logid', 'get');
+		$logid = (int)$this->getInput('logid', 'post');
+		if (!$logid) {
+			$this->showError('operate.fail');
+		}
 		if ($this->_getNotifyDs()->deleteLog($logid)) $this->showMessage('ADMIN:success');
 		$this->showError('ADMIN:fail');
 	}

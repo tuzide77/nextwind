@@ -1,11 +1,11 @@
 <?php
 Wind::import('LIB:base.PwBaseController');
 /**
- * the last known user to change this file in the repository  <$LastChangedBy: xiaoxia.xuxx $>
- * @author $Author: xiaoxia.xuxx $ Foxsee@aliyun.com
+ * the last known user to change this file in the repository  <$LastChangedBy: gao.wanggao $>
+ * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: DesignController.php 24134 2013-01-22 06:19:24Z xiaoxia.xuxx $ 
+ * @version $Id: DesignController.php 29033 2013-06-05 02:56:40Z gao.wanggao $ 
  * @package 
  */
 class DesignController extends PwBaseController {
@@ -115,8 +115,8 @@ class DesignController extends PwBaseController {
 		}
 		$this->_getDesignService()->clearCompile();
 		$this->_getBakService()->doBak($pageid);
-		$this->setOutput(urldecode($uri), 'data');
-		$this->showMessage("operate.success");
+		//$this->setOutput(urldecode($uri), 'data');
+		$this->showMessage("operate.success", urldecode($uri));
 	}
 
 	
@@ -257,8 +257,8 @@ class DesignController extends PwBaseController {
 		$dm->setDesignLock(0, 0);
 		$this->_getPageDs()->updatePage($dm);
 		$this->_getDesignService()->clearCompile();
-		$this->setOutput(urldecode($uri), 'data');
-		$this->showMessage("operate.success");
+		//$this->setOutput(urldecode($uri), 'data');
+		$this->showMessage("operate.success", urldecode($uri));
 	}
 	
 	/**

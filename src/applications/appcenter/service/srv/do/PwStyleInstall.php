@@ -8,7 +8,7 @@ Wind::import('APPCENTER:service.srv.helper.PwSystemHelper');
  * @author Shi Long <long.shi@alibaba-inc.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: PwStyleInstall.php 24585 2013-02-01 04:02:37Z jieyin $
+ * @version $Id: PwStyleInstall.php 28799 2013-05-24 06:47:37Z yetianshi $
  * @package service.style.srv
  */
 class PwStyleInstall extends PwInstall {
@@ -53,8 +53,10 @@ class PwStyleInstall extends PwInstall {
 	 * @see PwInstall::backUp()
 	 */
 	public function backUp($upgrade) {
+		
 		/* @var $upgrade PwUpgradeApplication */
 		if ($appId = $upgrade->getBackLog('appId')) {
+			
 			$upgrade->setRevertLog('appId', $this->_load()->findByAppId($appId));
 			$this->_load()->deleteStyle($appId);
 		}

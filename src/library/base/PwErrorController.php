@@ -36,9 +36,15 @@ class PwErrorController extends WindErrorHandler {
 			$this->setOutput($this->error['data'], 'data');
 			unset($this->error['data']);
 		}
+		if (isset($this->error['html'])) {
+			$this->setOutput($this->error['html'], 'html');
+			unset($this->error['html']);
+		}
 		$this->setOutput($this->error, "message");
+
+		//set layout for common request
 		$this->setTemplate('TPL:common.error');
-		// set layout for common request
+
 		if (!$this->getRequest()->getIsAjaxRequest()) {
 			$this->setLayout('TPL:common.layout_error');
 			$lang = Wind::getComponent('i18n');
@@ -78,7 +84,13 @@ class PwErrorController extends WindErrorHandler {
 		$requestJson = $this->getRequest()->getIsAjaxRequest() && strpos(strtolower($type), "application/json") !== false;
 		if ($requestJson || $json == 1) {
 			$this->getResponse()->setHeader('Content-type', 'application/json; charset=' . Wekit::V('charset'));
-			echo Pw::jsonEncode($this->getForward()->getVars());
+			$vars = $this->getForward()->getVars();
+			isset($vars['referer']) && $vars['referer'] = rawurlencode($vars['referer']);
+			foreach ($vars as $key => $value) {
+				if ($key == 'html') continue;
+				$vars[$key] = WindSecurity::escapeArrayHTML($value);
+			}
+			echo Pw::jsonEncode($vars);
 			exit();
 		}
 	}

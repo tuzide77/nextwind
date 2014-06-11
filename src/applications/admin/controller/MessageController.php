@@ -5,7 +5,7 @@
  * @author Qiong Wu <papa0924@gmail.com> 2011-10-14
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: MessageController.php 3340 2011-12-19 14:32:34Z yishuo $
+ * @version $Id: MessageController.php 28892 2013-05-29 06:41:54Z jieyin $
  * @package common
  */
 class MessageController extends PwErrorController {
@@ -19,6 +19,10 @@ class MessageController extends PwErrorController {
 		if (isset($this->error['data'])) {
 			$this->setOutput($this->error['data'], "data");
 			unset($this->error['data']);
+		}
+		if (isset($this->error['html'])) {
+			$this->setOutput($this->error['html'], 'html');
+			unset($this->error['html']);
 		}
 		$this->setOutput($this->error, "message");
 		$this->setTemplate('common.error');

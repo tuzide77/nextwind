@@ -8,7 +8,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @link http://www.phpwind.com
  * @copyright 2011 phpwind.com
  * @license
- * @version $Id: UpgradeController.php 24341 2013-01-29 03:08:55Z jieyin $
+ * @version $Id: UpgradeController.php 28862 2013-05-28 03:20:14Z jieyin $
  */
 
 class UpgradeController extends AdminBaseController {
@@ -34,7 +34,7 @@ class UpgradeController extends AdminBaseController {
 	 * @return void
 	 */
 	public function dosaveAction() {
-
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
 		$member = $this->getInput('member', 'post');
 
 		$strategy = array();

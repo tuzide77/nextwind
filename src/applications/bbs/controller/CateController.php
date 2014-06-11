@@ -9,7 +9,7 @@ Wind::import('SRV:forum.srv.PwThreadList');
  *
  * @author Jianmin Chen <sky_hold@163.com>
  * @license http://www.phpwind.com
- * @version $Id: CateController.php 24758 2013-02-20 06:55:42Z jieyin $
+ * @version $Id: CateController.php 28799 2013-05-24 06:47:37Z yetianshi $
  * @package forum
  */
 
@@ -131,6 +131,6 @@ class CateController extends PwBaseController {
 		} 
 		$topicTypes = Wekit::load('forum.srv.PwTopicTypeService')->getTopictypes($fid);
 		$topicTypes = $topicTypes ? $topicTypes : '';
-		echo Pw::jsonEncode(array('state' => 'success', 'data' => $topicTypes));exit;
+		Pw::echoJson(array('state' => 'success', 'data' => $topicTypes));exit;
 	}
 }

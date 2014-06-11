@@ -5,7 +5,7 @@ Wind::import('APPS:design.controller.DesignBaseController');
  * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: StyleController.php 20204 2012-10-24 09:14:08Z gao.wanggao $ 
+ * @version $Id: StyleController.php 28899 2013-05-29 07:23:48Z gao.wanggao $ 
  * @package 
  */
 class StyleController extends DesignBaseController{
@@ -78,7 +78,7 @@ class StyleController extends DesignBaseController{
 		$_style['styleDomId'] = $styleSrv->getCss($style);
 		$_style['styleDomIdLink'] = $styleSrv->getLink($style);
 		$_style['styleDomClass'] = $styleclass;
-		$this->setOutput($_style, 'data');
+		$this->setOutput($_style, 'html');
 		$this->showMessage("operate.success");
 	}
 	

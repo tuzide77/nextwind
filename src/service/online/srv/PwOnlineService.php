@@ -3,10 +3,10 @@
  /**
   * 在线服务记录接口
   * 
-  * @author $Author: xiaoxia.xuxx $ Foxsee@aliyun.com
+  * @author $Author: jieyin $ Foxsee@aliyun.com
   * @copyright ©2003-2103 phpwind.com
   * @license http://www.phpwind.com
-  * @version $Id: PwOnlineService.php 22230 2012-12-19 21:45:20Z xiaoxia.xuxx $ 
+  * @version $Id: PwOnlineService.php 28793 2013-05-24 03:55:18Z jieyin $ 
   * @package 
   */
 
@@ -109,7 +109,7 @@ class PwOnlineService {
 			->setGid($gid);
 		Wekit::load('online.PwUserOnline')->replaceInfo($dm);
 		
-		//游客转为登陆用户
+		//游客转为登录用户
 		$vistor = $this->getVisitor();
 		if (!is_array($vistor)) return false;
 		list($ip, $createdTime, $modifyTime) = $vistor;

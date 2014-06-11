@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<template source='TPL:admin.common.head' />
+</head>
+<body>
+<div class="wrap">
+
+<div class="nav">
+	<div class="return">
+		<a href="{@url:appcenter/app/run}">返回上一级</a>
+	</div>
+	<ul class="cc">
+		<li class="current"><a href="{@url:app/majia/manage/run}">马甲切换设置</a></li>
+	</ul>
+</div>
+
+<form method="post" class="J_ajaxForm" action="{@url:app/majia/manage/dorun}">
+<div class="h_a">马甲切换设置</div>
+<div class="table_full">
+	<table width="100%">
+		<col class="th" />
+		<col width="400" />
+		<col />
+		<tr>
+			<th>功能是否开启</th>
+			<td>
+				<ul class="switch_list cc">
+					<li><label><input type="radio" name="isopen" value="1" {@pw::ifcheck($config['isopen'] == 1)}><span>开启</span></label></li>
+					<li><label><input type="radio" name="isopen" value="0" {@Pw::ifcheck($config['isopen'] == 0)}><span>关闭</span></label></li>
+				</ul>
+			</td>
+			<td><div class="fun_tips"></div></td>
+		</tr>
+		<tr>
+			<th>最多绑定数</th>
+			<td><input type="number" class="input length_5" value="{$config['band.max.num']}" name="maxnum"></td>
+			<td><div class="fun_tips"></div></td>
+		</tr>
+		<tr>
+			<th>可切换用户组</th>
+			<td>
+				<div class="user_group J_check_wrap">
+<!--#foreach($groupTypes as $type => $typeName) { #-->
+					<dl>
+						<dt><label><input type="checkbox" data-direction="y" data-checklist="J_check_{$type}" class="checkbox J_check_all" />{$typeName}</label></dt>
+						<dd>
+<!--#
+	foreach($groups[$type] as $group) {
+		$checked = in_array($group['gid'], $config['band.allow.groups']);#-->
+							<label><input class="J_check" data-yid="J_check_{$type}" type="checkbox" name="groups[]" value="{$group['gid']}"{@Pw::ifcheck($checked)} /><span>{$group['name']}</span></label>
+<!--#}#-->
+						</dd>
+					</dl>
+<!--#}#-->
+				</div>
+			</td>
+			<td><div class="fun_tips"></div></td>
+		</tr>
+	</table>
+</div>
+<div class="btn_wrap">
+	<div class="btn_wrap_pd">
+		<button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit">提交</button>
+	</div>
+</div>
+</form>
+
+</div>
+<template source='TPL:admin.common.footer' />
+</body>
+</html>

@@ -1,11 +1,11 @@
 <?php
 Wind::import('ADMIN:library.AdminBaseController');
 /**
- * the last known user to change this file in the repository  <$LastChangedBy: jieyin $>
- * @author $Author: jieyin $ Foxsee@aliyun.com
+ * the last known user to change this file in the repository  <$LastChangedBy: gao.wanggao $>
+ * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PermissionsController.php 22678 2012-12-26 09:22:23Z jieyin $ 
+ * @version $Id: PermissionsController.php 28818 2013-05-24 10:10:46Z gao.wanggao $ 
  * @package 
  */
 class PermissionsController extends AdminBaseController {
@@ -171,7 +171,7 @@ class PermissionsController extends AdminBaseController {
 	}
 	
 	public function deleteAction() {
-		$id = (int)$this->getInput('id', 'get');
+		$id = (int)$this->getInput('id', 'post');
 		$ds = $this->_getPermissionsDs();
 		$info = $ds->getInfo($id);
 		if (!$info) $this->showError("operate.fail");

@@ -8,7 +8,7 @@ Wind::import('SRV:user.PwUserBan');
  * @author xiaoxia.xu <x_824@sina.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: ForbiddenController.php 24341 2013-01-29 03:08:55Z jieyin $
+ * @version $Id: ForbiddenController.php 28859 2013-05-28 03:11:35Z jieyin $
  * @package src.products.u.admin
  */
 class ForbiddenController extends AdminBaseController {
@@ -27,6 +27,8 @@ class ForbiddenController extends AdminBaseController {
 	 * 禁止用户
 	 */
 	public function dorunAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$key = $this->getInput('key', 'post');
 		if (!in_array($key, array('1', '2'))) $this->showError('USER:ban.error.data.format');
 		$array = array();
@@ -95,6 +97,8 @@ class ForbiddenController extends AdminBaseController {
 	 * 设置自动禁止
 	 */
 	public function dosetautoAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$config = new PwConfigSet('site');
 		list($open, $condition, $type, $reason) = $this->getInput(array('open', 'condition', 'type', 'reason'), 'post');
 		if ($open == 1) {
@@ -148,7 +152,7 @@ class ForbiddenController extends AdminBaseController {
 	 * 解除禁止
 	 */
 	public function delAction() {
-		$ids = $this->getInput('ids');
+		$ids = $this->getInput('ids', 'post');
 		if (!$ids) $this->showError('operate.select');
 		/* @var $banSrv PwUserBanService */
 		$banSrv = Wekit::load('SRV:user.srv.PwUserBanService');

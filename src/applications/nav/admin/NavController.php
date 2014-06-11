@@ -33,6 +33,8 @@ class NavController extends AdminBaseController {
 	 * @return void
 	 */
 	public function dorunAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$homeUrl = '';
 		Wekit::load('SRV:nav.dm.PwNavDm');
 		$dms = $newDms = $datas = $newdatas = array();
@@ -137,6 +139,8 @@ class NavController extends AdminBaseController {
 	 * @return void
 	 */
 	public function doeditAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$keys = array('navid', 'type', 'parentid', 'name', 'link', 'image', 'fontColor', 'fontBold', 'fontItalic', 'fontUnderline', 'alt', 'target', 'orderid', 'isshow');
 		list($navid, $type, $parentid, $name, $link, $image,$fontColor, $fontBold, $fontItalic, $fontUnderline, $alt, $target, $orderid, $isshow)= $this->getInput($keys, 'post');
 		$router = Wind::getComponent('router')->getRoute('pw')->matchUrl($link);
@@ -166,7 +170,11 @@ class NavController extends AdminBaseController {
 	 * @return void
 	 */
 	public function delAction() {
-		$navid = $this->getInput('navid', 'get');
+		$navid = $this->getInput('navid', 'post');
+		if (!$navid) {
+			$this->showError('operate.fail');
+		}
+
 		$resource = $this->_getNavDs()->delNav($navid);
 		if ($resource instanceof PwError) $this->showError($resource->getError());
 		$this->_getNavService()->updateConfig();

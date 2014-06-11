@@ -9,7 +9,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: ContentcheckController.php 23742 2013-01-15 09:22:58Z jieyin $
+ * @version $Id: ContentcheckController.php 27729 2013-04-28 02:00:50Z jieyin $
  * @package forum
  */
 
@@ -71,7 +71,7 @@ class ContentcheckController extends AdminBaseController {
 	
 	public function doPassThreadAction() {
 
-		$tid = $this->getInput('tid');
+		$tid = $this->getInput('tid', 'post');
 		if (empty($tid)) {
 			$this->showError('operate.select');
 		}
@@ -88,7 +88,7 @@ class ContentcheckController extends AdminBaseController {
 
 	public function doDeleteThreadAction() {
 
-		$tid = $this->getInput('tid');
+		$tid = $this->getInput('tid', 'post');
 		if (empty($tid)) {
 			$this->showError('operate.select');
 		}
@@ -158,7 +158,7 @@ class ContentcheckController extends AdminBaseController {
 
 	public function doPassPostAction() {
 
-		$pid = $this->getInput('pid');
+		$pid = $this->getInput('pid', 'post');
 		if (empty($pid)) {
 			$this->showError('operate.select');
 		}
@@ -175,7 +175,7 @@ class ContentcheckController extends AdminBaseController {
 
 	public function doDeletePostAction() {
 
-		$pid = $this->getInput('pid');
+		$pid = $this->getInput('pid', 'post');
 		if (empty($pid)) {
 			$this->showError('operate.select');
 		}

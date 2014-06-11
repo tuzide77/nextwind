@@ -5,7 +5,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PushController.php 20147 2012-10-24 02:52:06Z gao.wanggao $ 
+ * @version $Id: PushController.php 28818 2013-05-24 10:10:46Z gao.wanggao $ 
  * @package 
  */
 
@@ -139,7 +139,7 @@ class PushController extends AdminBaseController {
 	}
 	
 	public function doshieldAction() {
-		$dataid = (int)$this->getInput('dataid', 'get');
+		$dataid = (int)$this->getInput('dataid', 'post');
 		$ds = $this->_getDataDs();
 		$data = $ds->getData($dataid);
 		if (!$data) $this->showError("operate.fail");
@@ -170,7 +170,7 @@ class PushController extends AdminBaseController {
 	}
 	
 	public function doshielddeleteAction() {
-		$shieldid = (int)$this->getInput('shieldid', 'get');
+		$shieldid = (int)$this->getInput('shieldid', 'post');
 		if ($this->_getShieldDs()->deleteShield($shieldid)) {
 			$this->showMessage("operate.success");
 		} else {

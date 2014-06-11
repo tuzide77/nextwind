@@ -28,7 +28,7 @@
 			<th>{$user}</th>
 			<td>
 			<a class="J_dialog mr5" href="{@url:founder/edit?username=$user}" title="编辑">[编辑]</a>
-			<a class="J_ajax_del" href="{@url:founder/del?username=$user}">[取消创始人权限]</a></td>
+			<a class="J_ajax_del" href="{@url:founder/del}" data-pdata="{'username': '{$user}'}">[取消创始人权限]</a></td>
 		</tr>
 <!--# } #-->
 
@@ -63,7 +63,7 @@ Wind.use('dialog', 'ajaxForm', function(){
 			founder_add_btn.removeClass('disabled').prop('disabled', false).text(text.replace('中...', '')).parent().find('span').remove();
 
 			if(data.state == 'success') {
-				Wind.dialog.open( data.referer ,{
+				Wind.dialog.open( decodeURIComponent(data.referer) ,{
 					onClose : function() {
 						$('#J_founder_sub').focus();	//关闭时让触发弹窗的元素获取焦点
 					},

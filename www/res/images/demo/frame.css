@@ -1,0 +1,42 @@
+@charset "UTF-8";/* CSS Document */
+
+*{padding:0;margin:0;font-size:12px; font-family:STHeiti}
+
+.Scroller-Container { position: absolute;top: 0px;left: 0px;}
+.Scrollbar-Up { position: absolute;width: 10px;height: 9px;background:url(su.png) no-repeat;font-size: 0px;}
+.Scrollbar-Track { width: 10px;height: 179px;position: absolute;top: 10px;background-color: #4a310e;}
+.Scrollbar-Handle { position: absolute;width: 8px;height: 28px;background-color: #5c4627;border:1px solid #7a6548}
+.Scrollbar-Down { position: absolute;top: 190px;width: 10px;height: 9px;background:url(sd.png) no-repeat;font-size: 0px;}
+#Scrollbar-Container { position: absolute;top: 0px;left: 125px;_left: 124px}
+#Container { position: absolute;top: 0px;left:14px;width:125px;height: 100%;}
+
+#menu{overflow:auto;overflow-x:hidden;height:100%;}
+#menu dt{color:#d8e35f; line-height:30px; font-size:14px; font-weight:700;padding-left:2px}
+#menu  dd{  line-height:30px; height:30px; overflow:hidden; color:#fff;width:115px}
+#menu  dd a{ font-size:12px; *font-family:mingliu;color:#fff; display:block;line-height:30px; height:30px;padding:0 10px;width:95px; text-decoration:none}
+#menu  dd.active,#menu  dd.current,#menu  dd a:hover{ background:url(menu-current.png) 0 -30px; cursor:pointer}
+#menu  dd.current{ background-position:0 0; font-weight:700}
+
+#framemain{ background:#eeeeee; padding:0px 25px 0px 20px; font-family:Verdana, Geneva, sans-serif;height:100%;_overflow-y:scroll}
+
+h1.lbh1{ font-size:18px; line-height:1.1; font-weight:700; padding:5px; margin:10px 0}
+
+.lbdl1{padding:1px}
+.lbdt1w,.lbdt1{ height:29px; background:url(lbdt1.png) 0 -29px no-repeat ;}
+.lbdt1{ background-position:right top; font-weight:700; clear:both ;  overflow:hidden; cursor:pointer}
+.lbdt1w{ margin-right:20px; padding-left:15px; line-height:29px; color:#F60}
+.lbdd1{ margin:10px 15px; float:left; line-height:1.5; color:#414141;clear:left; text-indent:0; display:inline}
+.ddshow,.ddhide{float:left; height:12px; width:12px; background:url(t_down.gif); margin:8px 5px 10px 0; overflow:hidden}
+.ddhide{background-image:url(t_up.gif)}
+.ddtxt{ width:560px}/*文本描述线宽*/
+.ddtxt ol{margin-left:2em;line-height:22px;padding:0 0 5px;}
+.ddtxt ol em{float:left;width:140px;height:22px;overflow:hidden; font-style:normal;color:#ff5500;}
+.ddcode {display:block;width:960px;}
+.ddcode textarea{ width:46%; float:left; margin:0 1.5% 0 0;display:inline-block; height:250px; border:#ccc 1px solid; padding:2px}
+
+.att{color:#dc0101;}
+a{color:#666; text-decoration:none}
+a:hover{color:#f50; text-decoration:none}
+blockquote{padding:20px;margin:20px;background:#f0f0a1;border:1px dashed #909061color:#000;border:1px dashed #A0A098;}
+
+.htmlcode,.csscode{ font-family:Tahoma;}

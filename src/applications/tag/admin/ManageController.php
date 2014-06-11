@@ -189,7 +189,7 @@ class ManageController extends AdminBaseController {
 	 * 删除话题
 	 */
 	public function deleteAction(){
-		$tagIds = $this->getInput('tag_id');
+		$tagIds = $this->getInput('tag_id', 'post');
 		is_array($tagIds) or $tagIds = explode(',', $tagIds);
 		if (!$tagIds) $this->showError('operate.select');
 		$this->_getTagService()->deleteByTagIds($tagIds);
@@ -239,8 +239,8 @@ class ManageController extends AdminBaseController {
 	 * 合并关联话题
 	 */
 	public function domergeAction(){
-		$tagIds = explode(',', $this->getInput('tag_id'));
-		$tagName = $this->getInput('tag_name');
+		$tagIds = explode(',', $this->getInput('tag_id', 'post'));
+		$tagName = $this->getInput('tag_name', 'post');
 		if (!$tagIds || !$tagName) $this->showError('请输入关联话题名称');
 		$tag = $this->_getTagDs()->getTagByName($tagName);
 		//检查待合并的TAG有无所属话题
@@ -387,7 +387,10 @@ class ManageController extends AdminBaseController {
 	}
 
 	public function deleteCategoryAction() {
-		$id = $this->getInput('id');
+		$id = $this->getInput('id', 'post');
+		if (!$id) {
+			$this->showError('operate.fail');
+		}
 		$this->_getTagCateGoryDs()->deleteCategory($id);
 		$this->showMessage('success');
 	}

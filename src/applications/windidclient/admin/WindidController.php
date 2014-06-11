@@ -6,7 +6,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @author $Author: jieyin $ Foxsee@aliyun.com
  * @copyright ?2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: WindidController.php 24646 2013-02-01 11:35:32Z jieyin $ 
+ * @version $Id: WindidController.php 28890 2013-05-29 06:23:04Z jieyin $ 
  * @package 
  */
 class WindidController extends AdminBaseController {
@@ -17,6 +17,7 @@ class WindidController extends AdminBaseController {
 	}
 	
 	public function dorunAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
 
 		list($windid, $serverUrl, $clientId, $clientKey, $connect) = $this->getInput(array('windid', 'serverUrl', 'clientId', 'clientKey', 'connect'), 'post');
 

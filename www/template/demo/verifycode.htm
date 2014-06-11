@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<template source='header' />
+<template source='header_admin' />
+</head>
+<body>
+	<div class="demo_wrap">
+		<br>
+		<br>
+		<br>
+		<br>
+	
+		<!-- <form class="J_ajaxForm" data-role="list" action="{@url:doupload}" method="post"> -->
+		<form  action="{@url:doverifycode}" method="post" enctype="multipart/form-data">
+				<a href=""><img src="{$code}"></a>
+				<input name="verifycode" type="text" class="input length_1"><input type="submit">
+		</form>
+		<br>
+		
+	</div>
+</body>
+</html>

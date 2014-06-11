@@ -4,7 +4,7 @@
  * @Descript: 前台-私信&消息
  * @Author	: linhao87@gmail.com
  * @Depend	: jquery.js(1.7 or later),
- * $Id: message_index.js 21606 2012-12-11 11:33:10Z hao.lin $
+ * $Id: message_index.js 28797 2013-05-24 05:46:01Z hao.lin $
  */
  
 ;(function(){
@@ -166,7 +166,7 @@
 			dataType : 'json',
 			success : function(data){
 				if(data.state == 'success') {
-					location.href = data.referer;
+					location.href = decodeURIComponent(data.referer);
 				}else if(data.state == 'fail') {
 					Wind.Util.formBtnTips({
 						error : true,

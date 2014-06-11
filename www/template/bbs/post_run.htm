@@ -279,7 +279,7 @@ Wind.use('jquery', 'global', 'ajaxForm', 'dialog', function() {
 						}
 
 						$.each(data.data, function(i, o){
-							li_arr.push('<li><a href="{@url:bbs/draft/doDelete?id=}'+o.id+'" class="pop_close J_draft_del" title="删除草稿">[删除]</a><a href="" data-id="'+ o.id +'" class="insert J_draft_insert" title="载入草稿">[载入]</a><span class="J_draft_title">'+ o.title +'</span><span>'+ o.created_time +'</span></li>');
+							li_arr.push('<li><a data-pdata="{\'id\':\''+o.id+'\'}" href="{@url:bbs/draft/doDelete}" class="pop_close J_draft_del" title="删除草稿">[删除]</a><a href="" data-id="'+ o.id +'" class="insert J_draft_insert" title="载入草稿">[载入]</a><span class="J_draft_title">'+ o.title +'</span><span>'+ o.created_time +'</span></li>');
 
 							//存入内容
 							content_cache[o.id] = o.content;
@@ -326,7 +326,8 @@ Wind.use('jquery', 'global', 'ajaxForm', 'dialog', function() {
 				isMask : false,
 				follow : $this, //跟随触发事件的元素显示
 				onOk : function () {
-					$.getJSON($this.attr('href'), function(data){
+					$('body').trigger('setCustomPost', [$this]);
+					$.post($this.attr('href'), function(data){
 						if(data.state === 'success') {
 							$this.parent('li').remove();
 							
@@ -342,7 +343,7 @@ Wind.use('jquery', 'global', 'ajaxForm', 'dialog', function() {
 								msg : data.message
 							});
 						}
-					});
+					}, 'json');
 				}
 			});
 		}).on('click', 'a.J_draft_insert', function(e){
@@ -391,15 +392,7 @@ var forceTopic = '{$forceTopic}';//是否强制主题分类，1强制
 /*
  * 提交
 */
-	var word_tpl = '<div class="pop_sensitive">\
-			<div class="pop_top J_drag_handle">\
-				<a href="#" class="pop_close J_close">关闭</a>\
-				<strong>提示</strong>\
-			</div><div class="pop_cont">\
-				<div class="not_content_mini" id="J_word_tip"></div>\
-			</div>\
-			<div class="pop_bottom" id="J_word_bototm"></div>\
-			</div>',
+	var word_tpl = '<div class="pop_sensitive"><div class="pop_top J_drag_handle"><a href="#" class="pop_close J_close">关闭</a><strong>提示</strong></div><div class="pop_cont"><div class="not_content_mini" id="J_word_tip"></div></div><div class="pop_bottom" id="J_word_bototm"></div></div>',
 			needcheck = ('{$needcheck}' == '1') ? true : false,		//是否审核
 			post_btn =  $('#J_post_sub');							//提交按钮
 
@@ -547,7 +540,7 @@ var forceTopic = '{$forceTopic}';//是否强制主题分类，1强制
 	 				content_editor.data('windeditor').clear_local_data();
 	 				if(data.referer) {
 	 					setTimeout(function(){
-	 						location.href = data.referer;
+	 						location.href = decodeURIComponent(data.referer);
 	 					}, 10);
 	 				}
 	 			}else if(data.state == 'fail') {

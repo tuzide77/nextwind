@@ -10,7 +10,7 @@ Wind::import('SRV:forum.dm.PwReplyDm');
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwReplyModify.php 24736 2013-02-19 09:24:40Z jieyin $
+ * @version $Id: PwReplyModify.php 28950 2013-05-31 05:58:25Z jieyin $
  * @package forum
  */
 
@@ -131,6 +131,7 @@ class PwReplyModify extends PwPostAction {
 			}
 		}
 		//编辑非自己的帖子回复添加管理日志
+
 		if ($this->info['created_userid'] != $this->user->uid) {
 			$thread = $this->info;
 			$thread['subject'] = $this->postDm->getField('subject') ? $this->postDm->getField('subject') : $this->info['subject'];

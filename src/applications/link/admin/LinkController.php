@@ -7,7 +7,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @author jinlong.panjl <jinlong.panjl@aliyun-inc.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: LinkController.php 20104 2012-10-23 08:48:51Z xiaoxia.xuxx $
+ * @version $Id: LinkController.php 28814 2013-05-24 09:31:14Z jieyin $
  * @package controller.config
  */
 class LinkController extends AdminBaseController {
@@ -144,7 +144,7 @@ class LinkController extends AdminBaseController {
 	 * @return void
 	 */
 	public function doDeleteAction() {
-		$lid = $this->getInput('lid');
+		$lid = $this->getInput('lid', 'post');
 		if (!$lid) $this->showError('operate.select');
 		if (($result = $this->_getLinkSrv()->batchDelete($lid)) instanceof PwError) {
 			$this->showError($result->getError());
@@ -169,7 +169,9 @@ class LinkController extends AdminBaseController {
 	 * @return void
 	 */
 	public function dotypesAction() {
-		list($data,$newdata) = $this->getInput(array('data','newdata'),'post');
+		list($data,$newdata) = $this->getInput(array('data','newdata'), 'post');
+
+		is_array($data) || $data = array();
 		foreach ($data as $k => $v) {
 			if (!$v['typename']) continue;
 			if (Pw::strlen($v['typename']) > 6) {
@@ -182,6 +184,8 @@ class LinkController extends AdminBaseController {
 			*/
 			$this->_getLinkDs()->updateLinkType($v['typeid'],$v['typename'],$v['vieworder']);
 		}
+
+		is_array($newdata) || $newdata = array();
 		if ($newdata) {
 			foreach ($newdata as $v) {
 				if (!$v['typename']) continue;
@@ -208,6 +212,8 @@ class LinkController extends AdminBaseController {
 	 * @return void
 	 */
 	public function doAddTypeAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($typename,$vieworder) = $this->getInput(array('typename','vieworder'), 'post');
 		if (Pw::strlen($typename) > 6) {
 			$this->showError('Link:linkname.len.error');
@@ -228,7 +234,11 @@ class LinkController extends AdminBaseController {
 	 * @return void
 	 */
 	public function doDeleteTypeAction() {
-		$typeId = (int)$this->getInput('typeId','get');
+		$typeId = (int)$this->getInput('typeId','post');
+		if (!$typeId) {
+			$this->showError('operate.fail');
+		}
+
 		if (($result = $this->_getLinkDs()->deleteType($typeId)) instanceof PwError) {
 			$this->showError($result->getError());
 		}
@@ -263,6 +273,8 @@ class LinkController extends AdminBaseController {
 	 * @return void
 	 */
 	public function doCheckAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($data, $lid, $single) = $this->getInput(array('data', 'lid', 'signle'), 'post');
 		if (!$lid) $this->showError('operate.select');
 		Wind::import('SRC:service.link.dm.PwLinkDm');

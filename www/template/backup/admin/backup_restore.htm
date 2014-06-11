@@ -45,7 +45,7 @@
 				<td>{$v['version']}</td>
 				<td>{$v['time']}</td>
 				<td>{$v['num']}</td>
-				<td><a class="J_ajax_del" data-msg="确定要导入吗？" href="{@url:admin/backup/backup/import?isdir=$v['isdir']&dir=$v['dir']&file=$v['name']}">[导入]</a></td>
+				<td><a class="J_ajax_del" data-pdata="{'isdir': '{$v['isdir']}', 'dir':'{$v['dir']}', 'file':'{$v['name']}'}" data-msg="确定要导入吗？" href="{@url:admin/backup/backup/import}">[导入]</a></td>
 			</tr>
 			<!--# } #-->
 		</table>
@@ -60,31 +60,5 @@
 	
 </div>
 <template source='TPL:admin.common.footer' />
-<script>
-/*$('a.J_import').on('click', function(e){
-	e.preventDefault(0);
-	var $this = $(this);
-	Wind.dialog({
-		message	: '确定要导入吗？', 
-		type	: 'confirm', 
-		isMask	: false,
-		follow	: $this,
-		onOk	: function() {
-			$.getJSON($this.attr('href')).done(function(data) {
-				if(data.state === 'success') {
-					resultTip({
-						msg : '导入成功',
-						callback : function(){
-							//reloadPage(window);
-						}
-					});
-				}else if( data.state === 'fail' ) {
-					Wind.dialog.alert(data.message);
-				}
-			});
-		}
-	});
-});*/
-</script>
 </body>
 </html>

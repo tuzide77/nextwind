@@ -9,7 +9,7 @@ Wind::import('SRV:pay.srv.paymethod.PwPayAbstract');
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwAlipay.php 24975 2013-02-27 09:24:54Z jieyin $
+ * @version $Id: PwAlipay.php 26892 2013-04-18 01:24:54Z yetianshi $
  * @package forum
  */
 
@@ -29,11 +29,7 @@ class PwAlipay extends PwPayAbstract {
 		$this->alipay_partnerID = $config['alipaypartnerID'];
 		$this->alipay_interface = $config['alipayinterface'];
 		$this->baseurl = WindUrlHelper::createUrl('bbs/alipay/run');
-		if (!$this->alipay_interface) {
-			$this->alipay_url = 'https://mapi.alipay.com/gateway.do?';	//标准双接口
-		} else {
-			$this->alipay_url = 'https://www.alipay.com/cooperate/gateway.do?'; //即时到帐接口
-		}
+		$this->alipay_url = 'https://mapi.alipay.com/gateway.do?';
 	}
 
 	public function check() {

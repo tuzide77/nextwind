@@ -2,12 +2,12 @@
 Wind::import('ADMIN:library.AdminBaseController');
 
 /**
- * the last known user to change this file in the repository  <$LastChangedBy: jieyin $>
- * @author $Author: jieyin $ Foxsee@aliyun.com
+ * the last known user to change this file in the repository  <$LastChangedBy: taishici $>
+ * @author $Author: taishici $ Foxsee@aliyun.com
  * @copyright ?2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: MedalController.php 24341 2013-01-29 03:08:55Z jieyin $ 
- * @package 
+ * @version $Id: MedalController.php 29742 2013-06-28 08:02:34Z taishici $
+ * @package
  */
  class MedalController extends AdminBaseController{
  	/**
@@ -31,10 +31,10 @@ Wind::import('ADMIN:library.AdminBaseController');
 		$this->setOutput($perpage, 'perpage');
 		$this->setOutput(ceil($count/$perpage), 'totalpage');
  	}
- 	
+
  	/**
  	 * 勋章批量修改
- 	 * 
+ 	 *
  	 */
  	public function dorunAction() {
  		list($medalIds, $ispoens, $orderids, $names, $descrips) = $this->getInput(array('medalid', 'isopen', 'orderid', 'name', 'descrip'), 'post');
@@ -51,9 +51,9 @@ Wind::import('ADMIN:library.AdminBaseController');
 		$this->_getMedalService()->updateCache();
 		$this->showMessage("MEDAL:success");
  	}
- 	
+
  	/**
- 	 * 
+ 	 *
  	 * 勋章添加表单
  	 */
  	public function addAction() {
@@ -61,7 +61,7 @@ Wind::import('ADMIN:library.AdminBaseController');
 		$groups = $userGroup->getAllGroups();
 		$groupTypes = $userGroup->getTypeNames();
 		$medalList = $this->_getMedalDs()->getInfoList(1, 1, 0, 20);
-		
+
 		//组装json数据
 		$medals = $this->_getMedalDs()->getAllOpenMedal();
  		$medalJson = array();
@@ -86,10 +86,10 @@ Wind::import('ADMIN:library.AdminBaseController');
 		$this->setOutput($medalList, 'medalList');
 		$this->setOutput($medalJson, 'medalJson');
  	}
- 	
+
  	/**
  	 * 勋章添加处理
- 	 * 
+ 	 *
  	 */
  	public function doAddAction() {
  		Wind::import('SRV:medal.dm.PwMedalDm');
@@ -129,10 +129,10 @@ Wind::import('ADMIN:library.AdminBaseController');
 		$this->_getMedalService()->updateCache();
 		$this->showMessage("MEDAL:success");
  	}
- 
+
  	/**
  	 * 勋章编辑表单
- 	 * 
+ 	 *
  	 */
  	public function editAction() {
  		$medalId = (int)$this->getInput('id','get');
@@ -144,7 +144,7 @@ Wind::import('ADMIN:library.AdminBaseController');
 		$groups = $userGroup->getAllGroups();
 		$groupTypes = $userGroup->getTypeNames();
 		$medalList = $this->_getMedalDs()->getInfoListByAwardtype($info['award_type'], 1);
-		
+
  		//组装json数据
 		$medals = $this->_getMedalDs()->getAllOpenMedal();
  		$medalJson = array();
@@ -170,10 +170,10 @@ Wind::import('ADMIN:library.AdminBaseController');
 		$this->setOutput($info, 'info');
 		$this->setOutput($medalJson, 'medalJson');
  	}
- 	
+
  	/**
  	 * 勋章修改处理
- 	 * 
+ 	 *
  	 */
  	public function doEditAction() {
  		$medalid = (int)$this->getInput('medalid','post');
@@ -222,13 +222,13 @@ Wind::import('ADMIN:library.AdminBaseController');
 		$this->_getMedalService()->updateCache();
 		$this->showMessage("MEDAL:success");
  	}
- 	
+
  	/**
  	 * 勋章删除处理
- 	 * 
+ 	 *
  	 */
  	public function doDelAction() {
- 		$medalId = (int)$this->getInput('id','get');
+ 		$medalId = (int)$this->getInput('id','post');
  		if ($medalId <1) $this->showError('MEDAL:fail');
  		$info = $this->_getMedalDs()->getMedalInfo($medalId);
  		if ($info['medal_type'] == 1) $this->showError('MEDAL:fail'); //系统勋章不能删除
@@ -241,7 +241,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  		$this->_getMedalService()->updateCache();
  		$this->showMessage("MEDAL:success");
  	}
- 	
+
  	/**
  	 * 更新所有的勋章统计
  	 * Enter description here ...
@@ -268,10 +268,10 @@ Wind::import('ADMIN:library.AdminBaseController');
 		}
 		$this->showMessage("MEDAL:success");
  	}
- 	
+
  	/**
  	 * 勋章颁发列表页
- 	 * 
+ 	 *
  	 */
  	public function awardAction() {
  		$_empty = false;
@@ -298,7 +298,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  		} else {
  			$_medalIds = array();
  		}
- 		
+
 		list($start, $perpage) = Pw::page2limit($page, $perpage);
 		$list = $medals = $users = array();
 		$count = 0 ;
@@ -316,7 +316,7 @@ Wind::import('ADMIN:library.AdminBaseController');
 			}
 			$count = $this->_getMedalLogDs()->countMedalLogList($uid,  PwMedalLog::STATUS_AWARDED, $_medalIds);
 		}
- 		
+
  		$args = array('medalid' => $medalId, 'receivetype' => $receivetype, 'username' => $username);
 		$this->setOutput($args, 'args');
  		$this->setOutput($list, 'list');
@@ -329,21 +329,21 @@ Wind::import('ADMIN:library.AdminBaseController');
 		$this->setOutput($username, 'username');
 		$this->setOutput($medalId, 'medalId');
  	}
- 	
+
  	/**
  	 * 勋章收回
- 	 * 
+ 	 *
  	 */
  	public function doStopAction() {
- 		$logid = (int)$this->getInput('logid','get');
+ 		$logid = (int)$this->getInput('logid','post');
  		$resource = $this->_getMedalService()->stopAward($logid, 7);
  		if ($resource instanceof PwError) $this->showError($resource->getError());
  		$this->showMessage("MEDAL:success");
  	}
- 	
+
  	/**
  	 * 批量勋章收回
- 	 * 
+ 	 *
  	 */
  	public function batchStopAction() {
  		$logids = (array)$this->getInput('logids','post');
@@ -352,16 +352,16 @@ Wind::import('ADMIN:library.AdminBaseController');
  		}
  		$this->showMessage("MEDAL:success");
  	}
- 	
+
  	/**
  	 * 勋章颁发
- 	 * 
+ 	 *
  	 */
  	public function addAwardAction() {
  		$medalList = $this->_getMedalDs()->getInfoListByReceiveType(2, 1);
  		$this->setOutput($medalList, 'medalList');
  	}
- 	
+
  	/**
  	 * 管理员批量颁发勋章策略
  	 * Enter description here ...
@@ -378,7 +378,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  		$users = $userDs->fetchUserByName($usernames);
  		//$users = array_keys($userInfos);
  		if (!is_array($users) || count($users) < 1) $this->showError('MEDAL:username.fail');
- 		
+
  		$info = $this->_getMedalDs()->getMedalInfo($medalId);
  		if (!$info)  $this->showError('MEDAL:medal.fail');
  		$time = Pw::getTime();
@@ -425,10 +425,10 @@ Wind::import('ADMIN:library.AdminBaseController');
  		$msg = $msg ? $msg : 'MEDAL:success';
  		$this->showMessage($msg);
  	}
- 	
+
  	/**
  	 * 审核勋章
- 	 * 
+ 	 *
  	 */
  	public function approvalAction(){
  		$_empty = false;
@@ -458,7 +458,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  			$medal['medalImage'] = $sevice->getMedalImage($medal['path'], $medal['icon']);
  		}
  		$count = $this->_getMedalLogDs()->countInfo($uid, 2, $medalId);
- 		
+
  		$medalList = $this->_getMedalDs()->getInfoListByReceiveType(2, 1);
  		if ($_empty) $list = array();
  		$this->setOutput($medalList, 'medalList');
@@ -474,10 +474,10 @@ Wind::import('ADMIN:library.AdminBaseController');
 		$this->setOutput($username, 'username');
 		$this->setOutput($medalId, 'medalId');
  	}
- 	
+
  	/**
  	 * 审核勋章操作
- 	 * 
+ 	 *
  	 */
  	public function doEditApplyAction() {
  		$logId = (int)$this->getInput('id','get');
@@ -499,10 +499,10 @@ Wind::import('ADMIN:library.AdminBaseController');
  		}
  		$this->showMessage("MEDAL:success");
  	}
- 	
+
  	/**
  	 * 勋章申请批量操作
- 	 * 
+ 	 *
  	 */
  	public function batchPassAction() {
  		$logids = (array)$this->getInput('logids','post');
@@ -518,7 +518,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  		}
  		$this->showMessage("MEDAL:success");
  	}
- 	
+
  	public function batchDisclaimAction() {
  		$logids = (array)$this->getInput('logids','post');
  		Wind::import('SRV:medal.dm.PwMedalLogDm');
@@ -531,12 +531,12 @@ Wind::import('ADMIN:library.AdminBaseController');
  		}
  		$this->showMessage("MEDAL:success");
  	}
- 	
+
  	public function setAction() {
  		$config = Wekit::C()->getValues('site');
 		$this->setOutput($config, 'config');
  	}
- 	
+
  	public function doSetAction() {
  		$config = new PwConfigSet('site');
  		$isopen = (int)$this->getInput('isopen', 'post');
@@ -545,7 +545,7 @@ Wind::import('ADMIN:library.AdminBaseController');
 		Wekit::load('SRV:nav.srv.PwNavService')->updateNavOpen('medal', $isopen);
 		$this->showMessage('MEDAL:success');
  	}
- 	
+
  	private function _uploadImage($key = 'image') {
  		Wind::import('SRV:upload.action.PwMedalUpload');
 		Wind::import('LIB:upload.PwUpload');
@@ -563,7 +563,7 @@ Wind::import('ADMIN:library.AdminBaseController');
 		}
 		return $bhv->getAttachInfo();
  	}
-	
+
  	/**
  	 * Enter description here ...
  	 *
@@ -572,7 +572,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  	private function _getMedalService() {
 		return Wekit::load('SRV:medal.srv.PwMedalService');
 	}
-	
+
 	/**
 	 * Enter description here ...
 	 *
@@ -581,11 +581,11 @@ Wind::import('ADMIN:library.AdminBaseController');
 	private function _getMedalDs() {
 		return Wekit::load('SRV:medal.PwMedalInfo');
 	}
-	
+
  	private function _getMedalUserDs() {
 		return Wekit::load('SRV:medal.PwMedalUser');
 	}
-	
+
  	/**
  	 * Enter description here ...
  	 *

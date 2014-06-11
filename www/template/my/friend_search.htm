@@ -85,7 +85,7 @@
 										<!--# if (isset($friends[$value['uid']])) { #-->
 										<span class="mnfollow" title="互相关注">互相关注</span>
 										<!--# } if (isset($follows[$value['uid']])) { #-->
-										<a href="{@url:my/follow/delete?uid=$value['uid']&csrf_token=$csrf_token}" class="core_unfollow J_fans_follow J_unfollow_btn" data-role="unfollow" data-uid="{$value['uid']}" data-role="unfollow" style="display:none;" data-followed="{$isfan}">取消关注</a>
+										<a href="{@url:my/follow/delete?csrf_token=$csrf_token}" class="core_unfollow J_fans_follow J_unfollow_btn" data-role="unfollow" data-uid="{$value['uid']}" data-role="unfollow" style="display:none;" data-followed="{$isfan}">取消关注</a>
 										<!--# } else { #-->
 										<a href="{@url:my/follow/add?csrf_token=$csrf_token}" class="core_follow J_fans_follow" data-role="follow" data-uid="{$value['uid']}" data-role="follow" data-followed="{$isfan}">加关注</a>
 										<!--# } #-->

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+	<application>
+		<name>Wind Application Demo</name>
+		<version>0.0.1</version>
+		<minimum_wind_version>0.8.0</minimum_wind_version>
+		<description>Wind Application Demo</description>
+		<charset>UTF-8</charset>
+		<icons></icons>
+		<homepage_url></homepage_url>
+		<update_url></update_url>
+		<author>
+			<name>liusanbian</name>
+			<email>liusanbian@aliyun-inc.com</email>
+		</author>
+	</application>
+	<directory>directory</directory>
+	<products>products</products>
+	<plugins>plugins</plugins>
+	<themes></themes>
+	<publicKey></publicKey>
+	<permissions></permissions>
+</manifest>
+

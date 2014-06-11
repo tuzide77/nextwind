@@ -1,7 +1,7 @@
 							<dl class="cc"{$new_replyattr|html}>
 								<dt class="feed_face"><a class="J_user_card_show" data-uid="{$fresh['created_userid']}" href="{@url:space/index/run?uid=$fresh['created_userid']}"><img src="{@Pw::getAvatar($fresh['created_userid'], 'small')}" width="50" height="50" alt="{$fresh['created_username']}" class="J_avatar" data-type="small" /></a></dt>
 								<dd class="feed_content J_feed_content">
-									<!--# if (!empty($freshDelete)) { #--><a href="{@url:my/fresh/delete?id=$fresh['id']}" class="feed_lists_del J_fresh_del">删除</a><!--# } #-->
+									<!--# if (!empty($freshDelete)) { #--><a href="{@url:my/fresh/delete}" data-pdata="{'id':'{$fresh['id']}'}" class="feed_lists_del J_fresh_del">删除</a><!--# } #-->
 									<div class="content">
 										<!--# if ($fresh['title']) { #-->
 										<a data-uid="{$fresh['created_userid']}" href="{@url:space/index/run?uid=$fresh['created_userid']}" class="J_user_card_show name">{$fresh['created_username']}</a>：

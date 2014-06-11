@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+	<application>
+		<name>本地搜索</name>
+		<alias>search</alias>
+		<version>1.0</version>
+		<pw-version>9.0</pw-version>
+		<type>app</type>
+		<description>本地搜索</description>
+		<charset>utf-8</charset>
+		<logo>images/logo.png</logo>
+		<author-name>信天</author-name>
+		<author-email>leven.pan@gmail.com</author-email>
+	</application>
+	
+	<res>res</res>
+	<install>EXT:search.service.srv.App_Search_Install</install>
+	<inject-services>
+		<hook-name name="s_admin_menu">
+			<alias name="app_search">
+				<class>EXT:search.service.srv.App_Search_ConfigDo</class>
+				<loadway>load</loadway>
+				<method>getAdminMenu</method>
+				<description>本地搜索后台菜单扩展</description>
+			</alias>
+		</hook-name>
+		<hook-name name="s_permissionCategoryConfig">
+			<alias name="app_search">
+				<class>EXT:search.service.srv.App_Search_ConfigDo</class>
+				<loadway>load</loadway>
+				<method>getPermissionCategoryConfig</method>
+				<description>用户组权限扩展</description>
+			</alias>
+		</hook-name>
+		<hook-name name="s_permissionConfig">
+			<alias name="app_search">
+				<class>EXT:search.service.srv.App_Search_ConfigDo</class>
+				<loadway>load</loadway>
+				<method>getPermissionConfig</method>
+				<description>用户组根权限扩展</description>
+			</alias>
+		</hook-name>
+	</inject-services>
+</manifest>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+	<application>
+		<name>马甲绑定</name>                  
+		<alias>majia</alias>
+		<version>1.0</version>	 
+		<pw-version>9.0</pw-version>       
+		<description>多帐号绑定</description>   
+		<logo>images/logo.jpg</logo>		
+		<type>app</type>					
+		<charset>UTF-8</charset>		 
+		<website>http://www.cnblogs.com/xiaoyaoxia</website>	 
+		<author-name>肖肖</author-name>		     
+		<author-email>x_824@sina.com</author-email>		  	
+		<author-icon>your icon</author-icon>	         
+	</application>
+
+	<res>res</res>
+	<install>EXT:majia.service.srv.App_Majia_Install</install>
+	<inject-services>
+<s_admin_menu>
+	<app_majia>
+		<class>EXT:majia.service.srv.App_Majia_ConfigDo</class>
+		<loadway>load</loadway>
+		<method>getAdminMenu</method>
+		<description>马甲绑定admin menu</description>
+	</app_majia>
+</s_admin_menu>
+<s_PwUser_delete>
+	<app_majia>
+		<class>EXT:majia.service.App_Majia_Majia</class>
+		<loadway>load</loadway>
+		<method>deleteByUid</method>
+		<description>马甲绑定清除用户同步清除绑定信息</description>
+	</app_majia>
+</s_PwUser_delete>
+<s_header_my>
+	<app_majia>
+		<class>EXT:majia.service.srv.App_Majia_HeadHook</class>
+		<loadway>load</loadway>
+		<method>createHtmlForUserHead</method>
+		<expression>config:app_majia.isopen==1</expression>
+		<description>马甲绑定:前台点击帐号的下拉框</description>
+	</app_majia>
+</s_header_my>
+<s_footer>
+	<app_majia>
+		<class>EXT:majia.service.srv.App_Majia_HeadHook</class>
+		<loadway>load</loadway>
+		<method>createHtmlForFooter</method>
+		<expression>config:app_majia.isopen==1</expression>
+		<description>马甲绑定:底部的js</description>
+	</app_majia>
+</s_footer>
+<s_profile_menus>
+	<app_majia>
+		<class>EXT:majia.service.srv.App_Majia_ConfigDo</class>
+		<loadway>load</loadway>
+		<method>registProfile</method>
+		<expression>config:app_majia.isopen==1</expression>
+		<description>马甲绑定:个人资料页扩展</description>
+	</app_majia>
+</s_profile_menus>
+<c_profile_extends_run>
+	<app_majia>
+		<class>EXT:majia.service.srv.injector.App_Majia_ProfileInjector</class>
+		<method>run</method>
+		<expression>service:current==profile_app_majia</expression>
+		<description>用户菜单功能扩展-展示</description>
+	</app_majia>
+</c_profile_extends_run>
+</inject-services>
+</manifest>

@@ -9,7 +9,7 @@ Wind::import('LIB:upload.PwUploadAction');
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: WindidAvatarUpload.php 24829 2013-02-22 03:46:48Z jieyin $
+ * @version $Id: WindidAvatarUpload.php 28884 2013-05-29 02:44:27Z jieyin $
  * @package upload
  */
 
@@ -18,9 +18,11 @@ class WindidAvatarUpload extends PwUploadAction {
 	public $isLocal = false;
 	public $uid;
 	public $udir;
+	public $mime = array();
 
 	public function __construct($uid) {
 		$this->ftype = array('jpg' => 2000, 'png' => 2000, 'jpeg' => 2000);
+		$this->mime = array('image/jpeg', 'image/png', 'image/jpg');
 		$this->uid = $uid;
 		$this->udir = Pw::getUserDir($this->uid);
 	}
@@ -77,6 +79,15 @@ class WindidAvatarUpload extends PwUploadAction {
 	public function allowWaterMark() {
 		return false;
 		//return $this->forum->forumset['watermark'];
+	}
+	
+	/**
+	 * @see PwUploadAction.fileError
+	 */
+	public function fileError(PwUploadFile $file) {
+		parent::fileError($file);
+		$srv = Wekit::load('WSRV:user.srv.WindidUserService');
+		$srv->defaultAvatar($this->uid);
 	}
 
 	/**

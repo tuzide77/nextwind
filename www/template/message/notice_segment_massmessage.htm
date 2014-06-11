@@ -11,7 +11,7 @@
 		</dt>
 		<dd class="notice_segment_cont">
 			<div class="summary">
-				<!--# echo $v['title'] ? Pw::substrs($v['title'],43) : Pw::substrs(strip_tags($v['extend_params']['content'],true),43);#-->
+				<!--# echo $v['title'] ? WindSecurity::escapeHTML(Pw::substrs($v['title'],43)) : WindSecurity::escapeHTML(Pw::substrs(strip_tags($v['extend_params']['content'],true),43));#-->
 			</div>
 			<div class="time"><!--# echo Pw::time2str($v['modified_time'],'auto');#--></div>
 		</dd>
@@ -28,7 +28,7 @@
 			</dt>
 			<dd class="notice_segment_cont">
 				<div class="summary">
-					<!--# echo Pw::substrs($notice['title'],43); #-->
+					<!--# Pw::echoStr(Pw::substrs($notice['title'],43)); #-->
 					<div>{$notice['extend_params']['content']|html}</div>
 				</div>
 				<div class="time"><!--# echo Pw::time2str($notice['modified_time'],'auto');#--></div>
@@ -53,12 +53,12 @@
 				<!--# } else { #-->
 				<span class="icon_system" title="已读"></span>
 				<!--# } #-->
-				</span><!--# echo $v['title'] ? Pw::substrs($v['title'],43) : Pw::substrs(strip_tags($v['extend_params']['content'],true),43);#-->
+				</span><!--# echo $v['title'] ? WindSecurity::escapeHTML(Pw::substrs($v['title'],43)) : WindSecurity::escapeHTML(Pw::substrs(strip_tags($v['extend_params']['content'],true),43));#-->
 			</div>
 			<div class="title J_notice_all" style="display:none;padding-right:20px;"></div>
 			<div class="info">
 				<span class="time"><!--# echo Pw::time2str($v['modified_time'], 'auto');#--></span>
-				<span class="operating"><span class="line">|</span><a class="J_msg_del" href="{@url:message/notice/delete?id=$v['id']}">删除</a></span>
+				<span class="operating"><span class="line">|</span><a class="J_msg_del" href="#" data-uri="{@url:message/notice/delete}" data-pdata="{'id':'{$v['id']}'}">删除</a></span>
 			</div>
 		</div>
 	</div>
@@ -75,7 +75,7 @@
 	<!--# } #-->
 	</span>
 	<!--# if ($notice['title']) { #-->
-		<!--# echo Pw::substrs($notice['title'],43); #--><br />
+		<!--# Pw::echoStr(Pw::substrs($notice['title'],43)); #--><br />
 	<!--# } #-->
 	{$notice['extend_params']['content']|html}
 </div>

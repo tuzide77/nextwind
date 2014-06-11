@@ -35,6 +35,8 @@ class CreditController extends AdminBaseController {
 	 * 积分设置-保存设置操作
 	 */
 	public function doSettingAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$credits = $this->getInput('credits', 'post');
 		if (!is_array($credits) || empty($credits)) {
 			$this->showError("CREDIT:setting.dataError", "credit/credit/run");
@@ -47,7 +49,11 @@ class CreditController extends AdminBaseController {
 	 * 删除积分操作
 	 */
 	public function doDeleteAction() {
-		$creditId = (int) $this->getInput("creditId");
+		$creditId = (int) $this->getInput("creditId", 'post');
+		if (!$creditId) {
+			$this->showError('operate.fail');
+		}
+
 		if ($creditId < 5) $this->showError('CREDIT:setting.doDelete.fail', 'credit/credit/run');
 		if (($result = $this->_getCreditService()->deleteCredit($creditId)) instanceof PwError) {
 			$this->showError($result->getError(), "credit/credit/run");
@@ -109,10 +115,13 @@ class CreditController extends AdminBaseController {
 	 * 积分充值-充值设置操作
 	 */
 	public function dorechargeAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($recharge, $ctype, $rate, $min) = $this->getInput(
 			array('recharge', 'ctype', 'rate', 'min'));
 		
-		!$recharge && $recharge = array();
+		is_array($recharge) || $recharge = array();
+		is_array($ctype) || $ctype = array();
 		foreach ($ctype as $key => $value) {
 			if ($rate[$key] && !isset($recharge[$value])) {
 				$recharge[$value] = array(
@@ -142,6 +151,8 @@ class CreditController extends AdminBaseController {
 	 * 积分转换-编辑操作
 	 */
 	public function doexchangeAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($exchange_old, $ifopen_old, $credit1, $credit2, $value1, $value2, $ifopen) = $this->getInput(
 			array('exchange_old', 'ifopen_old', 'credit1', 'credit2', 'value1', 'value2', 'ifopen'));
 		$old = array();
@@ -154,6 +165,7 @@ class CreditController extends AdminBaseController {
 			}
 		}
 		
+		is_array($credit1) || $credit1 = array();
 		foreach ($credit1 as $key => $value) {
 			if (!$value || !$credit2[$key] || !$value1[$key] || !$value2[$key]) continue;
 			if ($value == $credit2[$key]) {
@@ -174,7 +186,11 @@ class CreditController extends AdminBaseController {
 	}
 
 	public function delexchangeAction() {
-		$id = $this->getInput('id');
+		$id = $this->getInput('id', 'post');
+		if (!$id) {
+			$this->showError('operate.fail');
+		}
+
 		$exchange = Wekit::C('credit', 'exchange');
 		if (isset($exchange[$id])) {
 			unset($exchange[$id]);
@@ -199,6 +215,8 @@ class CreditController extends AdminBaseController {
 	 * 积分转账设置操作
 	 */
 	public function dotransferAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($ifopen, $rate, $min) = $this->getInput(array('ifopen', 'rate', 'min'));
 		
 		Wind::import('SRV:credit.bo.PwCreditBo');

@@ -1,11 +1,11 @@
 <?php
 Wind::import('APPS:design.admin.DesignBaseController');
 /**
- * the last known user to change this file in the repository  <$LastChangedBy: jieyin $>
- * @author $Author: jieyin $ Foxsee@aliyun.com
+ * the last known user to change this file in the repository  <$LastChangedBy: gao.wanggao $>
+ * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: DataController.php 23975 2013-01-17 10:20:11Z jieyin $ 
+ * @version $Id: DataController.php 28818 2013-05-24 10:10:46Z gao.wanggao $ 
  * @package 
  */
 class DataController extends DesignBaseController {	
@@ -93,7 +93,7 @@ class DataController extends DesignBaseController {
 	}
 	
 	public function doshieldAction() {
-		$dataid = (int)$this->getInput('dataid', 'get');
+		$dataid = (int)$this->getInput('dataid', 'post');
 		$ds = $this->_getDataDs();
 		$data = $ds->getData($dataid);
 		if (!$data) $this->showError("operate.fail");
@@ -156,7 +156,7 @@ class DataController extends DesignBaseController {
 	
 	
 	public function dopushAction() {
-		$pushid = (int)$this->getInput('pushid','get');
+		$pushid = (int)$this->getInput('pushid','post');
 		$pushDs = $this->_getPushDs();
 		$pushDs->updateStatus($pushid, PwDesignPush::ISSHOW);
 		Wind::import('SRV:design.srv.data.PwAutoData');
@@ -166,7 +166,7 @@ class DataController extends DesignBaseController {
 	}
 	
 	public function delpushAction() {
-		$pushid = (int)$this->getInput('pushid','get');
+		$pushid = (int)$this->getInput('pushid','post');
 		$push = $this->_getPushDs()->getPush($pushid);
 		if (!$push) $this->showError("operate.fail");
 		if($this->_getPushDs()->deletePush($pushid)) {

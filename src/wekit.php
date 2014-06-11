@@ -2,9 +2,9 @@
 define('WEKIT_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 define('WEKIT_VERSION', '0.3.9');
 define('NEXT_VERSION', '9.0');
-define('NEXT_RELEASE', '20130227');
-define('NEXT_FIXBUG','9000001');
-defined('WIND_DEBUG') || define('WIND_DEBUG', 0);
+define('NEXT_RELEASE', '20130702');
+define('NEXT_FIXBUG','9000002');
+defined('WIND_DEBUG') || define('WIND_DEBUG', 1);
 
 require WEKIT_PATH . '../wind/Wind.php';
 
@@ -13,7 +13,7 @@ require WEKIT_PATH . '../wind/Wind.php';
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: wekit.php 26482 2013-04-10 02:35:19Z jieyin $
+ * @version $Id: wekit.php 29883 2013-07-02 07:48:55Z long.shi $
  * @package wekit
  */
 class Wekit {
@@ -197,7 +197,7 @@ class Wekit {
 	public static function V($key) {
 		return self::$_var[$key];
 	}
-	
+
 	/**
 	 * 设置全局基本配置
 	 *
@@ -255,13 +255,13 @@ class Wekit {
 		}
 		return $var;
 	}
-	
+
 	/**
 	 * 加载系统配置
 	 */
 	protected static function _loadSystemConfig($name) {
 		self::$_sc = WindUtility::mergeArray(
-			include WEKIT_PATH . '../conf/application/default.php', 
+			include WEKIT_PATH . '../conf/application/default.php',
 			include WEKIT_PATH . '../conf/application/' . $name . '.php'
 		);
 	}
@@ -280,7 +280,7 @@ class Wekit {
 		Wind::import('WIND:utility.WindSecurity');
 		Wind::import('WIND:utility.WindString');
 		Wind::import('WIND:utility.WindConvert');
-		
+
 		Wind::import('LIB:base.*');
 		Wind::import('LIB:engine.extension.viewer.*');
 		Wind::import('LIB:engine.component.*');
@@ -293,7 +293,7 @@ class Wekit {
 		Wind::import('LIB:Pw');
 		Wind::import('LIB:PwLoader');
 		Wind::import('LIB:filter.PwFrontFilters');
-		
+
 		Wind::import('WINDID:WindidApi');
 	}
 }

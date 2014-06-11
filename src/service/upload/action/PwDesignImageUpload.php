@@ -9,18 +9,19 @@ Wind::import('COM:utility.WindUtility');
  * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwDesignImageUpload.php 24832 2013-02-22 04:53:40Z gao.wanggao $ 
+ * @version $Id: PwDesignImageUpload.php 28882 2013-05-28 10:51:23Z gao.wanggao $ 
  * @package 
  */
 
 class PwDesignImageUpload extends PwUploadAction {
 	
 	private $moduleid;
+	private $mime = array();
 	
 	public function __construct($moduleid = 0) {
 		$this->moduleid = $moduleid;
 		$this->ftype = array('jpeg' => 2000,'jpg' => 2000, 'png' => 2000, 'gif' => 2000);
-
+		$this->mime  = array('image/jpeg', 'image/jpg', 'image/png', 'image/gif');
 	}
 	
 	/**

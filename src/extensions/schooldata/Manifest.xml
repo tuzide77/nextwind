@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+	<application>
+		<name>学校数据</name>
+		<alias>schooldata</alias>
+		<version>1.0</version>
+		<pw-version>9.0</pw-version>
+		<type>app</type>
+		<description>学校数据</description>
+		<charset>utf-8</charset>
+		<author-name>信天</author-name>
+		<author-email>leven.pan@gmail.com</author-email>
+	</application>
+	
+	<res>res</res>
+	<install>EXT:schooldata.service.srv.App_Schooldata_Install</install>
+	<inject-services>
+		<hook-name name="s_admin_menu">
+			<alias name="app_schooldata">
+				<class>EXT:schooldata.service.srv.App_Schooldata_ConfigDo</class>
+				<loadway>load</loadway>
+				<method>getAdminMenu</method>
+				<description>学校数据后台菜单扩展</description>
+			</alias>
+		</hook-name>
+	</inject-services>
+</manifest>

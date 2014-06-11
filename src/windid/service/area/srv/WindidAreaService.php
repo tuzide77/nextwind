@@ -6,7 +6,7 @@
  * @author xiaoxia.xu <xiaoxia.xuxx@aliyun-inc.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: WindidAreaService.php 24489 2013-01-31 02:59:09Z jieyin $
+ * @version $Id: WindidAreaService.php 28948 2013-05-31 05:02:59Z jieyin $
  * @package service.area.srv
  */
 class WindidAreaService {

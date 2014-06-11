@@ -6,7 +6,7 @@ defined('WEKIT_VERSION') || exit('Forbidden');
  *
  * @author Jianmin Chen <sky_hold@163.com>
  * @license http://www.phpwind.com
- * @version $Id: BuythreadController.php 24066 2013-01-21 07:30:33Z jinlong.panjl $
+ * @version $Id: BuythreadController.php 28868 2013-05-28 04:06:20Z jieyin $
  * @package forum
  */
 
@@ -52,7 +52,7 @@ class BuythreadController extends PwBaseController {
 	public function buyAction() {
 		
 		list($tid, $pid) = $this->getInput(array('tid', 'pid'));
-		$submit = (int)$this->getInput('submit', 'get');
+		$submit = (int)$this->getInput('submit', 'post');
 		if (!$this->loginUser->isExists()) {
 			$this->showError('login.not');
 		}

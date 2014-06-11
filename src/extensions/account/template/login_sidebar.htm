@@ -1,0 +1,57 @@
+<hook-action name="displayLoginSidebarHtml" args="info">
+<style>
+.header_account_wrap{
+	float:left;
+	margin-right:5px;
+}
+.header_account_wrap .hd{
+	display:inline-block;
+}
+.header_account_wrap .hd span{
+	padding-right:3px;
+	display:inline-block;
+}
+.header_account_wrap .core_menu{
+	margin-top:13px;
+}
+.header_account_wrap .core_menu_list{
+	padding:5px !important;
+}
+.header_account_wrap li{
+	margin-bottom:3px;
+}
+.header_account_wrap a{
+	display:inline-block;
+	line-height:23px;
+	height:23px;
+	padding-left:22px;
+	background:url({@G:url.extres}/account/images/header_account_icon.png) 0 5px no-repeat;
+}
+.header_account_wrap a.account_alipay{
+	background-position:2px -86px;
+	padding-left:22px !important;
+}
+.header_account_wrap a.account_qq{
+	background-position:2px -26px;
+	padding-left:22px !important;
+}
+.header_account_wrap a.account_weibo{
+	background-position:0 -56px;
+	padding-left:22px !important;
+}
+
+
+</style>
+<div class="mb10">其他帐号登录</div>
+<div class="header_account_wrap">
+	<ul>
+	<!--# 
+	foreach($info as $type => $value){
+	#-->
+		<li><a onclick="{$value['href']}" class="{$value['class']}">{$value['name']}</a></li>
+	<!--# 	
+	}
+	#-->
+	</ul>
+</div>
+</hook-action>

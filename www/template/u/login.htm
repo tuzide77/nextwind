@@ -85,15 +85,7 @@ Wind.use('jquery', 'global', 'validate', 'ajaxForm', function(){
 		code : ''
 	};
 
-	var login_qa = $('#J_login_qa'), $qa_html = $('<dl id="J_qa_wrap" class="cc">\
-							<dt><label for="J_login_question">安全问题</label></dt>\
-							<dd><select id="J_login_question" name="question" class="select_4"></select></dd>\
-						</dl>\
-						<dl class="cc">\
-							<dt><label for="J_login_answer">您的答案</label></dt>\
-							<dd><input id="J_login_answer" name="answer" type="text" class="input length_4" value=""></dd>\
-							<dd id="J_u_login_tip_answer" class="dd_r"></dd>\
-						</dl>');
+	var login_qa = $('#J_login_qa'), $qa_html = $('<dl id="J_qa_wrap" class="cc"><dt><label for="J_login_question">安全问题</label></dt><dd><select id="J_login_question" name="question" class="select_4"></select></dd></dl><dl class="cc"><dt><label for="J_login_answer">您的答案</label></dt><dd><input id="J_login_answer" name="answer" type="text" class="input length_4" value=""></dd><dd id="J_u_login_tip_answer" class="dd_r"></dd></dl>');
 	var _statu = '',
 		login_tip_username = $('#J_u_login_tip_username');
 
@@ -276,7 +268,7 @@ Wind.use('jquery', 'global', 'validate', 'ajaxForm', function(){
 								});
 							}, 'html');
 						}else{
-							window.location.href = data.referer;
+							window.location.href = decodeURIComponent(data.referer);
 						}
 						
 					}else if(data.state === 'fail'){

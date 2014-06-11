@@ -10,7 +10,7 @@ Wind::import('LIB:upload.PwUploadFile');
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwUpload.php 23975 2013-01-17 10:20:11Z jieyin $
+ * @version $Id: PwUpload.php 28967 2013-05-31 11:40:43Z jieyin $
  * @package upload
  */
 
@@ -105,6 +105,7 @@ class PwUpload {
 				return new PwError('upload.fail');
 			}
 			if (($result = $file->operate($this->bhv, $this->store)) !== true) {
+				$this->bhv->fileError($file);
 				return $result;
 			}
 			if (($result = $this->saveFile($file)) !== true) {

@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<template source='TPL:admin.common.head' />
+</head>
+<body>
+<div class="wrap J_check_wrap">
+
+	<form class="J_ajaxForm" data-role="list" action="{@url:app/search/manage/doRun}" method="post">
+	<div class="h_a">本地搜索设置</div>
+	<div class="table_full">
+		<table width="100%">
+			<col class="th" />
+			<col width="400" />
+			<col />
+			<tr>
+				<th>功能开启</th>
+				<td>
+					<ul class="switch_list cc">
+						<li><label><input type="radio" name="conf[isopen]" value="1" {@Pw::ifcheck($conf['isopen'] == 1)}><span>开启</span></label></li>
+						<li><label><input type="radio" name="conf[isopen]" value="0" {@Pw::ifcheck($conf['isopen'] == 0)}><span>关闭</span></label></li>
+					</ul>
+				</td>
+				<td><div class="fun_tips">开启后，本地搜索功能才可以使用</div></td>
+			</tr>
+			
+		</table>
+	</div>
+	<div class="btn_wrap">
+		<div class="btn_wrap_pd">
+			<button class="btn btn_submit J_ajax_submit_btn" type="submit">提交</button>
+		</div>
+	</div>
+	</form>
+</div>
+<template source='TPL:admin.common.footer' />
+</body>
+</html>

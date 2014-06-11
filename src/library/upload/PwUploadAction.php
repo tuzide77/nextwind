@@ -7,7 +7,7 @@ defined('WEKIT_VERSION') || exit('Forbidden');
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwUploadAction.php 23975 2013-01-17 10:20:11Z jieyin $
+ * @version $Id: PwUploadAction.php 28884 2013-05-29 02:44:27Z jieyin $
  * @package upload
  */
 
@@ -108,6 +108,16 @@ abstract class PwUploadAction {
 	 */
 	public function getWaterMarkInfo() {
 		return array();
+	}
+	
+	/**
+	 * 附件上传失败，回调函数
+	 *
+	 * @param PwUploadFile $file
+	 * @return void
+	 */
+	public function fileError(PwUploadFile $file) {
+		Pw::deleteFile($file->source);
 	}
 	
 	/**

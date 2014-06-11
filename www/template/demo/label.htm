@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+<head>
+<template source='header' />
+<template source='header_admin' />
+</head>
+<body>
+<div class="demo_wrap">
+	<div class="uidemo_wrap">
+		 <ul class="demo_nav cc mb10">
+				 <li><a href="">全局</a></li>
+				 <li><a href="">论坛</a></li>
+				 <li><a href="">个人中心</a></li>
+				 <li><a href="">文章系统</a></li>
+		 </ul>
+		<div class="tabs_content">
+<!--===========================================选项卡1========================================-->
+
+			 <div>
+		<!--组件块-->
+				<div class="section_tag">
+					<h2>用户相关</h2>
+					<div class="cc table_full">
+						<table width="100%">
+							<col class="th">
+							<tr>
+								<th>用户名</th>
+								<td>{name}</td>
+							</tr>
+							<tr>
+								<th>UID</th>
+								<td>{uid}</td>
+							</tr>
+							<tr>
+								<th>用户个人中心链接</th>
+								<td>{url}</td>
+							</tr>
+							<tr>
+								<th>其他</th>
+								<td>等等</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+		<!--组件块结束-->
+								
+		<!--组件块-->
+				<div class="section_tag">
+					<h2>风格方面</h2>
+					<div class="cc table_full">
+						<table width="100%">
+							<col class="th">
+							<tr>
+								<th>@G:theme.xxx</th>
+								<td>Manifest.xml里针对风格的变量可任意扩展</td>
+							</tr>
+							<tr>
+								<th>@G:theme.url.css</th>
+								<td>themes/css 独立路径变量,部署时可定义</td>
+							</tr>
+							<tr>
+								<th>@G:theme.url.img</th>
+								<td>themes/images 独立路径变量,部署时可定义</td>
+							</tr>
+							<tr>
+								<th>@G:theme.url.js</th>
+								<td>themes/js 独立路径变量,部署时可定义</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		
+			 </div>
+
+<!--===========================================选项卡2========================================-->
+
+			 <div>
+		<!--组件块-->
+				<div class="section_tag">
+					<h2>其他</h2>
+					<div class="cc table_full">
+						<table width="100%">
+							<col class="th">
+							<tr>
+								<th>其他</th>
+								<td>等等</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+		<!--组件块结束-->
+			 </div>
+
+<!--===========================================选项卡3========================================-->
+
+			 <div>
+			 
+		<!--组件块-->
+				<div class="section_tag">
+					<h2>其他</h2>
+					<div class="cc table_full">
+						<table width="100%">
+							<col class="th">
+							<tr>
+								<th>其他</th>
+								<td>等等</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+			 </div>
+			 
+<!--===========================================选项卡4========================================-->
+
+			 <div>
+			 
+		<!--组件块-->
+				<div class="section_tag">
+					<h2>其他</h2>
+					<div class="cc table_full">
+						<table width="100%">
+							<col class="th">
+							<tr>
+								<th>其他</th>
+								<td>等等</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+			 </div>
+			 
+<!--===========================================结束========================================-->
+
+		</div>
+	</div>
+</div>
+<template source='footer' />
+<script>
+Wind.use('tabs',function() {
+	$('.demo_nav').tabs('.tabs_content > div');
+});
+$("#btn_submit").click(function(){
+	$("#tips_error").slideDown(500);
+});
+$("#btn_close").click(function(){
+	$("#tips_error").slideUp(500);
+});
+</script>
+</body>
+</html>

@@ -39,7 +39,10 @@ class IndexController extends PwBaseController {
 	 * @return void
 	 */
 	public function doReportAction() {
-		list($type, $type_id, $reason) = $this->getInput(array('type', 'type_id', 'reason'));
+		list($type, $type_id, $reason) = $this->getInput(array('type', 'type_id', 'reason'), 'post');
+		if (!$type_id) {
+			$this->showError('operate.fail');
+		}
 		$report = Wekit::load('report.srv.PwReportService');
 		$result = $report->sendReport($type,$type_id,$reason);
 		if ($result instanceof PwError) {

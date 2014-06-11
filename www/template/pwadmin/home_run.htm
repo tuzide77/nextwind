@@ -66,7 +66,7 @@ $.ajax({
     url: "{@url:pwadmin/home/notice}",
     dataType: "json",
     success: function (data) {
-    	var r = data.data;
+    	var r = data.html;
     	if (r.notice) {
     		$('#J_system_update').show();
     		$('#J_system_update').html(r.notice);

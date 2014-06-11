@@ -9,7 +9,7 @@ Wind::import('SRV:attention.srv.dataSource.PwFetchAttentionFresh');
  *
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: FreshController.php 23994 2013-01-18 03:51:46Z long.shi $
+ * @version $Id: FreshController.php 28843 2013-05-28 01:57:37Z jieyin $
  * @package wind
  */
 class FreshController extends PwBaseController {
@@ -238,11 +238,13 @@ class FreshController extends PwBaseController {
 
 	public function deleteAction() {
 		
+		$id = $this->getInput('id', 'post');
+		if (!$id) {
+			$this->showError('operate.select');
+		}
 		if (!$this->loginUser->getPermission('fresh_delete')) {
 			$this->showError('permission.fresh.delete.deny');
 		}
-		$id = $this->getInput('id');
-
 		Wind::import('SRV:attention.srv.operation.PwDeleteFresh');
 		Wind::import('SRV:attention.srv.dataSource.PwGetFreshById');
 		

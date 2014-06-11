@@ -1,11 +1,11 @@
 <?php
 
 /**
- * 附件上传页面
+ * 闄勪欢涓婁紶椤甸潰
  *
  * @author Jianmin Chen <sky_hold@163.com>
  * @license http://www.phpwind.com
- * @version $Id: UploadController.php 23975 2013-01-17 10:20:11Z jieyin $
+ * @version $Id: UploadController.php 28799 2013-05-24 06:47:37Z yetianshi $
  * @package forum
  */
 
@@ -16,7 +16,8 @@ class UploadController extends PwBaseController {
 		header("Content-type: text/html; charset=" . Wekit::V('charset'));
 		//$pwServer['HTTP_USER_AGENT'] = 'Shockwave Flash';
 		$swfhash = 1/*GetVerify($winduid)*/;
-		echo Pw::jsonEncode(array('uid' => $this->loginUser->uid, 'a' => 'dorun', 'verify' => $swfhash));
+		Pw::echoJson(array('uid' => $this->loginUser->uid, 'a' => 'dorun', 'verify' => $swfhash));
+		
 		$this->setTemplate('');
 
 	}

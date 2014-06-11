@@ -35,7 +35,7 @@
 			<td>{$var['roles']}</td>
 			<td>
 				<a href="{@url:auth/edit?id=$var['id']}" title="编辑用户" class="mr10 J_dialog">[编辑]</a>
-				<a href="{@url:auth/del?id=$var['id']}" class="mr10 J_ajax_del">[删除]</a>
+				<a href="{@url:auth/del}" data-pdata="{'id': '{$var['id']}'}" class="mr10 J_ajax_del">[删除]</a>
 			</td>
 		</tr>
 <!--# } #-->

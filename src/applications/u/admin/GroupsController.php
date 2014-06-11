@@ -8,7 +8,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @link http://www.phpwind.com
  * @copyright 2011 phpwind.com
  * @license
- * @version $Id: GroupsController.php 24736 2013-02-19 09:24:40Z jieyin $
+ * @version $Id: GroupsController.php 28860 2013-05-28 03:16:49Z jieyin $
  */
 
 class GroupsController extends AdminBaseController {
@@ -96,6 +96,8 @@ class GroupsController extends AdminBaseController {
 	 * 保存用户组权限设置
 	 */
 	public function doeditAction(){
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($mainGid, $category, $gpermission, $groupname) = $this->getInput(array('gid', 'category', 'gpermission', 'groupname'), 'post');
 		$permissionService = Wekit::load('usergroup.PwUserPermission');
 		Wind::import('SRV:usergroup.dm.PwUserPermissionDm');
@@ -167,6 +169,7 @@ class GroupsController extends AdminBaseController {
 	}
 
 	public function dosetrightAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
 		list($rkey, $gpermission) = $this->getInput(array('rkey', 'gpermission'), 'post');
 		
 		$permissionService = Wekit::load('usergroup.PwUserPermission');
@@ -184,6 +187,7 @@ class GroupsController extends AdminBaseController {
 	 * 保存用户组信息
 	 */
 	public function dosaveAction(){
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
 		list($groupType, $groupName, $groupPoints, $groupImage, $newGroupName, $newGroupPoints, $newGroupImage) = $this->getInput(array('grouptype', 'groupname', 'grouppoints', 'groupimage', 'newgroupname', 'newgrouppoints', 'newgroupimage'), 'post');
 		
 		$userGroupService = Wekit::load('usergroup.PwUserGroups'); /* @var $userGroupService PwUserGroups */
@@ -247,7 +251,7 @@ class GroupsController extends AdminBaseController {
 	 * 删除用户组
 	 */
 	public function deleteAction(){
-		list($gid) = $this->getInput(array('gid'), 'get');
+		list($gid) = $this->getInput(array('gid'), 'post');
 		if ($gid <= 7) {
 			$this->showError('USER:groups.delete.error.default');
 		}

@@ -699,6 +699,7 @@ class IndexController extends WindController {
 		if ($uid instanceof PwError) {
 			$this->showError($uid->getError());
 		}
+		Wekit::load('user.PwUserBelong')->update($uid, array(3 => 0));
 		
 		//特殊操作  gao.wanggao
         $this->_defaultAvatar($uid);

@@ -1,0 +1,18 @@
+<div class="search_type_wrap">
+	<div class="search_type">
+	<!--# if ($count) { #-->
+		<div class="fr gray" style="margin:40px 5px 0 0;">获得约{$count}条结果，用时{$exectime}秒</div>
+	<!--# } #-->	
+		<ul>
+			<li class="{@Pw::isCurrent('run' == $src || 'searchthread' == $src)}"><a href="{@url:app/search/index/run}&{@http_build_query($args)}">帖子</a></li>
+			<li class="{@Pw::isCurrent('user' == $src || 'searchuser' == $src)}"><a href="{@url:app/search/index/user}&{@http_build_query($args)}">用户</a></li>
+			<li class="{@Pw::isCurrent('forum' == $src || 'searchforum' == $src)}"><a href="{@url:app/search/index/forum}&{@http_build_query($args)}">版块</a></li>
+		</ul>
+		<div class="">
+			<form action="{@url:app/search/index/$src}" method="post">
+			<input value="{$args['keywords']}" class="input" type="text" name="keywords">
+			<button type="submit" class="btn btn_big btn_submit">搜 索</button>
+			</form>
+		</div>
+	</div>
+</div>

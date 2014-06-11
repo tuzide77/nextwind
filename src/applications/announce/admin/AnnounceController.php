@@ -8,7 +8,7 @@ Wind::import('SRC:service.announce.dm.PwAnnounceDm');
  * @author MingXing Sun <mingxing.sun@aliyun-inc.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: AnnounceController.php 23742 2013-01-15 09:22:58Z jieyin $
+ * @version $Id: AnnounceController.php 28786 2013-05-23 09:57:58Z jieyin $
  * @package modules.admin
  */
 class AnnounceController extends AdminBaseController {
@@ -50,6 +50,8 @@ class AnnounceController extends AdminBaseController {
 	 */
 	
 	public function doAddAction(){
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$url = $this->getInput('url', 'post');
 		$dm = new PwAnnounceDm();
 		$url && $url = WindUrlHelper::checkUrl($url);
@@ -119,6 +121,8 @@ class AnnounceController extends AdminBaseController {
 	 */
 	public function doUpdateAction(){
 		list($aid, $url) = $this->getInput(array('aid', 'url'),'post');
+		if ($aid < 1) $this->showError('operate.fail');
+
 		$dm = new PwAnnounceDm($aid);
 		$url && $url = WindUrlHelper::checkUrl($url);
 		$dm->setContent($this->getInput('content', 'post'))

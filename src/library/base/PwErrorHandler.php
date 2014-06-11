@@ -3,7 +3,7 @@
  * @author Qiong Wu <papa0924@gmail.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: PwErrorHandler.php 24286 2013-01-25 04:07:31Z long.shi $
+ * @version $Id: PwErrorHandler.php 28685 2013-05-20 07:17:32Z gao.wanggao $
  * @package wind
  */
 class PwErrorHandler extends WindError {
@@ -49,7 +49,6 @@ class PwErrorHandler extends WindError {
 			$errPage = $errorcode;
 		else
 			$errPage = 'error';
-		
 		$title = $this->getResponse()->codeMap($errorcode);
 		$title = $title ? $errorcode . ' ' . $title : 'unknowen error';
 		$__vars['title'] = ucwords($title);

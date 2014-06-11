@@ -39,9 +39,9 @@
  	<!--# foreach($v as $theme){ #-->
 			<tr>
 				<!-- <th><input type="checkbox" name="themes[]" value="THEMES:{@str_replace('/','.',$addons[$k][1]).'.'.$theme}"></th> -->
-				<th><span class="b mr10">{$theme}</span><a class="J_ajax_del w" href="{@url:appcenter/style/delFolder}&folder={@str_replace('/','.',$addons[$k][1]).'.'.$theme}">[删除]</a></th>
+				<th><span class="b mr10">{$theme}</span><a class="J_ajax_del w" data-pdata="{'folder': '{@str_replace('/','.',$addons[$k][1]).'.'.$theme}'}" href="{@url:appcenter/style/delFolder}">[删除]</a></th>
 				<td><span style="line-height:24px;">{$addons[$k][0]}</span></td>
-				<td><a class="J_ajax_refresh btn btn_submit" href="{@url:appcenter/style/doinstall}&themes[]=THEMES:{@str_replace('/','.',$addons[$k][1]).'.'.$theme}">安装</a></td>
+				<td><a class="J_ajax_refresh btn btn_submit" href="{@url:appcenter/style/doinstall}" data-pdata="{'themes[]': 'THEMES:{@str_replace('/','.',$addons[$k][1]).'.'.$theme}'}">安装</a></td>
 			</tr>
 	<!--# } #-->
 <!--# } #-->

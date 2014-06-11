@@ -11,7 +11,7 @@ defined('WEKIT_VERSION') || exit('Forbidden');
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwPost.php 23093 2013-01-06 04:04:36Z jieyin $
+ * @version $Id: PwPost.php 28950 2013-05-31 05:58:25Z jieyin $
  * @package forum
  */
 class PwPost extends PwBaseHookService {
@@ -88,10 +88,6 @@ class PwPost extends PwBaseHookService {
 	public function checkPost() {
 		if ($this->user->groupid == 7) {
 			return new PwError('REG_CHECK');
-		}
-		$pertime = $this->user->getPermission('post_pertime'); // 防灌水
-		if ($pertime && Pw::getTime() - $this->user->info['lastpost'] < $pertime) {
-			return new PwError('BBS:post.pertime', array('{pertime}' => $pertime));
 		}
 		/*
 		$config = Wekit::C('bbs');

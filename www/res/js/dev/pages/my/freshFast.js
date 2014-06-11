@@ -40,7 +40,7 @@
 				'withMyforum' : 1
 			}, function(data){
 				if(data.state == 'success') {
-					cateforum_json = $.parseJSON(data.data);
+					cateforum_json = data.data;
 				}
 			}, 'json');
 		}

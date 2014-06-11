@@ -96,9 +96,9 @@
 				<td>{@Pw::time2str($v['start_time'])}</td>
 				<!--# } #-->
 				<td>
-					<a href="{@url:design/push/delpush?pushid=$v['push_id']}" class="mr10 J_ajax_del">[删除]</a>
+					<a href="{@url:design/push/delpush}" class="mr10 J_ajax_del" data-pdata="{'pushid': '{$v['push_id']}'}">[删除]</a>
 					<!--# if ($status == 1){ #-->
-					<a href="{@url:design/push/dopush?pushid=$v['push_id']}" class="mr10 J_ajax_refresh">[通过]</a>
+					<a href="{@url:design/push/dopush}" class="mr10 J_ajax_refresh" data-pdata="{'pushid': '{$v['push_id']}'}">[通过]</a>
 					<!--# } #-->
 				</td>
 			</tr>
@@ -143,7 +143,7 @@ $(function(){
 		if(pageid) {
 			$.post('{@url:design/page/getModuleOption}', {pageid : pageid}, function(data){
 				if(data.state == 'success') {
-					flag_passive.html('<option>不限制</option>'+data.data);
+					flag_passive.html('<option>不限制</option>'+data.html);
 
 					if(id) {
 						flag_passive.children('[value='+ id +']').prop('selected', true);

@@ -10,7 +10,7 @@ Wind::import('SRV:credit.bo.PwCreditBo');
  *
  * @author Jianmin Chen <sky_hold@163.com>
  * @license http://www.phpwind.com
- * @version $Id: PostController.php 24630 2013-02-01 08:41:07Z long.shi $
+ * @version $Id: PostController.php 27729 2013-04-28 02:00:50Z jieyin $
  * @package forum
  */
 
@@ -38,6 +38,13 @@ class PostController extends PwBaseController {
 		
 		//版块风格
 		$pwforum = $this->post->forum;
+		if ($pwforum->foruminfo['password']) {
+			if (!$this->loginUser->isExists()) {
+				$this->forwardAction('u/login/run', array('backurl' => WindUrlHelper::createUrl('bbs/post/' . $action, array('fid' => $$pwforum->fid))));
+			} elseif (Pw::getPwdCode($pwforum->foruminfo['password']) != Pw::getCookie('fp_' . $pwforum->fid)) {
+				$this->forwardAction('bbs/forum/password', array('fid' => $pwforum->fid));
+			}
+		}
 		if ($pwforum->foruminfo['style']) {
 			$this->setTheme('forum', $pwforum->foruminfo['style']);
 		}

@@ -6,7 +6,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @author JianMin Chen <sky_hold@163.com> 2012-7-17
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: EditorController.php 24341 2013-01-29 03:08:55Z jieyin $
+ * @version $Id: EditorController.php 28806 2013-05-24 08:06:26Z jieyin $
  * @package admin
  * @subpackage controller.config
  */
@@ -24,6 +24,8 @@ class EditorController extends AdminBaseController {
 	 * 后台设置-编辑器设置
 	 */
 	public function dorunAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($style, $contentDuplicate, $cvtimes, $imgOpen, $imgWidth, $imgHeight, $sizeMax, $flashOpen, $mediaOpen, $iframeOpen) = $this->getInput(array('style', 'content_duplicate', 'cvtimes', 'img_open', 'img_width', 'img_height', 'size_max', 'flash_open', 'media_open', 'iframe_open'), 'post');
 		
 		$config = new PwConfigSet('bbs');

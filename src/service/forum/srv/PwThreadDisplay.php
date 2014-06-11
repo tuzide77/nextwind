@@ -19,7 +19,7 @@ Wind::import('LIB:ubb.config.PwUbbCodeConvertConfig');
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwThreadDisplay.php 24307 2013-01-28 05:45:27Z jieyin $
+ * @version $Id: PwThreadDisplay.php 29739 2013-06-28 07:45:34Z taishici $
  * @package forum
  */
 
@@ -39,13 +39,13 @@ class PwThreadDisplay extends PwBaseHookService {
 	public $thread;	//PwThreadBo
 	public $forum;	//PwForumBo
 	public $attach;	//PwAttachDisplay
-	
+
 	protected $_ds;
 	protected $users = array();
 	protected $area = array();
 	protected $_floorName;
 	protected $_definedFloorName;
-	
+
 	private $imgLazy = false;
 
 	public function __construct($tid, PwUserBo $user) {
@@ -60,7 +60,7 @@ class PwThreadDisplay extends PwBaseHookService {
 		$this->_definedFloorName = $this->_parseDefindFloorName($config['read.defined_floor_name']);
 		parent::__construct();
 	}
-	
+
 	/**
 	 * 检查帖子显示运行环境
 	 *
@@ -94,7 +94,7 @@ class PwThreadDisplay extends PwBaseHookService {
 		}
 		return $this->runWithVerified('check');
 	}
-	
+
 	/**
 	 * 逻辑处理，数据准备
 	 */
@@ -114,13 +114,13 @@ class PwThreadDisplay extends PwBaseHookService {
 		$this->bulidUsers($ds->getUser());
 		$this->readdb =& $ds->getData();
 		$this->_initAttachs($ds->getAttach());
-		
+
 		foreach ($this->readdb as $key => $read) {
 			$this->readdb[$key] = $this->bulidRead($read, $start++);
 		}
 		$this->thread->hit();
 	}
-	
+
 	/**
 	 * 加工帖子数据
 	 *
@@ -148,7 +148,7 @@ class PwThreadDisplay extends PwBaseHookService {
 		}
 		return $this->runWithFilters('bulidRead', $read);
 	}
-	
+
 	/**
 	 * 获取主题信息
 	 *
@@ -157,7 +157,7 @@ class PwThreadDisplay extends PwBaseHookService {
 	public function getThreadInfo() {
 		return $this->thread->getThreadInfo();
 	}
-	
+
 	/**
 	 * 获取帖子内容数据
 	 *
@@ -166,7 +166,7 @@ class PwThreadDisplay extends PwBaseHookService {
 	public function getList() {
 		return $this->readdb;
 	}
-	
+
 	/**
 	 * 获取版块对象
 	 *
@@ -188,7 +188,7 @@ class PwThreadDisplay extends PwBaseHookService {
 	public function getArea() {
 		return $this->area;
 	}
-	
+
 	/**
 	 * 获取楼层名称
 	 *
@@ -203,7 +203,7 @@ class PwThreadDisplay extends PwBaseHookService {
 		$array = $this->_getTopicTypeDs()->getTopicType($id);
 		return $array['name'];
 	}
-	
+
 	/**
 	 * 获取当前路径导航条
 	 *
@@ -213,7 +213,7 @@ class PwThreadDisplay extends PwBaseHookService {
 		return $this->forum->headguide()
 			. $this->forum->bulidGuide(array(Pw::substrs($this->thread->info['subject'], 30), WindUrlHelper::createUrl('bbs/read/run', array('tid' => $this->tid, 'fid' => $this->fid))));
 	}
-	
+
 	public function setUrlArg($key, $value) {
 		$this->_ds->setUrlArg($key, $value);
 	}
@@ -221,7 +221,7 @@ class PwThreadDisplay extends PwBaseHookService {
 	public function getUrlArgs($except = '') {
 		return $this->_ds->getUrlArgs($except);
 	}
-	
+
 	/**
 	 * 帖子内容中，图片懒加载设置
 	 *
@@ -230,7 +230,7 @@ class PwThreadDisplay extends PwBaseHookService {
 	public function setImgLazy($isLazy) {
 		$this->imgLazy = empty($isLazy) ? false : true;
 	}
-	
+
 	/**
 	 * 准备用户显示信息
 	 *
@@ -257,7 +257,7 @@ class PwThreadDisplay extends PwBaseHookService {
 		$str[0] === ' ' && $str = '&nbsp;' . ltrim($str);
 		return $str;
 	}
-	
+
 
 	protected function _bulidContent($read) {
 		if (!$read['useubb']) {
@@ -277,7 +277,7 @@ class PwThreadDisplay extends PwBaseHookService {
 		}
 		return array($tip, 1);
 	}
-	
+
 	protected function _bulidBanContent() {
 		$tip = '<div class="shield">用户被禁言,该主题自动屏蔽!</div>';
 		if (!$this->user->getPermission('operate_thread.ban', $this->isBM)) {
@@ -298,7 +298,7 @@ class PwThreadDisplay extends PwBaseHookService {
 		}
 		return $sign;
 	}
-	
+
 	protected function _parseDefindFloorName($string) {
 		$array = array(0 => '楼主');
 		$_tmp = explode("\n", $string);

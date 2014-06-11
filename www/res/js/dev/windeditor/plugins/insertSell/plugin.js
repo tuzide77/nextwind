@@ -51,7 +51,7 @@
 				var price = $('#J_sell_price').val();
 				var textarea = _self.dialog.find('textarea');
 				var unit = _self.dialog.find('.J_unit option:selected').val();
-				var text = textarea.val();
+				var text = $('<div />').text(textarea.val()).html(); ////script xss
 				var name = _self.credit[unit];
 				if(isNaN(price) || parseInt(price) < 0 || price == '') {
 					alert('请输入正确的数字');

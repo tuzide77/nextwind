@@ -39,7 +39,7 @@
 							$( '<span class="tips_success">' + data.message + '</span>' ).appendTo(btn.parent()).fadeIn('slow').delay( 1000 ).fadeOut(function() {
 								if(data.referer) {
 									//返回带跳转地址
-									window.location.href = data.referer;
+									window.location.href = decodeURIComponent(data.referer);
 								}else {
 									reloadPage(window);
 								}

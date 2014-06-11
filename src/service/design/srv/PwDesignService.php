@@ -1,10 +1,10 @@
 <?php
 /**
- * the last known user to change this file in the repository  <$LastChangedBy: jieyin $>
- * @author $Author: jieyin $ Foxsee@aliyun.com
+ * the last known user to change this file in the repository  <$LastChangedBy: gao.wanggao $>
+ * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ?2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwDesignService.php 24585 2013-02-01 04:02:37Z jieyin $ 
+ * @version $Id: PwDesignService.php 28208 2013-05-07 09:58:07Z gao.wanggao $ 
  * @package 
  */
 class PwDesignService {
@@ -169,10 +169,13 @@ class PwDesignService {
 	 *	过滤白名单
 	 */
 	public function filterTemplate($string) {
+		$string = str_replace('<?', '&lt;?', $string);
 		$in = array(
 			'/<!--#(.*)#-->/isU',
 			'/<!--\{(.*)\}-->/isU',
-			'/<\?php(.*)\?>/isU',
+			/*'/<\?php(.*)\?>/isU',
+		    '/<\?(.*)\?>/isU',
+			'/<\?(.*)/isU',*/
 			/*'/<script(.*)>/isU',
 			'/<javascript(.*)>/isU',
 			'/<vbscript(.*)>/isU',
@@ -187,7 +190,9 @@ class PwDesignService {
 		$out = array(
 			'&lt;!--# \\1 #--&gt',
 			'&lt;!--{ \\1 }--&gt',
-			'&lt;\?php\\1\?&gt;',
+			/*'&lt;?php\\1?&gt;',
+			'&lt;?\\1?&gt;',
+			'&lt;&nbsp;?\\1',*/
 			/*'&lt;script\\1&gt;',
 			'&lt;javascript\\1&gt;',
 			'&lt;vbscript\\1&gt;',

@@ -9,15 +9,17 @@ Wind::import('COM:utility.WindUtility');
  * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwPortalUpload.php 24103 2013-01-21 10:15:47Z gao.wanggao $ 
+ * @version $Id: PwPortalUpload.php 28882 2013-05-28 10:51:23Z gao.wanggao $ 
  * @package 
  */
 
 class PwPortalUpload extends PwUploadAction {
 	private $id = 0;
+	private $mime = array();
 	public function __construct($id) {
 		$this->id = $id;
 		$this->ftype = array('jpeg'=>2000, 'jpg' => 2000, 'png' => '2000', 'gif' => 2000);
+		$this->mime = array('image/jpeg', 'image/png', 'image/jpg', 'image/gif');
 	}
 	
 	/**

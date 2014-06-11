@@ -45,9 +45,9 @@
 					<td>{$emotion['emotion_icon']}</td>
 					<td><img src="{$iconUrl}/{$folder}/{$emotion['emotion_icon']}" /></td>
 					<!--# if($emotion['isused']){ #-->
-					<td><a href="{@url:emotion/emotion/doused?emotionid=$emotion['emotion_id']}" class="J_ajax_refresh">[关闭]</a></td>
+					<td><a href="{@url:emotion/emotion/doused}" class="J_ajax_refresh" data-pdata="{'emotionid': '{$emotion['emotion_id']}'}">[关闭]</a></td>
 					<!--# }else{ #-->
-					<td><a href="{@url:emotion/emotion/doused?emotionid=$emotion['emotion_id'])&used=1}" class="J_ajax_refresh" style="color:#ff0000">[开启]</a></td>
+					<td><a href="{@url:emotion/emotion/doused}" class="J_ajax_refresh" style="color:#ff0000" data-pdata="{'emotionid': '{$emotion['emotion_id']}', 'used':'1'}">[开启]</a></td>
 					<!--# } #-->
 				</tr>
 			<!--# } #-->

@@ -4,7 +4,7 @@
  * @Descript: 前台全局功能js
  * @Author	:
  * @Depend	: wind.js、jquery.js(1.7 or later)
- * $Id: global.js 26496 2013-04-10 04:05:25Z hao.lin $
+ * $Id: global.js 28908 2013-05-30 02:11:03Z hao.lin $
  */
 
 /*
@@ -34,7 +34,7 @@ Wind.Util = {
 		//所有的确认提交操作（删除、加入黑名单等）
 		var _this = this,
 			elem = options.elem,				//点击元素
-			href = options.href,				//ajax地址
+			href = elem.data('uri') ? elem.data('uri') : options.href,				//ajax地址
 			msg = options.msg,					//提示文字
 			callback = options.callback;		//回调
 
@@ -45,7 +45,7 @@ Wind.Util = {
 			follow : elem,
 			onOk : function () {
 				_this.ajaxMaskShow();
-
+				$('body').trigger('setCustomPost', [elem]);
 				$.post(href, function (data) {
 					_this.ajaxMaskRemove();
 					if (data.state === 'success') {
@@ -55,7 +55,7 @@ Wind.Util = {
 						} else {
 							//默认刷新
 							if (data.referer) {
-								location.href = data.referer;
+								location.href = decodeURIComponent(data.referer);
 							} else {
 								location.reload();
 							}
@@ -411,7 +411,7 @@ Wind.Util = {
 			dataType : 'json',
 			success : function(data){
 				if(data.state == 'success') {
-					wrap.html(data.data);
+					wrap.html(data.html);
 				}else if(data.state == 'fail') {
 					if(clone) {
 						//恢复原代码
@@ -774,6 +774,23 @@ Wind.Util = {
 
 (function () {
 
+	//前台post数据方法 pdata
+	$('body').on('setCustomPost', function(event, elem) {
+		if(elem.attr('data-pdata')) {
+			try{
+				var pdata = $.parseJSON(elem.attr('data-pdata').replace(/'/g, '"'));
+				$.ajaxSetup({
+					data: function(){
+						pdata.csrf_token = GV.TOKEN;
+						return pdata;
+					}()
+				})
+			}catch(e){
+				$.error(e);
+			}
+		}
+	});
+
 	//全局ajax处理
 	$.ajaxSetup({
 		data : {
@@ -914,7 +931,7 @@ Wind.Util = {
 							});
 							
 						} else {
-							window.location.href = data.referer;
+							window.location.href = decodeURIComponent(data.referer);
 						}
 
 					} else {

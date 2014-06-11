@@ -1,0 +1,734 @@
+<!doctype html>
+<html>
+<head>
+<template source='header' />
+<link rel="stylesheet" href="{@G:theme.url.css}/core.css?v={@G:c.version}" />
+<link rel="stylesheet" href="{@G:theme.url.css}/style.css?v={@G:c.version}" />
+</head>
+<body>
+<div class="demo_wrap" id="top">
+	<div class="uidemo_wrap">
+		 <ul class="demo_nav cc mb10">
+				 <li><a href="{@url:ui_admin}">后台UI控件库</a></li>
+				 <li class="current"><a href="{@url:ui}">前台全局UI控件库</a></li>
+				 <li><a href="{@url:ui_bbs}">前台UI控件库</a></li>
+		 </ul>
+		<div class="tabs_content">
+
+			 <div>
+				<div class="pick_list" id="all_topbar">
+					<a href="#top">返回顶部</a>
+					<a href="#textclor_name">文案颜色</a>
+					<a href="#tips_name">操作提示</a>
+					<a href="#pop_name">弹窗</a>
+					<a href="#btn_name">按钮</a>
+					<a href="#form_name">表单</a>
+					<a href="#face_name">头像</a>
+					<a href="#pages_name">分页</a>
+					<a href="#progress_name">进度条</a>
+					<a href="#color_name">颜色筛选</a>
+					<a href="#pick_name">选中/复选</a>
+					<a href="#loading_name">载入状态条</a>
+					<a href="#notice_name">全站顶部公告</a>
+				</div>
+				
+		<!--组件块-->
+				<div class="section" id="textclor_name">
+					<h2>系统文案颜色</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<div class="pick_list">
+								<div class="mb10"><div class="red">我是红色字</div></div>
+								<div class="mb10"><div class="green">我是绿色字</div></div>
+								<div class="mb10"><div class="gray">我是灰色字</div></div>
+							</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>代码</h3>
+							<div class="demo_html_cont">
+								&lt;div class="red"&gt;我是红色字&lt;/div&gt;<br>
+								&lt;div class="green"&gt;我是绿色字&lt;/div&gt;<br>
+								&lt;div class="gray"&gt;我是灰色字&lt;/div&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		<!--组件块-->
+				<div class="section" id="tips_name">
+					<h2>操作提示</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<h3>普通提示</h3>
+							<div class="demo_html_cont">
+								<div class="mb10"><div class="tips">暂无内容</div></div>
+							</div>
+							<h3>跟随提示</h3>
+							<div class="demo_html_cont">
+								<div class="mb10"><span class="tips_loading">正在loading</span></div>
+								<div class="mb10"><span class="tips_error">请输入用户名</span></div>
+								<div class="mb10"><span class="tips_success">修改成功</span></div>
+							</div>
+							<h3>横条提示</h3>
+							<div class="demo_html_cont">
+								<div class="tips_block">
+									<div class="mb10"><span class="tips_error">请输入用户名</span></div>
+									<div class="mb10"><span class="tips_success">修改成功</span></div>
+								</div>
+							</div>
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>普通提示</h3>
+							<div class="demo_html_cont">
+								&lt;div class="tips"&gt;暂无内容&lt;/div&gt;<br>
+							</div>
+							<h3>跟随提示</h3>
+							<div class="demo_html_cont">
+								&lt;span class="tips_loading"&gt;正在loading&lt;/span&gt;<br>
+								&lt;span class="tips_error"&gt;错误提示&lt;/span&gt;<br>
+								&lt;span class="tips_success"&gt;修改成功&lt;/span&gt;<br>
+							</div>
+							<h3>横条提示</h3>
+							<div class="demo_html_cont">
+								&lt;div class="tips_block"&gt;<br>
+								&lt;span class="tips_error"&gt;错误提示&lt;/span&gt;<br>
+								&lt;span class="tips_success"&gt;修改成功&lt;/span&gt;<br>
+								&lt;/div&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+								
+		<!--组件块-->
+				<div class="section" id="pop_name">
+					<h2>弹窗</h2>
+					<div class="cc">
+						<div class="demo_code" style="height:630px;">
+						<!--代码区域开始-->
+							<div class="core_pop_wrap">
+								<div class="core_pop">
+									<div style="width:210px;">
+										<div class="p20 f14">
+											确认要删除该内容？
+										</div>
+										<div id="tips_error" class="tips_block" style="display:none;"><span class="tips_success">删除成功</span></div>
+										<div class="pop_bottom">
+											<button type="button" class="btn btn_success mr10" id="btn_submit">确认</button>
+											<button type="button" class="btn" id="btn_close">取消</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="core_pop_wrap" style="left:240px;">
+								<div class="core_pop">
+									<div class="pop_loading"></div>
+								</div>
+							</div>
+							<div class="core_pop_wrap" style="top:150px;">
+								<div class="core_pop">
+									<div style="width:400px;">
+										<div class="pop_top"><a href="#" class="pop_close">关闭</a><strong>这是标题</strong></div>
+										<div class="pop_cont">
+											<table width="100%" class="pop_table">
+												<tr>
+													<th>上级导航</th>
+													<td><span class="must_red">*</span><select class="select_4"><option>首页</option></select></td>
+												</tr>
+												<tr>
+													<th>栏目名称</th>
+													<td><span class="must_red">*</span><input class="input length_4 input_hd" type="text"></td>
+												</tr>
+												<tr>
+													<th>链接地址</th>
+													<td><input class="input length_4" type="text"></td>
+												</tr>
+												<tr>
+													<th>导航说明</th>
+													<td><input class="input length_4" type="text"></td>
+												</tr>
+												<tr>
+													<th>打开方式</th>
+													<td>
+														<ul class="switch_list cc">
+															<li><label><input type="radio">新窗口</label></li>
+															<li><label><input type="radio">本窗口</label></li>
+														</ul>
+													</td>
+												</tr>
+											</table>
+										</div>
+										<div class="pop_bottom">
+											<button type="button" class="btn btn_submit mr10">提交</button>
+											<button type="button" class="btn">取消</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>弹窗包装</h3>
+							<div class="demo_html_cont">
+								&lt;div class=&quot;core_pop_wrap&quot;&gt;<br />&lt;div class=&quot;core_pop&quot;&gt;<br>&lt;/div&gt;<br />&lt;/div&gt;
+							</div>
+							<h3>弹窗结构</h3>
+							<div class="demo_html_cont">
+								&lt;div class=&quot;pop_top&quot;&gt;头部标题&lt;/div&gt;<br>
+								&lt;div class=&quot;pop_cont&quot;&gt;内容区域&lt;/div&gt;<br>
+								&lt;div class=&quot;pop_bottom&quot;&gt;底部操作&lt;/div&gt;<br>
+							</div>
+							<h3>弹窗table样式</h3>
+							<div class="demo_html_cont">
+								&lt;table width=&quot;100%&quot; class=&quot;pop_table&quot;&gt;<br>
+									&lt;tr&gt;<br>
+										&lt;th&gt;&lt;/th&gt;<br>
+										&lt;td&gt;&lt;/td&gt;<br>
+									&lt;/tr&gt;<br>
+								&lt;/table&gt;
+							</div>
+							<h3>提示</h3>
+							<div class="demo_html_cont">
+								&lt;div class="pop_tips"&gt;提示信息&lt;/div&gt;<br>
+							</div>
+							<h3>弹窗关闭按钮</h3>
+							<div class="demo_html_cont">
+								&lt;a href="#" class="pop_close"&gt;关闭&lt;/a&gt;<br>
+							</div>
+							<h3>loading提示</h3>
+							<div class="demo_html_cont">
+								&lt;div class="pop_loading"&gt;&lt;/div&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		<!--组件块-->
+				<div class="section" id="btn_name">
+					<h2>按钮</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<h3>链接按钮(基础样式btn)</h3>
+							<div class="demo_code_cont">
+								<div class="mb10"><a href="#" class="btn mr10">默认</a><a href="#" class="btn btn_success mr10">确认/添加(btn_success)</a><a href="#" class="btn btn_error mr10">错误/醒目(btn_error)</a></div>
+								<div><a href="#" class="btn btn_submit mr10">提交(btn_submit)</a><a href="#" class="btn btn_success"><span class="add"></span>添加</a></div>
+							</div>
+							<h3>button按钮(基础样式btn)</h3>
+							<div class="demo_code_cont">
+								<div class="mb10"><button type="button" class="btn mr10">默认</button><button type="button" class="btn btn_success mr10">确认/添加(btn_success)</button><button type="button" class="btn btn_error mr10">错误/醒目(btn_error)</button></div>
+								<div><button type="button" class="btn btn_submit mr10">提交(btn_submit)</button><button type="button" class="btn btn_success"><span class="add"></span>添加</button></div>
+							</div>
+							<h3>大按钮(多加个btn_big)</h3>
+							<div class="demo_code_cont">
+								<div class="mb10"><a href="#" class="btn btn_big mr10">默认</a><a href="#" class="btn btn_success btn_big mr10">确认/添加</a><a href="#" class="btn btn_error btn_big mr10">错误/醒目</a></div>
+								<div><a href="#" class="btn btn_submit btn_big mr10">提交</a><a href="#" class="btn btn_success btn_big"><span class="add"></span>添加</a></div>
+							</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>A链接</h3>
+							<div class="demo_html_cont">
+								&lt;a href=&quot;#&quot; class=&quot;btn&quot;&gt;默认&lt;/a&gt;<br>
+								&lt;a href=&quot;#&quot; class=&quot;btn btn_success&quot;&gt;确认&lt;/a&gt;<br>
+								&lt;a href=&quot;#&quot; class=&quot;btn btn_error&quot;&gt;错误&lt;/a&gt;<br>
+								&lt;a href=&quot;#&quot; class=&quot;btn btn_submit&quot;&gt;提交&lt;/a&gt;<br>
+								&lt;a href=&quot;#&quot; class=&quot;btn btn_big&quot;&gt;默认&lt;/a&gt;<br>
+								&lt;a href=&quot;#&quot; class=&quot;btn btn_success&quot;&gt;&ltspan class="add"&gt;&lt/span&gt;添加&lt;/a&gt;<br>
+							</div>
+							<h3>button</h3>
+							<div class="demo_html_cont">
+								&lt;button type=&quot;button&quot; class=&quot;btn&quot;&gt;默认&lt;/button&gt;<br>
+								&lt;button type=&quot;button&quot; class=&quot;btn btn_success&quot;&gt;确认&lt;/button&gt;<br>
+								&lt;button type=&quot;button&quot; class=&quot;btn btn_error&quot;&gt;错误&lt;/button&gt;<br>
+								&lt;button type=&quot;button&quot; class=&quot;btn btn_submit&quot;&gt;提交&lt;/button&gt;<br>
+								&lt;button type=&quot;button&quot; class=&quot;btn btn_big&quot;&gt;大按钮&lt;/button&gt;
+							</div>
+							<h3>input</h3>
+							<div class="demo_html_cont">
+								&lt;input type=&quot;button&quot; class=&quot;btn&quot; value=&quot;默认&quot;&gt;<br>
+								&lt;input type=&quot;button&quot; class=&quot;btn btn_success&quot; value=&quot;确认&quot;&gt;<br>
+								&lt;input type=&quot;button&quot; class=&quot;btn btn_error&quot; value=&quot;错误&quot;&gt;<br>
+								&lt;input type=&quot;button&quot; class=&quot;btn btn_submit&quot; value=&quot;提交&quot;&gt;<br>
+								&lt;input type=&quot;button&quot; class=&quot;btn btn_big&quot; value=&quot;大按钮&quot;&gt;
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		<!--组件块-->
+				<div class="section" id="form_name">
+					<h2>表单</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<h3>输入框长度</h3>
+							<div class="demo_code_cont">
+								<div class="mb10"><input name="" type="text" class="input length_1 mr20" value="length_1">60px</div>
+								<div class="mb10"><input name="" type="text" class="input length_2 mr20" value="length_2">120px</div>
+								<div class="mb10"><input name="" type="text" class="input length_3 mr20" value="length_3">180px</div>
+								<div class="mb10"><input name="" type="text" class="input length_4 mr20" value="length_4">240px</div>
+								<div class="mb10"><input name="" type="text" class="input length_5 mr20" value="length_5">300px</div>
+								<div class="mb10"><input name="" type="text" class="input length_6 mr20" value="length_6">360px</div>
+							</div>
+							<h3>文本框</h3>
+							<div class="demo_code_cont">
+								<div class="mb10"><textarea class="length_3 mr10">length_3</textarea>180px</div>
+								<div class="mb10"><textarea class="length_4 mr10">length_4</textarea>240px</div>
+								<div class="mb10"><textarea class="length_5 mr10">length_5</textarea>300px</div>
+								<div class="mb10"><textarea class="length_6 mr10">length_6</textarea>360px</div>
+							</div>
+							<h3>选择框</h3>
+							<div class="demo_code_cont">
+								<div class="mb10"><select class="select_1"><option>select_1</option></select></div>
+								<div class="mb10"><select class="select_2"><option>select_2</option></select></div>
+								<div class="mb10"><select class="select_3"><option>select_3</option></select></div>
+								<div class="mb10"><select class="select_4"><option>select_4</option></select></div>
+								<div class="mb10"><select class="select_5"><option>select_5</option></select></div>
+								<div class="mb10"><select class="select_6"><option>select_6</option></select></div>
+							</div>
+							<h3>失效/与按钮通用</h3>
+							<div class="demo_code_cont">
+								<div class="mb10"><input name="" type="text" class="input length_3 disabled" disabled value="disabled"></div>
+								<div class="mb10"><textarea class="disabled length_3" disabled>disabled</textarea></div>
+								<div class="mb10"><select class="select_3 disabled" disabled><option>disabled</option></select></div>
+							</div>
+							<h3>正确</h3>
+							<div class="demo_code_cont">
+								<div class="mb10"><input name="" type="text" class="input length_3 form_success mr20" value="form_success"></div>
+								<div class="mb10"><textarea class="form_success length_3 mr20">form_success</textarea></div>
+							</div>
+							<h3>错误</h3>
+							<div class="demo_code_cont">
+								<div class="mb10"><input name="" type="text" class="input length_3 form_error mr20" value="form_success"></div>
+								<div class="mb10"><textarea class="form_error length_3 mr20">form_success</textarea></div>
+							</div>
+							<h3>标尺</h3>
+							<div class="demo_code_cont">
+								<div class="mb10"><input name="" type="text" class="input length_3 input_hd mr20" value="form_success"></div>
+								<div class="mb10"><textarea class="input_hd length_3 mr20">form_success</textarea></div>
+							</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>所有输入框必须要有.input样式</h3>
+							<h3>文本输入框共用长度</h3>
+							<div class="demo_html_cont">
+								length_1 ～ length_6
+							</div>
+							<h3>选择下拉长度</h3>
+							<div class="demo_html_cont">
+								select_1 ～ select_6
+							</div>
+							<h3>失效样式</h3>
+							<div class="demo_html_cont">
+								disabled
+							</div>
+							<h3>正确</h3>
+							<div class="demo_html_cont">
+								&lt;input type="text" class="input form_success" value=""&gt;<br>
+								&lt;textarea class="form_success"&gt;form_success&lt;/textarea&gt;<br>
+							</div>
+							<h3>错误</h3>
+							<div class="demo_html_cont">
+								&lt;input type="text" class="input form_success" value=""&gt;<br>
+								&lt;textarea class="form_success"&gt;form_error&lt;/textarea&gt;<br>
+							</div>
+							<h3>标尺</h3>
+							<div class="demo_html_cont">
+								&lt;input type="text" class="input input_hd" value=""&gt;<br>
+								&lt;textarea class="input_hd"&gt;form_error&lt;/textarea&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		<!--组件块-->
+				<div class="section" id="face_name">
+					<h2>头像</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<div class="mb10"><img src="{@G:url.images}/face/face.jpg" class="face face_big"></div>
+							<div class="mb10"><img src="{@G:url.images}/face/face.jpg" class="face"></div>
+							<div class="mb10"><img src="{@G:url.images}/face/face.jpg" class="face face_small"></div>
+							<div class="mb10"><img src="{@G:url.images}/face/face.jpg" class="face face_mini"></div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>代码</h3>
+							<div class="demo_html_cont">
+								&lt;img src=&quot;&quot; class=&quot;face face_big&quot;&gt;<br>
+								&lt;img src=&quot;&quot; class=&quot;face&quot;&gt;<br>
+								&lt;img src=&quot;&quot; class=&quot;face face_small&quot;&gt;<br>
+								&lt;img src=&quot;&quot; class=&quot;face face_mini&quot;&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		<!--组件块-->
+				<div class="section" id="pages_name">
+					<h2>分页</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<div class="mb10">
+								<div class="pages">
+									<strong>1</strong>
+									<a href="#">2</a>
+									<a href="#">3</a>
+									<a href="#">4</a>
+									<a href="#">5</a>
+									<a href="#">6</a>
+									<a href="#" class="pages_next">下一页</a>
+								</div>
+							</div>
+							<div class="mb10">
+								<div class="pages">
+									<a href="#">1</a>
+									<a href="#">2</a>
+									<a href="#">3</a>
+									<strong>4</strong>
+									<a href="#">5</a>
+									<a href="#">6</a>
+									<a href="#">..90</a>
+									<a href="#" class="pages_next">下一页</a>
+								</div>
+							</div>
+							<div class="mb10">
+								<div class="pages">
+									<a href="#" class="pages_pre">上一页</a>
+									<a href="#">1...</a>
+									<a href="#">7</a>
+									<a href="#">8</a>
+									<strong>9</strong>
+									<a href="#">10</a>
+									<a href="#">11</a>
+									<a href="#">..90</a>
+									<a href="#" class="pages_next">下一页</a>
+								</div>
+							</div>
+							<div class="mb10">
+								<div class="pages">
+									<a href="#" class="pages_pre">上一页</a>
+									<a href="#">1...</a>
+									<a href="#">7</a>
+									<a href="#">8</a>
+									<a href="#">9</a>
+									<a href="#">10</a>
+									<strong>11</strong>
+								</div>
+							</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>代码</h3>
+							<div class="demo_html_cont">
+							&lt;div class="pages"&gt;<br>
+								&lt;a href=&quot;&quot; class=&quot;pages_pre&quot;&gt;上一页&lt;/a&gt;<br>
+								&lt;a href=&quot;&quot;&gt;1...&lt;/a&gt;<br>
+								&lt;a href=&quot;&quot;&gt;7&lt;/a&gt;<br>
+								&lt;a href=&quot;&quot;&gt;8&lt;/a&gt;<br>
+								&lt;strong&gt;9&lt;/strong&gt;<br>
+								&lt;a href=&quot;&quot;&gt;10&lt;/a&gt;<br>
+								&lt;a href=&quot;&quot;&gt;11&lt;/a&gt;<br>
+								&lt;a href=&quot;&quot;&gt;..90&lt;/a&gt;<br>
+								&lt;a href=&quot;&quot; class=&quot;pages_next&quot;&gt;下一页&lt;/a&gt;<br>
+							&lt;/div&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		<!--组件块-->
+				<div class="section" id="progress_name">
+					<h2>进度条</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<span class="progress_bar"><span style="width:40%;"></span></span>
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>代码</h3>
+							<div class="demo_html_cont">
+								&lt;span class=&quot;progress_bar&quot;&gt;&lt;span style=&quot;width:40%;&quot;&gt;&lt;/span&gt;&lt;/span&gt;
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		<!--组件块-->
+				<div class="section" id="color_name">
+					<h2>颜色筛选</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<h3>默认</h3>
+							<div class="demo_code_cont">
+								<span class="color_pick"><em style="background:#ff5500;"></em></span>&nbsp;<span class="color_pick"><em style="background:#003399;"></em></span>
+							</div>
+							<h3>大</h3>
+							<div class="demo_code_cont">
+								<span class="color_pick color_big"><em style="background:#ff5500;"></em>边框颜色</span>&nbsp;<span class="color_pick color_big"><em style="background:#003399;"></em>背景颜色</span>
+							</div>
+							<h3>组合式</h3>
+							<div class="demo_code_cont">
+								<div class="color_pick_dom">
+									<div class="case"><p>字体预览</p><p>ABCD</p></div>
+									<ul>
+										<li><label><input name="" type="checkbox" value="">粗体</label></li>
+										<li><label><input name="" type="checkbox" value="">下划线</label></li>
+										<li class="none"><label><input type="checkbox">斜体</label></li>
+									</ul>
+									<span class="color_pick"><em style="background:#008800;"></em></span>
+								</div>
+							</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>默认</h3>
+							<div class="demo_html_cont">
+								&lt;span class=&quot;color_pick&quot;&gt;&lt;em style=&quot;background:#ff5500;&quot;&gt;&lt;/em&gt;&lt;/span&gt;<br>
+								&lt;span class=&quot;color_pick&quot;&gt;&lt;em style=&quot;background:#003399;&quot;&gt;&lt;/em&gt;&lt;/span&gt;
+							</div>
+							<h3>大</h3>
+							<div class="demo_html_cont">
+								&lt;span class=&quot;color_pick color_big&quot;&gt;&lt;em style=&quot;background:#ff5500;&quot;&gt;&lt;/em&gt;边框颜色&lt;/span&gt;<br>
+								&lt;span class=&quot;color_pick color_big&quot;&gt;&lt;em style=&quot;background:#003399;&quot;&gt;&lt;/em&gt;背景颜色&lt;/span&gt;
+							</div>
+							<h3>组合式</h3>
+							<div class="demo_html_cont">
+								&lt;div class="color_pick_dom"&gt;<br>
+								&lt;div class="case"&gt;&lt;p&gt;字体预览&lt;/p&gt;&lt;p&gt;ABCD&lt;/p&gt;&lt;/div&gt;<br>
+								&lt;ul&gt;<br>
+								&lt;li&gt;&lt;label&gt;&lt;input name="" type="checkbox" value=""&gt;粗体&lt;/label&gt;&lt;/li&gt;<br>
+								&lt;li&gt;&lt;label&gt;&lt;input name="" type="checkbox" value=""&gt;下划线&lt;/label&gt;&lt;/li&gt;<br>
+								&lt;li class="none"&gt;&lt;label&gt;&lt;input type="checkbox"&gt;斜体&lt;/label&gt;&lt;/li&gt;<br>
+								&lt;/ul&gt;<br>
+								&lt;span class="color_pick"&gt;&lt;em style="background:#008800;"&gt;&lt;/em&gt;&lt;/span&gt;<br>
+								&lt;/div&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		<!--组件块-->
+				<div class="section" id="pick_name">
+					<h2>选中/复选</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<div class="pick_list">
+								<a href="">有一群</a>
+								<a href="" class="current">有一只</a>
+							</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>代码</h3>
+							<div class="demo_html_cont">
+								&lt;div class=&quot;pick_list&quot;&gt;<br>
+									&lt;a href=&quot;&quot;&gt;有一群&lt;/a&gt;<br>
+									&lt;a href=&quot;&quot; class=&quot;current&quot;&gt;有一只&lt;/a&gt;<br>
+								&lt;/div&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		<!--组件块-->
+				<div class="section" id="loading_name">
+					<h2>载入状态</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<div class="pick_list">
+								<div class="mb10"><span class="loading">载入中...</span></div>
+								<div><span class="loading loading_error">网络出现问题，载入失败...</span></div>
+							</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>代码</h3>
+							<div class="demo_html_cont">
+								&lt;span class="loading"&gt;载入中...&lt;/span&gt;<br>
+								&lt;span class="loading loading_error"&gt;网络出现问题，载入失败...&lt;/span&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		<!--组件块-->
+				<div class="section" id="notice_name">
+					<h2>操作提示</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<div id="notice">本站定于2012年12月22日12:00至16:00进行维护升级</div>
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>代码</h3>
+							<div class="demo_html_cont">
+								&lt;div id="notice"&gt;顶部公告&lt;/div&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+			 </div>
+
+		</div>
+	</div>
+</div>
+<template source='footer' />
+<script>
+$("#btn_submit").click(function(){
+	$("#tips_error").slideDown(500);
+});
+$("#btn_close").click(function(){
+	$("#tips_error").slideUp(500);
+});
+
+//××××××××××××××固定滚动×××××××××××××××
+Function.prototype.bind = function(){  
+  var fn = this, args = Array.prototype.slice.call(arguments), object = args.shift();  
+  return function(){  
+    return fn.apply(object,  
+      args.concat(Array.prototype.slice.call(arguments)));  
+  };  
+};
+var Topbar = function(ele)
+{
+	//获取实际的位置值。
+	this.bar = ele;
+	this.origin = parseInt(this.getElementPos(ele).y);
+	this.keeping = false;
+	this.ie6=!(window.XMLHttpRequest);
+	window.onscroll=this.onScroll.bind(this);
+};
+//置顶
+var _WP = Topbar.prototype;
+_WP.keepTop=function(){
+	this.bar.style.top=0;
+	this.bar.style.position=this.ie6?'relative':'fixed';
+	return true;
+};
+_WP.reloadOrigin=function(){
+	this.origin = parseInt(this.getElementPos(this.bar).y);
+}
+//恢复初始状态
+_WP.turnOrigin=function(){
+	this.bar.style.position='static';
+	return;
+};
+_WP.onScroll=function(){
+	if(Math.max(document.documentElement.scrollTop, document.body.scrollTop)>this.origin)
+	{
+		this.keeping = this.keeping||this.keepTop();
+		this.ie6&&this.ie6Scroll();
+	}
+	else
+	{
+		this.keeping = this.keeping?this.turnOrigin():this.keeping;
+	}
+};
+//ie6下的滚动方法
+_WP.ie6Scroll=function(){
+	this.bar.style.top = document.documentElement.scrollTop-this.origin+'px';
+};
+_WP.getElementPos=function(el){ 
+    var ua = navigator.userAgent.toLowerCase(); 
+    var isOpera = (ua.indexOf('opera') != -1); 
+    var isIE = (ua.indexOf('msie') != -1 && !isOpera); // not opera spoof 
+ 
+    if(el.parentNode === null || el.style.display == 'none')  
+    { 
+        return false; 
+    } 
+ 
+    var parent = null; 
+    var pos = []; 
+    var box; 
+ 
+    if(el.getBoundingClientRect)    //IE 
+    { 
+        box = el.getBoundingClientRect(); 
+        var scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop); 
+        var scrollLeft = Math.max(document.documentElement.scrollLeft, document.body.scrollLeft); 
+ 
+        return {x:box.left + scrollLeft, y:box.top + scrollTop}; 
+    } 
+    else if(document.getBoxObjectFor)    // gecko 
+    { 
+        box = document.getBoxObjectFor(el); 
+            
+        var borderLeft = (el.style.borderLeftWidth)?parseInt(el.style.borderLeftWidth):0; 
+        var borderTop = (el.style.borderTopWidth)?parseInt(el.style.borderTopWidth):0; 
+ 
+        pos = [box.x - borderLeft, box.y - borderTop]; 
+    } 
+    else    // safari & opera 
+    { 
+        pos = [el.offsetLeft, el.offsetTop]; 
+        parent = el.offsetParent; 
+        if (parent != el) { 
+            while (parent) { 
+                pos[0] += parent.offsetLeft; 
+                pos[1] += parent.offsetTop; 
+                parent = parent.offsetParent; 
+            } 
+        } 
+        if (ua.indexOf('opera') != -1  
+            || ( ua.indexOf('safari') != -1 && el.style.position == 'absolute' ))  
+        { 
+                pos[0] -= document.body.offsetLeft; 
+                pos[1] -= document.body.offsetTop; 
+        }  
+    } 
+         
+    if (el.parentNode) { parent = el.parentNode; } 
+    else { parent = null; } 
+   
+    while (parent && parent.tagName != 'BODY' && parent.tagName != 'HTML')  
+    { // account for any scrolled ancestors 
+        pos[0] -= parent.scrollLeft; 
+        pos[1] -= parent.scrollTop; 
+   
+        if (parent.parentNode) { parent = parent.parentNode; }  
+        else { parent = null; } 
+    } 
+    return {x:pos[0], y:pos[1]}; 
+};
+
+var all_topbar = new Topbar(document.getElementById('all_topbar'));
+
+</script>
+</body>
+</html>

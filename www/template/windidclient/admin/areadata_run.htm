@@ -75,7 +75,7 @@ foreach ($list as $_i) {#-->
 				<td><!--#if ($hasLevel < 2) {#-->
 					<a href="{@url:windidclient/areadata/run?parentid=$_i['areaid']}" class="mr10 J_region_next" data-name="{$_i['name']}" data-type="{$data_role}" data-id="{$_i['areaid']}">[{$data_name}]</a>
 					<!--#}#-->
-					<a data-id="{$_i['areaid']}" data-role="{$data_role}" href="{@url:windidclient/areadata/delete?areaid=$_i['areaid']}" class="J_region_del">[删除]</a></td>
+					<a data-id="{$_i['areaid']}" data-role="{$data_role}" href="{@url:windidclient/areadata/delete?areaid=$_i['areaid']}" class="J_region_del" data-pdata="{'areaid': '{$_i['areaid']}'}">[删除]</a></td>
 			</tr>
 <!--#}#-->
 		</tbody>
@@ -147,9 +147,9 @@ Wind.use('dialog', 'draggable', function() {
 			yarnball_city = $('#J_yarnball_city');							//面包屑_市
 		
 	//table列表中省市区的html
-	var tr_province = '<tr><th data-id="_ID"><div class="J_items">_TEXT</div></th><td><a data-id="_ID" data-type="province" class="mr10 J_region_next" data-name="_PNAME" href="#">[下级城市]</a><a class="J_region_del" data-role="province" href="{@url:windidclient/areadata/delete?areaid=_ID}" data-id="_ID">[删除]</a></td></tr>',
-		tr_city = '<tr><th data-id="_ID"><div class="J_items">_TEXT</div></th><td><a data-id="_ID" data-type="city" class="mr10 J_region_next" data-name="_CNAME" href="#">[下级区县]</a><a class="J_region_del" data-role="city" href="{@url:windidclient/areadata/delete?areaid=_ID}" data-id="_ID">[删除]</a></td></tr>',
-		tr_district = '<tr><th data-id="_ID"><div class="J_items">_TEXT</div></th><td><a class="J_region_del" data-role="district" href="{@url:windidclient/areadata/delete?areaid=_ID}" data-id="_ID">[删除]</a></td></tr>';
+	var tr_province = '<tr><th data-id="_ID"><div class="J_items">_TEXT</div></th><td><a data-id="_ID" data-type="province" class="mr10 J_region_next" data-name="_PNAME" href="#">[下级城市]</a><a class="J_region_del" data-pdata="{\'areaid\': \'_ID\'}" data-role="province" href="{@url:windidclient/areadata/delete?areaid=_ID}" data-id="_ID">[删除]</a></td></tr>',
+		tr_city = '<tr><th data-id="_ID"><div class="J_items">_TEXT</div></th><td><a data-id="_ID" data-type="city" class="mr10 J_region_next" data-name="_CNAME" href="#">[下级区县]</a><a class="J_region_del" data-pdata="{\'areaid\': \'_ID\'}"  data-role="city" href="{@url:windidclient/areadata/delete?areaid=_ID}" data-id="_ID">[删除]</a></td></tr>',
+		tr_district = '<tr><th data-id="_ID"><div class="J_items">_TEXT</div></th><td><a class="J_region_del" data-pdata="{\'areaid\': \'_ID\'}"  data-role="district" href="{@url:windidclient/areadata/delete?areaid=_ID}" data-id="_ID">[删除]</a></td></tr>';
 	
 	$('#J_yarnball_list').children().hover(function(){
 		$(this).addClass('hover');
@@ -368,7 +368,8 @@ Wind.use('dialog', 'draggable', function() {
 		e.preventDefault();
 		var $this = $(this),
 				role = $this.data('role'),
-				id = $this.data('id');
+				id = $this.data('id'),
+				pdata = $this.data('pdata');
 
 		//dialog
 		Wind.dialog({
@@ -377,22 +378,34 @@ Wind.use('dialog', 'draggable', function() {
 			isMask	: false,
 			follow	: $this,//跟随触发事件的元素显示
 			onOk	: function() {
-				$.getJSON($this.attr('href'), function(data){
-					if(data.state == 'success') {
-						$this.parents('tr').slideUp('slow', function(){
-							$(this).remove();
-						});
-						if(role == 'province') {
-							delete GV.REGION_CONFIG[id];
-						}else if(role == 'city') {
-							delete GV.REGION_CONFIG[$('#J_yarnball_province a.J_yarnball').data('id')]['items'][id];
-						}else if(role == 'district') {
-							delete GV.REGION_CONFIG[$('#J_yarnball_province a.J_yarnball').data('id')]['items'][$('#J_yarnball_city a.J_yarnball').data('id')]['items'][id];
+
+				$.ajax({
+					url: $this.attr('href'),
+					type : 'post',
+					dataType: 'json',
+					data: function(){
+						if(pdata) {
+							return $.parseJSON(pdata.replace(/'/g, '"'));
 						}
-					}else if(data.state == 'fail'){
-						Wind.dialog.alert(data.message[0]);
+					}(),
+					success: function(data){
+						if(data.state == 'success') {
+							$this.parents('tr').slideUp('slow', function(){
+								$(this).remove();
+							});
+							if(role == 'province') {
+								delete GV.REGION_CONFIG[id];
+							}else if(role == 'city') {
+								delete GV.REGION_CONFIG[$('#J_yarnball_province a.J_yarnball').data('id')]['items'][id];
+							}else if(role == 'district') {
+								delete GV.REGION_CONFIG[$('#J_yarnball_province a.J_yarnball').data('id')]['items'][$('#J_yarnball_city a.J_yarnball').data('id')]['items'][id];
+							}
+						}else if(data.state == 'fail'){
+							Wind.dialog.alert(data.message[0]);
+						}
 					}
 				});
+
 			}
 		});
 

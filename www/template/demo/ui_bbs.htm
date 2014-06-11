@@ -1,0 +1,614 @@
+<!doctype html>
+<html>
+<head>
+<template source='header' />
+<link rel="stylesheet" href="{@G:theme.url.css}/core.css?v={@G:c.version}" />
+<link rel="stylesheet" href="{@G:theme.url.css}/common.css?v={@G:c.version}" />
+</head>
+<body>
+<div class="demo_wrap">
+	<div class="uidemo_wrap">
+		 <ul class="demo_nav cc mb10">
+				 <li><a href="{@url:ui_admin}">后台UI控件库</a></li>
+				 <li><a href="{@url:ui}">前台全局UI控件库</a></li>
+				 <li class="current"><a href="{@url:ui_bbs}">前台UI控件库</a></li>
+		 </ul>
+		<div class="tabs_content">
+
+			 <div>
+			 <div class="pick_list" id="all_topbar">
+					<a href="#top">返回顶部</a>
+					<a href="#nav">导航</a>
+					<a href="#color_span">基础文本颜色</a>
+					<a href="#top_wrap">顶部自定义导航</a>
+					<a href="#bread_crumb">面包屑</a>
+					<a href="#info_box">站点信息</a>
+					<a href="#fold">展开收起</a>
+					<a href="#post">发帖回复</a>
+					<a href="#a_checkbox">模拟复选框</a>
+					<a href="#grid_3">三栏自适应布局</a>
+					<a href="#grid_2">两栏自适应布局</a>
+				</div>
+			 
+		<!--组件块-->
+				<div class="section" id="nav">
+					<h2>导航</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<div class="demo_code_cont">
+							
+								<div class="nav">
+									<ul>
+										<li class="current"><a href="">首页</a></li><li class="line"></li>
+										<li><a href="">空间</a></li><li class="line"></li>
+										<li><a href="">排行榜</a></li><li class="line"></li>
+										<li><a href="">商家</a></li>
+									</ul>
+								</div>
+								<div class="nav_lower">
+									<ul class="cc">
+										<li><a href="">城市</a></li>
+										<li><a href="">房产</a></li>
+										<li><a href="">汽车</a></li>
+										<li><a href="">家居</a></li>
+										<li><a href="">婚嫁</a></li>
+										<li><a href="">母婴</a></li>
+									</ul>
+								</div>
+								
+							</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>主导航</h3>
+							<div class="demo_html_cont">
+								&lt;div class="nav"&gt;<br>
+								&lt;ul&gt;<br>
+								&lt;li class="current"&gt;&lt;a href=""&gt;首页&lt;/a&gt;&lt;/li&gt;&lt;li class="line"&gt;&lt;/li&gt;<br>
+								&lt;li&gt;&lt;a href=""&gt;空间&lt;/a&gt;&lt;/li&gt;<br>
+								&lt;/ul&gt;<br>
+								&lt;/div&gt;<br>
+							</div>
+							<h3>副导航</h3>
+							<div class="demo_html_cont">
+								&lt;div class="nav_lower"&gt;<br>
+								&lt;ul class="cc"&gt;<br>
+								&lt;li&gt;&lt;a href=""&gt;城市&lt;/a&gt;&lt;/li&gt;<br>
+								&lt;li&gt;&lt;a href=""&gt;房产&lt;/a&gt;&lt;/li&gt;<br>
+								&lt;/ul&gt;<br>
+								&lt;/div&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		<!--组件块-->
+				<div class="section" id="color_span">
+					<h2>基础文本颜色</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<div class="mb10"><span class="s1">s1</span></div>
+							<div class="mb10"><span class="s2">s2</span></div>
+							<div class="mb10"><span class="s3">s3</span></div>
+							<div class="mb10"><span class="s4">s4</span></div>
+							<div class="mb10"><span class="s5">s5</span></div>
+							<div class="mb10"><span class="s6">s6</span></div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>说明</h3>
+							<div class="demo_html_cont">
+								默认模板的配色，会根据不同模板产生不同的颜色
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		
+		<!--组件块-->
+				<div class="section" id="top_wrap">
+					<h2>顶部自定义导航</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<div class="top_wrap">
+								<div class="top">
+										<a href="">链接</a><a href="">链接2</a><a href="">链接3</a><a href="">链接4</a>
+								</div>
+							</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>代码</h3>
+							<div class="demo_html_cont">
+								&lt;div class="top_wrap"&gt;<br>
+								&lt;div class="top"&gt;<br>
+								&lt;a href=""&gt;链接&lt;/a&gt;<br>
+								&lt;/div&gt;<br>
+								&lt;/div&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		
+		<!--组件块-->
+				<div class="section" id="bread_crumb">
+					<h2>面包屑(路径)</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<div class="bread_crumb">
+								<a href="" title="phpwind 官方论坛">phpwind 官方论坛</a><em>&gt;</em><a href="">风格征集令</a><em>&gt;</em>这个帖子有点冷
+							</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>代码</h3>
+							<div class="demo_html_cont">
+								&lt;div class="bread_crumb"&gt;<br>
+								&lt;a href="" title="首页"&gt;首页&lt;/a&gt;&lt;em&gt;&gt;&lt;/em&gt;&lt;a href=""&gt;风格征集令&lt;/a&gt;&lt;em&gt;&gt;&lt;/em&gt;这个帖子有点冷<br>
+								&lt;/div&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		
+		<!--组件块-->
+				<div class="section" id="info_box">
+					<h2>站点信息</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+<div class="info_box">
+	今日：135<em></em>昨日：12345<em></em>最高日：<span>25500</span><em></em>帖子：123456<em></em>会员：456
+</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>代码</h3>
+							<div class="demo_html_cont">
+								&lt;div class="info_box"&gt;<br>
+								今日：135&lt;em&gt;&lt;/em&gt;昨日：12345<br>
+								&lt;/div&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		
+		<!--组件块-->
+				<div class="section" id="fold">
+					<h2>展开收起</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<div class="mb10 cc"><a href="" class="fold" style="float:left;">收起</a></div>
+							<div class="mb10 cc"><a href="" class="unfold" style="float:left;">展开</a></div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>代码</h3>
+							<div class="demo_html_cont">
+								&lt;a href="" class="fold"&gt;收起&lt;/a&gt;<br>
+								&lt;a href="" class="unfold"&gt;展开&lt;/a&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		
+		<!--组件块-->
+				<div class="section" id="post">
+					<h2>发帖回复</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<div class="mb10 cc"><a href="" class="btn_post">发帖</a></div>
+							<div class="mb10 cc"><a href="" class="btn_replay">回复</a></div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>代码</h3>
+							<div class="demo_html_cont">
+								&lt;a href="" class="btn_post"&gt;发帖&lt;/a&gt;<br>
+								&lt;a href="" class="btn_replay"&gt;回复&lt;/a&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		
+		<!--组件块-->
+				<div class="section" id="a_checkbox">
+					<h2>模拟复选框</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<div class="mb10"><a href="" class="a_checkbox">新窗</a></div>
+							<div class="mb10"><a href="" class="a_checkbox_checked">新窗</a></div>
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>代码</h3>
+							<div class="demo_html_cont">
+								&lt;a href="" class="a_checkbox"&gt;新窗&lt;/a&gt;<br>
+								&lt;a href="" class="a_checkbox_checked"&gt;新窗&lt;/a&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		
+		<!--组件块-->
+				<div class="section" id="grid_3">
+					<h2>三栏自适应布局</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+						
+							<div class="grid_3">
+								<div class="md">
+									<div class="box">170px</div>
+								</div>
+								<div class="cm">
+									<div class="cw">
+										<div class="box">自适应</div>
+									</div>
+								</div>
+								<div class="sd">
+									<div class="box">230px</div>
+								</div>
+							</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>代码</h3>
+							<div class="demo_html_cont">
+								&lt;div class="grid_3"&gt;<br>
+								&lt;div class="md"&gt;<br>
+								左<br>
+								&lt;/div&gt;<br>
+								&lt;div class="cm"&gt;<br>
+								&lt;div class="cw"&gt;<br>
+								中<br>
+								&lt;/div&gt;<br>
+								&lt;/div&gt;<br>
+								&lt;div class="sd"&gt;<br>
+								右<br>
+								&lt;/div&gt;<br>
+								&lt;/div&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		
+		<!--组件块-->
+				<div class="section" id="grid_2">
+					<h2>两栏自适应布局</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+
+							<div class="grid_2">
+								<div class="md">
+									<div class="box">150px</div>
+								</div>
+								<div class="cw">
+									<div class="cm">
+										<div class="box">自适应</div>
+									</div>
+								</div>
+							</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>代码</h3>
+							<div class="demo_html_cont">
+								&lt;div class="grid_2"&gt;<br>
+								&lt;div class="md"&gt;<br>
+								左边<br>
+								&lt;/div&gt;<br>
+								&lt;div class="cw"&gt;<br>
+								&lt;div class="cm"&gt;<br>
+								右边<br>
+								&lt;/div&gt;<br>
+								&lt;/div&gt;<br>
+								&lt;/div&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		
+		<!--组件块-->
+				<div class="section">
+					<h2>头部登录/头部登录后信息</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<h3>登录前</h3>
+							<div class="demo_code_cont">
+								<div class="login">
+									<dl>
+										<dt>
+											<div class="fl"><div class="tips"><div class="tips_error">帐号或密码错误，您还可以尝试5次</div></div></div>
+											<p class="mb5"><label for="username">用户名</label><input type="text" class="input" id="username" name="username" placeholder="输入用户名"></p>
+											<p><label for="password">密　码</label><input type="password" class="input" id="password" name="password" placeholder="请输入密码"></p>
+										</dt>
+										<dd class="bt">
+											<p class="mb5"><span class="checkbox" title="下次自动登录"><input type="checkbox" id="head_checkbox" name="cktime" value="31536000"><label for="head_checkbox">记住登录</label></span></p>
+											<p><button type="submit" class="btn">登录</button></p>
+										</dd>
+										<dd class="bt">
+											<p class="mb5"><a class="sendpwd" rel="nofollow" href="{@url:u/default/findPwd/run}">找回密码</a></p>
+											<p><a class="btn" href="{@url:u/default/register/run}" rel="nofollow">注册</a></p>
+										</dd>
+									</dl>
+								</div>
+							</div>
+							
+							<h3>登录后</h3>
+							<div class="demo_code_cont">
+								<div class="login_info">
+									<dl>
+										<dt><a href=""><img src="{@G:url.images}/face/face.jpg" class="face face_small" /></a></dt>
+										<dd class="cc"><p><a href="" class="username current">用户名</a><a href="" rel="nofollow" class="quit">退出</a><span class="line">|</span><a href="#" class="msg_news s4 b" target="_blank">消息<em>(5)</em></a><a href="#" class="set" target="_blank">设置</a><span class="line">|</span><a href="" class="system" target="_blank">系统后台</a></p></dd>
+										<dd class="cc"><p><a href="#" class="as" target="_blank">身份：管理员</a><span class="line">|</span><a href="#" class="integral" target="_blank">积分：1586</a></p></dd>
+									</dl>
+								</div>
+							</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>登录前</h3>
+							<div class="demo_html_cont">
+								&lt;div class="login"&gt;<br>
+								&lt;dl&gt;<br>
+								&lt;dt&gt;&lt;div class="fl"&gt;&lt;div class="tips"&gt;&lt;div class="tips_error"&gt;帐号或密码错误，您还可以尝试5次&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;<br>
+								&lt;p class="mb5"&gt;&lt;label for="username"&gt;用户名&lt;/label&gt;&lt;input type="text" class="input" placeholder="输入用户名"&gt;&lt;/p&gt;<br>
+								&lt;p&gt;&lt;label for="password"&gt;密　码&lt;/label&gt;&lt;input type="password" class="input" placeholder="请输入密码"&gt;&lt;/p&gt;<br>
+								&lt;/dt&gt;<br>
+								&lt;dd class="bt"&gt;<br>
+								&lt;p class="mb5"&gt;&lt;span class="checkbox" title="下次自动登录"&gt;&lt;input type="checkbox" id="head_checkbox" name="cktime" value="31536000"&gt;&lt;label for="head_checkbox"&gt;记住登录&lt;/label&gt;&lt;/span&gt;&lt;/p&gt;<br>
+								&lt;p&gt;&lt;button type="submit" class="btn"&gt;登录&lt;/button&gt;&lt;/p&gt;<br>
+								&lt;/dd&gt;<br>
+								&lt;dd class="bt"&gt;<br>
+								&lt;p class="mb5"&gt;&lt;a class="sendpwd" rel="nofollow" href=""&gt;找回密码&lt;/a&gt;&lt;/p&gt;<br>
+								&lt;p&gt;&lt;a class="btn" href="" rel="nofollow"&gt;注册&lt;/a&gt;&lt;/p&gt;<br>
+								&lt;/dd&gt;<br>
+								&lt;/dl&gt;<br>
+								&lt;/div&gt;<br>
+							</div>
+							<h3>登录后</h3>
+							<div class="demo_html_cont">
+								&lt;div class="login_info"&gt;<br>
+								&lt;dl&gt;<br>
+								&lt;dt&gt;&lt;a href=""&gt;&lt;img src="face.jpg" class="face face_small" /&gt;&lt;/a&gt;&lt;/dt&gt;<br>
+								&lt;dd class="cc"&gt;&lt;p&gt;&lt;a href="" class="username current"&gt;用户名&lt;/a&gt;&lt;a href="" rel="nofollow" class="quit"&gt;退出&lt;/a&gt;&lt;span class="line"&gt;|&lt;/span&gt;&lt;a href="#" class="msg_news s4 b" target="_blank"&gt;消息&lt;em&gt;(5)&lt;/em&gt;&lt;/a&gt;&lt;a href="#" class="set" target="_blank"&gt;设置&lt;/a&gt;&lt;span class="line"&gt;|&lt;/span&gt;&lt;a href="" class="system" target="_blank"&gt;系统后台&lt;/a&gt;&lt;/p&gt;&lt;/dd&gt;<br>
+								&lt;dd class="cc"&gt;&lt;p&gt;&lt;a href="#" class="as" target="_blank"&gt;身份：管理员&lt;/a&gt;&lt;span class="line"&gt;|&lt;/span&gt;&lt;a href="#" class="integral" target="_blank"&gt;积分：1586&lt;/a&gt;&lt;/p&gt;&lt;/dd&gt;<br>
+								&lt;/dl&gt;<br>
+								&lt;/div&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		
+		<!--组件块-->
+				<div class="section">
+					<h2>按钮</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<h3>按钮(基础样式btn)</h3>
+							<div class="demo_code_cont">
+							</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>A链接</h3>
+							<div class="demo_html_cont">
+								&lt;a href=&quot;#&quot; class=&quot;btn&quot;&gt;默认&lt;/a&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		
+		<!--组件块-->
+				<div class="section">
+					<h2>按钮</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<h3>按钮(基础样式btn)</h3>
+							<div class="demo_code_cont">
+							</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>A链接</h3>
+							<div class="demo_html_cont">
+								&lt;a href=&quot;#&quot; class=&quot;btn&quot;&gt;默认&lt;/a&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		
+		<!--组件块-->
+				<div class="section">
+					<h2>按钮</h2>
+					<div class="cc">
+						<div class="demo_code">
+						<!--代码区域开始-->
+							<h3>按钮(基础样式btn)</h3>
+							<div class="demo_code_cont">
+							</div>
+							
+						<!--代码区域结束-->
+						</div>
+						<div class="demo_html">
+							<h3>A链接</h3>
+							<div class="demo_html_cont">
+								&lt;a href=&quot;#&quot; class=&quot;btn&quot;&gt;默认&lt;/a&gt;<br>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!--组件块结束-->
+		
+		
+			 </div>
+		</div>
+	</div>
+</div>
+<template source='footer' />
+<script>
+
+//××××××××××××××固定滚动×××××××××××××××
+Function.prototype.bind = function(){  
+  var fn = this, args = Array.prototype.slice.call(arguments), object = args.shift();  
+  return function(){  
+    return fn.apply(object,  
+      args.concat(Array.prototype.slice.call(arguments)));  
+  };  
+};
+var Topbar = function(ele)
+{
+	//获取实际的位置值。
+	this.bar = ele;
+	this.origin = parseInt(this.getElementPos(ele).y);
+	this.keeping = false;
+	this.ie6=!(window.XMLHttpRequest);
+	window.onscroll=this.onScroll.bind(this);
+};
+//置顶
+var _WP = Topbar.prototype;
+_WP.keepTop=function(){
+	this.bar.style.top=0;
+	this.bar.style.position=this.ie6?'relative':'fixed';
+	return true;
+};
+_WP.reloadOrigin=function(){
+	this.origin = parseInt(this.getElementPos(this.bar).y);
+}
+//恢复初始状态
+_WP.turnOrigin=function(){
+	this.bar.style.position='static';
+	return;
+};
+_WP.onScroll=function(){
+	if(Math.max(document.documentElement.scrollTop, document.body.scrollTop)>this.origin)
+	{
+		this.keeping = this.keeping||this.keepTop();
+		this.ie6&&this.ie6Scroll();
+	}
+	else
+	{
+		this.keeping = this.keeping?this.turnOrigin():this.keeping;
+	}
+};
+//ie6下的滚动方法
+_WP.ie6Scroll=function(){
+	this.bar.style.top = document.documentElement.scrollTop-this.origin+'px';
+};
+_WP.getElementPos=function(el){ 
+    var ua = navigator.userAgent.toLowerCase(); 
+    var isOpera = (ua.indexOf('opera') != -1); 
+    var isIE = (ua.indexOf('msie') != -1 && !isOpera); // not opera spoof 
+ 
+    if(el.parentNode === null || el.style.display == 'none')  
+    { 
+        return false; 
+    } 
+ 
+    var parent = null; 
+    var pos = []; 
+    var box; 
+ 
+    if(el.getBoundingClientRect)    //IE 
+    { 
+        box = el.getBoundingClientRect(); 
+        var scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop); 
+        var scrollLeft = Math.max(document.documentElement.scrollLeft, document.body.scrollLeft); 
+ 
+        return {x:box.left + scrollLeft, y:box.top + scrollTop}; 
+    } 
+    else if(document.getBoxObjectFor)    // gecko 
+    { 
+        box = document.getBoxObjectFor(el); 
+            
+        var borderLeft = (el.style.borderLeftWidth)?parseInt(el.style.borderLeftWidth):0; 
+        var borderTop = (el.style.borderTopWidth)?parseInt(el.style.borderTopWidth):0; 
+ 
+        pos = [box.x - borderLeft, box.y - borderTop]; 
+    } 
+    else    // safari & opera 
+    { 
+        pos = [el.offsetLeft, el.offsetTop]; 
+        parent = el.offsetParent; 
+        if (parent != el) { 
+            while (parent) { 
+                pos[0] += parent.offsetLeft; 
+                pos[1] += parent.offsetTop; 
+                parent = parent.offsetParent; 
+            } 
+        } 
+        if (ua.indexOf('opera') != -1  
+            || ( ua.indexOf('safari') != -1 && el.style.position == 'absolute' ))  
+        { 
+                pos[0] -= document.body.offsetLeft; 
+                pos[1] -= document.body.offsetTop; 
+        }  
+    } 
+         
+    if (el.parentNode) { parent = el.parentNode; } 
+    else { parent = null; } 
+   
+    while (parent && parent.tagName != 'BODY' && parent.tagName != 'HTML')  
+    { // account for any scrolled ancestors 
+        pos[0] -= parent.scrollLeft; 
+        pos[1] -= parent.scrollTop; 
+   
+        if (parent.parentNode) { parent = parent.parentNode; }  
+        else { parent = null; } 
+    } 
+    return {x:pos[0], y:pos[1]}; 
+};
+
+var all_topbar = new Topbar(document.getElementById('all_topbar'));
+
+</script>
+</body>
+</html>

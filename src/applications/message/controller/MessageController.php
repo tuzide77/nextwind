@@ -371,13 +371,27 @@ class MessageController extends PwBaseController {
 			$count && $attentions = $attentionDs->getFans($this->loginUser->uid, $limit, $start);
 		}
 		if (!$attentions) {
-			echo Pw::jsonEncode(array('state' => 'fail'));exit;
+			Pw::echoJson(array('state' => 'fail'));exit;
 		}
-		$uids = array_keys($attentions);
-		$attentions = Wekit::load('user.PwUser')->fetchUserByUid($uids);
-		echo Pw::jsonEncode(array('state' => 'success', 'data' => $attentions));exit;
+		Pw::echoJson(array('state' => 'success', 'data' => $this->_buildUsers($attentions)));exit;
 	}
 	
+	/** 
+	 * 组装用户
+	 *
+	 */
+	private function _buildUsers($attentions) {
+		$uids = array_keys($attentions);
+		$userList = $this->_getUserDs()->fetchUserByUid($uids, PwUser::FETCH_MAIN);
+		$users = array();
+		foreach ($uids as $v) {
+			if (!isset($userList[$v]['username'])) continue;
+			$users[$v]['uid'] = $v;
+			$users[$v]['username'] = $userList[$v]['username'];
+		}	
+		return $users;
+	}
+
 	/** 
 	 * 获得验证码
 	 */

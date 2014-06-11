@@ -1,10 +1,10 @@
 <?php
 /**
- * the last known user to change this file in the repository  <$LastChangedBy: jieyin $>
- * @author $Author: jieyin $ Foxsee@aliyun.com
+ * the last known user to change this file in the repository  <$LastChangedBy: gao.wanggao $>
+ * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ?2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwWindidInform.php 24861 2013-02-25 03:27:57Z jieyin $ 
+ * @version $Id: PwWindidInform.php 29745 2013-06-28 09:07:39Z gao.wanggao $ 
  * @package 
  */
 class PwWindidInform {
@@ -15,6 +15,7 @@ class PwWindidInform {
 	 * @param unknown_type $params
 	 */
 	public function test($testdata) {
+		
 		return $testdata ? true : false;
 	}
 	

@@ -7,7 +7,7 @@ Wind::import('APPS:manage.controller.BaseManageController');
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: ContentController.php 24023 2013-01-21 03:04:37Z xiaoxia.xuxx $
+ * @version $Id: ContentController.php 28815 2013-05-24 09:39:50Z jieyin $
  * @package forum
  */
 
@@ -75,7 +75,7 @@ class ContentController extends BaseManageController {
 	
 	public function doPassThreadAction() {
 
-		$tid = $this->getInput('tid');
+		$tid = $this->getInput('tid', 'post');
 		if (empty($tid)) {
 			$this->showError('operate.select');
 		}
@@ -100,7 +100,7 @@ class ContentController extends BaseManageController {
 
 	public function doDeleteThreadAction() {
 
-		$tid = $this->getInput('tid');
+		$tid = $this->getInput('tid', 'post');
 		if (empty($tid)) {
 			$this->showError('operate.select');
 		}
@@ -167,7 +167,7 @@ class ContentController extends BaseManageController {
 
 	public function doPassPostAction() {
 
-		$pid = $this->getInput('pid');
+		$pid = $this->getInput('pid', 'post');
 		if (empty($pid)) {
 			$this->showError('operate.select');
 		}
@@ -202,7 +202,7 @@ class ContentController extends BaseManageController {
 
 	public function doDeletePostAction() {
 
-		$pid = $this->getInput('pid');
+		$pid = $this->getInput('pid', 'post');
 		if (empty($pid)) {
 			$this->showError('operate.select');
 		}

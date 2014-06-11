@@ -28,7 +28,7 @@
 				<td><input name="credits[{$key}][unit]" type="text" class="input" value="{$credit['unit']}"></td>
 				<!-- <td><input name="credits[{$key}][open]" type="checkbox" value="1"{@Pw::ifcheck($credit['open'])}></td> -->
 				<!--# if($key > 4) {#-->
-				<td><a href="{@url:windid/credit/doDeletecredit?creditId=$key}" class="mr10 J_ajax_del">[删除]</a></td>
+				<td><a href="{@url:windid/credit/doDeletecredit}" class="mr10 J_ajax_del" data-pdata="{'creditId': '{$key}'}">[删除]</a></td>
 				<!--#} else {#-->
 				<td>-- --</td>
 				<!--#}#-->

@@ -29,6 +29,8 @@ class AttachmentController extends AdminBaseController {
 	 * 后台设置-附件设置
 	 */
 	public function dorunAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($pathsize, $attachnum, $extsize) = $this->getInput(array('pathsize', 'attachnum', 'extsize'), 'post');
 		$_extsize = array();
 		foreach ($extsize as $key => $value) {
@@ -71,6 +73,8 @@ class AttachmentController extends AdminBaseController {
 	 * 附件存储方式设置列表页
 	 */
 	public function dostroageAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$att_storage = $this->getInput('att_storage', 'post');
 		$avatar_storage = $this->getInput('avatar_storage', 'post');
 
@@ -104,11 +108,17 @@ class AttachmentController extends AdminBaseController {
 	 * 后台设置-附件缩略设置
 	 */
 	public function dothumbAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($thumb, $thumbsize_width, $thumbsize_height, $quality) = $this->getInput(
 			array('thumb', 'thumbsize_width', 'thumbsize_height', 'quality'), 'post');
+
 		$config = new PwConfigSet('attachment');
-		$config->set('thumb', intval($thumb))->set('thumb.size.width', $thumbsize_width)->set('thumb.size.height', 
-			$thumbsize_height)->set('thumb.quality', $quality)->flush();
+		$config->set('thumb', intval($thumb))
+			->set('thumb.size.width', $thumbsize_width)
+			->set('thumb.size.height', $thumbsize_height)
+			->set('thumb.quality', $quality)
+			->flush();
 		$this->showMessage('ADMIN:success');
 	}
 
@@ -116,6 +126,8 @@ class AttachmentController extends AdminBaseController {
 	 * 后台设置-附件缩略预览
 	 */
 	public function viewAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($thumb, $thumbsize_width, $thumbsize_height, $quality) = $this->getInput(
 			array('thumb', 'thumbsize_width', 'thumbsize_height', 'quality'), 'post');
 		

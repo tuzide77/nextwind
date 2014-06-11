@@ -27,6 +27,8 @@ class PunchController extends AdminBaseController {
 	 * 后台设置-每日打卡设置
 	 */
 	public function dorunAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$config = new PwConfigSet('site');
 		list($punchOpen,$punchReward,$punchFrendOpen,$punchFrendReward) = $this->getInput(array('punchOpen','punchReward','punchFrendOpen','punchFrendReward'), 'post');
 		$oldmin = abs(ceil($punchReward['min']));

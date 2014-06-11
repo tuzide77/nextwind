@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<template source='TPL:admin.common.head' />
+</head>
+<body>
+<div class="wrap">
+<div class="h_a">功能说明</div>
+<div class="prompt_text">
+	<ul>
+		<li>本功能为导入完整的中国学校数据（包括高中、初中、小学）。</li>
+		<li>本功能数据来源朋友网，只用于技术学习交流，不可用于商业。对于产生的法律纠纷，本人将不承担任何责任。</li>
+	</ul>
+</div>
+	<div class="h_a">抓取学校数据</div>
+	<div class="table_full">
+		<table width="100%">
+			<col class="th" />
+			<col width="400" />
+			<col />
+			<tr>
+				<th>生成大学数据</th>
+				<td>
+					<a class="btn" href="{@url:app/schooldata/manage/unversity}">提交</a>
+				</td>
+				<td><div class="fun_tips"></div></td>
+			</tr>
+			<tr>
+				<th>生成中学数据</th>
+				<td>
+					<a class="btn" href="{@url:app/schooldata/manage/senior}">提交</a>
+				</td>
+				<td><div class="fun_tips"></div></td>
+			</tr>
+			<tr>
+				<th>生成小学数据</th>
+				<td>
+					<a class="btn" href="{@url:app/schooldata/manage/primary}">提交</a>
+				</td>
+				<td><div class="fun_tips"></div></td>
+			</tr>
+		</table>
+	</div>
+</div>
+<template source='TPL:admin.common.footer' />
+</body>
+</html>

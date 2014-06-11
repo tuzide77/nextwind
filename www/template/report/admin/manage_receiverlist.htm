@@ -34,7 +34,7 @@
 			<tr>
 				<th>{$v['username']}</th>
 				<td>{$v['group']}</td>
-				<td><a href="{@url:report/manage/deleteReceiver?uid=$v['uid']}" class="J_ajax_del">[删除]</a></td>
+				<td><a href="{@url:report/manage/deleteReceiver}" class="J_ajax_del" data-pdata="{'uid': '{$v['uid']}'}">[删除]</a></td>
 			</tr>
 			<!--# } #-->
 		</table>

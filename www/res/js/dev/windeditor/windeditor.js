@@ -4,7 +4,7 @@
  * @Descript	: windeditor
  * @Author		: chaoren1641@gmail.com
  * @Depend		: jquery.js(1.7 or later)
- * $Id: windeditor.js 26578 2013-04-11 08:26:20Z hao.lin $			:
+ * $Id: windeditor.js 28780 2013-05-23 09:20:00Z hao.lin $			:
  */
 ;(function ( $, window, undefined ) {
 
@@ -572,7 +572,10 @@
 					 		url = 'http://' + url;
 					 	}
 					 	if(url && title) {
-					 		_self.insertHTML('<a href="'+ url +'" target="_blank">'+ title +'</a>');
+					 		//script xss
+					 		var goal = $('<a href="'+ url +'" target="_blank" />').text(title);
+					 		var snap = $('<div />').html(goal);
+					 		_self.insertHTML(snap.html());
 					 	}else {
 					 		_self.execCommand("unlink");
 					 	}

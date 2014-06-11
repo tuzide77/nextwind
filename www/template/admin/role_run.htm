@@ -32,7 +32,7 @@
 				<td>{$role['name']}</td>
 				<td>
 					<a href="{@url:role/edit?rid=$role['id']}" class="mr10">[编辑]</a>
-					<a href="{@url:role/del?rid=$role['id']}" class="mr10 J_ajax_del">[删除]</a></td>
+					<a href="{@url:role/del}" class="mr10 J_ajax_del" data-pdata="{'rid': '{$role['id']}'}">[删除]</a></td>
 			</tr>
 	<!--# } #-->
 		</table>

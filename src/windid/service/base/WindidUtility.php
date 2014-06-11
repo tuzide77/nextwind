@@ -4,7 +4,7 @@
  * 
  * @author xiaoxia.xu <xiaoxia.xuxx@aliyun-inc.com> 2010-11-2
  * @license http://www.phpwind.com
- * @version $Id: WindidUtility.php 24692 2013-02-05 08:18:21Z jieyin $
+ * @version $Id: WindidUtility.php 29745 2013-06-28 09:07:39Z gao.wanggao $
  * @package Windid.library
  */
 class WindidUtility {
@@ -32,8 +32,21 @@ class WindidUtility {
 		return substr(md5($question . $answer), 8, 8);
 	}
 	
-	public static function appKey($apiId, $time, $secretkey) {
-		return md5(md5($apiId.'||'.$secretkey).$time);
+	public static function appKey($apiId, $time, $secretkey, $get, $post) {
+		$array = array('m', 'c', 'a', 'windidkey', 'clientid', 'time', '_json', 'jcallback', 'csrf_token', 'Filename', 'Upload', 'token');
+		$str = '';
+		ksort($get);
+		ksort($post);
+		foreach ($get AS $k=>$v) {
+			if (in_array($k, $array)) continue;
+			$str .=$k.$v;
+		}
+		foreach ($post AS $k=>$v) {
+			if (in_array($k, $array)) continue;
+			$str .=$k.$v;
+		}
+		return md5(md5($apiId.'||'.$secretkey).$time.$str);
+		
 	}
 	
 	public static function buildRequest($url, $params = array(), $isreturn = true, $timeout = 10, $method = 'post') {
@@ -57,7 +70,17 @@ class WindidUtility {
 	}
 	
 	public static function uploadRequest($url, $file, $timeout = 30) {
-		if (!function_exists('fsockopen')) {
+		if (function_exists('curl_init')) {
+			 $curl = curl_init($url);  
+		     curl_setopt($curl,CURLOPT_POST, true);  
+		     curl_setopt($curl,CURLOPT_POSTFIELDS,  array('FileData'=>'@'.$file));
+		     curl_setopt($curl,CURLOPT_TIMEOUT, $timeout);  
+		     curl_setopt($curl,CURLOPT_FOLLOWLOCATION, false);  
+		     curl_setopt($curl,CURLOPT_RETURNTRANSFER, true);    
+		     $response = curl_exec($curl);  
+			 curl_close($curl);
+			 return $response;
+		} elseif (function_exists('fsockopen')) {
 			$urlArr = parse_url($url);
 			$port = isset($urlArr['port']) ? $urlArr['port'] : 80;
         	$boundary = "---------------------".substr(md5(rand(0,32000)),0,10);
@@ -89,17 +112,6 @@ class WindidUtility {
 				$response = substr($response, strlen($response) - intval($matches[1]));
 			}
 			return $response;
-	        
-		} elseif (function_exists('curl_init')) {
-			 $curl = curl_init($url);  
-		     curl_setopt($curl,CURLOPT_POST, true);  
-		     curl_setopt($curl,CURLOPT_POSTFIELDS, $file);
-		     curl_setopt($curl,CURLOPT_TIMEOUT, $timeout);  
-		     curl_setopt($curl,CURLOPT_FOLLOWLOCATION, false);  
-		     curl_setopt($curl,CURLOPT_RETURNTRANSFER, true);    
-		     $response = curl_exec($curl);  
-			 curl_close($curl);
-			 return $response;
 		} else {
 			return false;
 		}

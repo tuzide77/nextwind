@@ -144,7 +144,7 @@ class ManageController extends AdminBaseController {
 					'count' => $count,
 					'haveBuild' => $haveBuild
 				);
-		echo Pw::jsonEncode(array('data' => $data));exit;
+		Pw::echoJson(array('data' => $data));exit;
 	}
 	
 	private function sendNoticeByUsers ($userInfos,$content,$title) {

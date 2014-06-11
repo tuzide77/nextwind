@@ -7,7 +7,7 @@ Wind::import('SRV:hook.dm.PwHookInjectDm');
  * @author Shi Long <long.shi@alibaba-inc.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: InjectController.php 24202 2013-01-23 02:18:05Z jieyin $
+ * @version $Id: InjectController.php 28812 2013-05-24 09:08:16Z jieyin $
  * @package hook.admin
  */
 class InjectController extends AdminBaseController {
@@ -26,6 +26,8 @@ class InjectController extends AdminBaseController {
 	 * 添加inject
 	 */
 	public function doAddAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($alias, $hook_name, $class, $method, $loadway, $expression, $description) = $this->getInput(
 			array('alias', 'hook_name', 'class', 'method', 'loadway', 'expression', 'description'));
 		$dm = new PwHookInjectDm();
@@ -53,6 +55,8 @@ class InjectController extends AdminBaseController {
 	 * 编辑inject
 	 */
 	public function doEditAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		list($id, $alias, $hook_name, $class, $method, $loadway, $expression, $description) = $this->getInput(
 			array(
 				'id', 
@@ -77,6 +81,8 @@ class InjectController extends AdminBaseController {
 	 * 删除injector
 	 */
 	public function delAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$id = $this->getInput('id');
 		$this->_injectDs()->del($id);
 		$this->showMessage('success');
@@ -86,6 +92,8 @@ class InjectController extends AdminBaseController {
 	 * injector详细页
 	 */
 	public function detailAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$id = $this->getInput('id');
 		$inject = $this->_injectDs()->find($id);
 		$this->setOutput($inject, 'inject');

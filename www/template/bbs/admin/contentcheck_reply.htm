@@ -62,8 +62,8 @@
 					</td>
 					<td>
 						<ul class="single_list cc">
-							<li><a href="{@url:bbs/contentcheck/doPassPost?pid=$value['pid']}" class="mr5 J_ajax_refresh">[通过]</a></li>
-							<li><a class="J_ajax_del" href="{@url:bbs/contentcheck/doDeletePost?pid=$value['pid']}">[删除]</a></li>
+							<li><a href="{@url:bbs/contentcheck/doPassPost}" class="mr5 J_ajax_refresh" data-pdata="{'pid': '{$value['pid']}'}">[通过]</a></li>
+							<li><a class="J_ajax_del" data-pdata="{'pid': '{$value['pid']}'}" href="{@url:bbs/contentcheck/doDeletePost}">[删除]</a></li>
 						</ul>
 					</td>
 				</tr>

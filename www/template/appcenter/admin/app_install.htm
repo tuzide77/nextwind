@@ -32,7 +32,7 @@
 			<col class="th" />
 <!--#foreach ($apps as $k => $v){ #-->
 			<tr>
-				<th><span class="b mr10">{$v}</span><a class="J_ajax_del w" href="{@url:appcenter/app/delFolder?folder=$v}">[删除]</a></th>
+				<th><span class="b mr10">{$v}</span><a class="J_ajax_del w" href="{@url:appcenter/app/delFolder}" data-pdata="{'folder': '{$v}'}">[删除]</a></th>
 				<td><form action="{@url:appcenter/app/toInstall?apps[]=$v}" method="post" class="J_ajaxForm"><button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit">安装</button></form></td>
 			</tr>
 <!--# } #-->

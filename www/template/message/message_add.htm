@@ -104,7 +104,7 @@ Wind.use('jquery', 'global', 'ajaxForm', 'validate', function() {
 				Wind.Util.resultTip({
 					msg : '发送成功',
 					callback : function(){
-						window.location.href = data.referer;
+						window.location.href = decodeURIComponent(data.referer);
 					}
 				});
 			}else if(data.state === 'fail'){

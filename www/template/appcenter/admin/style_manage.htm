@@ -31,7 +31,7 @@
 					<div class="mb5"><input name="logo" class="J_upload_preview" type="file" data-preview="#J_logo_preview"></div>
 					<!--# if($logo){ #-->
 					<img id="J_logo_preview" src="{@Pw::getPath($logo)}" align="top" class="mr10">
-					<a class="J_ajax_del" href="{@url:appcenter/style/delete?type=logo&path=$logo}">[删除]</a>
+					<a class="J_ajax_del" href="{@url:appcenter/style/delete}" data-pdata="{'path': '{$logo}', 'type': 'logo'}">[删除]</a>
 					<input type="hidden" name="oldlogo" value="{$logo}">
 					<!--# }else{ #-->
 					<img id="J_logo_preview" style="display:none">
@@ -45,7 +45,7 @@
 				<div class="mb5"><input name="bg" class="J_upload_preview" type="file" data-preview="#J_bg_preview"></div>
 					<!--# if($bg){ #-->
 					<img id="J_bg_preview" src="{@Pw::getPath($bg)}" align="top" class="mr10">
-					<a class="J_ajax_del" href="{@url:appcenter/style/delete?type=bg&path=$bg}">[删除]</a>
+					<a class="J_ajax_del" href="{@url:appcenter/style/delete}" data-pdata="{'path': '{$bg}', 'type': 'bg'}">[删除]</a>
 					<input type="hidden" name="oldbg" value="{$bg}">
 					<!--# }else{ #-->
 					<img id="J_bg_preview" style="display:none">
@@ -202,7 +202,7 @@
 				<div class="mb5"><input name="headbg" class="J_upload_preview" type="file" data-preview="#J_headbg_preview"></div>
 					<!--# if($headbg){ #-->
 					<img id="J_headbg_preview" src="{@Pw::getPath($headbg)}" align="top" class="mr10">
-					<a class="J_ajax_del" href="{@url:appcenter/style/delete?type=headbg&path=$headbg}">[删除]</a>
+					<a class="J_ajax_del" href="{@url:appcenter/style/delete}" data-pdata="{'path': '{$headbg}', 'type': 'headbg'}">[删除]</a>
 					<input type="hidden" name="oldheadbg" value="{$headbg}">
 					<!--# }else{ #-->
 					<img id="J_headbg_preview" style="display:none">
@@ -290,7 +290,7 @@
 				<div class="mb5"><input name="boxbg" class="J_upload_preview" type="file" data-preview="#J_boxbg_preview"></div>
 					<!--# if($boxbg){ #-->
 					<img id="J_boxbg_preview" src="{@Pw::getPath($boxbg)}" align="top" class="mr10">
-					<a class="J_ajax_del" href="{@url:appcenter/style/delete?type=boxbg&path=$boxbg}">[删除]</a>
+					<a class="J_ajax_del" href="{@url:appcenter/style/delete}" data-pdata="{'path': '{$boxbg}', 'type': 'boxbg'}">[删除]</a>
 					<input type="hidden" name="oldboxbg" value="{$boxbg}">
 					<!--# }else{ #-->
 					<img id="J_boxbg_preview" style="display:none">
@@ -369,7 +369,7 @@
 				<div class="mb5"><input name="boxhdbg" class="J_upload_preview" type="file" data-preview="#J_boxhdbg_preview"></div>
 					<!--# if($boxhdbg){ #-->
 					<img id="J_boxhdbg_preview" src="{@Pw::getPath($boxhdbg)}" align="top" class="mr10">
-					<a class="J_ajax_del" href="{@url:appcenter/style/delete?type=boxhdbg&path=$boxhdbg}">[删除]</a>
+					<a class="J_ajax_del" href="{@url:appcenter/style/delete}" data-pdata="{'path': '{$boxhdbg}', 'type': 'boxhdbg'}">[删除]</a>
 					<input type="hidden" name="oldboxhdbg" value="{$boxhdbg}">
 					<!--# }else{ #-->
 					<img id="J_boxhdbg_preview" style="display:none">

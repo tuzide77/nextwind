@@ -48,6 +48,8 @@ class RegistController extends AdminBaseController {
 	 * @return void
 	 */
 	public function dorunAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$username_max = abs($this->getInput('securityUsernameMax', 'post'));
 		$username_min = abs($this->getInput('securityUsernameMin', 'post'));
 		$username_max = max(array($username_max, $username_min));
@@ -125,7 +127,9 @@ class RegistController extends AdminBaseController {
 	 *
 	 * @return void
 	 */
-	 public function dologinAction() {
+	public function dologinAction() {
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
 		$way = $this->getInput('ways', 'post');
 		if (!$way) $this->showError('config.login.type.require');
 		$config = new PwConfigSet('login');

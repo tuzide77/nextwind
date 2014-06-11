@@ -9,7 +9,7 @@ Wind::import('WIND:utility.WindCookie');
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: Pw.php 24747 2013-02-20 03:13:43Z jieyin $
+ * @version $Id: Pw.php 28776 2013-05-23 08:46:10Z jieyin $
  * @package library
  */
 class Pw {
@@ -486,5 +486,25 @@ class Pw {
 	 */
 	public static function inArray($value, $array) {
 		return is_array($array) && in_array($value, $array);
+	}
+	
+	/**
+	 * 将HTML标签转义后输出字符串
+	 *
+	 * @param string $str
+	 * @return void
+	 */
+	public static function echoStr($str) {
+		echo WindSecurity::escapeHTML($str);
+	}
+	
+	/**
+	 * 将HTML标签转义后输出JSON数据
+	 *
+	 * @param mixed $data
+	 * @return void
+	 */
+	public static function echoJson($data) {
+		echo self::jsonEncode(is_array($data) ? WindSecurity::escapeArrayHTML($data) : WindSecurity::escapeHTML($data));
 	}
 }

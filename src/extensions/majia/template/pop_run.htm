@@ -1,0 +1,32 @@
+<style>
+.pop_majia_ct {
+	padding-bottom:15px;
+}
+.pop_majia_ct li{
+	float:left;
+	width:150px;
+	line-height:25px;
+	text-indent:25px;
+}
+.pop_majia_ct li a{
+	display:block;
+}
+.pop_majia_ct li a:hover,
+.pop_majia_ct li.current a{
+	background:#f7f7f7 url({@G:url.extres}/majia/images/cutover.png) 5px center no-repeat;
+}
+</style>
+<div style="width:350px;">
+	<div class="pop_cont">
+		<div class="pop_majia_ct">
+			<ul class="cc">
+			<!--#foreach ($list as $_one) {#-->
+				<li><a class="J_majia_pop_handle" href="{@url:app/majia/my/change?uid=$_one['uid']}" data-uid="{$_one['uid']}" title="{$_one['group']}">{$_one['username']}</a></li>
+			<!--#}#-->
+			</ul>
+		</div>
+		<div class="pop_majia_bt tar">
+			您还可以绑定<strong class="b org">{$hasNum}</strong>个马甲，<a href="{@url:profile/extends/run?_left=profile&_tab=app_majia}">绑定</a>
+		</div>
+	</div>
+</div>

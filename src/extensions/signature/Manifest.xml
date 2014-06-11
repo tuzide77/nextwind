@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest>
+	<application>
+	<name>签名档</name>
+	<alias>signature</alias>
+	<version>1.0</version>
+	<pw-version>9.0</pw-version>
+	<description>帖子签名需要消耗积分才能展示，有效消耗积分</description>
+	<logo>images/logo.png</logo>
+	<type>app</type>
+	<charset>UTF-8</charset>
+	<website>www.phpwind.net</website>
+	<author-name>shilong</author-name>
+	<author-email>shilong1987@163.com</author-email>
+	<author-icon>your icon</author-icon>
+	</application>
+	<res>res</res>
+	<install>EXT:signature.service.srv.App_Signature_install</install>
+	<installation-service>
+	</installation-service>
+	<inject-services>
+	<s_admin_menu>
+	<app_signature>
+	<class>EXT:signature.service.srv.App_Signature_ConfigDo</class>
+	<loadway>load</loadway>
+	<method>getAdminMenu</method>
+	<description>签名档admin menu</description>
+	</app_signature>
+	</s_admin_menu>
+	<m_PwLoginService>
+	<app_signature>
+	<class>EXT:signature.service.srv.App_Signaturelogin_WelcomeDo</class>
+	<expression>config:site.app.signature.isopen==1</expression>
+	<description>this is another m_login_welcome</description>
+	</app_signature>
+	</m_PwLoginService>
+	<m_PwThreadDisplay>
+	<app_signature>
+	<class>EXT:signature.service.srv.App_SignaturePwThreadDisplayDo</class>
+	<expression>config:site.app.signature.isopen==1</expression>
+	<description>this is another m_PwThreadDisplay</description>
+	</app_signature>
+	</m_PwThreadDisplay>
+	</inject-services>
+	</manifest>

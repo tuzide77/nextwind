@@ -7,7 +7,7 @@ Wind::import('APPS:windid.admin.WindidBaseController');
  * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ?2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: ClientController.php 24499 2013-01-31 06:01:38Z gao.wanggao $ 
+ * @version $Id: ClientController.php 29741 2013-06-28 07:54:24Z gao.wanggao $ 
  * @package 
  */
 class ClientController extends WindidBaseController { 
@@ -25,7 +25,7 @@ class ClientController extends WindidBaseController {
 		if (!$client) $this->showError('WINDID:fail');
 		$time = Pw::getTime();
 		$array = array(
-			'windidkey'=>WindidUtility::appKey($client['id'], $time, $client['secretkey']),
+			'windidkey'=>WindidUtility::appKey($client['id'], $time, $client['secretkey'], array('operation'=>999), array()),
 			'operation'=>999,
 			'clientid'=>$client['id'],
 			'time'=>$time

@@ -20,5 +20,13 @@ return array(
 		'managelink' => 'storage/ftp',
 		'description' => 'FTP 远程附件存储', 
 		'components' => array('path' => 'LIB:storage.PwStorageFtp')
+	),
+	
+	'cdn' => array(
+		'name' => '集团cdn', 
+		'alias' => 'cdn', 
+		'managelink' => '',
+		'description' => '集团cdn', 
+		'components' => array('path' => 'LIB:storage.PwStorageCdn')
 	)
 );

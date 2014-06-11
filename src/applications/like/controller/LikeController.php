@@ -55,7 +55,7 @@ class LikeController extends PwBaseController {
     	if ($cron || count($data) < 1) {
     		$pageBo->updateDesignCron(array($moduleid));
     	}
-    	$this->setOutput($_data, 'data');
+    	$this->setOutput($_data, 'html');
     	$this->showMessage('operate.success');
 	}
 

@@ -37,7 +37,7 @@
 			<tr>
 				<td><input data-yid="J_check_y" data-xid="J_check_x" class="J_check" type="checkbox" name="shieldids[]" value="{$v['shield_id']}"></td>
 				<td><a href="{$v['shield_url']}" target="_blank">{$v['shield_title']}</a></td>
-				<td><a href="{@url:design/push/doshielddelete?shieldid=$v['shield_id']}" class="mr10 J_ajax_refresh">[取消屏蔽]</a></td>
+				<td><a href="{@url:design/push/doshielddelete}" class="mr10 J_ajax_refresh" data-pdata="{'shieldid': '{$v['shield_id']}'}">[取消屏蔽]</a></td>
 			</tr>
 		<!--# } #-->
 		</table>
@@ -54,30 +54,5 @@
 	</form>	
 </div>
 <template source='TPL:admin.common.footer' />
-<script>
-$(function(){
-	//select联动
-	var flag_passive = $('#J_flag_passive');
-	$('#J_flag_initiative').on('change', function(){
-		var pageid = this.value;
-		if(pageid) {
-			$.post('{@url:design/page/getModuleOption}', {pageid : pageid}, function(data){
-				if(data.state == 'success') {
-					flag_passive.html(data.data);
-				}else if(data.state == 'fail'){
-					//common.js
-					resultTip({
-						error : true,
-						msg : data.message
-					});
-				}
-			}, 'json');
-		}else{
-			flag_passive.html('<option>不限制</option>');
-		}
-		
-	});
-});
-</script>
 </body>
 </html>

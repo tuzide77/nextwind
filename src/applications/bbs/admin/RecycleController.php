@@ -9,7 +9,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  * @author Qiong Wu <papa0924@gmail.com> 2011-10-21
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.windframework.com
- * @version $Id: RecycleController.php 23742 2013-01-15 09:22:58Z jieyin $
+ * @version $Id: RecycleController.php 28789 2013-05-23 10:11:36Z jieyin $
  * @package admin
  * @subpackage controller
  */
@@ -83,7 +83,7 @@ class RecycleController extends AdminBaseController {
 	}
 
 	public function doDeleteTopicAction() {
-		$tids = $this->getInput('tids');
+		$tids = $this->getInput('tids', 'post');
 		if (!$tids) $this->showError('operate.select');
 		
 		Wind::import('SRV:forum.srv.operation.PwDeleteTopic');
@@ -95,7 +95,7 @@ class RecycleController extends AdminBaseController {
 	}
 
 	public function doRevertTopicAction() {
-		$tids = $this->getInput('tids');
+		$tids = $this->getInput('tids', 'post');
 		if (!$tids) $this->showError('operate.select');
 
 		Wind::import('SRV:forum.srv.operation.PwRevertTopic');
@@ -166,7 +166,7 @@ class RecycleController extends AdminBaseController {
 	}
 
 	public function doDeleteReplyAction() {
-		$pids = $this->getInput('pids');
+		$pids = $this->getInput('pids', 'post');
 		if (!$pids) $this->showError('operate.select');
 		
 		Wind::import('SRV:forum.srv.operation.PwDeleteReply');
@@ -178,8 +178,9 @@ class RecycleController extends AdminBaseController {
 	}
 
 	public function doRevertReplyAction() {
-		$pids = $this->getInput('pids');
+		$pids = $this->getInput('pids', 'post');
 		if (!$pids) $this->showError('operate.select');
+
 		Wind::import('SRV:forum.srv.operation.PwRevertReply');
 		$srv = new PwRevertReply($pids, new PwUserBo($this->loginUser->uid));
 		$srv->execute();

@@ -7,7 +7,7 @@ Wind::import('SRV:forum.srv.PwThreadList');
  *
  * @author Jianmin Chen <sky_hold@163.com>
  * @license http://www.phpwind.com
- * @version $Id: ForumController.php 23994 2013-01-18 03:51:46Z long.shi $
+ * @version $Id: ForumController.php 28803 2013-05-24 07:58:21Z jieyin $
  * @package forum
  */
 
@@ -154,7 +154,7 @@ class ForumController extends PwBaseController {
 			$forum['my'] = $tmp;
 		}
 		$response = array('cate' => $cate, 'forum' => $forum);
-		$this->setOutput(Pw::jsonEncode($response), 'data');
+		$this->setOutput($response, 'data');
 		$this->showMessage('success');
 	}
 
@@ -162,7 +162,11 @@ class ForumController extends PwBaseController {
 	 * 加入版块
 	 */
 	public function joinAction() {
-		$fid = $this->getInput('fid');
+		$fid = $this->getInput('fid', 'post');
+		if (!$fid) {
+			$this->showError('operate.fail');
+		}
+
 		Wind::import('SRV:forum.bo.PwForumBo');
 		$forum = new PwForumBo($fid);
 		if (!$forum->isForum()) {
@@ -183,7 +187,11 @@ class ForumController extends PwBaseController {
 	 * 退出版块
 	 */
 	public function quitAction() {
-		$fid = $this->getInput('fid');
+		$fid = $this->getInput('fid', 'post');
+		if (!$fid) {
+			$this->showError('operate.fail');
+		}
+
 		Wind::import('SRV:forum.bo.PwForumBo');
 		$forum = new PwForumBo($fid);
 		if (!$forum->isForum()) {

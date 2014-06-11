@@ -9,7 +9,7 @@ Wind::import('LIB:ubb.config.PwUbbCodeConvertConfig');
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwUbbCode.php 24383 2013-01-29 10:09:39Z jieyin $
+ * @version $Id: PwUbbCode.php 28913M 2014-06-11 03:13:39Z (local) $
  * @package lib.utility
  */
 
@@ -211,9 +211,9 @@ class PwUbbCode {
 	 */
 	public static function parseImg($message, $convertStatus = 1, $maxWidth = 0, $maxHeight = 0, $isLazy = false) {
 		if ($convertStatus) {
-			return preg_replace("/\[img\]([^\<\r\n\"']+?)\[\/img\]/eis", "self::createImg('\\1', '$maxWidth', '$maxHeight', '', '$isLazy')", $message, self::$_cvtimes);
+			return preg_replace("/\[img\]([^\<\(\r\n\"']+?)\[\/img\]/eis", "self::createImg('\\1', '$maxWidth', '$maxHeight', '', '$isLazy')", $message, self::$_cvtimes);
 		}
-		return preg_replace("/\[img\]([^\<\r\n\"']+?)\[\/img\]/eis", "self::createImgLink('\\1')", $message, self::$_cvtimes);
+		return preg_replace("/\[img\]([^\<\(\r\n\"']+?)\[\/img\]/eis", "self::createImgLink('\\1')", $message, self::$_cvtimes);
 	}
 
 	/**
@@ -303,9 +303,9 @@ class PwUbbCode {
 	 */
 	public static function parseFlash($message, $convertStatus = 1) {
 		if ($convertStatus) {
-			return preg_replace("/\[flash(=(\d+?)\,(\d+?)(\,(0|1))?)?\]([^\[\<\r\n\"']+?)\[\/flash\]/eis", "self::createPlayer('\\6','\\2','\\3','\\5','video')", $message, self::$_cvtimes);
+			return preg_replace("/\[flash(=(\d+?)\,(\d+?)(\,(0|1))?)?\]([^\[\<\(\r\n\"']+?)\[\/flash\]/eis", "self::createPlayer('\\6','\\2','\\3','\\5','video')", $message, self::$_cvtimes);
 		}
-		return preg_replace("/\[flash(=(\d+?)\,(\d+?)(\,(0|1))?)?\]([^\[\<\r\n\"']+?)\[\/flash\]/eis", "self::createFlashLink('\\6')", $message, self::$_cvtimes);
+		return preg_replace("/\[flash(=(\d+?)\,(\d+?)(\,(0|1))?)?\]([^\[\<\(\r\n\"']+?)\[\/flash\]/eis", "self::createFlashLink('\\6')", $message, self::$_cvtimes);
 	}
 
 	/**
@@ -319,8 +319,8 @@ class PwUbbCode {
 		if ($convertStatus) {
 			return preg_replace(
 				array(
-					"/\[(wmv|mp3)(=(0|1))?\]([^\<\r\n\"']+?)\[\/\\1\]/eis",
-					"/\[(wmv|rm)(=([0-9]{1,3})\,([0-9]{1,3})\,(0|1))?\]([^\<\r\n\"']+?)\[\/\\1\]/eis"
+					"/\[(wmv|mp3)(=(0|1))?\]([^\<\(\r\n\"']+?)\[\/\\1\]/eis",
+					"/\[(wmv|rm)(=([0-9]{1,3})\,([0-9]{1,3})\,(0|1))?\]([^\<\(\r\n\"']+?)\[\/\\1\]/eis"
 				),
 				array(
 					"self::createPlayer('\\4','314','53','\\3','audio')",
@@ -353,7 +353,7 @@ class PwUbbCode {
 	 * @return string
 	 */
 	public static function parseIframe($message, $convertStatus = 1) {
-		return preg_replace("/\[iframe\]([^\[\<\r\n\"']+?)\[\/iframe\]/eis", "self::createIframe('\\1', \$convertStatus)", $message, self::$_cvtimes);
+		return preg_replace("/\[iframe\]([^\[\<\(\r\n\"']+?)\[\/iframe\]/eis", "self::createIframe('\\1', \$convertStatus)", $message, self::$_cvtimes);
 	}
 
 	protected static function _init() {
@@ -448,7 +448,7 @@ class PwUbbCode {
 		self::$_cvtimes = -1;
 		return $message;
 	}
-	
+
 	/**
 	 * 自动转化url到ubb标签
 	 *
@@ -512,6 +512,7 @@ class PwUbbCode {
 	 * @return string 图片html
 	 */
 	public static function createImg($path, $maxWidth = 0, $maxHeight = 0, $original = '', $isLazy = false) {
+        $path = self::escapeUrl($path); //by taishici
 		if ($isLazy) {
 			$html = '<img class="J_post_img J_lazy" data-original="' . $path . '" src="' .  Wekit::url()->images . '/blank.gif" border="0"';
 		} else {
@@ -543,6 +544,7 @@ class PwUbbCode {
 	 * @return string
 	 */
 	public static function createImgLink($path) {
+        $path = self::escapeUrl($path); //by taishici
 		$html = "<img src=\"" . Wekit::url()->images . "/wind/file/img.gif\" align=\"absbottom\"> <a target=\"_blank\" href=\"$path \">$path</a>";
 		return self::_pushCode($html);
 	}
@@ -696,6 +698,7 @@ class PwUbbCode {
 	 * @return string
 	 */
 	public static function createPlayer($url, $width = 0, $height = 0, $auto = 0, $type = 'video') {
+        $url = self::escapeUrl($url); //by taishici
 		if (!preg_match('/\.(rmvb|rm|wmv|avi|mp3|wma|swf|flv)/i', $url, $match)) {
 			$html = "<a href=\"$url \" target=\"_blank\">$url</a>";
 		} elseif ($type == 'audio') {
@@ -715,6 +718,7 @@ class PwUbbCode {
 	 * @return string
 	 */
 	public static function createFlashLink($url) {
+        $url = self::escapeUrl($url); //by taishici
 		$html = "<span class=\"posts_icon\"><i class=\"icon_music\"><i></span> <a target=\"_blank\" href=\"$url \">flash: $url</a>";
 		return self::_pushCode($html);
 	}
@@ -726,6 +730,7 @@ class PwUbbCode {
 	 * @return string
 	 */
 	public static function createMediaLink($url) {
+        $url = self::escapeUrl($url); //by taishici
 		$html = "<span class=\"posts_icon\"><i class=\"icon_music\"><i></span> <a target=\"_blank\" href=\"$url \">$url</a>";
 		return self::_pushCode($html);
 	}
@@ -742,6 +747,7 @@ class PwUbbCode {
 	 * @return string
 	 */
 	public static function createIframe($url, $convertStatus) {
+        $url = self::escapeUrl($url); //by taishici
 		if ($convertStatus) {
 			$html = "<iframe src=\"$url\" frameborder=\"0\" allowtransparency=\"true\" scrolling=\"yes\" width=\"97%\" height=\"340\"></iframe>";
 		} else {
@@ -801,4 +807,17 @@ class PwUbbCode {
 	public static function createTd($tag, $col, $row, $width, $tdStyle = '') {
 		return ($tag == 'tr' ? '<tr>' : '</td>').(($col && $row) ? "<td colspan=\"$col\" rowspan=\"$row\" width=\"$width\"{$tdStyle}>" : "<td{$tdStyle}>");
 	}
+
+    /**
+     * 白盒过滤http://以及特殊符号
+     *
+     * @return string
+     */
+    public static function escapeUrl($path) {
+        if(!(strpos($path, 'http://')===0 || strpos($path, 'https://')===0)) {
+            return '';
+        }
+        $path = str_replace(array("<",">","'","\"",";"," "), array("%3c","%3e","%27","%22","%3b","%20"),$path);
+        return $path;
+    }
 }

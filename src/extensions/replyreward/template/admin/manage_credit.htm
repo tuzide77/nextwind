@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<template source='TPL:admin.common.head' />
+</head>
+<body>
+<div class="wrap J_check_wrap">
+
+<template source="headtab" />
+
+<div class="h_a">提示信息</div>
+<div class="mb10 prompt_text">
+	<ol>
+		<li>设置回帖奖励可用积分类型</li>
+	</ol>
+</div>
+
+<form class="J_ajaxForm" data-role="list" action="{@url:app/replyreward/manage/creditdo}" method="post">
+<div class="table_list">
+	<table width="100%" id="J_group_table">
+		<col width="100">
+		<col width="200">
+		<thead>
+			<tr>
+			<td >积分类型</td>
+			<td >是否启用</td>
+			</tr>
+		</thead>
+		<tbody id="J_groupList">
+		<!--# 
+			foreach ($creditType as $key => $type) {
+		#-->
+		<tr>
+			<td>{$type}</td>
+			<td>
+				<ul class="switch_list cc">
+					<li><label><input type="radio" name="type[{$key}]" value="1" {@Pw::ifcheck(in_array($key,$config))}><span>开启</span></label></li>
+					<li><label><input type="radio" name="type[{$key}]" value="0" {@Pw::ifcheck(!in_array($key,$config))}><span>关闭</span></label></li>
+				</ul>
+			</td>
+		</tr>
+		<!--# } #-->
+		</tbody>
+
+	</table>
+</div>
+<div class="btn_wrap">
+	<div class="btn_wrap_pd" id="J_sub_wrap">
+    <button type="submit" class="btn btn_submit J_ajax_submit_btn">提交</button>
+	</div>
+</div>
+</form>
+
+</div>
+<template source='TPL:admin.common.footer' />
+</body>
+</html>

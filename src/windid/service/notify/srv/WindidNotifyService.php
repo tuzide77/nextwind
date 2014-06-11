@@ -2,11 +2,11 @@
 Wind::import('WSRV:notify.dm.WindidNotifyLogDm');
 /**
  * 客户端通知服务
- * the last known user to change this file in the repository  <$LastChangedBy: jieyin $>
- * @author $Author: jieyin $ Foxsee@aliyun.com
+ * the last known user to change this file in the repository  <$LastChangedBy: gao.wanggao $>
+ * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ?2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: WindidNotifyService.php 24780 2013-02-21 06:25:29Z jieyin $ 
+ * @version $Id: WindidNotifyService.php 29741 2013-06-28 07:54:24Z gao.wanggao $ 
  * @package 
  */
 class WindidNotifyService {
@@ -76,7 +76,7 @@ class WindidNotifyService {
 			}
 			if (!$val['issyn'] || $val['id'] == $appid) continue;
 			$array = array(
-				'windidkey' => WindidUtility::appKey($val['id'],$time, $val['secretkey']),
+				'windidkey' => WindidUtility::appKey($val['id'],$time, $val['secretkey'], array('uid'=>$uid), array()),
 				'operation' => $operation,
 				'uid' => $uid,
 				'clientid' => $val['id'],

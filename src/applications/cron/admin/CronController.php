@@ -165,7 +165,7 @@ Wind::import('ADMIN:library.AdminBaseController');
  	}
  	
  	public function dodeleteAction() {
- 		$cronId = (int)$this->getInput('id','get');
+ 		$cronId = (int)$this->getInput('id', 'post');
  		if ($cronId < 1) $this->showError("operate.fail");
  		$resource = $this->_getCronDs()->deleteCron($cronId);
  		if ($resource instanceof PwError) $this->showError($resource->getError());

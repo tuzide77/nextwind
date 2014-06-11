@@ -20,10 +20,12 @@ class SourceController extends PwBaseController {
 	}
 	
 	public function addlikeAction() {
-		$fromid = (int)$this->getInput('fromid','get');
-		$fromApp = $this->getInput('app','get');
-		$subject = $this->getInput('subject','get');
-		$url = $this->getInput('url','get');
+		$this->getRequest()->isPost() || $this->showError('operate.fail');
+
+		$fromid = (int)$this->getInput('fromid','post');
+		$fromApp = $this->getInput('app','post');
+		$subject = $this->getInput('subject','post');
+		$url = $this->getInput('url','post');
 		if($fromid < 1 || empty($fromApp)) $this->showError('BBS:like.fail');
 		$source = $this->_getLikeSourceDs()->getSourceByAppAndFromid($fromApp, $fromid);
 		$newId = isset($source['sid']) ? (int)$source['sid'] : 0;

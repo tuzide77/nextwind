@@ -5,7 +5,7 @@
  * @author $Author: gao.wanggao $ Foxsee@aliyun.com
  * @copyright ?2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwDesignRouter.php 22477 2012-12-25 01:50:37Z gao.wanggao $ 
+ * @version $Id: PwDesignRouter.php 28949 2013-05-31 05:43:05Z gao.wanggao $ 
  * @package 
  */
 class PwDesignRouter {
@@ -28,7 +28,7 @@ class PwDesignRouter {
 	 * @param string $unique  页面唯一标识，如果不需要单独设置，请留空
 	 */
 	public function set($m, $c, $a, $name = '', $unique = '') {
-		if (!$name || !$unique) return false;
+		if (!$name && !$unique) return false;
 		$router = Wekit::C('site','design.router');
 		$router[$m.'/'.$c.'/'.$a] = array($name, $unique);
 		$config = new PwConfigSet('site');

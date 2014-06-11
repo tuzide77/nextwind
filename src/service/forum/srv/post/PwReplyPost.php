@@ -10,7 +10,7 @@ Wind::import('SRV:forum.dm.PwReplyDm');
  * @author Jianmin Chen <sky_hold@163.com>
  * @copyright ©2003-2103 phpwind.com
  * @license http://www.phpwind.com
- * @version $Id: PwReplyPost.php 19564 2012-10-16 02:34:48Z jinlong.panjl $
+ * @version $Id: PwReplyPost.php 28950 2013-05-31 05:58:25Z jieyin $
  * @package forum
  */
 
@@ -50,6 +50,9 @@ class PwReplyPost extends PwPostAction {
 			return new PwError('BBS:forum.thread.locked.not');
 		}
 		if (($result = $this->checkPostNum()) !== true) {
+			return $result;
+		}
+		if (($result = $this->checkPostPertime()) !== true) {
 			return $result;
 		}
 		return true;

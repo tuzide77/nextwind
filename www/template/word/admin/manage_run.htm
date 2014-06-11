@@ -95,7 +95,7 @@
 					<td>{$key+1}</td>
 					<td>{$value['word']}</td>
 					<td>{$value['word_type']}</td>
-					<td><a class="mr5 J_dialog" title="编辑" href="{@url:word/manage/edit?id=$value['word_id']}">[编辑]</a><a href="{@url:word/manage/delete?id=$value['word_id']}" data-msg="确定删除该敏感词" class="J_ajax_del">[删除]</a></td>
+					<td><a class="mr5 J_dialog" title="编辑" href="{@url:word/manage/edit?id=$value['word_id']}">[编辑]</a><a href="{@url:word/manage/delete}" data-msg="确定删除该敏感词" class="J_ajax_del" data-pdata="{'id': '{$value['word_id']}'}">[删除]</a></td>
 				</tr>
 				<!--# } #-->
 				</tbody>

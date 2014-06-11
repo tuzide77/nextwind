@@ -1,7 +1,6 @@
 <?php
 Wind::import('WIND:viewer.AbstractWindTemplateCompiler');
 Wind::import('WIND:utility.WindSecurity');
-Wind::import('WIND:utility.WindJson');
 /**
  * 变量输出编译类
  * 变量输出格式:<code>
@@ -41,9 +40,9 @@ class WindTemplateCompilerEcho extends AbstractWindTemplateCompiler {
 		$charset = Wind::getComponent('response')->getCharset();
 		switch (strtolower($_type)) {
 			case 'json':
-				$content = '<?php echo WindJson::encode(' . $_output . ', \'' . $charset . '\');?>';
+		/*		$content = '<?php echo WindJson::encode(' . $_output . ', \'' . $charset . '\');?>';   */
+				$content = '<?php echo WindSecurity::escapeEncodeJson(' . $_output . ', \'' . $charset . '\');?>';
 				break;
-			case 'url':
 			case 'html':
 			case 'js':
 				$content = '<?php echo ' . $_output . ';?>';
@@ -51,6 +50,7 @@ class WindTemplateCompilerEcho extends AbstractWindTemplateCompiler {
 			case 'text':
 				$content = '<?php echo strip_tags(' . $_output . ');?>';
 				break;
+			case 'url':
 			default:
 				$charset == 'GBK' && $charset = 'ISO-8859-1';
 				$content = '<?php echo htmlspecialchars(' . $_output . ', ENT_QUOTES, \'' . $charset . '\');?>';

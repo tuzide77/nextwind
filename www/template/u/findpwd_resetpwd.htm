@@ -164,7 +164,7 @@ Wind.use('jquery', 'global', 'validate', 'ajaxForm', function(){
 						Wind.Util.resultTip({
 							msg : '恭喜，新密码已设置成功！',
 							callback : function(){
-								window.location.href = data.referer;
+								window.location.href = decodeURIComponent(data.referer);
 							}
 						});
 					}else if(data.state === 'fail'){

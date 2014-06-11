@@ -1,0 +1,194 @@
+<script>
+//全局变量 Global Variables
+var GV = {
+	JS_ROOT : '{@G:url.res}/js/dev/',										//js目录
+	JS_VERSION : '{@G:version}',											//js版本号
+	TOKEN : '{@Wind::getComponent('windToken')->saveToken('csrf_token')}',	//token $.ajaxSetup data
+<!--#
+$loginUser = Wekit::getLoginUser();
+if ($loginUser->isExists()) {
+#-->
+	//登录后
+	U_NAME : '{$loginUser->username}',										//登录用户名
+	U_CENTER : '{@url:space/index/run?uid=$value["created_userid"]}',		//用户空间(参数 : uid)
+	U_AVATAR : '{@Pw::getAvatar($loginUser->uid)}',							//登录用户头像
+<!--#
+}
+#-->
+	U_AVATAR_DEF : '{@G:url.images}/face/face_small.jpg',					//默认小头像
+	U_ID : parseInt('{$loginUser->uid}'),									//uid
+	REGION_CONFIG : '',														//地区数据
+	CREDIT_REWARD_JUDGE : '{@$loginUser->showCreditNotice()|html}',			//是否积分奖励，空值:false, 1:true
+	URL : {
+		LOGIN : '{@url:u/login/run}',										//登录地址
+		QUICK_LOGIN : '{@url:u/login/fast}',								//快速登录
+		IMAGE_RES: '{@G:url.images}',										//图片目录
+		CHECK_IMG : '{@url:u/login/showverify}',							//验证码图片url，global.js引用
+		VARIFY : '{@url:verify/index/get}',									//验证码html
+		VARIFY_CHECK : '{@url:verify/index/check}',							//验证码html
+		HEAD_MSG : {
+			LIST : '{@url:message/notice/minilist}'							//头部消息_列表
+		},
+		USER_CARD : '{@url:space/card/run}',								//小名片(参数 : uid)
+		LIKE_FORWARDING : '{@url:post/doreply/}',							//喜欢转发(参数 : fid)
+		REGION : '{@url:misc/webData/area}',									//地区数据
+		SCHOOL : '{@url:misc/webData/school}',								//学校数据
+		EMOTIONS : "{@url:emotion/index/run?type=bbs}",					//表情数据
+		CRON_AJAX : '{$runCron}',											//计划任务 后端输出执行
+		FORUM_LIST : '{@url:bbs/forum/list}',								//版块列表数据
+		CREDIT_REWARD_DATA : '{@url:u/index/showcredit}',					//积分奖励 数据
+		AT_URL: '{@url:bbs/remind/run}',									//@好友列表接口
+		TOPIC_TYPIC: '{@url:bbs/forum/topictype}'							//主题分类
+	}
+};
+</script>
+<script src="{@G:url.js}/wind.js?v{@G:c.version}"></script>
+<script src="{@G:url.js}/jquery.js?v{@G:c.version}"></script>
+<script>
+$(function(){
+	//placeholder 处理
+	if(!'placeholder' in document.createElement('input')) {
+		$('[placeholder]').focus(function() {
+			var input = $(this);
+			if(input.val() == input.attr('placeholder')) {
+				input.val('');
+				input.removeClass('placeholder');
+			}
+		}).blur(function() {
+			var input = $(this);
+			if(input.val() == '' || input.val() == input.attr('placeholder')) {
+				input.addClass('placeholder');
+				input.val(input.attr('placeholder'));
+			}
+		}).blur().parents('form').submit(function() {
+			$(this).find('[placeholder]').each(function() {
+				var input = $(this);
+				if(input.val() == input.attr('placeholder')) {
+					input.val('');
+				}
+			});
+		});
+	}
+	
+	//jquery.lint 开发时用
+	if($.browser.webkit) {
+		//Wind.js('{@G:url.js}/jquery.lint.js?v{@G:c.version}');
+	}
+
+	$('#J_side a').on('click', function(e){
+		$('#J_side li.current').removeClass('current');
+		$(this).parent().addClass('current');
+	});
+
+	/*var hash = location.hash;
+	if(hash) {
+		hash = hash.replace(/#/g, '');
+		var current = $('[href=#'+ hash +']').parent().first();
+		current.addClass('current');
+
+		var top = current.offset().top - $(window).height();
+
+		$('#J_side').scrollTop(current.offset().top - $('#J_side').offset().top);
+	}*/
+
+	var doc = $(document),
+		header = $('#J_header'),
+		header_h = header.height(),
+		side = $('#J_side'),
+		side_head = $('#J_side_head'),
+		side_head_h = side_head.height(),
+		is_ie6 = ($.browser.msie&& $.browser.version<7 ? true : false);
+
+	var demoUtil = {
+		scrollJudge : function(doc_h){
+			if(doc_h > header_h) {
+				//滚动超出header
+				side_head.fadeIn();
+
+				if(is_ie6) {
+					side.css('top', doc_h+side_head_h+20);
+				}else{
+					side.css('top', side_head_h+20);
+				}
+
+				this.sideHeight('overhead');
+			}else{
+				side_head.hide();
+
+				if(is_ie6) {
+					side.css('top', 180);
+				}else{
+					side.css('top', 180 - doc_h);
+				}
+				
+				this.sideHeight();
+			}
+
+			demoUtil.sectionPos();
+		},
+		sideHeight : function(type){
+			//侧栏高度
+
+			if(type == 'overhead') {
+				//滚动超出header
+				side.height($(window).height() - side_head_h -30 - 20);
+			}else{
+				//console.log($(window).height())
+				side.height($(window).height() - 180 - 30 + doc.scrollTop());
+			}
+		},
+		sectionPos : function(){
+			//当前项定位
+
+			var sec_arr = [],
+				hash = location.hash.replace(/#/g, '');
+
+			$('.section').each(function(){
+				if($(this).offset().top - doc.scrollTop() < 200) {
+					sec_arr.push(this);
+				}
+			});
+
+			var sec_len = sec_arr.length;
+
+			if(sec_len === 0) {
+				side.scrollTop(0);
+			}else{
+				var sec_current = sec_arr[sec_len-1];
+
+				var side_current = $('[href=#'+ sec_current.id +']').parent().first();
+				if(!side_current.hasClass('current')) {
+					side.find('li.current').removeClass('current');
+
+					side_current.addClass('current').siblings();
+					
+					var current_os_top = side_current.offset().top,
+						side_os_top = side.offset().top,
+						minus = current_os_top - side_os_top;
+
+					if(minus >0 && minus+40 < side.height()) {
+						//当前可见
+						return;
+					}else{
+						side.scrollTop(0);
+						if(sec_len !== 1) {
+							side.scrollTop(side_current.offset().top - side.offset().top);
+						}
+					}
+					
+				}
+				
+			}
+		}
+	}
+
+
+	$(window).on('scroll resize', function(){
+		demoUtil.scrollJudge(doc.scrollTop());
+	});
+
+	demoUtil.scrollJudge(doc.scrollTop());
+
+	
+});
+</script>

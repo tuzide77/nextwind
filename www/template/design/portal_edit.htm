@@ -127,7 +127,7 @@ Wind.use('jquery', 'global', 'ajaxForm', function(){
 					$(this).remove();
 
 					if(data.referer) {
-						location.href = data.referer;
+						location.href = decodeURIComponent(data.referer);
 					}
 				});
 			}else if(data.state == 'fail'){

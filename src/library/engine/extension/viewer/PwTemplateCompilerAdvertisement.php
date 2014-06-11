@@ -43,9 +43,9 @@ class PwTemplateCompilerAdvertisement extends AbstractWindTemplateCompiler {
 		$html .= '$adShowResult = $pwAdService->getAdShowState($currentAd,\''.$mode.'\',$fid,\''.$adSrc.'\',$read[\'lou\'],$proid);'."\r\n";
 		$html .= 'if($adShowResult){'."\r\n";
 		$html .= 'if($currentAd[\'show_type\'] == 1){?>'."\r\n";
-		$html .= '<script type="text/javascript" charset="gb2312" src="http://js.adm.cnzz.net/s.php?sid='.$pid.'&proid=<?php echo $proid;?>&fid=<?php echo $fid;?>&mid='.$mode.'&floorid=<?php echo $read[lou]?>&pid='.$adSrc.'"></script>'."\r\n";
+		$html .= '<script type="text/javascript" charset="gb2312" src="http://js.adm.cnzz.net/s.php?sid='.$pid.'&proid=<?php echo WindSecurity::escapeHTML($proid);?>&fid=<?php echo WindSecurity::escapeHTML($fid);?>&mid='.$mode.'&floorid=<?php echo WindSecurity::escapeHTML($read[lou])?>&pid='.$adSrc.'"></script>'."\r\n";
 		$html .= '<?php }else{ ?>'."\r\n";
-		$html .= '<div class="J_ad_iframes_div" data-src="http://js.adm.cnzz.net/pwaos.php?sid='.$pid.'&proid=<?php echo $proid;?>&fid=<?php echo $fid;?>&mid='.$mode.'&floorid=<?php echo $read[lou]?>&pid='.$adSrc.'" data-width="<?php echo $currentAd[width];?>" data-height="<?php echo $currentAd[height];?>"></div>'."\r\n";
+		$html .= '<div class="J_ad_iframes_div" data-src="http://js.adm.cnzz.net/pwaos.php?sid='.$pid.'&proid=<?php echo WindSecurity::escapeHTML($proid);?>&fid=<?php echo WindSecurity::escapeHTML($fid);?>&mid='.$mode.'&floorid=<?php echo WindSecurity::escapeHTML($read[lou])?>&pid='.$adSrc.'" data-width="<?php echo WindSecurity::escapeHTML($currentAd[width]);?>" data-height="<?php echo WindSecurity::escapeHTML($currentAd[height]);?>"></div>'."\r\n";
 		$html .= '<?php }}?>'."\r\n";
 		return $html;
 	}

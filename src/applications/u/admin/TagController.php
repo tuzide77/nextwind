@@ -43,7 +43,7 @@ class TagController extends AdminBaseController {
 	 * 删除标签
 	 */
 	public function deleteAction() {
-		$ids = $this->getInput('ids');
+		$ids = $this->getInput('ids', 'post');
 		if (!$ids) $this->showError('USER:tag.ids.require');
 		$result = $this->_getDs()->batchDeleteTag($ids);
 		if ($result instanceof PwError) {
@@ -56,7 +56,7 @@ class TagController extends AdminBaseController {
 	 * 设置为热门标签
 	 */
 	public function setHotAction() {
-		$ids = $this->getInput('ids');
+		$ids = $this->getInput('ids', 'post');
 		if (!$ids) $this->showError('USER:tag.ids.require');
 		$result = $this->_getDs()->batchUpdateTagHot($ids, 1);
 		if ($result instanceof PwError) {
@@ -69,7 +69,7 @@ class TagController extends AdminBaseController {
 	 * 取消热门标签
 	 */
 	public function cancleHotAction() {
-		$ids = $this->getInput('ids');
+		$ids = $this->getInput('ids', 'post');
 		if (!$ids) $this->showError('USER:tag.ids.require');
 		$result = $this->_getDs()->batchUpdateTagHot($ids, 0);
 		if ($result instanceof PwError) {

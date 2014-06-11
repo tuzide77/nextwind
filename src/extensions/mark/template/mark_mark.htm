@@ -1,0 +1,121 @@
+<style>
+/*评分弹窗*/
+/*87新评分弹窗*/
+.read_score_pop{
+	padding:10px 0;
+}
+.read_score_pop td,
+.read_score_pop th{
+	padding:5px 0 5px 10px;
+	font-size:12px;
+}
+.read_score_pop th{
+	width:45px;
+	line-height:24px;
+	text-align:right;
+	font-weight:100;
+}
+.rating_pop{
+	padding:2px 0;
+}
+.rating_pop a{
+	width:35px;
+	display:inline-block;
+	text-align:center;
+	border:1px solid #c7d8e1;
+	color:#425b79;
+	background:#f3fafc;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#f8fdfe), to(#edf6f9));
+	background: -moz-linear-gradient(top, #f8fdfe, #edf6f9);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f8fdfe', endColorstr='#edf6f9');
+}
+.rating_pop a:hover{
+	border-color:#4f8eb0;
+	text-decoration:none;
+}
+.rating_pop a.less{
+	border-color:#ecd8cf;
+	color:#8d5230;
+	background:#fffaf2;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#fffaf2), to(#fff0e6));
+	background: -moz-linear-gradient(top, #fffaf2, #fff0e6);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffaf2', endColorstr='#fff0e6');
+}
+.rating_pop a.less:hover{
+	border-color:#c58b69;
+}
+.rating_pop a.old{
+	background:#f7f7f7;
+	color:#999;
+	border:1px solid #ccc;
+	cursor:default;
+	filter:none;
+}
+.rating_pop_surplus{
+	color:#666;
+}
+</style>
+<div style="width:420px;">
+	<form id="J_mark_form" action="{@url:app/mark/mark/domark}" method="post" >
+			<div class="">
+				<div class="read_score_pop">
+				<table width="100%">
+					<tbody>
+					<!--# foreach ($ratelist as $key => $value) { #-->
+					<tr>
+						<th><span class="w">{$value['name']}：</span></th>
+						
+						<td width="80">
+							<!--# if ($value['max']) { #-->
+							<div class="rating_pop cc w">
+								<!--# foreach ($value['max'] as $max) { #-->
+								<a href="#" class="J_mark_item">{$max}</a>
+								<!--# } #-->
+							</div>  
+							<!--# } #-->
+							<!--# if ($value['min']) { #-->
+							<div class="rating_pop cc w">
+								<!--# foreach ($value['min'] as $min) { #-->
+								<a href="javascript:;" class="less J_mark_item">{$min}</a>
+								<!--# } #-->							
+							</div>
+							<!--# } #-->
+						</td>
+						
+						<td>
+							<div class="w"><input class="input mr10 J_mark_credits" type="text" name="credits[{$key}]" style="width:30px"><input type="hidden" name="cid[]" value="money"><span class="rating_pop_surplus">剩余<span>{$value['leavepoint']}</span></span></div>
+						</td>
+					</tr>
+					<!--# } #-->
+					<tr>
+						<th class="vt">理由：</th>
+						<td colspan="2">
+							<p class="mb10"><textarea id="J_mark_reason" name="reason" placeholder="写点评分理由吧" class="length_5" style="height:20px;"></textarea></p>
+							<select id="J_mark_reason_select" class="select_5" size="5">
+							<!--# foreach ($markReasons as $val) {
+								$val = trim($val);
+								if (!$val) continue;
+								($val == '------') && $val = '----------------------------';
+							#-->
+								<option value="{$val}">{$val}</option>
+							<!--#}#-->
+							</select>
+							
+						</td>
+					</tr>
+					<tr id="tdPing">
+						<th></th>
+						<td colspan="2"><input type="checkbox" name="isreply" value="1" style="padding:0;margin:-2px 3px 0 0;*margin:0;"><label for="ifpost">同时作为回复发表</label></td>
+					</tr>
+				</tbody></table>
+				</div>
+
+			</div>
+			<div class="pop_bottom">
+				<input type="hidden" name="tid" value="{$tid}">
+				<input type="hidden" name="pid" value="{$pid}">
+				<button type="submit" class="btn btn_submit" type="submit">提交</button>
+				<button type="button" class="btn J_close">取消</button>
+			</div>
+	</form>
+</div>

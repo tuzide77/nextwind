@@ -39,22 +39,35 @@ Wind.use('dialog', function(){
 	//删除 屏蔽
 	$('a.J_design_data_ajax').on('click',function(e) {
 		e.preventDefault();
-		var $this = $(this), href = $this.prop('href'), msg = ($this.text().indexOf('删除') > 0 ? '确定要删除本条吗？' : '确定要屏蔽本条吗？');
+		var $this = $(this),
+			href = $this.prop('href'),
+			msg = ($this.text().indexOf('删除') > 0 ? '确定要删除本条吗？' : '确定要屏蔽本条吗？'),
+			pdata = $this.data('pdata');
 		var params = {
 			message	: msg, 
 			type	: 'confirm', 
 			isMask	: false,
 			follow	: $(this),//跟随触发事件的元素显示
 			onOk	: function() {
-				$.getJSON(href).done(function(data) {
-					if(data.state === 'success') {
-						if(data.referer) {
-							location.href = data.referer;
-						}else {
-							reloadPage(window);
+				$.ajax({
+					url: href,
+					type : 'post',
+					dataType: 'json',
+					data: function(){
+						if(pdata) {
+							return $.parseJSON(pdata.replace(/'/g, '"'));
 						}
-					}else if( data.state === 'fail' ) {
-						Wind.dialog.alert(data.message);
+					}(),
+					success: function(data){
+						if(data.state === 'success') {
+							if(data.referer) {
+								location.href = decodeURIComponent(data.referer);
+							}else {
+								reloadPage(window);
+							}
+						}else if( data.state === 'fail' ) {
+							Wind.dialog.alert(data.message);
+						}
 					}
 				});
 			}

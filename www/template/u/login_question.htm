@@ -74,7 +74,7 @@ $(function(){
 		},
 		success : function (data, statusText, xhr, $form) {
 			if(data.state === 'success') {
-				window.location.href = data.referer;
+				window.location.href = decodeURIComponent(data.referer);
 			}else{
 				Wind.Util.ajaxBtnEnable(btn);
 				login_question_tips.html('<div class="tips_icon_error">'+ data.message +'</div>').show();

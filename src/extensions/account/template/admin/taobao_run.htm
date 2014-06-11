@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+<template source='TPL:admin.common.head' />
+</head>
+<body>
+<div class="wrap">
+
+<template source='head_tab' />
+
+<div class="h_a">绑定设置</div>
+<div class="prompt_text">
+	<ul>
+		<li>回调地址必须和站点域名一致</li>		
+	</ul>
+</div>
+<form class="J_ajaxForm" action="{@url:app/account/manage/doset}" method="post">
+<input type="hidden" name="type" value="taobao" />
+<div class="table_full">
+	<table width="100%">
+		<col width="th" />
+		<col width="400"/>
+		<col />
+		
+		<tr>
+		<th>开启绑定</th>
+		<td>
+			<ul class="switch_list cc">
+				<li><label><input type="radio" name="status" value="1" {@Pw::ifcheck($info['status'])}><span>开启</span></label></li>
+				<li><label><input type="radio" name="status" value="0" {@Pw::ifcheck(!$info['status'])}><span>关闭</span></label></li>
+			</ul>
+		</td>
+		<td><div class="fun_tips"></div></td>
+		</tr>
+		
+		<tr>
+		<th>AppKey</th>
+		<td>
+			<input type="text" class="input length_5 mr5" name="appkey" value="{$info['app_key']}">
+		</td>
+		<td><div class="fun_tips">请输入淘宝合作appkey</div></td>
+		</tr>
+	
+	
+		<tr>
+		<th>AppSecret</th>
+		<td>
+			<input type="text" class="input length_5 mr5" name="appsecret" value="{$info['app_secret']}">
+		</td>
+		<td><div class="fun_tips">请输入淘宝合作appsecret,<a target="_blank" href="http://open.taobao.com">申请地址</a></div></td>
+		</tr>
+	
+
+		<tr>
+		<th>显示顺序</th>
+		<td>
+			<input type="text" class="input length_5 mr5" name="display_order" value="{$info['display_order']}">
+		</td>
+		<td><div class="fun_tips">填写数字,根据数字大小进行显示,数字小的显示在前面</div></td>
+		</tr>
+		
+	</table>
+</div>
+<div class="btn_wrap">
+	<div class="btn_wrap_pd" id="J_sub_wrap">
+   <button type="submit" class="btn btn_submit J_ajax_submit_btn">提交</button>
+	</div>
+</div>
+</form>
+
+</div>
+<template source='TPL:admin.common.footer' />
+</body>
+</html>

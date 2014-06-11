@@ -42,7 +42,7 @@ class HomeController extends AdminBaseController {
 	public function noticeAction() {
 		$notice = Wekit::load('APPCENTER:service.srv.PwSystemInstallation')->getNotice(
 			$this->loginUser);
-		$this->setOutput($notice, 'data');
+		$this->setOutput($notice, 'html');
 		$this->showMessage('success');
 	}
 }

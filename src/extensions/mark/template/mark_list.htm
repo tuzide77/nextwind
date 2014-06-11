@@ -1,0 +1,28 @@
+
+		<div class="hd">共<strong class="b org">{$count}</strong>条评分，
+		<!--# foreach ($credits as $cName => $cValue) { #-->
+		{$cName}&nbsp;<strong class="b org">{$cValue}</strong>
+		<!--# } #-->
+		</div>
+		<ul>
+			<!--# 
+			$isManage = Wekit::getLoginUser()->getPermission('app_mark_manage');
+			Wind::import('SRV:credit.bo.PwCreditBo');
+			$creditBo = PwCreditBo::getInstance();
+			foreach ($marks as $value) { #-->
+			<li class="cc">
+				<!--# if ($isManage) { #-->
+				<div class="face"><input type="checkbox" name="ids[]" value="{$value['id']}" class="J_markcheck"></div>
+				<!--# } #-->
+				<div class="face"><a href="{@url:space/index/run?uid=$value['created_userid']}" target="_blank" class="J_user_card_show face" data-uid="{$value['created_userid']}" ><img class="J_avatar" src="{@Pw::getAvatar($value['created_userid'], 'small')}" data-type="small" alt="{$value['created_username']}" width="30" height="30" /></a></div>
+				<div class="name"><a href="{@url:space/index/run?uid=$value['created_userid']}" target="_blank" class="J_user_card_show face" data-uid="{$value['created_userid']}" >{$value['created_username']}</a></div>
+				<div class="num">{$creditBo->cType[$value['ctype']]}&nbsp;<strong class="org b">{$value['cnum']}</strong></div>
+				<div class="detail">{$value['reason']}</div>
+				<div class="time">{@Pw::time2str($value['created_time'], 'auto')}</div>
+			</li>
+			<!--# } #-->
+		</ul>
+		<!--# if ($isManage) { #-->
+		<div><label class="mr10"><input type="checkbox" class="J_markcheck_all">全选</label> <button class="btn mr10 J_marklist_del" type="submit">删除</button></div>
+		<!--# } #-->
+		<div class="J_plugin_mark_page"><page tpl="TPL:common.page" page="$page" per="$perpage" count="$count" url="app/mark/mark/list" args='$args'/></div>

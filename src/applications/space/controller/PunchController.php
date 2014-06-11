@@ -75,7 +75,7 @@ class PunchController extends PwBaseController {
 			'behaviornum' => $havePunch ? $behavior['number'] : $behavior['number']+1,
 			'reward' => $awardNum. $this->_creditBo->cUnit[$this->config['punch.reward']['type']] . $this->_creditBo->cType[$this->config['punch.reward']['type']]
 		);
-		echo Pw::jsonEncode(array('state' => 'success', 'data' => $result));exit;
+		Pw::echoJson(array('state' => 'success', 'data' => $result));exit;
 	}
 	
 	/** 
@@ -135,7 +135,7 @@ class PunchController extends PwBaseController {
 			$count = $this->loginUser->info['follows'];
 		}
 		$uids = array_keys($follows);
-		echo Pw::jsonEncode(array('state' => 'success', 'data' => $this->_fetchFollowUsers($uids), 'page' => $page));exit;
+		Pw::echoJson(array('state' => 'success', 'data' => $this->_fetchFollowUsers($uids), 'page' => $page));exit;
 	}
 	
 	private function _fetchFollowUsers($uids) {
@@ -214,7 +214,7 @@ class PunchController extends PwBaseController {
 				'reward' => $awardNums. $this->_creditBo->cUnit[$this->config['punch.reward']['type']] . $this->_creditBo->cType[$this->config['punch.reward']['type']]
 			);
 		}
-		echo Pw::jsonEncode(array('state' => 'success', 'data' => $result));exit;
+		Pw::echoJson(array('state' => 'success', 'data' => $result));exit;
 	}
 	
 	protected function fetchBehaviors($uids, $behavior = 'punch_day') {
@@ -247,11 +247,11 @@ class PunchController extends PwBaseController {
 				'step'	=> $reward['step'],
 				'max'	=> $reward['max']
 			);
-			echo Pw::jsonEncode(array('state' => 'success', 'data' => $data));exit;
+			Pw::echoJson(array('state' => 'success', 'data' => $data));exit;
 		}
 		$havePunch = $this->_getPunchService()->isPunch($punchData);
 		if($punchData['username'] == $this->loginUser->username && $havePunch){
-			echo Pw::jsonEncode(array('state' => 'fail'));exit;
+			Pw::echoJson(array('state' => 'fail'));exit;
 		}
 		$behavior = $this->_getUserBehaviorDs()->getBehavior($this->loginUser->uid,'punch_day');
 		$steps = $behavior['number'] > 0 ? $behavior['number']: 0;
@@ -265,7 +265,7 @@ class PunchController extends PwBaseController {
 			'step'	=> $reward['step'],
 			'max'	=> $reward['max']
 		);
-		echo Pw::jsonEncode(array('state' => 'success', 'data' => $data));exit;
+		Pw::echoJson(array('state' => 'success', 'data' => $data));exit;
 	}
 	
 	/** 
