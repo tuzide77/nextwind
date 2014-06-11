@@ -15,4 +15,4 @@ phpwind9全局应用了异步加载模式和最流行的js加载器让页面打�
 
 more
 ========
-请查阅http://wiki.open.phpwind.com
+请查阅https://github.com/Zerol/nextwind/wiki
